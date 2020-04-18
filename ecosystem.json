@@ -1,17 +1,31 @@
 {
-   "apps" : [
+    "apps": [
         {
             "name": "solo",
-            "script" : "server.js",
+            "script": "server.js",
             "merge_logs": true,
             "min_uptime": 30000,
             "max_restarts": 3,
             "env": {
                 "NODE_ENV": "production"
             },
-            "env_production" : {
+            "env_production": {
                 "NODE_ENV": "production"
             }
         }
-  ]
+    ],
+    "deploy": {
+        "production": {
+            "user": "root",
+            "host": [
+                "101.132.121.111"
+            ],
+            "port": "22",
+            "ref": "origin/dev",
+            "repo": "git@github.com:chaosBreaking/solo.git",
+            "path": "/dev/solo",
+            "ssh_options": "StrictHostKeyChecking=no",
+            "post-deploy": "npm i && npm run deploy"
+        }
+    }
 }

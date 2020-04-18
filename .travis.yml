@@ -16,4 +16,4 @@ script:
   - npm build
 after_success:
   - echo "build finished"
-  - npm run deploy
+  - npm run build
