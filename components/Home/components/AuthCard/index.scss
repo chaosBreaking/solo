@@ -1,0 +1,71 @@
+.container {
+    position: relative;
+    width: 3.5rem;
+    height: 2.5rem;
+    border-radius: .1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    font-size: .12rem;
+    font-family: lemon;
+}
+
+.logo {
+    position: absolute;
+    top: 0;
+    width: 1rem;
+    height: 1rem;
+    transform: translateY(-50%);
+    text-align: center;
+    border-radius: 100%;
+    font-size: .18rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: lemon;
+}
+
+.main {
+    position: relative;
+    top: .2rem;
+}
+
+.slogan {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: .2rem;
+}
+
+.btn {
+    width: 2rem;
+    height: .3rem;
+    background: #000;
+    text-align: center;
+    color: #fff;
+    border-radius: .02rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: .1rem 0;
+    cursor: pointer;
+    &:hover {
+        opacity: .8;
+    }
+}
+
+.login {
+    position: relative;
+    top: .2rem;
+    width: 3.5rem;
+    height: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    opacity: .8;
+}

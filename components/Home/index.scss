@@ -1,3 +1,9 @@
 .home {
-  width: 100vw;
+    width: 100vw;
+    height: 100vh;
+    background: url('http://solo-app.test.upcdn.net/wallhaven-96w8e8.png') no-repeat;
+    background-size: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
