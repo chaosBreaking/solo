@@ -1,0 +1,17 @@
+{
+   "apps" : [
+        {
+            "name": "solo",
+            "script" : "server.js",
+            "merge_logs": true,
+            "min_uptime": 30000,
+            "max_restarts": 3,
+            "env": {
+                "NODE_ENV": "production"
+            },
+            "env_production" : {
+                "NODE_ENV": "production"
+            }
+        }
+  ]
+}

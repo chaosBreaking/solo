@@ -1,0 +1,19 @@
+#.travis.yml
+sudo: false
+language: node_js
+node_js:
+  - 12
+cache: yarn
+#指定构建分支
+branches:
+  only:
+    - dev
+#安装依赖
+install:
+  - npm install
+#构建
+script:
+  - npm build
+after_success:
+  - echo "build finished"
+  - npm run deploy
