@@ -47,8 +47,8 @@ export default function Html ({
                     <script
                         dangerouslySetInnerHTML={{
                             __html:
-                'window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;' +
-                `ga('create','${config.analytics.googleTrackingId}','auto');ga('send','pageview')`,
+                                'window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;' +
+                                `ga('create','${config.analytics.googleTrackingId}','auto');ga('send','pageview')`,
                         }}
                     />
                 )}
@@ -66,7 +66,6 @@ export default function Html ({
 
 Html.propTypes = {
     title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
     styles: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.string.isRequired,
@@ -74,7 +73,7 @@ Html.propTypes = {
         }).isRequired,
     ),
     scripts: PropTypes.arrayOf(PropTypes.string.isRequired),
-  app: PropTypes.object, // eslint-disable-line
+    app: PropTypes.object, // eslint-disable-line
     children: PropTypes.string.isRequired,
 };
 
