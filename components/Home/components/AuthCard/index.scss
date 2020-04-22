@@ -10,6 +10,32 @@
     color: #000;
     font-size: .12rem;
     font-family: lemon;
+    input {
+        outline-style: none ;
+        border: 0px;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(120%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        transform: translateY(20%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .logo {
@@ -52,9 +78,21 @@
     align-items: center;
     margin: .1rem 0;
     cursor: pointer;
+
     &:hover {
-        opacity: .8;
+        opacity: .7;
     }
+}
+
+.mask {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: .8;
+    background: #000;
+    z-index: 0;
 }
 
 .login {
@@ -66,6 +104,26 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #000;
+    background: rgba(0, 0, 0, .7);
     opacity: .8;
+    animation: slideIn 1s;
+    -webkit-animation: slideIn .2s ease-in-out;
+    border-radius: .05rem;
+    z-index: 1;
+}
+
+.register {
+    position: relative;
+    top: .2rem;
+    width: 3.5rem;
+    height: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, .7);
+    opacity: .8;
+    animation: slideIn 1s;
+    -webkit-animation: slideIn .2s ease-in-out;
+    z-index: 1;
 }

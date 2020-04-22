@@ -15,8 +15,13 @@ import s from './index.scss';
 export default class Home extends Component {
     render () {
         return (
-            <div className={s.home}>
-                <AuthCard />
+            <div className={s.container}>
+                <div className={s.banner}>
+                    <span className={s.bottomInfo}>随便逛逛?</span>
+                </div>
+                <div className={s.home}>
+                    <AuthCard />
+                </div>
             </div>
         );
     }
