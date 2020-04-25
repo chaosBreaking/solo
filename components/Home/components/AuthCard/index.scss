@@ -7,21 +7,35 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #000;
+    color: #eee;
     font-size: .12rem;
     font-family: lemon;
-    input {
-        outline-style: none ;
-        border: 0px;
+}
+
+.goTop {
+    .logo {
+        position: fixed;
+        left: .2rem;
+        top: .2rem;
+        height: auto;
+        line-height: 1;
+        transform: unset;
+        color: #fff;
+
+        h1 {
+            margin: 0;
+        }
     }
 }
 
 @keyframes slideIn {
     from {
-        transform: translateX(120%);
+        opacity: 0;
+        transform: translateX(50%);
     }
 
     to {
+        opacity: 1;
         transform: translateX(0);
     }
 }
@@ -38,6 +52,20 @@
     }
 }
 
+@keyframes goTop {
+
+    100% {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes fade {
+    100% {
+        color: #fff;
+    }
+}
+
 .logo {
     position: absolute;
     top: 0;
@@ -51,11 +79,11 @@
     align-items: center;
     justify-content: center;
     font-family: lemon;
+    transition: all .5s ease;
 }
 
 .main {
     position: relative;
-    top: .2rem;
 }
 
 .slogan {
@@ -64,23 +92,25 @@
     justify-content: center;
     align-items: center;
     margin-bottom: .2rem;
+    font-size: .14rem;
 }
 
 .btn {
-    width: 2rem;
+    width: 1.5rem;
     height: .3rem;
-    background: #000;
+    background: #4b6dc9;
     text-align: center;
     color: #fff;
     border-radius: .02rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: .1rem 0;
+    margin: .1rem auto 0 auto;
+    transition: all .2s ease-in;
     cursor: pointer;
 
     &:hover {
-        opacity: .7;
+        transform: scale(.9);
     }
 }
 
@@ -104,26 +134,126 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, .7);
-    opacity: .8;
-    animation: slideIn 1s;
-    -webkit-animation: slideIn .2s ease-in-out;
+    animation: fadeIn 1s;
+    -webkit-animation: fadeIn .2s ease-in-out;
     border-radius: .05rem;
     z-index: 1;
+    font-size: .1rem;
+
+    input {
+        border-radius: .02rem; 
+    }
 }
 
 .register {
     position: relative;
     top: .2rem;
     width: 3.5rem;
-    height: 4rem;
+    height: 3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, .7);
-    opacity: .8;
-    animation: slideIn 1s;
-    -webkit-animation: slideIn .2s ease-in-out;
+    // background: rgba(0, 0, 0, .7);
+    animation: fadeIn 1s;
+    -webkit-animation: fadeIn .2s ease-in-out;
+    border-radius: .05rem;
     z-index: 1;
+    font-size: .1rem;
+
+    input:last-of-type {
+        border: none;
+    }
+}
+
+.info {
+    text-align: center;
+    color: #fff;
+    margin-bottom: .1rem;
+}
+
+input {
+    height: .3rem;
+    width: 1.5rem;
+    background: #181a1b;
+    border-bottom: 1px solid #e6e6e6;
+    outline-style: none;
+    color: #fff;
+    padding: .1rem;
+    font-family: auto;
+}
+
+.passwdInput {
+    animation: slideIn .2s;
+    -webkit-animation: slideIn .2s;   
+}
+
+.noBackground {
+    background: transparent;
+}
+
+.oauth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.5rem;
+}
+
+.iconBtn {
+    width: .2rem;
+    height: .2rem;
+    margin: .1rem .1rem 0 .1rem;
+    background: #eee;
+    cursor: pointer;
+}
+@mixin iconWrapper {
+    background: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    width: .2rem;
+    height: .2rem;
+    opacity: .6;
+    &:hover {
+        opacity: 1;
+    }
+}
+.choosed {
+    opacity:  1 !important;
+    background: #fff !important;
+}
+.iconGoogle {
+    background: url('http://solo-app.test.upcdn.net/google.png') no-repeat;
+    background-size: cover;
+}
+.iconGithub {
+    background: url('http://solo-app.test.upcdn.net/GitHub.png') no-repeat;
+    background-size: cover;
+}
+.iconFacebook {
+    background: url('http://solo-app.test.upcdn.net/icon_facebook.png') no-repeat;
+    background-size: cover;
+}
+.iconPhone {
+    @include iconWrapper();
+    &:after {
+        content: '';
+        width: .15rem;
+        height: .15rem;
+        position: absolute;
+        background: url('http://solo-app.test.upcdn.net/phone.png') no-repeat;
+        background-size: cover;
+    }
+}
+.iconEmail {
+    @include iconWrapper();
+    &:after {
+        content: '';
+        width: .13rem;
+        height: .13rem;
+        position: absolute;
+        background: url('http://solo-app.test.upcdn.net/email.png') no-repeat;
+        background-size: cover;
+    }
 }
