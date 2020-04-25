@@ -1,10 +1,16 @@
 import { observable, action } from 'mobx';
 import CommonStore from '@framework/CommonStore';
+import AuthService from './service';
 
 export default class Store extends CommonStore {
     @observable stage = 0;
     @observable authType = 0;
-    async fetchInitialData (requestContext) {
+    constructor (props) {
+        super(props);
+        this.authService = new AuthService();
+    }
+
+    async initializeData (requestContext) {
         return {};
     }
 

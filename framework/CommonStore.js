@@ -1,13 +1,6 @@
-// import { observable, action } from 'mobx';
-import axios from 'axios';
-
 export default class CommonStore {
     get rootStore () {
         return typeof this.getRoot === 'function' && this.getRoot();
-    }
-
-    request (service, ...params) {
-        return service(axios, ...params);
     }
 
     /**
@@ -16,7 +9,23 @@ export default class CommonStore {
      * @returns
      * @memberof CommonStore
      */
-    async fetchInitialData (requestContext) {
-        return { pageInfo: { title: 'home' } };
+    async initializeData (requestContext) {
+        return {};
     }
+
+    /**
+     * @desc 服务端渲染数据hook
+     * @param {*} requestContext
+     * @returns
+     * @memberof CommonStore
+     */
+    async prepareServerData () {}
+
+    /**
+     * @desc 客户端渲染数据hook
+     * @param {*} requestContext
+     * @returns
+     * @memberof CommonStore
+     */
+    async prepareClientData () {}
 }

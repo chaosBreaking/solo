@@ -44,11 +44,10 @@ export default async (req, res, next) => {
         } else {
             rawData.ssr = true;
             const Component = route.component;
-            const store = new Component.Store();
-            rawData.data = await store.fetchInitialData({ req, res });
             if (Component.Store) {
                 const store = new Component.Store();
-                await store.fetchInitialData({ req, res });
+                await store.initializeData({ req, res });
+                store.prepareServerData();
                 rawData.store = store;
             }
             data.children = ReactDOM.renderToString(

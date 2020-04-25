@@ -59,7 +59,8 @@ async function render (Component, ssrData = {}, context) {
             const context = {};
             if (Component.Store) {
                 const store = new Component.Store();
-                await store.fetchInitialData(context);
+                await store.initializeData(context);
+                store.prepareClientData();
                 ssrData.store = store;
             }
         }
