@@ -6,7 +6,7 @@ const routes = {
 
     children: [
         {
-            path: '/home.html',
+            path: '/index.html',
             load: () => import(/* webpackChunkName: 'home' */ './home'),
         },
 

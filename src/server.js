@@ -41,6 +41,7 @@ app.use(bodyParser.json());
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------
 app.get('*.html', routeHandler, renderHandler);
+app.get('*', routeHandler, renderHandler);
 
 //
 // Error handling

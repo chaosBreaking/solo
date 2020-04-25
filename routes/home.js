@@ -1,9 +1,9 @@
-import Home from '@components/Home';
+import Index from '@components/Index';
 
 export default async function action () {
     return {
-        title: '主页',
-        chunks: ['home'],
-        component: Home
+        title: 'Solo',
+        chunks: ['index'],
+        component: Index
     };
 }
