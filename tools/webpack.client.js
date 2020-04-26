@@ -6,6 +6,7 @@ import basicConfig from './webpack.base';
 import Webpackbar from 'webpackbar';
 import { BUILD_DIR, isDebug, isAnalyze, happyThreadPool } from './constants';
 import HappyPack from 'happypack';
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import babelConfig from './babel.config';
 //
 // Configuration for the client-side bundle (client.js)
@@ -90,7 +91,19 @@ export default {
 
     // Move modules that occur in multiple entry chunks to a new entry chunk (the commons chunk).
     optimization: {
+        minimizer: isDebug ? [] : [new UglifyJsPlugin({
+            uglifyOptions: {
+                compress: {
+                    drop_debugger: true,
+                    drop_console: true,
+                },
+            },
+            parallel: true,
+            sourceMap: false
+        })],
         splitChunks: {
+            chunks: 'all',
+            minChunks: 2,
             cacheGroups: {
                 commons: {
                     chunks: 'initial',
