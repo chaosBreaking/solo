@@ -10,9 +10,12 @@ body {
 * {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -khtml-user-select: none; /* 早期浏览器 */
-  -moz-user-select: none; /* 火狐 */
-  -ms-user-select: none;  /* IE10 */
+  -khtml-user-select: none;
+  /* 早期浏览器 */
+  -moz-user-select: none;
+  /* 火狐 */
+  -ms-user-select: none;
+  /* IE10 */
   user-select: none;
 }
 
@@ -29,6 +32,7 @@ textarea {
 @font-face {
   font-family: lemon;
   src: url('../../public/font.ttf');
+  font-display: swap;
 }
 
 #app {
