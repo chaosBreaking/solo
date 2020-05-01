@@ -6,6 +6,7 @@ export const STAGE_MAP = {
 };
 
 export const AUTH_TYPE = {
+    ERROR: -1,
     EMAIL: 0,
     PHONE: 1,
     GITHUB: 2,

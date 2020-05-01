@@ -6,17 +6,39 @@ import cs from 'classnames';
 import s from './index.scss';
 
 const SLOGAN = ['Don\'t be afraid to dream', 'Just Solo!'];
+const ERROR_MAP = {
+    ID: 0,
+    PASSWD: 1,
+    CONFIRM_PASSWD: 2,
+    NICKNAME: 3
+};
 
 @withStyles(s)
 @inject('store')
 @observer
 export default class AuthCard extends Component {
+    constructor (props) {
+        super(props);
+        this.state = {
+            stage: 0,
+            authType: 0,
+            idInput: {
+                0: 'x491807573@qq.com'
+            },
+            passwd: '',
+            nickname: '',
+            showErrorMsg: false,
+            error: {},
+            errorMsg: '',
+        };
+    }
+
     get store () {
         return this.props.store;
     }
 
     get stage () {
-        return +this.props.store.stage;
+        return +this.state.stage;
     }
 
     get showMask () {
@@ -24,7 +46,7 @@ export default class AuthCard extends Component {
     }
 
     changeStage (stage) {
-        this.store.nextStage(stage);
+        this.setState({ stage });
     }
 
     loginBtnHandler = e => {
@@ -35,16 +57,73 @@ export default class AuthCard extends Component {
         e.stopPropagation();
     }
 
-    changeAuthType = type => {
-        this.store.changeAuthType(type);
+    changeAuthType = authType => {
+        this.cleanError();
+        this.setState({ authType });
+    }
+
+    showError (key, errorMsg) {
+        const { error = {} } = this.state;
+        error[key] = true;
+        this.setState({
+            errorMsg,
+            showErrorMsg: true,
+            error
+        });
+    }
+
+    cleanError (key) {
+        const { error = {} } = this.state;
+        error[key] = false;
+        this.setState({
+            error
+        });
+    }
+
+    preAuthInputHandler = e => {
+        e && e.stopPropagation();
+        const authType = this.state.authType;
+        const obj = this.state.idInput;
+        obj[authType] = e.target.value;
+        this.setState({
+            idInput: obj
+        });
     }
 
     onNextStepClick = async e => {
         e.stopPropagation();
-        if (this.stage === 1) {
-            const nextStage = await this.store.preAuth();
-            this.store.nextStage(nextStage);
+        if (!this.state.idInput[this.state.authType]) {
+            return this.showError(ERROR_MAP.ID, '请填写邮箱或手机');
         }
+        const data = await this.store.preAuth(this.state.idInput[this.state.authType]);
+        const { authType, stage } = data;
+        if (authType === AUTH_TYPE.ERROR) {
+            this.showError();
+        } else {
+            this.setState({ stage, authType });
+        }
+    }
+
+    onSignInClick = async e => {
+        e.stopPropagation();
+    }
+
+    onRegisterClick = async e => {
+        e.stopPropagation();
+    }
+
+    passwdInput = e => {
+        e && e.stopPropagation();
+        this.setState({
+            passwd: e.target.value
+        });
+    }
+
+    nicknameInput = e => {
+        e && e.stopPropagation();
+        this.setState({
+            nickname: e.target.value
+        });
     }
 
     renderFirst () {
@@ -60,6 +139,9 @@ export default class AuthCard extends Component {
 
     renderPreAuth () {
         const btnText = this.stage === STAGE_MAP.PRE_AUTH ? '下一步' : '登录';
+        const idInputClass = cs(s.idInput, {
+            [s.errorInput]: this.state.error[ERROR_MAP.ID] && this.state.showErrorMsg
+        });
         return (
             <div className={s.login} onKeyUp={e => {
                 e.keyCode === 13 && this.onNextStepClick(e);
@@ -69,8 +151,15 @@ export default class AuthCard extends Component {
                     <p>Just solo</p>
                 </div>
                 {
+                    this.state.showErrorMsg
+                        ? <div className={s.errorMsg}>
+                            {this.state.errorMsg}
+                        </div>
+                        : null
+                }
+                {
                     this.stage === STAGE_MAP.PRE_AUTH
-                        ? <input key={'userName'} placeholder='用户名' />
+                        ? <input className={idInputClass} value={this.state.idInput[this.state.authType]} key={'userName'} placeholder='邮箱/手机号' onChange={this.preAuthInputHandler} />
                         : <input className={s.passwdInput} key={'passwd'} placeholder='密钥' />
                 }
                 {
@@ -89,8 +178,7 @@ export default class AuthCard extends Component {
     }
 
     renderRegistration () {
-        const authType = this.store.authType;
-        const placeholder = authType === AUTH_TYPE.EMAIL ? '邮箱' : '手机号';
+        const { authType, idInput } = this.state;
         const emailClass = cs(s.iconBtn, s.iconEmail, {
             [s.choosed]: authType === AUTH_TYPE.EMAIL
         });
@@ -105,11 +193,16 @@ export default class AuthCard extends Component {
                     <p>即刻加入 solo</p>
                     <p>尽兴创作</p>
                 </div>
-                <input key={authType} placeholder={placeholder} />
-                <input placeholder='密码' />
+                <div key={authType} className={s.inputBox}>
+                    {idInput[authType] && <input placeholder={idInput[authType]} className={s.infoInput} disabled={true} />}
+                    <input type="password" placeholder='密码' onChange={this.passwdInput} />
+                    <input type="password" placeholder='再次确认密码' onChange={this.passwdInput} />
+                    <input key={authType} placeholder='昵称' onChange={this.nicknameInput} />
+                    {authType === AUTH_TYPE.PHONE && <input key={authType} placeholder='验证码' />}
+                </div>
                 <div className={s.oauth}>
                     <div className={emailClass} onClick={() => this.changeAuthType(AUTH_TYPE.EMAIL)} />
-                    <div className={phoneClass} onClick={() => this.changeAuthType(AUTH_TYPE.PHONE)}/>
+                    <div className={phoneClass} onClick={() => this.changeAuthType(AUTH_TYPE.PHONE)} />
                 </div>
                 <div>
                     <div className={s.btn} onClick={this.registBtnHandler}>注册</div>

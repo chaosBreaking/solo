@@ -99,7 +99,7 @@ export default {
                 },
             },
             parallel: true,
-            sourceMap: false
+            sourceMap: isDebug
         })],
         splitChunks: {
             chunks: 'all',

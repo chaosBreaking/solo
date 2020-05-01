@@ -1,10 +1,10 @@
 import { observable, action } from 'mobx';
 import CommonStore from '@framework/CommonStore';
 import AuthService from './service';
+import { isPhoneNumber, isEmail } from '@utils/validate';
+import { STAGE_MAP, AUTH_TYPE } from './constants';
 
 export default class Store extends CommonStore {
-    @observable stage = 0;
-    @observable authType = 0;
     constructor (props) {
         super(props);
         this.authService = new AuthService();
@@ -12,11 +12,6 @@ export default class Store extends CommonStore {
 
     async initializeData (requestContext) {
         return {};
-    }
-
-    @action.bound
-    nextStage (stage) {
-        this.stage = typeof stage === 'number' ? stage : this.stage;
     }
 
     @action.bound
@@ -31,7 +26,18 @@ export default class Store extends CommonStore {
     sign () {}
 
     @action.bound
-    async preAuth () {
-        return new Promise((resolve, reject) => setTimeout(() => resolve(2), 500));
+    async preAuth (id) {
+        let authType;
+        if (isEmail(id)) {
+            authType = AUTH_TYPE.EMAIL;
+        } else if (isPhoneNumber(id)) {
+            authType = AUTH_TYPE.PHONE;
+        } else {
+            authType = AUTH_TYPE.ERROR;
+        }
+        return new Promise((resolve, reject) => setTimeout(() => resolve({
+            authType,
+            stage: STAGE_MAP.REGISTER
+        }), 500));
     }
 }

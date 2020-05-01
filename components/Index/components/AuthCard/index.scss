@@ -24,10 +24,27 @@
 
         h1 {
             margin: 0;
+            background: linear-gradient(135deg, #833ab4, #3274D5 60%, #833ab4);
+            -webkit-background-clip: text;
+            color: transparent;
+            &:hover {
+                animation: colorfulFont 2s infinite ease;
+                -webkit-animation: colorfulFont 2s infinite ease;
+            }
         }
     }
 }
-
+@keyframes colorfulFont {
+    0% {
+        color: #833ab4;
+    }
+    50% {
+        color: #fff;
+    }
+    to {
+        color: #3274D5;
+    }
+}
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -80,6 +97,7 @@
     justify-content: center;
     font-family: lemon;
     transition: all .5s ease;
+    cursor: pointer;
 }
 
 .main {
@@ -167,9 +185,18 @@
 }
 
 .info {
+    position: relative;
     text-align: center;
     color: #fff;
     margin-bottom: .1rem;
+    transition: all .5s ease-in;
+}
+
+.inputBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 input {
@@ -181,6 +208,24 @@ input {
     color: #fff;
     padding: .1rem;
     font-family: auto;
+}
+
+.infoInput {
+    text-align: center;
+    background: rgba(0, 0, 0, .5);
+    border-bottom: 0;
+    margin-bottom: .1rem;
+    border-radius: .1rem;
+}
+
+.infoInput::-webkit-input-placeholder {
+    color: #fff;
+}
+.infoInput:-moz-placeholder {
+    color: #fff;
+}
+.infoInput:-ms-input-placeholder {
+    color: #fff;
 }
 
 .passwdInput {
@@ -256,4 +301,25 @@ input {
         background: url('http://solo-app.test.upcdn.net/email.png') no-repeat;
         background-size: cover;
     }
+}
+
+.errorInput {
+    outline: 0.03rem solid red;
+    outline-style: auto;
+    outline-offset: 0;
+    border-bottom: 0;
+    z-index: 1;
+}
+
+.errorMsg {
+    height: .25rem;
+    width: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: .1rem;
+    border-radius: .1rem;
+    background: rgba(0, 0, 0, .6);
+    animation: fadeIn 1s;
+    -webkit-animation: fadeIn .2s ease-in-out;
 }
