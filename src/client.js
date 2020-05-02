@@ -46,9 +46,7 @@ async function init () {
         return;
     }
     if (!route.component) return;
-
-    const { data } = window.__ssrData;
-    render(route.component, data, context);
+    render(route.component, window.__ssrData, context);
 }
 
 async function render (Component, ssrData = {}, context) {
