@@ -2,12 +2,13 @@ import { observable, action } from 'mobx';
 import CommonStore from '@framework/CommonStore';
 import AuthService from './service';
 import { isPhoneNumber, isEmail } from '@utils/validate';
-import { STAGE_MAP, AUTH_TYPE } from './constants';
+import { STAGE_MAP, AUTH_TYPE, BG_IMAGES } from './constants';
 
 export default class Store extends CommonStore {
     constructor (props) {
         super(props);
         this.authService = new AuthService();
+        this.bgUrl = BG_IMAGES[~~(Math.random() * 10) % 3];
     }
 
     async initializeData (requestContext) {
