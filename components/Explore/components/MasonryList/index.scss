@@ -1,0 +1,17 @@
+.container {
+    position: relative;
+    padding-top: .6rem;
+    width: 70%;
+    height: auto;
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.column {
+    width: 2rem;
+    flex: 1 0 auto;
+    margin-right: .1rem;
+}

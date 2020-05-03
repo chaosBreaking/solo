@@ -13,3 +13,9 @@ export const AUTH_TYPE = {
     GOOGLE: 3,
     FACEBOOK: 4,
 };
+
+export const BG_IMAGES = [
+    'http://solo-app.test.upcdn.net/home_bg-13mk9v-progressive.jpeg',
+    'http://solo-app.test.upcdn.net/home_bg_xj3haef-progressive.jpeg',
+    'http://solo-app.test.upcdn.net/wallhaven-96w8e8.jpeg'
+];

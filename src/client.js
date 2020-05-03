@@ -59,7 +59,7 @@ async function render (Component, ssrData = {}, context) {
                 const store = new Component.Store();
                 await store.initializeData(context);
                 store.prepareClientData();
-                ssrData.store = store;
+                ssrData.store = store || {};
             }
         }
         const renderReactApp = isInitialRender ? ReactDOM.hydrate : ReactDOM.render;

@@ -13,7 +13,7 @@ export default (options = {}) => {
                 super(props);
                 this.initialProps = {
                     context: props.context,
-                    store: props.store,
+                    store: props.store || {},
                     pageInfo
                 };
             }

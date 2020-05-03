@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import { STAGE_MAP, AUTH_TYPE } from '../../constants';
+import { forward } from '@utils/navi';
 import cs from 'classnames';
 import s from './index.scss';
 
@@ -43,6 +44,10 @@ export default class AuthCard extends Component {
 
     get showMask () {
         return this.stage !== 0;
+    }
+
+    forward () {
+        forward('/explore');
     }
 
     changeStage (stage) {
@@ -229,8 +234,10 @@ export default class AuthCard extends Component {
         return (
             <div className={containerClass}>
                 <div className={s.logo}><h1>Solo</h1></div>
-                {/* {this.showMask && <div className={s.mask} />} */}
                 {this.renderContent()}
+                <div className={s.exploreBtn} onClick={this.forward}>
+                    随便逛逛
+                </div>
             </div>
         );
     }
