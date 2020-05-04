@@ -8,4 +8,6 @@
     display: flex;
     flex-flow: row;
     justify-content: flex-start;
+    overflow: auto;
+    padding: 0 .2rem;
 }

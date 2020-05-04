@@ -257,7 +257,7 @@ export default {
 
     // Choose a developer tool to enhance debugging
     // https://webpack.js.org/configuration/devtool/#devtool
-    devtool: isDebug ? 'cheap-module-inline-source-map' : 'source-map',
+    devtool: isDebug ? 'cheap-module-eval-source-map' : 'source-map',
 
     plugins: [
         new HappyPack({

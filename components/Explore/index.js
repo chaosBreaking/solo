@@ -23,7 +23,7 @@ export default class Explore extends Component {
         return (
             <div className={s.container}>
                 <NavigationBar />
-                {/* <Recommend /> */}
+                <Recommend />
                 <MasonryList list={list} />
             </div>
         );
