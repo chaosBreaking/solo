@@ -8,7 +8,6 @@ export default async (req, res, next) => {
 
     try {
         const route = await router.resolve(context);
-
         if (route.redirect) {
             res.redirect(route.status || 302, route.redirect);
             return;
@@ -17,6 +16,9 @@ export default async (req, res, next) => {
         res.locals.route = route;
         res.locals.ssr = req.query.ssr !== 'false' && req.query.csr === undefined;
     } catch (error) {
+        if (error.status === 404) {
+            return next();
+        }
         console.error(error);
         next(error);
     }

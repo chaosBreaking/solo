@@ -4,9 +4,11 @@ import chunks from './chunk-manifest.json';
 import config from '../config';
 import App from '../components/App';
 import Html from '../components/Html';
+import buildContext from '../contextBuilder';
 
 export default async (req, res, next) => {
     try {
+        // todo: cache common page
         const route = res.locals.route;
         if (!route) {
             return next();
@@ -30,10 +32,6 @@ export default async (req, res, next) => {
         if (route.chunk) addChunk(route.chunk);
         if (route.chunks) route.chunks.forEach(addChunk);
 
-        const context = {
-            pathname: req.path,
-            query: req.query,
-        };
         let rawData = {};
         const data = { ...route };
 
@@ -44,12 +42,9 @@ export default async (req, res, next) => {
         } else {
             rawData.ssr = true;
             const Component = route.component;
-            if (Component.Store) {
-                const store = new Component.Store();
-                await store.initializeData({ req, res });
-                store.prepareServerData();
-                rawData.store = store;
-            }
+            const context = buildContext({ req, res });
+            const store = await Component.initializeProps(context);
+            rawData.store = store;
             data.children = ReactDOM.renderToString(
                 <App insertCss={insertCss}>
                     <Component {...rawData} />

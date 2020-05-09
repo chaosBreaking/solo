@@ -2,10 +2,10 @@
 import 'whatwg-fetch';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import queryString from 'query-string';
 import App from './components/App';
 import history from './history';
 import router from './router';
+import buildContext from './contextBuilder';
 // import * as Sentry from '@sentry/browser';
 
 // Sentry.init({ dsn: 'https://cc95f9289e7e4f79ae2c723dac9f7442@sentry.io/5188590' });
@@ -22,18 +22,11 @@ const insertCss = (...styles) => {
 
 // Global (context) variables that can be easily accessed from any React component
 // https://facebook.github.io/react/docs/context.html
-const context = {
-    // Universal HTTP client
-    // fetch: createFetch(fetch, {
-    //     baseUrl: window.App.apiUrl,
-    // }),
-};
+const context = buildContext();
 
 const container = document.getElementById('app');
 
 async function init () {
-    context.pathname = location.pathname;
-    context.query = queryString.parse(location.search);
     let route;
     try {
         route = await router.resolve(context);
@@ -52,20 +45,15 @@ async function init () {
 async function render (Component, ssrData = {}, context) {
     try {
         const isInitialRender = ssrData.ssr;
-        if (!isInitialRender) {
-            // csr
-            const context = {};
-            if (Component.Store) {
-                const store = new Component.Store();
-                await store.initializeData(context);
-                store.prepareClientData();
-                ssrData.store = store || {};
-            }
-        }
+        const initialData = { context };
+        // const initialData = isInitialRender ? { ...ssrData.store } : { ...await Component.initializeProps(context) };
+        initialData.store = isInitialRender
+            ? await Component.rebuildStore({ context, ...ssrData.store })
+            : await Component.initializeProps(context);
         const renderReactApp = isInitialRender ? ReactDOM.hydrate : ReactDOM.render;
         renderReactApp(
             <App insertCss={insertCss}>
-                <Component {...ssrData} />
+                <Component {...initialData} />
             </App>,
             container,
             () => {},

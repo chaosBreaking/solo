@@ -1,6 +1,14 @@
 export default class CommonStore {
+    constructor (props) {
+        Object.assign(this, props);
+    }
+
     get rootStore () {
         return typeof this.getRoot === 'function' && this.getRoot();
+    }
+
+    get context () {
+        return typeof this.getContext === 'function' && this.getContext();
     }
 
     /**

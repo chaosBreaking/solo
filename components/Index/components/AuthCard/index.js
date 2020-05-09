@@ -24,7 +24,7 @@ export default class AuthCard extends Component {
             stage: 0,
             authType: 0,
             idInput: {
-                0: 'x491807573@qq.com'
+                0: ''
             },
             passwd: '',
             nickname: '',
@@ -54,6 +54,11 @@ export default class AuthCard extends Component {
         this.setState({ stage });
     }
 
+    startBtnHandler = () => {
+        this.store.hideExplorer();
+        this.changeStage(STAGE_MAP.PRE_AUTH);
+    }
+
     loginBtnHandler = e => {
         e.stopPropagation();
     }
@@ -81,12 +86,15 @@ export default class AuthCard extends Component {
         const { error = {} } = this.state;
         error[key] = false;
         this.setState({
-            error
+            error,
+            errorMsg: '',
+            showErrorMsg: false
         });
     }
 
     preAuthInputHandler = e => {
         e && e.stopPropagation();
+        this.state.error[ERROR_MAP.ID] && this.cleanError(ERROR_MAP.ID);
         const authType = this.state.authType;
         const obj = this.state.idInput;
         obj[authType] = e.target.value;
@@ -103,7 +111,7 @@ export default class AuthCard extends Component {
         const data = await this.store.preAuth(this.state.idInput[this.state.authType]);
         const { authType, stage } = data;
         if (authType === AUTH_TYPE.ERROR) {
-            this.showError();
+            this.showError(ERROR_MAP.ID, '邮箱或手机号码不正确');
         } else {
             this.setState({ stage, authType });
         }
@@ -137,7 +145,7 @@ export default class AuthCard extends Component {
                 <div className={s.slogan}>
                     {SLOGAN.map(content => <span key={content}>{content}</span>)}
                 </div>
-                <div className={s.btn} onClick={() => this.changeStage(STAGE_MAP.PRE_AUTH)}>开始吧</div>
+                <div className={s.btn} onClick={this.startBtnHandler}>开始吧</div>
             </div>
         );
     }
@@ -231,13 +239,14 @@ export default class AuthCard extends Component {
         const containerClass = cs(s.container, {
             [s.goTop]: this.stage !== STAGE_MAP.START,
         });
+        const { showExplore } = this.store;
         return (
             <div className={containerClass}>
                 <div className={s.logo}><h1>Solo</h1></div>
                 {this.renderContent()}
-                <div className={s.exploreBtn} onClick={this.forward}>
+                {showExplore && <div className={s.exploreBtn} onClick={this.forward}>
                     随便逛逛
-                </div>
+                </div>}
             </div>
         );
     }

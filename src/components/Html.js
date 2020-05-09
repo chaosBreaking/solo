@@ -74,7 +74,6 @@ Html.propTypes = {
     ),
     scripts: PropTypes.arrayOf(PropTypes.string.isRequired),
     app: PropTypes.object, // eslint-disable-line
-    children: PropTypes.string.isRequired,
 };
 
 Html.defaultProps = {

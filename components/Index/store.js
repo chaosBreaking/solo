@@ -5,13 +5,22 @@ import { isPhoneNumber, isEmail } from '@utils/validate';
 import { STAGE_MAP, AUTH_TYPE, BG_IMAGES } from './constants';
 
 export default class Store extends CommonStore {
+    @observable showExplore = true;
     constructor (props) {
         super(props);
         this.authService = new AuthService();
-        this.bgUrl = BG_IMAGES[~~(Math.random() * 10) % 3];
     }
 
     async initializeData (requestContext) {
+        this.bgUrl = BG_IMAGES[~~(Math.random() * 10) % 3];
+        return { title: 'Solo' };
+    }
+
+    async prepareServerData (requestContext) {
+        return {};
+    }
+
+    async prepareClientData (requestContext) {
         return {};
     }
 
@@ -34,11 +43,18 @@ export default class Store extends CommonStore {
         } else if (isPhoneNumber(id)) {
             authType = AUTH_TYPE.PHONE;
         } else {
-            authType = AUTH_TYPE.ERROR;
+            return {
+                authType: AUTH_TYPE.ERROR,
+            };
         }
         return new Promise((resolve, reject) => setTimeout(() => resolve({
             authType,
             stage: STAGE_MAP.REGISTER
-        }), 500));
+        })));
+    }
+
+    @action.bound
+    hideExplorer () {
+        this.showExplore = false;
     }
 }
