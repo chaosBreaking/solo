@@ -26,5 +26,5 @@ export const reNotIsomorphicStyle = [
 ];
 
 export const reStyleModule = [
-    /components/
+    /components|widgets/
 ];

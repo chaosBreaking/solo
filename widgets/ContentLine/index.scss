@@ -1,0 +1,66 @@
+$AVATAR_HEIGHT: .5rem;
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: .05rem;
+}
+
+.item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    position: relative;
+    margin-bottom: .15rem;
+    cursor: pointer;
+}
+
+.img {
+    width: $AVATAR_HEIGHT;
+    height: $AVATAR_HEIGHT;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: .02rem;
+    flex: 1 0 auto;
+}
+
+.info {
+    width: 100%;
+    height: $AVATAR_HEIGHT;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-left: .05rem;
+}
+
+.title {
+    font-size: .1rem;
+    line-height: 1;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.author {
+    font-size: .08rem;
+    color: #ddd;
+    position: relative;
+    bottom: 0;
+    line-height: 1;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.abstract {
+    padding-right: .1rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}

@@ -266,10 +266,9 @@ export default {
             loaders: [{
                 loader: 'css-loader',
                 query: {
-                    // minimize: !isDebug,
-                    // module: true, // CSS Modules https://github.com/css-modules/css-modules
+                    minimize: !isDebug,
+                    module: true, // CSS Modules https://github.com/css-modules/css-modules
                     modules: {
-
                         localIdentName: isDebug ? '[path][name]-[local]-[hash:base64:5]' : '[local]-[hash:base64:5]'
                     }
                 },

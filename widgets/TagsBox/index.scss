@@ -1,0 +1,27 @@
+.body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: .05rem;
+    margin-bottom: .05rem;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .02rem;
+    margin: .02rem;
+    max-width: 1.1rem;
+    min-width: .6rem;
+    text-overflow: ellipsis;
+    background: #666;
+    border-radius: .03rem;
+    flex: 1 0 auto;
+    cursor: pointer;
+    &:hover {
+        background: #bbb;
+        color: #333;
+    }
+}

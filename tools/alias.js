@@ -5,7 +5,7 @@ export default {
     '@components': resolvePath('components'),
     '@constants': resolvePath('constants/'),
     '@framework': resolvePath('framework'),
-    '@widgets': resolvePath('components/Widgets'),
+    '@widgets': resolvePath('widgets'),
     '@tools': resolvePath('tools'),
     '@utils': resolvePath('utils'),
     '@routes': resolvePath('routes'),

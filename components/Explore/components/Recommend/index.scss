@@ -1,25 +1,28 @@
 @import '~static/color';
+@import '~static/constants';
+$TOP: $NAV_HEIGHT + .05rem;
 
 .container {
-    position: fixed;
+    position: relative;
     left: 0;
     display: flex;
     flex-direction: column;
-    width: 25%;
-    padding-top: 0.5rem;
+    width: $RECOMMEND_WIDTH;
+    // width: 25%;
+    padding-top: $TOP;
     padding-left: .2rem;
     z-index: 1;
     color: #fff;
+    overflow: auto;
 }
 
 .body {
     position: relative;
     width: 100%;
     height: 4.5rem;
-    // background: #fff;
     margin-bottom: .1rem;
+    padding-right: .1rem;
     border-radius: .01rem;
-    padding: .05rem;
 }
 
 .title {
@@ -29,7 +32,6 @@
     align-items: center;
     font-size: .1rem;
     font-weight: 100;
-    margin-bottom: .05rem;
     &:before {
         content: '';
         display: inline-block;

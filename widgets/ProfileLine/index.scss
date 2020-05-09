@@ -1,0 +1,81 @@
+$AVATAR_HEIGHT: .25rem;
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.item {
+    height: .35rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    padding: 0 .03rem;
+    position: relative;
+    cursor: pointer;
+    &:hover {
+        background: rgba(255, 255, 255, .2);
+    }
+}
+
+.avatar {
+    width: $AVATAR_HEIGHT;
+    height: $AVATAR_HEIGHT;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: .02rem;
+    flex: 0 0 auto;
+}
+
+.info {
+    height: $AVATAR_HEIGHT;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-left: .06rem;
+    width: 100%;
+    word-break: break-all;
+}
+
+.nickname {
+    font-size: .1rem;
+    line-height: 1;
+}
+
+.intro {
+    position: relative;
+    bottom: 0;
+    display: inline-block;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: nowrap;
+    font-size: .08rem;
+    color: #ddd;
+    line-height: 1;
+    width: 100%;
+    // line-clamp: 2;
+    // -webkit-line-clamp: 2;
+
+    /* white-space: nowrap; */
+    overflow: hidden;
+    max-width: 1.2rem;
+    white-space: nowrap;
+}
+
+.btn {
+    height: .16rem;
+    width: .3rem;
+    line-height: .16rem;
+    text-align: center;
+    border: 1px solid #eee;
+    border-radius: .05rem;
+    font-size: .08rem;
+    flex: 0 0 auto;
+    &:hover {
+        color: #333;
+        background: #eee;
+    }
+}

@@ -49,12 +49,21 @@
     align-items: center;
 }
 
+.imageWrapper {
+    overflow: hidden;
+    width: 100%;
+}
+
 .image {
     width: 100%;
+    min-height: 1rem;
     // background: url('https://api.ixiaowai.cn/api/api.php');
     background-size: cover;
     flex: 1 0 auto;
     cursor: pointer;
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 
 .content {
