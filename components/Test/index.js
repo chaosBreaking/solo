@@ -34,7 +34,7 @@ export default class Test extends Component {
             <div className={s.container}>
                 <div className={s.content}>{ ReactHtmlParser(this.state.content) }</div>
                 <div onClick={this.submit}>xxxx</div>
-                {this.state.show && <Editor id={'editor'} mountEditorRef={mountEditorRef} />}
+                <Editor id={'editor'} mountEditorRef={mountEditorRef} />
             </div>
         );
     }
