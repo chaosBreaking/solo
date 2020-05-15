@@ -61,6 +61,7 @@
     "query-string": "^6.9.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-html-parser": "^2.0.2",
     "sass-loader": "^8.0.2",
     "sequelize": "^5.21.2",
     "serialize-javascript": "^2.1.1",

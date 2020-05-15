@@ -17,6 +17,10 @@ const routes = {
             path: '/explore.html',
             load: () => import(/* webpackChunkName: 'explore' */ './explore'),
         },
+        {
+            path: '/test.html',
+            load: () => import(/* webpackChunkName: 'test' */ './test'),
+        },
 
         // Wildcard routes, e.g. { path: '(.*)', ... } (must go last)
         // {
