@@ -264,7 +264,7 @@ export default {
         new CompressionPlugin({
             filename: '[path].gz[query]',
             algorithm: 'gzip',
-            test: new RegExp('\\.(js|css|scss|jsx)$'),
+            test: /\.(js|jsx|css|scss|html|svg)$/,
             threshold: 1024 * 10, // 10kb
             minRatio: 0.8,
             compressionOptions: { level: 9 },
