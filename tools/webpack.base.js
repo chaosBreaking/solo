@@ -14,6 +14,7 @@ import {
     happyThreadPool
 } from './constants';
 import HappyPack from 'happypack';
+import CompressionPlugin from 'compression-webpack-plugin';
 
 const staticAssetName = isDebug
     ? '[path][name].[ext]?[hash:8]'
@@ -260,6 +261,14 @@ export default {
     devtool: isDebug ? 'cheap-module-eval-source-map' : 'source-map',
 
     plugins: [
+        new CompressionPlugin({
+            filename: '[path].gz[query]',
+            algorithm: 'gzip',
+            test: new RegExp('\\.(js|css|scss|jsx)$'),
+            threshold: 1024 * 10, // 10kb
+            minRatio: 0.8,
+            compressionOptions: { level: 9 },
+        }),
         new HappyPack({
             id: 'happyCss',
             threadPool: happyThreadPool,
