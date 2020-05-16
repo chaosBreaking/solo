@@ -12,7 +12,7 @@ import s from './index.scss';
 })
 @inject('store')
 @observer
-export default class Home extends Component {
+export default class Entrance extends Component {
     render () {
         const { bgUrl } = this.props.store;
         return (

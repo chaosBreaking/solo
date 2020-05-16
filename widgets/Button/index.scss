@@ -1,0 +1,25 @@
+.btn {
+    width: 1.5rem;
+    height: .3rem;
+    background: #4b6dc9;
+    text-align: center;
+    color: #fff;
+    border-radius: .02rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: .1rem auto 0 auto;
+    transition: all .2s ease-in;
+    cursor: pointer;
+}
+
+.loading {
+    opacity: .9;
+    color: transparent;
+    cursor: not-allowed;
+    pointer-events: auto;
+}
+
+.hollow {
+    background: transparent;
+}

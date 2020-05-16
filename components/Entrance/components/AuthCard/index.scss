@@ -29,6 +29,7 @@
             background: linear-gradient(135deg, #833ab4, #3274D5 60%, #833ab4);
             -webkit-background-clip: text;
             color: transparent;
+
             &:hover {
                 animation: colorfulFont 2s infinite ease;
                 -webkit-animation: colorfulFont 2s infinite ease;
@@ -80,9 +81,21 @@
     margin: .1rem auto 0 auto;
     transition: all .2s ease-in;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
 
-    &:hover {
-        transform: scale(.9);
+    .loading {
+        opacity: .9;
+        color: transparent;
+        cursor: not-allowed;
+        pointer-events: auto;
+    }
+
+    .disabled {
+        background: #868686;
+        color: #3f3f3f;
+        cursor: not-allowed;
+        pointer-events: auto;
     }
 }
 
@@ -113,7 +126,7 @@
     font-size: .1rem;
 
     input {
-        border-radius: .02rem; 
+        border-radius: .02rem;
     }
 }
 
@@ -144,6 +157,8 @@
     color: #fff;
     margin-bottom: .1rem;
     transition: all .5s ease-in;
+    font-size: .12rem;
+    font-weight: bold;
 }
 
 .inputBox {
@@ -175,16 +190,18 @@ input {
 .infoInput::-webkit-input-placeholder {
     color: #fff;
 }
+
 .infoInput:-moz-placeholder {
     color: #fff;
 }
+
 .infoInput:-ms-input-placeholder {
     color: #fff;
 }
 
 .passwdInput {
     animation: slideIn .2s;
-    -webkit-animation: slideIn .2s;   
+    -webkit-animation: slideIn .2s;
 }
 
 .noBackground {
@@ -196,6 +213,7 @@ input {
     justify-content: center;
     align-items: center;
     width: 1.5rem;
+    padding-top: .1rem;
 }
 
 .iconBtn {
@@ -205,6 +223,7 @@ input {
     background: #eee;
     cursor: pointer;
 }
+
 @mixin iconWrapper {
     background: #eee;
     display: flex;
@@ -214,28 +233,36 @@ input {
     width: .2rem;
     height: .2rem;
     opacity: .6;
+    margin-top: 0rem;
+
     &:hover {
         opacity: 1;
     }
 }
+
 .choosed {
-    opacity:  1 !important;
+    opacity: 1 !important;
     background: #fff !important;
 }
+
 .iconGoogle {
     background: url('http://solo-app.test.upcdn.net/google.png') no-repeat;
     background-size: cover;
 }
+
 .iconGithub {
     background: url('http://solo-app.test.upcdn.net/GitHub.png') no-repeat;
     background-size: cover;
 }
+
 .iconFacebook {
     background: url('http://solo-app.test.upcdn.net/icon_facebook.png') no-repeat;
     background-size: cover;
 }
+
 .iconPhone {
     @include iconWrapper();
+
     &:after {
         content: '';
         width: .15rem;
@@ -245,8 +272,10 @@ input {
         background-size: cover;
     }
 }
+
 .iconEmail {
     @include iconWrapper();
+
     &:after {
         content: '';
         width: .13rem;
@@ -285,8 +314,177 @@ input {
     font-size: .09rem;
     color: #fff;
     cursor: pointer;
+
     &:hover {
         animation: colorfulFont 2s infinite ease;
         -webkit-animation: colorfulFont 2s infinite ease;
     }
+}
+
+
+/* START TOOLTIP STYLES */
+[tooltip] {
+    position: relative;
+    /* opinion 1 */
+}
+
+/* Applies to all tooltips */
+[tooltip]::before,
+[tooltip]::after {
+    text-transform: none;
+    /* opinion 2 */
+    font-size: .9em;
+    /* opinion 3 */
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    position: absolute;
+    display: none;
+    opacity: 0;
+}
+
+[tooltip]::before {
+    content: '';
+    border: 5px solid transparent;
+    /* opinion 4 */
+    z-index: 1001;
+    /* absurdity 1 */
+}
+
+[tooltip]::after {
+    content: attr(tooltip);
+    /* magic! */
+
+    /* most of the rest of this is opinion */
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+
+    /* 
+      Let the content set the size of the tooltips 
+      but this will also keep them from being obnoxious
+      */
+    min-width: 3em;
+    max-width: 21em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 1ch 1.5ch;
+    border-radius: .3ch;
+    box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.35);
+    background: #333;
+    color: #fff;
+    z-index: 1000;
+    /* absurdity 2 */
+}
+
+/* Make the tooltips respond to hover */
+[tooltip]:hover::before,
+[tooltip]:hover::after {
+    display: block;
+}
+
+/* don't show empty tooltips */
+[tooltip='']::before,
+[tooltip='']::after {
+    display: none !important;
+}
+
+/* FLOW: UP */
+[tooltip]:not([flow])::before,
+[tooltip][flow^="up"]::before {
+    bottom: 100%;
+    border-bottom-width: 0;
+    border-top-color: #333;
+}
+
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::after {
+    bottom: calc(100% + 5px);
+}
+
+[tooltip]:not([flow])::before,
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::before,
+[tooltip][flow^="up"]::after {
+    left: 50%;
+    transform: translate(-50%, -.5em);
+}
+
+/* FLOW: DOWN */
+[tooltip][flow^="down"]::before {
+    top: 100%;
+    border-top-width: 0;
+    border-bottom-color: #333;
+}
+
+[tooltip][flow^="down"]::after {
+    top: calc(100% + 5px);
+}
+
+[tooltip][flow^="down"]::before,
+[tooltip][flow^="down"]::after {
+    left: 50%;
+    transform: translate(-50%, .5em);
+}
+
+/* FLOW: LEFT */
+[tooltip][flow^="left"]::before {
+    top: 50%;
+    border-right-width: 0;
+    border-left-color: #333;
+    left: calc(0em - 5px);
+    transform: translate(-.5em, -50%);
+}
+
+[tooltip][flow^="left"]::after {
+    top: 50%;
+    right: calc(100% + 5px);
+    transform: translate(-.5em, -50%);
+}
+
+/* FLOW: RIGHT */
+[tooltip][flow^="right"]::before {
+    top: 50%;
+    border-left-width: 0;
+    border-right-color: #333;
+    right: calc(0em - 5px);
+    transform: translate(.5em, -50%);
+}
+
+[tooltip][flow^="right"]::after {
+    top: 50%;
+    left: calc(100% + 5px);
+    transform: translate(.5em, -50%);
+}
+
+/* KEYFRAMES */
+@keyframes tooltips-vert {
+    to {
+        opacity: .9;
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes tooltips-horz {
+    to {
+        opacity: .9;
+        transform: translate(0, -50%);
+    }
+}
+
+/* FX All The Things */
+[tooltip]:not([flow]):hover::before,
+[tooltip]:not([flow]):hover::after,
+[tooltip][flow^="up"]:hover::before,
+[tooltip][flow^="up"]:hover::after,
+[tooltip][flow^="down"]:hover::before,
+[tooltip][flow^="down"]:hover::after {
+    animation: tooltips-vert 300ms ease-out forwards;
+}
+
+[tooltip][flow^="left"]:hover::before,
+[tooltip][flow^="left"]:hover::after,
+[tooltip][flow^="right"]:hover::before,
+[tooltip][flow^="right"]:hover::after {
+    animation: tooltips-horz 300ms ease-out forwards;
 }

@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import withStyles from 'isomorphic-style-loader/withStyles';
-import { STAGE_MAP, AUTH_TYPE } from '../../constants';
+import { STAGE_MAP, AUTH_TYPE, ERROR_MAP } from '../../constants';
 import { forward } from '@utils/navi';
+import Button, { LoadingSVG } from '@widgets/Button';
 import cs from 'classnames';
 import s from './index.scss';
 
 const SLOGAN = ['Don\'t be afraid to dream', 'Just Solo!'];
-const ERROR_MAP = {
-    ID: 0,
-    PASSWD: 1,
-    CONFIRM_PASSWD: 2,
-    NICKNAME: 3
-};
 
 @withStyles(s)
 @inject('store')
@@ -21,6 +16,7 @@ export default class AuthCard extends Component {
     constructor (props) {
         super(props);
         this.state = {
+            isLoading: false,
             stage: 0,
             authType: 0,
             idInput: {
@@ -46,6 +42,19 @@ export default class AuthCard extends Component {
         return this.stage !== 0;
     }
 
+    back = e => {
+        e.stopPropagation();
+        switch (this.state.stage) {
+        case STAGE_MAP.PRE_AUTH: {
+            this.store.switchExplorer(true);
+            this.changeStage(STAGE_MAP.START);
+            break;
+        }
+        case STAGE_MAP.LOGIN:
+        case STAGE_MAP.REGISTER: this.changeStage(STAGE_MAP.PRE_AUTH); break;
+        }
+    }
+
     forward () {
         forward('/explore');
     }
@@ -55,7 +64,7 @@ export default class AuthCard extends Component {
     }
 
     startBtnHandler = () => {
-        this.store.hideExplorer();
+        this.store.switchExplorer(false);
         this.changeStage(STAGE_MAP.PRE_AUTH);
     }
 
@@ -105,9 +114,17 @@ export default class AuthCard extends Component {
 
     onNextStepClick = async e => {
         e.stopPropagation();
-        if (!this.state.idInput[this.state.authType]) {
-            return this.showError(ERROR_MAP.ID, '请填写邮箱或手机');
+        switch (this.state.stage) {
+        case STAGE_MAP.PRE_AUTH: return this.onPreAuth();
+        case STAGE_MAP.LOGIN: return this.onLogIn();
         }
+    }
+
+    onPreAuth = async () => {
+        if (!this.state.idInput[this.state.authType]) {
+            return this.showError(ERROR_MAP.ID, '请输入邮箱或手机');
+        }
+        this.setState({ isLoading: true });
         const data = await this.store.preAuth(this.state.idInput[this.state.authType]);
         const { authType, stage } = data;
         if (authType === AUTH_TYPE.ERROR) {
@@ -115,17 +132,35 @@ export default class AuthCard extends Component {
         } else {
             this.setState({ stage, authType });
         }
+        this.setState({ isLoading: false });
     }
 
-    onSignInClick = async e => {
-        e.stopPropagation();
+    onLogIn = async () => {
+        if (!this.state.passwd) {
+            return this.showError(ERROR_MAP.PASSWD, '请输入密码');
+        }
+        this.setState({ isLoading: true });
+        const res = await this.store.login({
+            id: this.state.idInput[this.state.authType],
+            passwd: this.state.passwd
+        });
+        const { success, error } = res;
+        if (!success) {
+            switch (error) {
+            case ERROR_MAP.PASSWD: this.showError(ERROR_MAP.PASSWD, '密码错误'); break;
+            case ERROR_MAP.NETWORK: this.showError(ERROR_MAP.PASSWD, '网络异常'); break;
+            }
+        } else {
+            forward('/home');
+        }
+        this.setState({ isLoading: false });
     }
 
     onRegisterClick = async e => {
         e.stopPropagation();
     }
 
-    passwdInput = e => {
+    passwdInputHandler = e => {
         e && e.stopPropagation();
         this.setState({
             passwd: e.target.value
@@ -145,7 +180,7 @@ export default class AuthCard extends Component {
                 <div className={s.slogan}>
                     {SLOGAN.map(content => <span key={content}>{content}</span>)}
                 </div>
-                <div className={s.btn} onClick={this.startBtnHandler}>开始吧</div>
+                <Button onClick={this.startBtnHandler} text={'开始吧'}/>
             </div>
         );
     }
@@ -173,18 +208,20 @@ export default class AuthCard extends Component {
                 {
                     this.stage === STAGE_MAP.PRE_AUTH
                         ? <input className={idInputClass} value={this.state.idInput[this.state.authType]} key={'userName'} placeholder='邮箱/手机号' onChange={this.preAuthInputHandler} />
-                        : <input className={s.passwdInput} key={'passwd'} placeholder='密钥' />
+                        : <input className={s.passwdInputHandler} type={'password'} key={'passwd'} placeholder='密钥' value={this.state.passwd} onChange={this.passwdInputHandler}/>
                 }
                 {
-                    <div className={s.oauth}>
+                    this.stage === STAGE_MAP.PRE_AUTH && <div className={s.oauth}>
                         <div className={cs(s.iconBtn, s.iconGoogle)} />
                         <div className={cs(s.iconBtn, s.iconGithub)} />
                         <div className={cs(s.iconBtn, s.iconFacebook)} />
                     </div>
                 }
                 <div>
-                    <div className={s.btn} onClick={this.onNextStepClick}>{btnText}</div>
-                    <div className={cs(s.btn, s.noBackground)} onClick={() => this.changeStage(STAGE_MAP.START)}>返回</div>
+                    <div className={cs(s.btn, { [s.loading]: this.state.isLoading })} onClick={this.onNextStepClick}>
+                        {this.state.isLoading ? <LoadingSVG /> : btnText}
+                    </div>
+                    <Button text={'返回'} onClick={this.back} hollow={true}/>
                 </div>
             </div>
         );
@@ -208,18 +245,19 @@ export default class AuthCard extends Component {
                 </div>
                 <div key={authType} className={s.inputBox}>
                     {idInput[authType] && <input placeholder={idInput[authType]} className={s.infoInput} disabled={true} />}
-                    <input type="password" placeholder='密码' onChange={this.passwdInput} />
-                    <input type="password" placeholder='再次确认密码' onChange={this.passwdInput} />
+                    <input type="password" placeholder='密码' onChange={this.passwdInputHandler} />
+                    <input type="password" placeholder='再次确认密码' onChange={this.passwdInputHandler} />
                     <input key={authType} placeholder='昵称' onChange={this.nicknameInput} />
                     {authType === AUTH_TYPE.PHONE && <input key={authType} placeholder='验证码' />}
                 </div>
                 <div className={s.oauth}>
                     <div className={emailClass} onClick={() => this.changeAuthType(AUTH_TYPE.EMAIL)} />
-                    <div className={phoneClass} onClick={() => this.changeAuthType(AUTH_TYPE.PHONE)} />
+                    <div tooltip="暂不支持手机登录" flow='right'><span className={phoneClass} /></div>
+                    {/* <div className={phoneClass} onClick={() => this.changeAuthType(AUTH_TYPE.PHONE)} /> */}
                 </div>
                 <div>
-                    <div className={s.btn} onClick={this.registBtnHandler}>注册</div>
-                    <div className={cs(s.btn, s.noBackground)} onClick={() => this.changeStage(STAGE_MAP.PRE_AUTH)}>返回</div>
+                    <Button text={'注册'} onClick={this.registBtnHandler} />
+                    <Button text={'返回'} onClick={this.back} hollow={true}/>
                 </div>
             </div>
         );

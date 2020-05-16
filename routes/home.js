@@ -1,9 +1,9 @@
-import Index from '@components/Index';
+import Home from '@components/Home';
 
 export default async function action () {
     return {
         title: 'Solo',
         chunks: ['home'],
-        component: Index
+        component: Home
     };
 }
