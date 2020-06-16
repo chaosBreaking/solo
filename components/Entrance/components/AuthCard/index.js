@@ -3,7 +3,7 @@ import { observer, inject } from 'mobx-react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import { STAGE_MAP, AUTH_TYPE, ERROR_MAP } from '../../constants';
 import { forward } from '@utils/navi';
-import Button, { LoadingSVG } from '@widgets/Button';
+import Button from '@widgets/Button';
 import cs from 'classnames';
 import s from './index.scss';
 
@@ -218,10 +218,8 @@ export default class AuthCard extends Component {
                     </div>
                 }
                 <div>
-                    <div className={cs(s.btn, { [s.loading]: this.state.isLoading })} onClick={this.onNextStepClick}>
-                        {this.state.isLoading ? <LoadingSVG /> : btnText}
-                    </div>
-                    <Button text={'返回'} onClick={this.back} hollow={true}/>
+                    <Button text={btnText} onClick={this.onNextStepClick} loading={this.state.isLoading}/>
+                    <Button text={'返回'} onClick={this.back} plain={true}/>
                 </div>
             </div>
         );

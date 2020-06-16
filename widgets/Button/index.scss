@@ -1,25 +1,79 @@
-.btn {
+$default_bg_color: #4b6dc9;
+$default_font_color: #fff;
+
+.container {
+    position: relative;
     width: 1.5rem;
     height: .3rem;
-    background: #4b6dc9;
-    text-align: center;
-    color: #fff;
-    border-radius: .02rem;
+    margin: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: .1rem auto 0 auto;
-    transition: all .2s ease-in;
+    text-align: center;
+    color: $default_font_color;
     cursor: pointer;
+    transition: all .2s ease-in;
+    border-radius: .05rem;
+    overflow: hidden;
+
+    &:active {
+        opacity: .8;
+    }
+}
+
+.bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: $default_bg_color;
+    z-index: -1;
 }
 
 .loading {
-    opacity: .9;
-    color: transparent;
-    cursor: not-allowed;
-    pointer-events: auto;
+    .bg {
+        opacity: .7;
+        color: transparent;
+        cursor: not-allowed;
+        pointer-events: auto;
+    }
 }
 
 .hollow {
-    background: transparent;
+    color: $default_bg_color;
+    font-weight: bold;
+    outline: 1px solid $default_bg_color;
+    outline-style: auto;
+    .bg {
+        background: transparent;
+    }
+    &:active {
+        outline: unset;
+        .bg {
+            background: $default_bg_color;
+            opacity: .6;
+        }
+    }
+}
+
+.plain {
+    .bg {
+        background: transparent;
+    }
+}
+
+.disabled {
+    background: #efefef !important;
+    color: #a6a6a6 !important;
+    cursor: not-allowed !important;
+    &:active {
+        background: #efefef !important;
+        color: #a6a6a6 !important;
+        cursor: not-allowed !important;
+
+        .bg {
+            background: transparent !important;
+        }
+    }
 }

@@ -16,15 +16,12 @@ import Recommend from './components/Recommend';
 @observer
 export default class Explore extends Component {
     render () {
-        const list = Array.from({ length: 20 }).map((_, index) => ({
-            index,
-            height: Math.random() + 1
-        }));
+        const { dataList } = this.props.store;
         return (
             <div className={s.container}>
                 <NavigationBar />
                 <Recommend />
-                <MasonryList list={list} />
+                <MasonryList list={dataList} />
             </div>
         );
     }

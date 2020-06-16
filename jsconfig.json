@@ -8,7 +8,7 @@
       "@static/*": ["src/static/*"],
       "@utils/*": ["utils/*"],
       "@tools/*": ["tools/*"],
-      "@widgets/*": ["components/Widgets/*"]
+      "@widgets/*": ["widgets/*"]
     },
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
