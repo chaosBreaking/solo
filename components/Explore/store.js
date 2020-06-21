@@ -4,6 +4,7 @@ import ContentService from './service';
 
 export default class Store extends CommonStore {
     @observable dataList = [];
+    @observable loadingStatus = 0;
 
     constructor (props) {
         super(props);
@@ -12,10 +13,26 @@ export default class Store extends CommonStore {
 
     @action.bound
     async initializeData (requestContext) {
-        this.dataList = Array.from({ length: 20 }).map((_, index) => ({
+        this.dataList = Array.from({ length: 21 }).map((_, index) => ({
             index,
             height: Math.random() + 1
         }));
         return {};
+    }
+
+    @action.bound
+    async loadMore () {
+        this.loadingStatus = 1;
+        const offset = this.dataList.length;
+        const data = await new Promise(resolve => {
+            setTimeout(() => {
+                resolve(Array.from({ length: 21 }).map((_, index) => ({
+                    index: index + offset,
+                    height: Math.random() + 1
+                })));
+            }, 1000);
+        });
+        this.dataList.push(...data);
+        this.loadingStatus = 0;
     }
 }

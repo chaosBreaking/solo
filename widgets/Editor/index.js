@@ -6,7 +6,13 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @withStyles(s)
 export default class Editor extends Component {
+    state = { show: false };
+    componentDidMount () {
+        this.setState({ show: true });
+    }
+
     render () {
+        if (!this.state.show) return null;
         return (
             <div className={s.editor}>
                 <CKEditor

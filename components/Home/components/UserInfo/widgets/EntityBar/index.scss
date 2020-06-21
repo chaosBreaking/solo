@@ -1,0 +1,26 @@
+.container {
+    position: relative;
+    width: 100%;
+    height: .25rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+    line-height: .2rem;
+    background: #eee;
+    border-radius: .02rem;
+    padding-left: .1rem;
+}
+
+.name {
+    color: #3f3f3f;
+    max-width: 1rem;
+    display: inline-block;
+    padding-left: .04rem;
+    text-overflow: ellipsis;
+    font-size: .09rem;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+}

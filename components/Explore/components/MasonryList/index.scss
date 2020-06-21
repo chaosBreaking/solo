@@ -1,6 +1,11 @@
 @import '~static/constants';
 $TOP: $NAV_HEIGHT + .05rem;
+
 .container {
+    position: relative;
+}
+
+.list {
     position: relative;
     padding-top: $TOP;
     // padding-left: 25%;

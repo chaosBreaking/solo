@@ -1,0 +1,68 @@
+$barHeight: .2rem;
+$barBgDefault: #415f88;
+$barBgActive: #eee;
+// $barBgActive: var(--navy);
+$fontSize: .1rem;
+$fontColor: #dfdfdf;
+$fontColorActive: #868686;
+
+.container {
+    position: relative;
+    left: 0;
+    width: 1.5rem;
+    display: flex;
+    align-items: center;
+    transition: all .6s cubic-bezier(0.19, 1, 0.22, 1);
+    &:focus-within {
+        width: 2rem;
+
+        input {
+            color: $fontColorActive;
+            background: $barBgActive;
+            &::-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                color: $fontColorActive;
+            }
+            &::-moz-placeholder { /* Mozilla Firefox 19+ */
+                color: $fontColorActive;
+            }
+            &::-webkit-input-placeholder {
+                color: $fontColorActive;
+            }
+        }
+    }
+    input {
+        position: relative;
+        height: $barHeight;
+        width: 100%;
+        padding-left: .1rem;
+        border-radius: .03rem;
+        margin: 0;
+        outline: 0;
+        -webkit-appearance:none;
+        -moz-appearance: none;
+        font-size: $fontSize;
+        color: $fontColor;
+        background: $barBgDefault;
+        transition: all .6s cubic-bezier(0.19, 1, 0.22, 1);
+        &::-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: $fontColor;
+        }
+        &::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: $fontColor;
+        }
+        &::-webkit-input-placeholder {
+            color: $fontColor;
+        }
+    }
+    #searchIcon {
+        cursor: pointer;
+        position: absolute;
+        left: 0;
+        margin: 0;
+        padding: 0 0 0 0.5rem;
+        align-self: center;
+        justify-self: center;
+        z-index: 3;
+        font-size: $fontSize;
+    }
+}

@@ -1,3 +1,17 @@
+@import '~static/constants';
+@import '~static/ani';
+
 .container {
-    width: 80%;
+    width: 100vw;
+    min-height: 100vh;
+    height: auto;
+}
+
+.main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+    padding-top: $NAV_HEIGHT;
 }

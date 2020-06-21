@@ -1,0 +1,18 @@
+@import '~static/color';
+@import '~static/ani';
+
+.container {
+    position: relative;
+    display: inline-block;
+    // margin: 0 .1rem;
+    padding-right: .1rem;
+    font-family: lemon;
+    font-size: .1rem;
+    line-height: 1;
+    color: #fff;
+    cursor: pointer;
+    &:hover {
+        animation: colorfulFont 1.5s infinite ease;
+        -webkit-animation: colorfulFont 1.5s infinite ease;
+    }
+}
