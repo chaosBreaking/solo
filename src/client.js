@@ -1,5 +1,4 @@
-
-import 'whatwg-fetch';
+import 'intersection-observer';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
@@ -31,7 +30,8 @@ async function init () {
     try {
         route = await router.resolve(context);
     } catch (error) {
-        console.error('cannot resolve route');
+        console.error('cannot resolve route', error);
+        return;
     }
 
     if (route.redirect) {
