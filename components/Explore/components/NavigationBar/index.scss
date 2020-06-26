@@ -31,7 +31,7 @@
 .mainNav {
     // left: 25%;
     position: relative;
-    height: 100%;
+    height: $NAV_HEIGHT_MAIN;
     width: 100%;
     display: flex;
     align-items: center;
@@ -60,10 +60,11 @@
 .subNav {
     position: relative;
     width: 100%;
+    height: $NAV_HEIGHT_SUB;
     display: flex;
     align-items: center;
     color: #fff;
-    font-size: .1rem;
+    font-size: .08rem;
     flex-direction: row;
     justify-content: center;
     align-items: center;

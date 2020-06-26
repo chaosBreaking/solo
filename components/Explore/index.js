@@ -20,8 +20,10 @@ export default class Explore extends Component {
         return (
             <div className={s.container}>
                 <NavigationBar />
-                <Recommend />
-                <MasonryList list={dataList} />
+                <div className={s.main}>
+                    <Recommend />
+                    <MasonryList list={dataList} />
+                </div>
             </div>
         );
     }

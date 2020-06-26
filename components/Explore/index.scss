@@ -1,4 +1,7 @@
 @import '~static/color';
+@import '~static/constants';
+
+$TOP: $NAV_HEIGHT + .05rem;
 
 .container {
     position: relative;
@@ -6,8 +9,17 @@
     height: 100%;
     background: var(--navy);
     display: flex;
-    flex-flow: row;
+    flex-flow: column;
     justify-content: flex-start;
     overflow: auto;
     // padding: 0 .2rem;
+}
+
+.main {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    overflow: auto;
+    top: $TOP;
 }

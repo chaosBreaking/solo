@@ -9,16 +9,30 @@ const TITLE = '作品集';
 @inject('store')
 @observer
 export default class Repo extends Component {
-    componentDidMount () {
+    get store () {
+        return this.props.store;
+    }
+
+    renderItem (repo, idx) {
+        const { title } = repo;
+        return <div key={idx} className={s.item}>
+            <span className={s.icon}>📖</span>
+            <span className={s.name}>{title}</span>
+        </div>;
     }
 
     render () {
+        const { repoList } = this.store;
         return (
             <div className={s.container}>
                 <div className={s.top}>
-                    <span className={s.title}>{TITLE}</span>
+                    <div className={s.title}>{TITLE}</div>
                 </div>
-                <div className={s.main}></div>
+                <div className={s.main}>
+                    {
+                        repoList.map(this.renderItem)
+                    }
+                </div>
             </div>
         );
     }

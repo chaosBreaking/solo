@@ -9,12 +9,12 @@ $fontColorActive: #868686;
 .container {
     position: relative;
     left: 0;
-    width: 1.5rem;
+    width: 1.8rem;
     display: flex;
     align-items: center;
     transition: all .6s cubic-bezier(0.19, 1, 0.22, 1);
     &:focus-within {
-        width: 2rem;
+        width: 2.2rem;
 
         input {
             color: $fontColorActive;

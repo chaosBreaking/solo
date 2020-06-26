@@ -1,6 +1,5 @@
 @import '~static/color';
 @import '~static/constants';
-$TOP: $NAV_HEIGHT + .05rem;
 
 .container {
     position: relative;
@@ -8,8 +7,6 @@ $TOP: $NAV_HEIGHT + .05rem;
     display: flex;
     flex-direction: column;
     width: $RECOMMEND_WIDTH;
-    // width: 25%;
-    padding-top: $TOP;
     padding-left: .2rem;
     z-index: 1;
     color: #fff;

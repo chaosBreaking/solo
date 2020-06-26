@@ -9,7 +9,7 @@ $iconHeight: .14rem;
     position: fixed;
     top: 0;
     width: 100%;
-    height: $NAV_HEIGHT;
+    height: $NAV_HEIGHT_MAIN;
     display: flex;
     padding-left: .1rem;
     border-bottom: 1px solid rgba(255, 255, 255, .3);
@@ -25,11 +25,8 @@ $iconHeight: .14rem;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-
     color: #fff;
     font-size: .1rem;
-
-    border-bottom: 1px solid rgba(255, 255, 255, .3);
 }
 
 .left {
@@ -61,8 +58,9 @@ $iconHeight: .14rem;
 }
 
 .items {
-    height: 100%;
     position: relative;
+    height: 100%;
+    margin-left: .2rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;

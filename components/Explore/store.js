@@ -30,7 +30,7 @@ export default class Store extends CommonStore {
                     index: index + offset,
                     height: Math.random() + 1
                 })));
-            }, 1000);
+            }, 500);
         });
         this.dataList.push(...data);
         this.loadingStatus = 0;
