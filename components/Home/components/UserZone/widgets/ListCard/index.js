@@ -13,7 +13,7 @@ export default class ListCard extends Component {
     }
 
     render () {
-        const { data, title, loadMore } = this.props;
+        const { data, title, loadMore, loadingStatus } = this.props;
         return (
             <div className={s.container}>
                 <div className={s.top}>
@@ -24,7 +24,13 @@ export default class ListCard extends Component {
                         data.map(this.renderItem)
                     }
                 </div>
-                <div className={s.more} onClick={loadMore}>展开更多...</div>
+                <div className={s.more} onClick={loadMore}>
+                    {
+                        loadingStatus === 0
+                            ? '展开更多'
+                            : '正在加载更多...'
+                    }
+                </div>
             </div>
         );
     }

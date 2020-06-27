@@ -18,12 +18,12 @@ export default class UserZone extends Component {
     }
 
     render () {
-        const { repoList, loadMore } = this.store;
+        const { repoList, loadMore, loadingStatus } = this.store;
         return (
             <div className={s.container}>
                 <EntityBar />
-                <ListCard title={'作品集'} Item={RepoItem} data={repoList} loadMore={loadMore} />
-                <ListCard title={'团队'} Item={TeamItem} data={repoList} loadMore={loadMore} />
+                <ListCard title={'作品集'} Item={RepoItem} data={repoList} loadMore={loadMore} loadingStatus={loadingStatus} />
+                <ListCard title={'团队'} Item={TeamItem} data={repoList} loadMore={loadMore} loadingStatus={loadingStatus} />
             </div>
         );
     }

@@ -7,6 +7,9 @@ export default class Store extends CommonStore {
     @observable
     repoList = [];
 
+    @observable
+    loadingStatus = 0;
+
     @action.bound
     async initializeData (requestContext) {
         this.repoList = Array.from({ length: 10 }).map((_, index) => ({
@@ -19,16 +22,17 @@ export default class Store extends CommonStore {
     @action.bound
     async loadMore () {
         this.loadingStatus = 1;
-        const offset = this.dataList.length;
         const data = await new Promise(resolve => {
             setTimeout(() => {
-                resolve(Array.from({ length: 21 }).map((_, index) => ({
-                    index: index + offset,
-                    height: Math.random() + 1
-                })));
+                resolve(
+                    Array.from({ length: 10 }).map((_, index) => ({
+                        index,
+                        title: getRandomString(8)
+                    }))
+                );
             }, 1000);
         });
-        this.dataList.push(...data);
+        this.repoList.push(...data);
         this.loadingStatus = 0;
     }
 }
