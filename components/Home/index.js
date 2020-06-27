@@ -4,7 +4,7 @@ import withStyles from 'isomorphic-style-loader/withStyles';
 import pageWrapper from '@framework/pageWrapper';
 import Store from './store';
 import NavigationBar from './components/NavigationBar';
-import UserInfo from './components/UserInfo';
+import UserZone from './components/UserZone';
 import Timeline from './components/Timeline';
 import Recommend from './components/Recommend';
 
@@ -25,7 +25,7 @@ export default class Home extends Component {
             <div className={s.container}>
                 <NavigationBar />
                 <div className={s.main}>
-                    <UserInfo />
+                    <UserZone />
                     <Timeline />
                     <Recommend />
                 </div>

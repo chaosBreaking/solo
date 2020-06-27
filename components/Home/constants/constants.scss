@@ -1,5 +1,5 @@
-@mixin divider {
-    border-bottom: 1px solid #aaa;
-    padding-bottom: .05rem;
-    margin-bottom: .05rem;
+@mixin divider($pos: bottom, $color: #aaa, $marginTop: .05rem, $marginBottom: .05rem) {
+    border-#{$pos}: 1px solid $color;
+    padding-#{$pos}: $marginTop;
+    margin-bottom: $marginBottom;
 }

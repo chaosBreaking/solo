@@ -40,3 +40,10 @@
 .name {
     color: #3f3f3f;
 }
+
+.more {
+    font-size: .06rem;
+    color: #666;
+    cursor: pointer;
+    @include divider(top, #ddd,.05rem, 0);
+}

@@ -47,8 +47,8 @@ function NavigationBar (props) {
                     </div>
                 </div>
                 <div className={s.right}>
-                    <div className={`${s.iconBtn} ${s.notifications}`} tooltip="消息" flow="down" />
-                    <div className={`${s.iconBtn} ${s.createBtn}`} tooltip="创建" flow="down" />
+                    <div className={`${s.iconBtn} ${s.notifications}`} tooltip="消息" flow="down">🔔</div>
+                    <div className={`${s.iconBtn} ${s.createBtn}`} tooltip="创建" flow="down">+</div>
                     <Avatar src={'http://blog.hyperii.com/images/logo.jpg?v=6.6.0'} size={'small'} />
                 </div>
             </div>

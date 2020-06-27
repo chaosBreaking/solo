@@ -3,36 +3,28 @@ import { observer, inject } from 'mobx-react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import s from './index.scss';
 
-const TITLE = '团队';
-
 @withStyles(s)
 @inject('store')
 @observer
-export default class Team extends Component {
-    get store () {
-        return this.props.store;
-    }
-
-    renderItem (repo, idx) {
-        const { title } = repo;
-        return <div key={idx} className={s.item}>
-            <span className={s.icon}>🚩</span>
-            <span className={s.name}>{title}</span>
-        </div>;
+export default class ListCard extends Component {
+    renderItem = (data, idx) => {
+        const { Item } = this.props;
+        return <Item data={data} idx={idx} key={idx} />;
     }
 
     render () {
-        const { repoList } = this.store;
+        const { data, title, loadMore } = this.props;
         return (
             <div className={s.container}>
                 <div className={s.top}>
-                    <div className={s.title}>{TITLE}</div>
+                    <div className={s.title}>{title}</div>
                 </div>
                 <div className={s.main}>
                     {
-                        repoList.map(this.renderItem)
+                        data.map(this.renderItem)
                     }
                 </div>
+                <div className={s.more} onClick={loadMore}>展开更多...</div>
             </div>
         );
     }
