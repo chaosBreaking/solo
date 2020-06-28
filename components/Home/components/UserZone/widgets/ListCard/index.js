@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import s from './index.scss';
+import { StaticSearchBar } from '@widgets/SearchBar';
 
 @withStyles(s)
 @inject('store')
@@ -13,11 +14,12 @@ export default class ListCard extends Component {
     }
 
     render () {
-        const { data, title, loadMore, loadingStatus } = this.props;
+        const { data, title, loadMore, loadingStatus, placeholder } = this.props;
         return (
             <div className={s.container}>
                 <div className={s.top}>
                     <div className={s.title}>{title}</div>
+                    <StaticSearchBar placeholder={placeholder} />
                 </div>
                 <div className={s.main}>
                     {

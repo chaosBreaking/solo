@@ -1,7 +1,7 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import Logo from '@widgets/Logo';
-import SearchBar from '@widgets/SearchBar';
+import { FlexSearchBar } from '@widgets/SearchBar';
 import Avatar from '@widgets/Avatar';
 import { forward } from '@utils/navi';
 import s from './index.scss';
@@ -30,8 +30,8 @@ function NavigationBar (props) {
         <div className={s.container}>
             <div className={s.mainNav}>
                 <div className={s.left}>
-                    {/* <Logo size={'middle'} /> */}
-                    <SearchBar />
+                    <Logo size={'middle'} />
+                    <FlexSearchBar />
                     <div className={s.items}>
                         {
                             ITEMS.map(

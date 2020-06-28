@@ -22,8 +22,8 @@ export default class UserZone extends Component {
         return (
             <div className={s.container}>
                 <EntityBar />
-                <ListCard title={'作品集'} Item={RepoItem} data={repoList} loadMore={loadMore} loadingStatus={loadingStatus} />
-                <ListCard title={'团队'} Item={TeamItem} data={repoList} loadMore={loadMore} loadingStatus={loadingStatus} />
+                <ListCard title={'作品集'} placeholder={'搜索作品仓库...'} Item={RepoItem} data={repoList} loadMore={loadMore} loadingStatus={loadingStatus} />
+                <ListCard title={'团队'} placeholder={'搜索团队...'} Item={TeamItem} data={repoList} loadMore={loadMore} loadingStatus={loadingStatus} />
             </div>
         );
     }

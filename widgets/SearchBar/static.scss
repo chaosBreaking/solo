@@ -1,0 +1,54 @@
+$barHeight: .16rem;
+$barBgDefault: #fff;
+$fontSize: .08rem;
+$fontColor: #000;
+$phFontColor: #868686;
+
+.container {
+    position: relative;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    input {
+        position: relative;
+        height: $barHeight;
+        width: 100%;
+        padding-left: .05rem;
+        border-radius: .03rem;
+        margin: 0;
+        outline: 0;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        font-size: $fontSize;
+        color: $fontColor;
+        background: $barBgDefault;
+
+        &::-moz-placeholder {
+            /* Mozilla Firefox 4 to 18 */
+            color: $phFontColor;
+        }
+
+        &::-moz-placeholder {
+            /* Mozilla Firefox 19+ */
+            color: $phFontColor;
+        }
+
+        &::-webkit-input-placeholder {
+            color: $phFontColor;
+        }
+    }
+
+    #searchIcon {
+        cursor: pointer;
+        position: absolute;
+        left: 0;
+        margin: 0;
+        padding: 0 0 0 0.5rem;
+        align-self: center;
+        justify-self: center;
+        z-index: 3;
+        font-size: $fontSize;
+    }
+}
