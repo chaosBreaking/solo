@@ -10,7 +10,7 @@ const STATUS_MAP = {
 };
 
 export default function InfiniteLoader (props) {
-    const { status, onShowAction, once, loaddedAllTip = '我可是有底线的' } = props;
+    const { status, onShowAction, once = false, loaddedAllTip = '我可是有底线的' } = props;
     switch (status) {
     case STATUS_MAP.READY:
         return <Sentinel onShowAction={onShowAction} once={once} />;
