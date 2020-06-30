@@ -20,7 +20,14 @@ body {
     padding-left: $LEFT_ZONE_WIDTH;
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
+}
+
+.scrollZone {
+    position: relative;
+    width: 100%;
+    height: 100%;
     display: flex;
     background: #eee;
+    overflow: auto;
 }

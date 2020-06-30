@@ -23,8 +23,10 @@ export default class Home extends Component {
                 <NavigationBar />
                 <div className={s.main}>
                     <UserZone />
-                    <Timeline />
-                    <Recommend />
+                    <div className={s.scrollZone}>
+                        <Timeline />
+                        <Recommend />
+                    </div>
                 </div>
             </div>
         );
