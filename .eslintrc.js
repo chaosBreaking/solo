@@ -31,5 +31,9 @@ module.exports = {
         'comma-dangle': 0,
         'react/prop-types': 0,
         'no-unused-vars': ['warn']
-    }
+    },
+    ignorePatterns: [
+        "node_modules",
+        "build",
+    ],
 };
