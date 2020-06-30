@@ -32,8 +32,4 @@ module.exports = {
         'react/prop-types': 0,
         'no-unused-vars': ['warn']
     },
-    ignorePatterns: [
-        "node_modules",
-        "build",
-    ],
 };

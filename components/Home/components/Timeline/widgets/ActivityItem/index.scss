@@ -3,47 +3,49 @@
 .container {
     width: 100%;
     margin-bottom: .1rem;
-    background: #fff;
     border-radius: .05rem;
-    padding: .05rem;
+    // padding: .05rem;
 }
 
-.title {
-    font-size: .09rem;
-    font-weight: 600;
-    width: 100%;
-    @include divider();
-}
-
-.main {
+.actLine {
     position: relative;
     width: 100%;
-    font-size: .08rem;
+    display: flex;
+    align-items: center;
+    font-size: .1rem;
+    padding-bottom: .05rem;
 }
 
-.item {
-    line-height: 2;
-    cursor: pointer;
+.infoLine {
+    padding-left: .05rem;
 
-    &:hover {
-        .name {
-            color: #000;
-            text-decoration: underline;
-        }
+    span {
+        padding-right: .05rem;
     }
 }
 
-.icon {
-    padding-right: .05rem;
+.repoTitle {
+    display: flex;
+    align-items: center;
+    font-size: .09rem;
+
+    .creator {
+        font-weight: bold;
+    }
+
+    span {
+        padding: 0 .02rem;
+    }
 }
 
-.name {
-    color: #3f3f3f;
-}
-
-.more {
-    font-size: .06rem;
-    color: #666;
-    cursor: pointer;
-    @include divider(top, #ddd,.05rem, 0);
+.activityCard {
+    position: relative;
+    width: 100%;
+    height: 1rem;
+    padding: .1rem;
+    border-radius: .05rem;
+    background: #fff;
+    -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
+    -moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
 }

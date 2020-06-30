@@ -47,7 +47,7 @@ const SIZE_MAP = {
 };
 
 function Avatar (props) {
-    const { src, size = 'normal', onClick, flat, noMargin } = props;
+    const { src, size = 'normal', onClick, flat, noMargin, inline } = props;
     const style = {};
     const imgStyle = {};
     if (SIZE_MAP[size]) {
@@ -60,6 +60,9 @@ function Avatar (props) {
     }
     if (noMargin) {
         style.margin = 0;
+    }
+    if (inline) {
+        style.display = 'inline-block';
     }
     const onClickAvatar = e => {
         typeof onClick === 'function'
