@@ -1,6 +1,14 @@
+@import '../../constants/constants.scss';
+@import '~static/constants';
+
 .container {
-    width: 2rem;
-    min-height: 100vh;
+    position: fixed;
+    top: $NAV_HEIGHT_MAIN;
+    left: 0;
+    height: 100%;
+    width: $LEFT_ZONE_WIDTH;
+    max-width: $LEFT_ZONE_WIDTH;
     border-right: 1px solid #eee;
-    padding: .1rem .05rem;
+    padding: 0 .05rem;
+    overflow: auto;
 }

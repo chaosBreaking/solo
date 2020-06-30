@@ -1,5 +1,10 @@
 .container {
-    width: 15%;
-    min-height: 100vh;
+    position: relative;
+    width: 2rem;
+    max-width: 2rem;
+    height: auto;
     padding-left: .1rem;
+    justify-self: flex-end;
+    flex: 1 0 auto;
+    border-left: 1px solid #666;
 }

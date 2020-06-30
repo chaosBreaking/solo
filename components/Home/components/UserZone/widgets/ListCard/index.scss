@@ -8,6 +8,14 @@
     padding: .05rem;
 }
 
+.top {
+    position: sticky;
+    top: 0;
+    padding: .05rem 0;
+    z-index: 1;
+    background: #eee;
+}
+
 .title {
     font-size: .09rem;
     font-weight: 600;

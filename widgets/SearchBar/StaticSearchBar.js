@@ -21,7 +21,7 @@ function StaticSearchBar (props) {
     typeof mountRef === 'function' && mountRef(controller);
     return (
         <div className={s.container} {...events}>
-            <input onChange={onInputChange} value={content} placeholder={placeholder} id="topBarInput" />
+            <input onChange={onInputChange} value={content} placeholder={placeholder} />
         </div>
     );
 };

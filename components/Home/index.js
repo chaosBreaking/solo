@@ -17,9 +17,6 @@ import s from './index.scss';
 })
 @observer
 export default class Home extends Component {
-    componentDidMount () {
-    }
-
     render () {
         return (
             <div className={s.container}>
