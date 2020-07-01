@@ -65,9 +65,7 @@ function Avatar (props) {
         style.display = 'inline-block';
     }
     const onClickAvatar = e => {
-        typeof onClick === 'function'
-            ? onClick()
-            : forward('/index');
+        typeof onClick === 'function' && onClick();
     };
     return (
         <div className={s.container} onClick={onClickAvatar} style={style}>
