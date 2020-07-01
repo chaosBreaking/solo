@@ -37,13 +37,15 @@ function ActivityItem (props) {
         repoType = 1,
         langType = 0,
         starts = 3306,
-        stared = Math.random() > 0.5
+        stared = Math.random() > 0.5,
     } = props;
     const randomImg = `https://api.ixiaowai.cn/api/api.php?${Math.random().toFixed(1)}`;
     return (
         <div className={s.container}>
-            <div className={s.actLine}>
+            <div className={s.avatar}>
                 <Avatar src={'http://blog.hyperii.com/images/logo.jpg?v=6.6.0'} size={'normal'} noMargin={true} />
+            </div>
+            <div className={s.actLine}>
                 <div className={s.subjetLine}>
                     <span className={s.name}>{name}</span>
                     <span className={s.act}>{ACT_TYPE_MAP[actType]}</span>
@@ -63,6 +65,7 @@ function ActivityItem (props) {
                         <div className={s.lang}><span className={s.icon}>🌍</span>{LANG_MAP[langType]}</div>
                         <div className={s.star}><span className={s.icon}>⭐️</span>{starts}</div>
                         <div className={s.star}><span className={s.icon}>💓</span>赞助</div>
+                        <div className={s.star}><span className={s.icon}>🆕</span>{new Date().toLocaleTimeString()} 更新</div>
                     </div>
                     {/* <div className={s.repoOwner}>
                         <Avatar src={randomImg} size={'mini'} noMargin={true} />

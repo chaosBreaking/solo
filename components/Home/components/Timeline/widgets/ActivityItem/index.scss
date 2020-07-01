@@ -5,6 +5,12 @@
     width: 100%;
     border-radius: .05rem;
     margin-bottom: .1rem;
+    padding-left: .35rem;
+}
+
+.avatar {
+    position: absolute;
+    left: 0;
 }
 
 .actLine {
@@ -12,16 +18,19 @@
     width: 100%;
     display: flex;
     align-items: center;
-    font-size: .1rem;
-    padding-bottom: .05rem;
+    font-size: .09rem;
+    padding: .05rem 0;
 }
 
 .subjetLine {
-    padding-left: .05rem;
-
+    font-weight: 600;
     span {
         padding-right: .05rem;
     }
+}
+
+.act {
+    color: #666;
 }
 
 .activityCard {
@@ -53,6 +62,10 @@
 
 .ownerName {
     padding: 0 .05rem;
+    cursor: pointer;
+    &:hover {
+        color: #0366d6;
+    }
 }
 
 .repoName {
@@ -81,6 +94,7 @@
     display: flex;
     align-items: flex-end;
     padding: .1rem 0 .05rem;
+    color: #666;
 }
 
 .repoOwner {
