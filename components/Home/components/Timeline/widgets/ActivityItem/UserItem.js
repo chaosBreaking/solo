@@ -27,7 +27,6 @@ function UserItem (props) {
                     <div className={s.info}>
                         <div className={s.type}><span className={s.icon}>📦</span>12个作品集</div>
                         <div className={s.type}><span className={s.icon}>👀</span>8964人关注</div>
-                        <div className={s.star}></div>
                         <div className={s.star}><span className={s.icon}>🤝</span>{new Date().toLocaleDateString()} 加入</div>
                     </div>
                 </div>

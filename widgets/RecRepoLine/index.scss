@@ -1,4 +1,3 @@
-$AVATAR_HEIGHT: .25rem;
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -7,51 +6,56 @@ $AVATAR_HEIGHT: .25rem;
 }
 
 .item {
-    height: .35rem;
+    position: relative;
     width: 100%;
     display: flex;
-    color: #fff;
-    padding: 0 .03rem;
-    position: relative;
+    flex-direction: column;
+    padding: .05rem .05rem .05rem .1rem;
+    margin-bottom: .05rem;
+    border-radius: .05rem;
+    background: rgba(255, 255, 255, .4);
     cursor: pointer;
+
     &:hover {
         background: rgba(255, 255, 255, .2);
     }
 }
 
-.avatar {
-    width: $AVATAR_HEIGHT;
-    height: $AVATAR_HEIGHT;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border-radius: .02rem;
-    flex: 0 0 auto;
-}
-
 .info {
-    height: $AVATAR_HEIGHT;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    padding-left: .06rem;
     width: 100%;
     word-break: break-all;
 }
 
-.nickname {
-    font-size: .1rem;
-    line-height: 1;
+.title {
+    font-size: .09rem;
+}
+
+.author {
+    padding-left: .05rem;
+    font-size: .08rem;
+    color: #666;
 }
 
 .intro {
     position: relative;
     width: 100%;
     max-width: 1.2rem;
-    bottom: 0;
-    display: inline-block;
+    padding: .05rem 0;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: nowrap;
     font-size: .08rem;
-    color: #ddd;
+    color: #666;
+    line-clamp: 5;
+    -webkit-line-clamp: 5;
+
+    /* white-space: nowrap; */
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .btn {
@@ -63,8 +67,14 @@ $AVATAR_HEIGHT: .25rem;
     border-radius: .05rem;
     font-size: .08rem;
     flex: 0 0 auto;
+
     &:hover {
         color: #333;
         background: #eee;
     }
+}
+
+.bottom {
+    display: flex;
+    align-items: center;
 }

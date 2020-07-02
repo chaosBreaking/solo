@@ -1,0 +1,34 @@
+.container {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.item {
+    width: max-content;
+    display: flex;
+    align-items: center;
+    color: #666;
+    position: relative;
+    margin-right: .1rem;
+    cursor: pointer;
+}
+
+.icon {
+    padding-right: .05rem;
+}
+
+.title {
+    font-size: .1rem;
+    line-height: 1;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    &:hover {
+        text-decoration: underline;
+    }
+}

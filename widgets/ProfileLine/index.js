@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import s from './index.scss';
 
 function ProfileLine (props) {
-    const { data } = props;
+    const { data, configs } = props;
+    const {
+        hideBtn = false,
+        nameColor,
+        introColor,
+    } = configs;
     const list = Object.prototype.toString.call(data) === '[object Array]'
         ? data
         : [data];
@@ -16,10 +21,10 @@ function ProfileLine (props) {
                     return <div className={s.item} key={nickname + index}>
                         <div className={s.avatar} style={{ backgroundImage }} />
                         <div className={s.info}>
-                            <span className={s.nickname}>{nickname}</span>
-                            <span className={s.intro}>{intro}</span>
+                            <span className={s.nickname} style={{ color: nameColor }}>{nickname}</span>
+                            <span className={s.intro} style={{ color: introColor }}>{intro}</span>
                         </div>
-                        <div className={s.btn}>关注</div>
+                        {!hideBtn && <div className={s.btn}>关注</div>}
                     </div>;
                 })
             }
