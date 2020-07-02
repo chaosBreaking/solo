@@ -8,7 +8,7 @@ import s from './user.scss';
 function UserItem (props) {
     const {
         owner = '矢川六郎',
-        bio = '前卫朋克幻想家，Coder，观察者，喜欢给未来加上滤镜和白噪声',
+        bio = '前卫朋克幻想家，Coder，观察者，喜欢给未来加上滤镜和白噪声，汽车以及摇滚爱好者。',
         stared = Math.random() > 0.5,
     } = props.data;
     const randomImg = 'https://api.ixiaowai.cn/api/api.php';
