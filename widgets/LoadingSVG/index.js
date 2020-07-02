@@ -7,6 +7,9 @@ const styles = {
     margin: 'auto',
     width: '100%',
     textAlign: 'center',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
 };
 
 const colorMap = {
