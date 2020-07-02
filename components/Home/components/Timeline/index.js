@@ -18,7 +18,8 @@ export default class Timeline extends Component {
         const loadOptions = {
             status: loadingActivityStatus,
             onShowAction: loadMoreActivity,
-            loaddedAllTip: '已经展示所有动态'
+            loaddedAllTip: '已经展示所有动态',
+            theme: 'dark',
         };
         return (
             <div className={s.container}>

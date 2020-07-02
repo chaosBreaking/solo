@@ -10,12 +10,12 @@ const STATUS_MAP = {
 };
 
 export default function InfiniteLoader (props) {
-    const { status, onShowAction, once = false, loaddedAllTip = '我可是有底线的' } = props;
+    const { status, onShowAction, once = false, loaddedAllTip = '我可是有底线的', theme } = props;
     switch (status) {
     case STATUS_MAP.READY:
         return <Sentinel onShowAction={onShowAction} once={once} />;
     case STATUS_MAP.LOADING:
-        return <LoadingSVG />;
+        return <LoadingSVG theme={theme} />;
     default: return <div>{loaddedAllTip}</div>;
     }
 }
