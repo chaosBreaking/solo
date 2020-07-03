@@ -60,6 +60,7 @@
     // background: url('https://api.ixiaowai.cn/api/api.php');
     background-size: cover;
     flex: 1 0 auto;
+    transition: all .3s ease;
     cursor: pointer;
     &:hover {
         transform: scale(1.1);

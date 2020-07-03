@@ -3,7 +3,7 @@ import withStyles from 'isomorphic-style-loader/withStyles';
 import s from './index.scss';
 
 function ProfileLine (props) {
-    const { data, configs } = props;
+    const { data, configs = {} } = props;
     const {
         hideBtn = false,
         nameColor,
