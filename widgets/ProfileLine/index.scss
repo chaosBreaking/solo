@@ -1,9 +1,11 @@
 $AVATAR_HEIGHT: .25rem;
+
 .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
+    padding-top: .05rem;
 }
 
 .item {

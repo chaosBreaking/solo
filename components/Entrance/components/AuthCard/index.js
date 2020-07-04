@@ -13,21 +13,18 @@ const SLOGAN = ['Don\'t be afraid to dream', 'Just Solo!'];
 @inject('store')
 @observer
 export default class AuthCard extends Component {
-    constructor (props) {
-        super(props);
-        this.state = {
-            isLoading: false,
-            stage: 0,
-            authType: 0,
-            idInput: {
-                0: ''
-            },
-            passwd: '',
-            nickname: '',
-            showErrorMsg: false,
-            error: {},
-            errorMsg: '',
-        };
+    state = {
+        isLoading: false,
+        stage: 0,
+        authType: 0,
+        idInput: {
+            0: ''
+        },
+        passwd: '',
+        nickname: '',
+        showErrorMsg: false,
+        error: {},
+        errorMsg: '',
     }
 
     get store () {
@@ -42,8 +39,25 @@ export default class AuthCard extends Component {
         return this.stage !== 0;
     }
 
+    setOriginState () {
+        this.setState({
+            isLoading: false,
+            stage: 0,
+            authType: 0,
+            idInput: {
+                0: ''
+            },
+            passwd: '',
+            nickname: '',
+            showErrorMsg: false,
+            error: {},
+            errorMsg: '',
+        });
+    }
+
     back = e => {
         e.stopPropagation();
+        this.setOriginState();
         switch (this.state.stage) {
         case STAGE_MAP.PRE_AUTH: {
             this.store.switchExplorer(true);
@@ -195,7 +209,7 @@ export default class AuthCard extends Component {
                 e.keyCode === 13 && this.onNextStepClick(e);
             }}>
                 <div className={s.info}>
-                    <p>多说无益，在这里汇聚灵感</p>
+                    <p>汇聚灵感, 尽情创作</p>
                     <p>Just solo</p>
                 </div>
                 {
@@ -212,12 +226,12 @@ export default class AuthCard extends Component {
                 }
                 {
                     this.stage === STAGE_MAP.PRE_AUTH && <div className={s.oauth}>
-                        <div className={cs(s.iconBtn, s.iconGoogle)} />
-                        <div className={cs(s.iconBtn, s.iconGithub)} />
-                        <div className={cs(s.iconBtn, s.iconFacebook)} />
+                        <div className={s.iconBtnWrapper}><div className={cs(s.iconBtn, s.iconGoogle)} /></div>
+                        <div className={s.iconBtnWrapper}><div className={cs(s.iconBtn, s.iconGithub)} /></div>
+                        <div className={s.iconBtnWrapper}><div className={cs(s.iconBtn, s.iconFacebook)} /></div>
                     </div>
                 }
-                <div>
+                <div className={s.preAuthBtn}>
                     <Button text={btnText} onClick={this.onNextStepClick} loading={this.state.isLoading}/>
                     <Button text={'返回'} onClick={this.back} plain={true}/>
                 </div>

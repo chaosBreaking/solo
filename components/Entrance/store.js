@@ -13,7 +13,7 @@ export default class Store extends CommonStore {
     }
 
     async initializeData (requestContext) {
-        this.bgUrl = BG_IMAGES[~~(Math.random() * 10) % 3];
+        this.bgUrl = BG_IMAGES[~~(Math.random() * 10) % BG_IMAGES.length];
         return { title: 'Solo' };
     }
 

@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import cs from 'classnames';
 import LoadingSVG from '@widgets/LoadingSVG';
 import s from './index.scss';
 
 function Button (props) {
-    const { color, text, loading, disabled, wrapperStyles, innerStyles, ...rest } = props;
+    const { color, text, loading, disabled, wrapperStyles, innerStyles, plain, hollow, ...rest } = props;
     const isLoading = !disabled && loading;
     const containerClass = cs(s.container, {
         [s.loading]: isLoading,
-        [s.disabled]: props.disabled,
-        [s.hollow]: props.hollow,
-        [s.plain]: props.plain,
+        [s.disabled]: disabled,
+        [s.hollow]: hollow,
+        [s.plain]: plain,
     });
     return (
         <div className={containerClass} {...rest} disabled={disabled ? 'disabled' : ''} style={wrapperStyles}>
