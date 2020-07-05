@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import TagsBox from '@widgets/TagsBox';
 import ProfileLine from '@widgets/ProfileLine';

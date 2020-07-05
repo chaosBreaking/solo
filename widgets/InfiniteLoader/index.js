@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Sentinel from '@widgets/Sentinel';
 import LoadingSVG from '@widgets/LoadingSVG';
 
