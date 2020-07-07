@@ -1,36 +1,17 @@
-import React, { Component } from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
-import s from './index.scss';
-import CKEditor from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import React from 'react';
+import Loadable from 'react-loadable';
 
-@withStyles(s)
-export default class Editor extends Component {
-    state = { show: false };
-    componentDidMount () {
-        this.setState({ show: true });
-    }
+const LoadingUI = props => props?.error
+    ? <div>Error! <button onClick={ props.retry }>Retry</button></div>
+    : <div>Loading...</div>;
 
-    render () {
-        if (!this.state.show) return null;
-        return (
-            <div className={s.editor}>
-                <CKEditor
-                    editor={ClassicEditor}
-                    data="<p>Hello from CKEditor 5!</p>"
-                    onInit={editor => {
-                        // You can store the "editor" and use when it is needed.
-                        console.log('Editor is ready to use!', editor);
-                        this.props.mountEditorRef(editor);
-                    }}
-                    onChange={(event, editor) => {
-                    }}
-                    onBlur={(event, editor) => {
-                    }}
-                    onFocus={(event, editor) => {
-                    }}
-                />
-            </div>
-        );
-    }
+const LoadableEditor = Loadable({
+    loader: () => import('./editor'),
+    loading: LoadingUI,
+    delay: 200,
+    timeout: 10000,
+});
+
+export default function Editor (props) {
+    return <LoadableEditor {...props} />;
 }

@@ -22,8 +22,8 @@ const routes = {
             load: () => import(/* webpackChunkName: 'intro' */ './intro'),
         },
         {
-            path: '/test.html',
-            load: () => import(/* webpackChunkName: 'test' */ './test'),
+            path: '/editor.html',
+            load: () => import(/* webpackChunkName: 'editor' */ './editor'),
         },
 
         // Wildcard routes, e.g. { path: '(.*)', ... } (must go last)
