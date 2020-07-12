@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import pageWrapper from '@framework/pageWrapper';
+import withStyles from 'isomorphic-style-loader/withStyles';
+import Editor from './components/Editor';
+// import ReactHtmlParser from 'react-html-parser';
+import NavigationBar from './components/NavigationBar';
 import Store from './store';
-import Editor from '@widgets/Editor';
-import ReactHtmlParser from 'react-html-parser';
 import s from './index.scss';
+import LeftBar from './components/Uploader';
 
+@withStyles(s)
 @inject('store')
 @pageWrapper({
     Store
@@ -34,19 +38,11 @@ export default class EditorPage extends Component {
     }
 
     render () {
-        const mountEditorRef = editor => {
-            this.editor = editor;
-        };
-        const editorConfig = {
-            language: 'zh',
-        };
         return (
             <div className={s.container}>
-                <div className={s.content}>{ ReactHtmlParser(this.state.content) }</div>
-                <div onClick={this.submit}>提交</div>
-                <div className={s.editor}>
-                    <Editor type={'classic'} mountEditorRef={mountEditorRef} config={editorConfig} />
-                </div>
+                <NavigationBar />
+                <LeftBar />
+                <Editor />
             </div>
         );
     }

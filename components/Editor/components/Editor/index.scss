@@ -1,0 +1,39 @@
+@import '~static/constants';
+
+.editor {
+    position: relative;
+    width: 70%;
+    height: 100%;
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    color: #626262;
+    padding: .1rem;
+    font-family: 'Spectral', serif !important;
+}
+
+.title {
+    width: 100%;
+    font-size: 30px;
+    color: #000;
+    font-weight: bold;
+    padding-bottom: .1rem;
+}
+
+:global(.tox-tinymce) {
+    * {
+        border-color: #eee;
+    }
+}
+
+:global(.tox-tinymce) {
+    border: none !important;
+    border-top: 1px solid #eee !important;
+}
+
+:global(.tox-toolbar__primary) {
+    background: none !important;
+}
+
+:global(.tox-editor-header) {
+    border-bottom: 1px solid #eee !important;
+}
