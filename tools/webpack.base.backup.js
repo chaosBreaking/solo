@@ -4,6 +4,7 @@ import pkg from '../package.json';
 import {
     ROOT_DIR,
     resolvePath,
+    reStyleModule,
     BUILD_DIR,
     isDebug,
     isVerbose,
@@ -55,6 +56,12 @@ export default {
 
         rules: [
             // Rules for JS / JSX
+            // {
+            //     test: reScript,
+            //     use: ['happypack/loader?id=happyBabel'],
+            //     exclude: [path.join(__dirname, 'node_modules')]
+            // },
+
             {
                 test: reScript,
                 // include: [SRC_DIR, resolvePath('tools')],
@@ -117,20 +124,37 @@ export default {
                         issuer: { not: [reStyle] },
                         use: 'isomorphic-style-loader',
                     },
+
+                    // Process external/third-party styles
+                    {
+                        exclude: reStyleModule,
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: isDebug,
+                        },
+                    },
+
                     // Process internal/project styles (from src folder)
                     {
-                        exclude: /node_modules/,
-                        loader: ['happypack/loader?id=moduleCss'],
+                        include: reStyleModule,
+                        loader: 'css-loader',
+                        options: {
+                        // CSS Loader https://github.com/webpack/css-loader
+                            importLoaders: 1,
+                            sourceMap: isDebug,
+                            // CSS Modules https://github.com/css-modules/css-modules
+                            modules: {
+                                localIdentName: isDebug
+                                    ? '[name]-[local]-[hash:base64:5]'
+                                    : '[hash:base64:5]',
+                            },
+                        },
                     },
-                    // Process external CSS from node_modules
+
+                    // Compile Sass to CSS
+                    // https://github.com/webpack-contrib/sass-loader
+                    // Install dependencies before uncommenting: yarn add --dev sass-loader node-sass
                     {
-                        include: /node_modules/,
-                        loader: ['happypack/loader?id=extCss']
-                    },
-                    {
-                        // Compile Sass to CSS
-                        // https://github.com/webpack-contrib/sass-loader
-                        // Install dependencies before uncommenting: yarn add --dev sass-loader node-sass
                         test: /\.(scss|sass)$/,
                         loader: 'sass-loader',
                     },
@@ -246,38 +270,18 @@ export default {
             compressionOptions: { level: 9 },
         }),
         new HappyPack({
-            id: 'moduleCss',
+            id: 'happyCss',
             threadPool: happyThreadPool,
             loaders: [{
                 loader: 'css-loader',
                 query: {
-                    sourceMap: isDebug,
-                    // CSS Modules https://github.com/css-modules/css-modules
+                    minimize: !isDebug,
+                    module: true, // CSS Modules https://github.com/css-modules/css-modules
                     modules: {
-                        localIdentName: isDebug
-                            ? '[name]-[local]-[hash:base64:5]'
-                            : '[hash:base64:5]',
-                    },
+                        localIdentName: isDebug ? '[path][name]-[local]-[hash:base64:5]' : '[local]-[hash:base64:5]'
+                    }
                 },
             }],
-        }),
-        new HappyPack({
-            id: 'extCss',
-            threadPool: happyThreadPool,
-            loaders: [
-                'style-loader',
-                {
-                    loader: 'css-loader',
-                    options: {
-                        // minimize: !isDebug,
-                        // module: true, // CSS Modules https://github.com/css-modules/css-modules
-                        // modules: {
-                        //     localIdentName: isDebug ? '[path][name]-[local]-[hash:base64:5]' : '[local]-[hash:base64:5]'
-                        // }
-                    },
-                },
-                'sass-loader'
-            ]
         }),
     ]
 };

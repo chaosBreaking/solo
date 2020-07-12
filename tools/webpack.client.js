@@ -7,7 +7,9 @@ import Webpackbar from 'webpackbar';
 import { BUILD_DIR, isDebug, isAnalyze, happyThreadPool } from './constants';
 import HappyPack from 'happypack';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import babelConfig from './babel.config';
+
 //
 // Configuration for the client-side bundle (client.js)
 // -----------------------------------------------------------------------------
@@ -91,24 +93,43 @@ export default {
 
     // Move modules that occur in multiple entry chunks to a new entry chunk (the commons chunk).
     optimization: {
-        minimizer: isDebug ? [] : [new UglifyJsPlugin({
-            uglifyOptions: {
-                compress: {
-                    drop_debugger: true,
-                    drop_console: true,
+        minimizer: isDebug ? [] : [
+            new UglifyJsPlugin({
+                exclude: /\.min\.js$/,
+                parallel: true,
+                sourceMap: isDebug,
+                extractComments: true, // 移除注释
+                uglifyOptions: {
+                    compress: {
+                        unused: true,
+                        drop_debugger: true,
+                        drop_console: true,
+                    },
+                    output: {
+                        comments: false,
+                    }
                 },
-            },
-            parallel: true,
-            sourceMap: isDebug
-        })],
+            }),
+            new OptimizeCssAssetsPlugin({
+                cssProcessor: require('cssnano'),
+                cssProcessorOptions: {
+                    autoprefixer: { browsers: ['android 4.2', 'ios 7'], add: true },
+                    discardComments: { removeAll: true },
+                    zindex: false,
+                    reduceIdents: false
+                }
+            }),
+        ],
         splitChunks: {
             chunks: 'all',
             minChunks: 2,
+            minSize: 30000,
             cacheGroups: {
                 commons: {
                     chunks: 'initial',
                     test: /[\\/]node_modules[\\/]/,
                     name: 'vendors',
+                    priority: 1,
                 },
             },
         },

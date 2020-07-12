@@ -119,18 +119,39 @@ export default {
                     },
                     // Process internal/project styles (from src folder)
                     {
+                        // include: reStyleModule,
                         exclude: /node_modules/,
-                        loader: ['happypack/loader?id=moduleCss'],
+                        loader: 'css-loader',
+                        options: {
+                        // CSS Loader https://github.com/webpack/css-loader
+                            importLoaders: 1,
+                            sourceMap: isDebug,
+                            // CSS Modules https://github.com/css-modules/css-modules
+                            modules: {
+                                localIdentName: isDebug
+                                    ? '[name]-[local]-[hash:base64:5]'
+                                    : '[hash:base64:5]',
+                            },
+                        },
                     },
                     // Process external CSS from node_modules
                     {
                         include: /node_modules/,
-                        loader: ['happypack/loader?id=extCss']
+                        loader: [
+                            'style-loader',
+                            {
+                                loader: 'css-loader',
+                                options: {
+                                    importLoaders: 1,
+                                },
+                            },
+                            'sass-loader'
+                        ]
                     },
+                    // Compile Sass to CSS
+                    // https://github.com/webpack-contrib/sass-loader
+                    // Install dependencies before uncommenting: yarn add --dev sass-loader node-sass
                     {
-                        // Compile Sass to CSS
-                        // https://github.com/webpack-contrib/sass-loader
-                        // Install dependencies before uncommenting: yarn add --dev sass-loader node-sass
                         test: /\.(scss|sass)$/,
                         loader: 'sass-loader',
                     },
@@ -246,38 +267,18 @@ export default {
             compressionOptions: { level: 9 },
         }),
         new HappyPack({
-            id: 'moduleCss',
+            id: 'happyCss',
             threadPool: happyThreadPool,
             loaders: [{
                 loader: 'css-loader',
                 query: {
-                    sourceMap: isDebug,
-                    // CSS Modules https://github.com/css-modules/css-modules
+                    minimize: !isDebug,
+                    module: true, // CSS Modules https://github.com/css-modules/css-modules
                     modules: {
-                        localIdentName: isDebug
-                            ? '[name]-[local]-[hash:base64:5]'
-                            : '[hash:base64:5]',
-                    },
+                        localIdentName: isDebug ? '[path][name]-[local]-[hash:base64:5]' : '[local]-[hash:base64:5]'
+                    }
                 },
             }],
-        }),
-        new HappyPack({
-            id: 'extCss',
-            threadPool: happyThreadPool,
-            loaders: [
-                'style-loader',
-                {
-                    loader: 'css-loader',
-                    options: {
-                        // minimize: !isDebug,
-                        // module: true, // CSS Modules https://github.com/css-modules/css-modules
-                        // modules: {
-                        //     localIdentName: isDebug ? '[path][name]-[local]-[hash:base64:5]' : '[local]-[hash:base64:5]'
-                        // }
-                    },
-                },
-                'sass-loader'
-            ]
         }),
     ]
 };

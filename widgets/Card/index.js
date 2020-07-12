@@ -21,7 +21,7 @@ function Card (props) {
     } = props;
     return (
         <div className={className} style={containerStyle}>
-            { React.Children.only(children) }
+            { children }
         </div>
     );
 };

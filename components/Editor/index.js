@@ -5,9 +5,9 @@ import withStyles from 'isomorphic-style-loader/withStyles';
 import Editor from './components/Editor';
 // import ReactHtmlParser from 'react-html-parser';
 import NavigationBar from './components/NavigationBar';
+import LeftBar from './components/LeftBar';
 import Store from './store';
 import s from './index.scss';
-import LeftBar from './components/Uploader';
 
 @withStyles(s)
 @inject('store')
