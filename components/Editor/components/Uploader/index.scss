@@ -7,6 +7,10 @@
     width: 100%;
     height: auto;
     * {
-        font-size: 10px !important;
+        font-size: .08rem !important;
     }
+}
+
+:global(.filepond--root) :global(.filepond--drop-label) {
+    height: 1rem;
 }

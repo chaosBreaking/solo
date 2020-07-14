@@ -12,9 +12,9 @@ function FilePondUploader () {
     const [files, setFiles] = useState([]);
     return <FilePond
         files={files}
-        allowMultiple={true}
+        allowMultiple={false}
         onupdatefiles={setFiles}
-        labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+        labelIdle='将文件拖入框内或者<span class="filepond--label-action">选取本地文件</span>'
     />;
 }
 

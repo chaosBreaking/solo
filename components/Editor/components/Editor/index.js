@@ -7,7 +7,6 @@ function EditorWrapper (props) {
     return (
         <div className={s.editor}>
             <div className={s.titleInput}>
-                <div></div>
                 <input className={s.title} type="text" placeholder="输入文章标题 ..." />
             </div>
             <Editor type={'classic'} />
