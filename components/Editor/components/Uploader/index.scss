@@ -7,10 +7,21 @@
     width: 100%;
     height: auto;
     * {
-        font-size: .08rem !important;
+        font-size: .09rem !important;
     }
 }
 
 :global(.filepond--root) :global(.filepond--drop-label) {
     height: 1rem;
+}
+
+:global(.filepond--label-action) {
+    padding: .02rem .05rem;
+    background: #fff;
+    border-radius: .1rem;
+    margin-left: .02rem;
+    text-decoration: none !important;
+    &:active {
+        background: #eee;
+    }
 }

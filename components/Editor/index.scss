@@ -1,4 +1,9 @@
 @import '~static/constants';
+$fontFamily: 'Spectral', serif !important;
+
+:global(*) {
+    font-family: $fontFamily;
+}
 
 .container {
     position: relative;

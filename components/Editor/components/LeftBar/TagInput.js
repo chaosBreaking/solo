@@ -1,0 +1,34 @@
+import React, { useState } from 'react';
+import withStyles from 'isomorphic-style-loader/withStyles';
+import Card from '@widgets/Card';
+import s from './index.scss';
+
+function TagInput (props) {
+    const [tagsArray, updateTagsArray] = useState([]);
+    const [currentTag, changeCurrentTag] = useState('');
+    const addTag = () => {
+        if (currentTag && !tagsArray.includes(currentTag.trim())) {
+            updateTagsArray([...tagsArray, currentTag.trim()]);
+        }
+        changeCurrentTag('');
+    };
+    const deleteTag = target => {
+        updateTagsArray(tagsArray.filter(tag => tag !== target));
+    };
+    return <Card className={s.card}>
+        <div className={s.title}>标签</div>
+        <div className={s.tagContainer}>
+            {tagsArray.map((tag, index) => <span key={index} className={s.tag} onClick={e => deleteTag(tag)}>{tag}</span>)}
+            <input type="text"
+                className={s.tagInput}
+                placeholder={'添加标签 +'}
+                onChange={e => changeCurrentTag(e.target.value)}
+                onBlur={addTag}
+                onKeyDown={e => +e.keyCode === 13 && addTag()}
+                value={currentTag}
+            />
+        </div>
+    </Card>;
+};
+
+export default withStyles(s)(TagInput);
