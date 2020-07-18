@@ -1,0 +1,192 @@
+@import '~static/color';
+@import '~static/constants';
+@import '~static/ani';
+
+$iconWidth: .14rem;
+$iconHeight: .14rem;
+
+.container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: $NAV_HEIGHT_MAIN;
+    display: flex;
+    padding-left: .1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .3);
+    margin-bottom: .02rem;
+    background: var(--navy);
+    z-index: 99;
+}
+
+.mainNav {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #fff;
+    font-size: .1rem;
+}
+
+.left {
+    height: 100%;
+    flex: 1 0 auto;
+    display: flex;
+    justify-self: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.right {
+    height: 100%;
+    flex: 0 1 auto;
+    display: flex;
+    justify-self: flex-end;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.iconBtn {
+    margin-left: .1rem;
+    position: relative;
+    display: inline-block;
+    width: $iconWidth;
+    height: $iconHeight;
+    cursor: pointer;
+}
+
+.items {
+    position: relative;
+    height: 100%;
+    margin-left: .2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.navItem {
+    width: .5rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .1rem;
+    text-align: center;
+    letter-spacing: .01rem;
+    color: #eee;
+    cursor: pointer;
+    &:hover {
+        color: #fff;
+    }
+}
+
+/* START TOOLTIP STYLES */
+[tooltip] {
+    position: relative;
+    /* opinion 1 */
+}
+
+/* Applies to all tooltips */
+[tooltip]::before,
+[tooltip]::after {
+    text-transform: none;
+    /* opinion 2 */
+    font-size: .9em;
+    /* opinion 3 */
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    position: absolute;
+    display: none;
+    opacity: 0;
+}
+
+[tooltip]::before {
+    content: '';
+    border: 5px solid transparent;
+    /* opinion 4 */
+    z-index: 1001;
+    /* absurdity 1 */
+}
+
+[tooltip]::after {
+    content: attr(tooltip);
+    /* magic! */
+
+    /* most of the rest of this is opinion */
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+
+    /* 
+      Let the content set the size of the tooltips 
+      but this will also keep them from being obnoxious
+      */
+    min-width: 3em;
+    max-width: 21em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 1ch 1.5ch;
+    border-radius: .6ch;
+    box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.35);
+    background: #333;
+    color: #fff;
+    letter-spacing: .01rem;
+    z-index: 1000;
+    /* absurdity 2 */
+}
+
+/* Make the tooltips respond to hover */
+[tooltip]:hover::before,
+[tooltip]:hover::after {
+    display: block;
+}
+
+/* don't show empty tooltips */
+[tooltip='']::before,
+[tooltip='']::after {
+    display: none !important;
+}
+
+/* FLOW: DOWN */
+[tooltip][flow^="down"]::before {
+    top: 100%;
+    border-top-width: 0;
+    border-bottom-color: #333;
+}
+
+[tooltip][flow^="down"]::after {
+    top: calc(100% + 10px);
+}
+
+[tooltip][flow^="down"]::before,
+[tooltip][flow^="down"]::after {
+    left: 50%;
+    transform: translate(-50%, .5em);
+}
+
+/* KEYFRAMES */
+@keyframes tooltips-vert {
+    to {
+        opacity: .9;
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes tooltips-horz {
+    to {
+        opacity: .9;
+        transform: translate(0, -50%);
+    }
+}
+
+/* FX All The Things */
+[tooltip]:not([flow]):hover::before,
+[tooltip]:not([flow]):hover::after,
+[tooltip][flow^="up"]:hover::before,
+[tooltip][flow^="up"]:hover::after,
+[tooltip][flow^="down"]:hover::before,
+[tooltip][flow^="down"]:hover::after {
+    animation: tooltips-vert 300ms ease-out forwards;
+}

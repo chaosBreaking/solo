@@ -1,56 +1,34 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
-import Logo from '@widgets/Logo';
-import { FlexSearchBar } from '@widgets/SearchBar';
-import Avatar from '@widgets/Avatar';
 import { forward } from '@utils/navi';
+import { NAVI_ITEMS } from '../../constants';
 import s from './index.scss';
 
-const ITEMS = [
-    {
-        title: '草稿',
-        url: ''
-    },
-    {
-        title: '疑问',
-        url: ''
-    },
-    {
-        title: '发现',
-        url: '/explore'
-    },
-];
+const SUB_ITEMS = ['科技', '赛博文化', '密码朋克', '媒体', '艺术'];
 
 function NavigationBar (props) {
-    const clickNavItem = url => {
-        // forward(url);
+    const { subNav = SUB_ITEMS } = props;
+    const naviToIndex = e => {
+        forward('/index');
     };
-
+    const itemForward = url => {
+        forward(url);
+    };
     return (
         <div className={s.container}>
             <div className={s.mainNav}>
-                <div className={s.left}>
-                    <Logo size={'middle'} />
-                    <FlexSearchBar />
-                    <div className={s.items}>
-                        {
-                            ITEMS.map(
-                                item => <div
-                                    className={s.navItem}
-                                    key={item.title}
-                                    onClick={clickNavItem.bind(this, item.url)}
-                                >
-                                    {item.title}
-                                </div>
-                            )
-                        }
-                    </div>
-                </div>
-                <div className={s.right}>
-                    <div className={`${s.iconBtn} ${s.notifications}`} tooltip="消息" flow="down">🔔</div>
-                    <div className={`${s.iconBtn} ${s.createBtn}`} tooltip="创建" flow="down">+</div>
-                    <Avatar src={'http://blog.hyperii.com/images/logo.jpg?v=6.6.0'} size={'small'} />
-                </div>
+                <div className={s.logo} onClick={naviToIndex}><h1>Solo</h1></div>
+                {
+                    NAVI_ITEMS.map(item => {
+                        const { title, url } = item;
+                        return <span onClick={itemForward.bind(this, url)} key={title}>{title}</span>;
+                    })
+                }
+            </div>
+            <div className={s.subNav}>
+                {
+                    subNav.map(item => <span key={item}>{item}</span>)
+                }
             </div>
         </div>
     );

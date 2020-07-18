@@ -3,13 +3,14 @@
 
 .container {
     position: relative;
-    left: 0;
+    width: 2rem;
+    max-width: 2rem;
     display: flex;
     flex-direction: column;
-    width: $RECOMMEND_WIDTH;
-    padding-left: .2rem;
-    z-index: 1;
-    color: #fff;
+    height: auto;
+    padding: .05rem .1rem 0 0;
+    justify-self: flex-end;
+    flex: 1 0 auto;
 }
 
 .body {
@@ -24,14 +25,16 @@
 .title {
     position: relative;
     height: .2rem;
+    margin-bottom: .05rem;
     display: flex;
     align-items: center;
-    font-size: .1rem;
+    font-size: .09rem;
     font-weight: 100;
+
     &:before {
         content: '';
         display: inline-block;
-        width: .01rem;
+        width: .02rem;
         height: .1rem;
         background: #151515;
         margin-right: .03rem;
@@ -45,7 +48,23 @@
         height: .01rem;
         display: inline-block;
         margin-top: .02rem;
-        background: #fff;
+        background: #000;
         opacity: .2;
+    }
+}
+
+.sub {
+    font-weight: lighter;
+    color: #666;
+
+    &:before {
+        content: '';
+        display: inline-block;
+        width: .03rem;
+        height: .03rem;
+        margin: 0 .02rem;
+        border-radius: 100%;
+        background: #666;
+        vertical-align: middle;
     }
 }

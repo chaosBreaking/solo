@@ -19,10 +19,13 @@ const MAX_FILE_SIZE = '5MB';
 
 function FilePondUploader () {
     const [files, setFiles] = useState([]);
+    const uploadHandler = file => {
+        console.log(file);
+    };
     return <FilePond
         files={files}
         allowMultiple={false}
-        onupdatefiles={setFiles}
+        onupdatefiles={uploadHandler}
         labelIdle='将文件拖入框内 或<span class="filepond--label-action">选取本地文件</span>'
         allowFileTypeValidation={true}
         acceptedFileTypes={['image/*']}

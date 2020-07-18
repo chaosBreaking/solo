@@ -17,7 +17,6 @@ class App extends React.Component {
     }
 
     onInit = editor => {
-        console.log('onInit', editor);
         this.setState({ mounted: true });
     }
 

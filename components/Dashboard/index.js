@@ -1,28 +1,32 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
+import withStyles from 'isomorphic-style-loader/withStyles';
 import pageWrapper from '@framework/pageWrapper';
 import Store from './store';
-import withStyles from 'isomorphic-style-loader/withStyles';
-import s from './index.scss';
-import MasonryList from './components/MasonryList';
 import NavigationBar from './components/NavigationBar';
+import UserZone from './components/UserZone';
+import Timeline from './components/Timeline';
 import Recommend from './components/Recommend';
 
+import s from './index.scss';
+
 @withStyles(s)
+@inject('store')
 @pageWrapper({
     Store
 })
-@inject('store')
 @observer
-export default class Index extends Component {
+export default class Dashboard extends Component {
     render () {
-        const { dataList } = this.props.store;
         return (
             <div className={s.container}>
                 <NavigationBar />
                 <div className={s.main}>
-                    <Recommend />
-                    <MasonryList list={dataList} />
+                    <UserZone />
+                    <div className={s.scrollZone}>
+                        <Timeline />
+                        <Recommend />
+                    </div>
                 </div>
             </div>
         );

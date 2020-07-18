@@ -14,6 +14,10 @@ const routes = {
             load: () => import(/* webpackChunkName: 'home' */ './home'),
         },
         {
+            path: '/dashboard.html',
+            load: () => import(/* webpackChunkName: 'dashboard' */ './dashboard'),
+        },
+        {
             path: '/explore.html',
             load: () => import(/* webpackChunkName: 'explore' */ './explore'),
         },

@@ -1,0 +1,30 @@
+@import '~static/constants';
+
+.container {
+    position: relative;
+    width: 100%;
+}
+
+.list {
+    position: relative;
+    // padding-left: 25%;
+    // padding-right: .2rem;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    overflow-x: hidden;
+    overflow-y: auto;
+    // overflow: -moz-hidden-unscrollable;
+    // -ms-overflow-style: none;
+    // &::-webkit-scrollbar {
+    //     display: none;
+    // }
+}
+
+.column {
+    width: 1.5rem;
+    flex: 1 0 auto;
+    margin-right: .1rem;
+}
