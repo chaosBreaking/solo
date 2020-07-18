@@ -16,6 +16,7 @@ $introFontColor: #666;
     height: auto;
     // min-height: 1rem;
     margin-bottom: .1rem;
+    border-radius: .04rem !important;
 }
 
 .title {
@@ -90,6 +91,10 @@ $introFontColor: #666;
     padding: 0 .04rem;
     margin-right: .05rem;
     border-radius: .02rem;
+    cursor: pointer;
+    &:hover {
+        opacity: .5;
+    }
 }
 
 .close {

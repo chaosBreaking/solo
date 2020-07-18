@@ -1,9 +1,20 @@
 import React from 'react';
 import Loadable from 'react-loadable';
+import LoadingSVG from '@widgets/LoadingSVG';
+import LoadingRipple from '@widgets/LoadingRipple';
+
+const loadingStyles = {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+};
 
 const LoadingUI = props => props?.error
     ? <div>Error! <button onClick={ props.retry }>Retry</button></div>
-    : <div>Loading...</div>;
+    : <div style={loadingStyles}><LoadingRipple size={'original'} /><br /><h1>编辑器加载中...</h1></div>;
+    // : <div style={{ height: '100%' }}>Loading...<LoadingSVG theme={'dark'}/></div>;
 
 const LoadableEditor = Loadable({
     loader: () => import('./editor'),
@@ -13,5 +24,5 @@ const LoadableEditor = Loadable({
 });
 
 export default function Editor (props) {
-    return <LoadableEditor {...props} />;
-}
+    return <LoadableEditor {...props} LoadingUI={LoadingUI} />;
+};

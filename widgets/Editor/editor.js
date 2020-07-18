@@ -11,16 +11,20 @@ const initContent = '';
 const fontFamily = "'Spectral', Serif;";
 
 class App extends React.Component {
+    state = { mounted: false };
     handleEditorChange = (content, editor) => {
         console.log('Content was updated:', content);
     }
 
-    componentDidMount () {
-        // localize(window.tinymce);
+    onInit = editor => {
+        console.log('onInit', editor);
+        this.setState({ mounted: true });
     }
 
     render () {
-        return (
+        const { LoadingUI } = this.props;
+        return <>
+            {!this.state.mounted && <LoadingUI />}
             <Editor
                 initialValue={initContent}
                 skin='dark'
@@ -36,14 +40,15 @@ class App extends React.Component {
                     branding: false,
                     fontsize_formats: fontsizeFormats,
                     content_style: `
-                        * { font-family: 'Spectral', serif }
-                        .mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before { font-size: 18px; font-family: 'Spectral', serif !important; }
-                        `,
+                    * { font-family: 'Spectral', serif }
+                    .mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before { font-size: 18px; font-family: 'Spectral', serif !important; }
+                    `,
                     placeholder: '输入正文 ...',
                 }}
                 onEditorChange={this.handleEditorChange}
+                onInit={this.onInit}
             />
-        );
+        </>;
     }
 }
 
