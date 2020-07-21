@@ -6,7 +6,7 @@ import withStyles from 'isomorphic-style-loader/withStyles';
 import s from './index.scss';
 import MasonryList from './components/MasonryList';
 import NavigationBar from './components/NavigationBar';
-import Recommend from './components/Recommend';
+import FeedsList from './components/FeedsList';
 
 @withStyles(s)
 @pageWrapper({
@@ -14,15 +14,16 @@ import Recommend from './components/Recommend';
 })
 @inject('store')
 @observer
-export default class Index extends Component {
+export default class Home extends Component {
     render () {
         const { dataList } = this.props.store;
         return (
             <div className={s.container}>
                 <NavigationBar />
                 <div className={s.main}>
-                    <Recommend />
-                    <MasonryList list={dataList} />
+                    {/* <SideNav /> */}
+                    <FeedsList />
+                    {/* <Recommend /> */}
                 </div>
             </div>
         );

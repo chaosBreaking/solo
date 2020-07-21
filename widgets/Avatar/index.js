@@ -47,8 +47,8 @@ const SIZE_MAP = {
 };
 
 function Avatar (props) {
-    const { src, size = 'normal', onClick, flat, noMargin, inline } = props;
-    const style = {};
+    const { src, size = 'normal', onClick, flat, noMargin, inline, style: AvatarStyle } = props;
+    const style = { ...AvatarStyle };
     const imgStyle = {};
     if (SIZE_MAP[size]) {
         Object.assign(style, {

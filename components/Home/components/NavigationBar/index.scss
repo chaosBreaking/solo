@@ -5,13 +5,13 @@
 .container {
     position: fixed;
     width: 100%;
-    height: $NAV_HEIGHT;
+    height: $NAV_HEIGHT_MAIN;
+    padding: 0 .1rem;
     margin-bottom: .02rem;
-    background: var(--navy);
-    z-index: 99;
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid rgba(255, 255, 255, .3);
+    z-index: 99;
 }
 
 .logo {
@@ -29,18 +29,23 @@
 }
 
 .mainNav {
-    // left: 25%;
     position: relative;
     height: $NAV_HEIGHT_MAIN;
     width: 100%;
+
     display: flex;
-    align-items: center;
-    color: #fff;
-    font-size: .1rem;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+
+    margin: auto;
+    border-radius: .1rem;
+    color: #000;
+    font-size: .1rem;
     border-bottom: 1px solid rgba(255, 255, 255, .3);
+    -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
+    -moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
 
     span {
         display: flex;
@@ -52,7 +57,7 @@
         padding: 0 .2rem;
         cursor: pointer;
         &:hover {
-            background: rgba(255, 255, 255, .1)
+            background: rgba(255, 255, 255, .1);
         }
     }
 }
@@ -62,12 +67,12 @@
     width: 100%;
     height: $NAV_HEIGHT_SUB;
     display: flex;
-    align-items: center;
-    color: #fff;
-    font-size: .08rem;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    padding-top: .1rem;
+    color: #333;
+    font-size: .08rem;
 
     span {
         display: flex;
