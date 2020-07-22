@@ -14,7 +14,8 @@ export const parseQuery = query => {
     query = query || location.search;
     return query.slice(1).split('&').reduce((acc, s) => {
         const [k, v] = s.split('=');
-        v !== undefined && (acc[k] = v);
+        // v !== undefined && (acc[k] = v);
+        acc[k] = v || true;
         return acc;
     }, {});
 };

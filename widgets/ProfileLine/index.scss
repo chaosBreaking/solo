@@ -12,7 +12,6 @@ $AVATAR_HEIGHT: .25rem;
     height: .35rem;
     width: 100%;
     display: flex;
-    color: #fff;
     padding: 0 .03rem;
     position: relative;
     cursor: pointer;
@@ -53,7 +52,6 @@ $AVATAR_HEIGHT: .25rem;
     bottom: 0;
     display: inline-block;
     font-size: .08rem;
-    color: #ddd;
 }
 
 .btn {
@@ -67,6 +65,5 @@ $AVATAR_HEIGHT: .25rem;
     flex: 0 0 auto;
     &:hover {
         color: #333;
-        background: #eee;
     }
 }

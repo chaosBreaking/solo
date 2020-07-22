@@ -5,9 +5,9 @@ import LoadingSVG from '@widgets/LoadingSVG';
 import s from './index.scss';
 
 function Button (props) {
-    const { color, text, loading, disabled, wrapperStyles, innerStyles, plain, hollow, ...rest } = props;
+    const { className, color, text, loading, disabled, wrapperStyles, innerStyles, plain, hollow, ...rest } = props;
     const isLoading = !disabled && loading;
-    const containerClass = cs(s.container, {
+    const containerClass = cs(s.container, className, {
         [s.loading]: isLoading,
         [s.disabled]: disabled,
         [s.hollow]: hollow,
@@ -21,4 +21,4 @@ function Button (props) {
     );
 };
 
-export default withStyles(s)(Button);
+export default Button;

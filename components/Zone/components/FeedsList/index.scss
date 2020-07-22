@@ -1,0 +1,10 @@
+@import '~static/constants';
+
+.container {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}

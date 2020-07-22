@@ -18,6 +18,10 @@ const routes = {
             load: () => import(/* webpackChunkName: 'dashboard' */ './dashboard'),
         },
         {
+            path: '/zone.html',
+            load: () => import(/* webpackChunkName: 'zone' */ './zone'),
+        },
+        {
             path: '/explore.html',
             load: () => import(/* webpackChunkName: 'explore' */ './explore'),
         },

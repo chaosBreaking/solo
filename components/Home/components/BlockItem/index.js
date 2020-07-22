@@ -2,6 +2,7 @@ import React from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import Avatar from '@widgets/Avatar';
 import cs from 'classnames';
+import { forward } from '@utils/navi';
 import s from './index.scss';
 
 function BlockItem (props) {
@@ -13,11 +14,17 @@ function BlockItem (props) {
     //         height:
     //     }
     //     : {};
+    const clickHandler = () => {
+        forward('/zone.html');
+    };
     return (
-        <div className={cs(s.container, {
-            [s.topLine]: index < 2,
-            [s.secondLine]: index >= 2 && index < 5,
-        })}>
+        <div
+            className={cs(s.container, {
+                [s.topLine]: index < 2,
+                [s.secondLine]: index >= 2 && index < 5,
+            })}
+            onClick={clickHandler}
+        >
             <div className={s.info}>
                 {/* <h2>科技</h2> */}
                 {/* 圈子主题背景图 */}
