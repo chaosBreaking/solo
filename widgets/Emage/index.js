@@ -1,10 +1,10 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import cs from 'classnames';
 import withStyles from 'isomorphic-style-loader/withStyles';
+import cs from 'classnames';
 import s from './index.scss';
 
-function Card (props) {
+function Emage (props) {
     const {
         className,
         children
@@ -16,4 +16,4 @@ function Card (props) {
     );
 };
 
-export default withStyles(s)(observer(Card));
+export default withStyles(s)(observer(Emage));

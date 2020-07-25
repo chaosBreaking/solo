@@ -15,3 +15,44 @@
     height: 100%;
     border-radius: 100%;
 }
+
+.mini {
+    width: .16rem;
+    height: .16rem;
+}
+
+.small {
+    width: .22rem;
+    height: .22rem;
+}
+
+.normal {
+    width: .26rem;
+    height: .26rem;
+}
+
+.middle {
+    width: .3rem;
+    height: .3rem;
+}
+
+.large {
+    width: .4rem;
+    height: .4rem;
+}
+
+.flat {
+    border-radius: 0;
+}
+
+.noMargin {
+    margin: 0;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.isFake {
+    background: #aaa;
+}

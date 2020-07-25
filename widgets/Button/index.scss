@@ -57,6 +57,7 @@ $default_font_color: #fff;
 }
 
 .plain {
+    transition: unset;
     .bg {
         background: transparent;
     }

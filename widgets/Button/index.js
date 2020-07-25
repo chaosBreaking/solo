@@ -21,4 +21,4 @@ function Button (props) {
     );
 };
 
-export default Button;
+export default withStyles(s)(Button);
