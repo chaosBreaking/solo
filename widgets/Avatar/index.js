@@ -13,9 +13,8 @@ const SIZE_MAP = [
 ];
 
 function Avatar (props) {
-    const { className, src, size = 'normal', onClick, flat, noMargin, inline, style: AvatarStyle, isFake } = props;
+    const { className, src, size = 'normal', onClick, flat, noMargin, inline, style: AvatarStyle = {}, isFake } = props;
     const style = { ...AvatarStyle };
-    const imgStyle = {};
     const csName = cs(s.container, {
         [s[size]]: SIZE_MAP.includes(size),
         [s.flat]: flat,
@@ -29,7 +28,7 @@ function Avatar (props) {
     };
     return (
         <div className={`${csName} ${className}`} onClick={onClickAvatar} style={style}>
-            <img className={s.image} src={src} alt={''} style={imgStyle} />
+            <img className={s.image} src={isFake ? '' : src} alt={''} />
         </div>
     );
 };

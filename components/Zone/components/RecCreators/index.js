@@ -19,8 +19,7 @@ function RecCreators (props) {
                 list.slice(0, 3).map((item, index) => {
                     const { avatar, nickname, intro, followers = 4231, posts = 37 } = item;
                     return <div className={s.item} key={nickname + index}>
-                        {/* <div className={s.avatar} style={{ backgroundImage }} /> */}
-                        <Avatar className={s.avatar} size={'middle'} src={avatar} />
+                        <Avatar className={s.avatar} src={avatar} isFake={true} />
                         <div className={s.info}>
                             <span className={s.nickname} style={{ color: nameColor }}>{nickname}</span>
                             <span className={s.intro} style={{ color: introColor }}>{intro}</span>
