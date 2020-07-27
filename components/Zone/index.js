@@ -7,6 +7,8 @@ import s from './index.scss';
 import NavigationBar from './components/NavigationBar';
 import Recommend from './components/Recommend';
 import FeedsList from './components/FeedsList';
+import TopCard from './components/TopCard';
+import SideNav from './components/SideNav';
 
 @withStyles(s)
 @pageWrapper({
@@ -18,11 +20,14 @@ export default class Zone extends Component {
     render () {
         return (
             <div className={s.container}>
-                {/* <NavigationBar /> */}
+                <NavigationBar />
                 <div className={s.main}>
-                    {/* <SideNav /> */}
-                    <FeedsList />
-                    <Recommend />
+                    <TopCard />
+                    <SideNav />
+                    <div className={s.row}>
+                        <FeedsList />
+                        <Recommend />
+                    </div>
                 </div>
             </div>
         );

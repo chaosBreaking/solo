@@ -1,0 +1,73 @@
+$AVATAR_HEIGHT: .45rem;
+$INFO_HEIGHT: $AVATAR_HEIGHT - 0.05rem;
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex: 1 0 auto;
+    padding: 0 .03rem;
+    position: relative;
+    cursor: pointer;
+    &:hover {
+        background: rgba(255, 255, 255, .2);
+    }
+}
+
+.avatar {
+    width: $AVATAR_HEIGHT;
+    height: $AVATAR_HEIGHT;
+    background-size: cover;
+    background-repeat: no-repeat;
+    // border-radius: .02rem;
+    margin: 0;
+    flex: 0 0 auto;
+}
+
+.info {
+    height: $INFO_HEIGHT;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-left: .1rem;
+    width: 100%;
+    word-break: break-all;
+}
+
+.nickname {
+    font-size: .1rem;
+    line-height: 1;
+}
+
+.intro {
+    position: relative;
+    width: 100%;
+    max-width: 1.2rem;
+    bottom: 0;
+    display: inline-block;
+    font-size: .08rem;
+}
+
+.btn {
+    height: .16rem;
+    width: .3rem;
+    line-height: .16rem;
+    text-align: center;
+    border: 1px solid #eee;
+    border-radius: .05rem;
+    font-size: .08rem;
+    flex: 0 0 auto;
+    &:hover {
+        color: #333;
+    }
+}

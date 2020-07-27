@@ -2,6 +2,20 @@
 @import '~static/constants';
 @import '~static/ani';
 
+$NAVI_BG_COLOR: #fff;
+
+@mixin NAVI_BASE {
+    height: $NAV_HEIGHT_MAIN;
+    line-height: $NAV_HEIGHT_MAIN;
+    background: $NAVI_BG_COLOR;
+    border-radius: .1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .3);
+
+    -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
+    -moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
+}
+
 .container {
     position: fixed;
     width: 100%;
@@ -9,19 +23,19 @@
     padding: 0 .1rem;
     margin-bottom: .02rem;
     display: flex;
-    flex-direction: column;
     border-bottom: 1px solid rgba(255, 255, 255, .3);
     z-index: 99;
 }
 
 .logo {
-    position: absolute;
-    left: 0;
-    font-size: .1rem;
-    margin: 0 .2rem;
+    position: relative;
+    padding: 0 .1rem;
     color: #000;
+    font-size: .2rem;
+    font-weight: bolder;
     font-family: lemon;
     cursor: pointer;
+    @include NAVI_BASE();
 
     &:hover {
         animation: colorfulFont 1.5s infinite ease;
@@ -29,34 +43,39 @@
     }
 }
 
+.user {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    @include NAVI_BASE();
+}
+
 .mainNav {
     position: relative;
     height: $NAV_HEIGHT_MAIN;
-    width: 100%;
 
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    flex: 1 0 auto;
 
-    margin: auto;
-    border-radius: .1rem;
+    margin: auto .1rem;
     color: #000;
     font-size: .1rem;
-    background: #fff;
+    font-weight: bold;
+    @include NAVI_BASE();
 
-    border-bottom: 1px solid rgba(255, 255, 255, .3);
-    -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
-    -moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
 
     span {
+        height: 100%;
+        width: .8rem;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        height: 100%;
-        width: .8rem;
         padding: 0 .2rem;
         cursor: pointer;
         &:hover {

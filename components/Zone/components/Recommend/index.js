@@ -11,23 +11,23 @@ import Button from '@widgets/Button';
 
 function Recommend (props) {
     const tags = ['COV-19', 'Anti-996', 'Utopia', 'Tech', 'Artificial Intelligence', 'hack', 'BlockChain', 'Pink'];
-    const profiles = [{
-        // avatar: 'https://api.ixiaowai.cn/api/api.php',
-        nickname: 'Allon',
-        intro: 'Never stop thinking'
-    }, {
-        // avatar: 'https://api.ixiaowai.cn/api/api.php?x=1',
-        nickname: 'Bob',
-        intro: 'Hello, i am fresh!'
-    }, {
-        // avatar: 'https://api.ixiaowai.cn/api/api.php?x=2',
-        nickname: 'Cobain',
-        intro: 'It\'s better to burn out than fade away!'
-    }, {
-        // avatar: 'https://api.ixiaowai.cn/api/api.php?x=1',
-        nickname: 'Dacy',
-        intro: 'Hello, i am fresh!'
-    }];
+    // const profiles = [{
+    //     // avatar: 'https://api.ixiaowai.cn/api/api.php',
+    //     nickname: 'Allon',
+    //     intro: 'Never stop thinking'
+    // }, {
+    //     // avatar: 'https://api.ixiaowai.cn/api/api.php?x=1',
+    //     nickname: 'Bob',
+    //     intro: 'Hello, i am fresh!'
+    // }, {
+    //     // avatar: 'https://api.ixiaowai.cn/api/api.php?x=2',
+    //     nickname: 'Cobain',
+    //     intro: 'It\'s better to burn out than fade away!'
+    // }, {
+    //     // avatar: 'https://api.ixiaowai.cn/api/api.php?x=1',
+    //     nickname: 'Dacy',
+    //     intro: 'Hello, i am fresh!'
+    // }];
     const content = [
         {
             // img: 'https://api.ixiaowai.cn/api/api.php?x=content1',
@@ -69,20 +69,10 @@ function Recommend (props) {
     return (
         <div className={s.container}>
             <div className={s.body}>
-                <Card className={s.card}>
+                {/* <Card className={s.card}>
                     <div className={s.title}>热门创作者</div>
                     <ProfileLine data={profiles} />
-                </Card>
-                <Card className={s.card}>
-                    <div className={s.title}>订阅圈子</div>
-                    <div className={s.content}>
-                        社群动态、热门内容，订阅Solo为您精选的社群内容，精彩不错过。
-                    </div>
-                    <div className={s.rssInput}>
-                        <StaticSearchBar placeholder={'邮箱地址'} />
-                        <Button className={s.subBtn} text={'订阅'} plain />
-                    </div>
-                </Card>
+                </Card> */}
                 <Card className={s.card}>
                     <div className={s.title}>为你推荐</div>
                     <ContentLine data={content}/>
@@ -94,6 +84,16 @@ function Recommend (props) {
                 <Card className={s.card}>
                     <span className={s.title}>热门标签</span>
                     <TagsBox tags={tags}/>
+                </Card>
+                <Card className={s.card}>
+                    <div className={s.title}>订阅圈子</div>
+                    <div className={s.content}>
+                        社群动态、热门内容，订阅Solo为您精选的社群内容，精彩不错过。
+                    </div>
+                    <div className={s.rssInput}>
+                        <StaticSearchBar placeholder={'邮箱地址'} />
+                        <Button className={s.subBtn} text={'订阅'} plain />
+                    </div>
                 </Card>
             </div>
         </div>
