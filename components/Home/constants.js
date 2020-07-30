@@ -1,22 +1,18 @@
 export const NAVI_ITEMS = [
     {
-        title: 'Timeline',
-        url: ''
-    },
-    {
         title: '探索',
         url: ''
     },
     {
-        title: '频道',
-        url: ''
-    },
-    {
-        title: '创作空间',
+        title: '社群',
         url: ''
     },
     {
         title: '活动',
+        url: ''
+    },
+    {
+        title: '关于',
         url: ''
     },
 ];

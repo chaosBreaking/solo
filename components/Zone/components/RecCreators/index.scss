@@ -24,8 +24,8 @@ $INFO_HEIGHT: $AVATAR_HEIGHT - 0.05rem;
 }
 
 .avatar {
-    width: $AVATAR_HEIGHT;
-    height: $AVATAR_HEIGHT;
+    width: $AVATAR_HEIGHT !important;
+    height: $AVATAR_HEIGHT !important;
     background-size: cover;
     background-repeat: no-repeat;
     // border-radius: .02rem;
