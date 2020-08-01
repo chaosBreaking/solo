@@ -3,7 +3,8 @@ $default_font_color: #fff;
 
 .container {
     position: relative;
-    width: 1.5rem;
+    width: auto;
+    min-width: 1.5rem;
     height: .3rem;
     margin: auto;
     display: flex;
@@ -15,6 +16,7 @@ $default_font_color: #fff;
     transition: all .2s ease-in;
     border-radius: .05rem;
     overflow: hidden;
+    font-size: inherit;
 
     &:active {
         opacity: .8;
@@ -28,7 +30,15 @@ $default_font_color: #fff;
     top: 0;
     left: 0;
     background: $default_bg_color;
-    z-index: -1;
+}
+
+.content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
 }
 
 .loading {
@@ -42,8 +52,8 @@ $default_font_color: #fff;
 .hollow {
     color: $default_bg_color;
     font-weight: bold;
-    outline: 1px solid $default_bg_color;
-    outline-style: auto;
+    border: 1px solid $default_bg_color;
+
     .bg {
         background: transparent;
     }
@@ -58,6 +68,7 @@ $default_font_color: #fff;
 
 .plain {
     transition: unset;
+    color: #000;
     .bg {
         background: transparent;
     }

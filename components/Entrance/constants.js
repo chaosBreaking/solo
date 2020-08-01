@@ -27,3 +27,49 @@ export const BG_IMAGES = [
     'http://solo-app.test.upcdn.net/home_bg-13mk9v-progressive.jpeg',
     'http://solo-app.test.upcdn.net/home_bg_xj3haef-progressive.jpeg',
 ];
+
+export const NAVI_ITEM_TYPE = {
+    LINK: 1,
+    COLLECTION: 2,
+    BUTTON: 3,
+};
+
+export const NAVI_ITEMS = [
+    {
+        title: '探索',
+        url: ''
+    },
+    {
+        title: '创作团',
+        url: ''
+    },
+    {
+        title: '活动',
+        url: ''
+    },
+    {
+        title: '会员',
+        url: ''
+    },
+    {
+        title: '关于',
+        url: ''
+    },
+];
+
+export const NAVI_FUNC_ITEMS = [
+    {
+        title: '入门资源',
+        url: '',
+    },
+    {
+        title: '创作者',
+        url: '',
+        type: NAVI_ITEM_TYPE.COLLECTION,
+    },
+    {
+        title: '登录',
+        url: '',
+        type: NAVI_ITEM_TYPE.BUTTON,
+    },
+];
