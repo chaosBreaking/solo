@@ -7,6 +7,8 @@ import { hash } from '@utils/crypto';
 
 export default class Store extends CommonStore {
     @observable showExplore = true;
+    @observable showLoginCard = false;
+    @observable showRegistryCard = false;
     constructor (props) {
         super(props);
         this.authService = new AuthService();
@@ -23,6 +25,16 @@ export default class Store extends CommonStore {
 
     async prepareClientData (requestContext) {
         return {};
+    }
+
+    @action.bound
+    switchRegistryCardCard (val) {
+        this.showRegistryCard = val;
+    }
+
+    @action.bound
+    switchLoginCard (val) {
+        this.showLoginCard = val;
     }
 
     @action.bound

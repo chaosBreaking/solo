@@ -1,4 +1,5 @@
 import React from 'react';
+import { observer, inject } from 'mobx-react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import { forward } from '@utils/navi';
 import { NAVI_ITEMS, NAVI_FUNC_ITEMS, NAVI_ITEM_TYPE } from '../../constants';
@@ -8,6 +9,7 @@ const CLASS_TYPE_MAP = {
     1: 'navItem',
     2: 'collection',
     3: 'button',
+    4: 'special',
 };
 
 const btnClickHandler = item => {
@@ -17,7 +19,16 @@ const btnClickHandler = item => {
     }
 };
 
-function NavigationBar (props) {
+function NavigationBar ({ store }) {
+    const funcBtnClickHandler = item => {
+        const { type } = item || {};
+        if (type === NAVI_ITEM_TYPE.BUTTON) {
+            store.switchLoginCard(true);
+        }
+        if (type === NAVI_ITEM_TYPE.LINK || type === NAVI_ITEM_TYPE.SPECIAL) {
+            forward(item.url);
+        }
+    };
     return (
         <div className={s.container}>
             <div className={s.logo}><h1>Solo</h1></div>
@@ -34,7 +45,7 @@ function NavigationBar (props) {
                     NAVI_FUNC_ITEMS.map(item => {
                         const { title, url, type } = item;
                         const className = s[CLASS_TYPE_MAP[type]];
-                        return <span key={title} className={className}>{title}</span>;
+                        return <span key={title} className={className} onClick={() => funcBtnClickHandler(item)}>{title}</span>;
                     })
                 }
             </div>
@@ -42,4 +53,4 @@ function NavigationBar (props) {
     );
 };
 
-export default withStyles(s)(NavigationBar);
+export default withStyles(s)(inject('store')(NavigationBar));

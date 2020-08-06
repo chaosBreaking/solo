@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import cs from 'classnames';
 import s from './index.scss';
 import Card from '@widgets/Card';
 import Button from '@widgets/Button';
+import CloseIcon from '@widgets/CloseIcon';
 
-export default withStyles(s)(observer(function RegistryCard (props) {
+export default withStyles(s)(inject('store')((observer(function LoginCard (props) {
     const {
-        data
+        data,
+        store,
+        transparent,
     } = props;
     const [formState, updateFormData] = useState({
         loading: false,
@@ -18,8 +21,11 @@ export default withStyles(s)(observer(function RegistryCard (props) {
         confirmPasswd: '',
     });
     const nicknameHandle = e => {
+
     };
-    const emailInputHandle = e => {};
+    const emailInputHandle = e => {
+
+    };
     const passwdInputHandler = e => {
 
     };
@@ -29,20 +35,28 @@ export default withStyles(s)(observer(function RegistryCard (props) {
             loading: true,
         });
     };
+    const closeBtnHandler = e => {
+        e && e.stopPropagation();
+        store.switchLoginCard(false);
+    };
+    const containerClass = cs(s.container, {
+        [s.transparent]: transparent,
+    });
     return (
-        <Card className={s.container}>
-            <div className={s.title}>注册</div>
+        <Card className={containerClass}>
+            <div className={s.title}>
+                <span>登录</span>
+                <CloseIcon className={s.close} onClick={closeBtnHandler} />
+            </div>
             <div onKeyUp={e => {
                 e.keyCode === 13 && this.registBtnHandler(e);
             }} >
                 <div className={s.inputBox}>
-                    <input type="text" placeholder='昵称' onChange={nicknameHandle} />
                     <input type="text" placeholder='邮箱地址' onChange={emailInputHandle} />
                     <input type="password" placeholder='密码' onChange={passwdInputHandler} />
-                    <input type="password" placeholder='再次确认密码' onChange={passwdInputHandler} />
                 </div>
-                <Button className={s.btn} text={'注册'} loading={formState.loading} onClick={btnClickHandler} />
-                {/* <Button text={'返回'} plain /> */}
+                <Button className={s.btn} text={'登录'} loading={formState.loading} onClick={btnClickHandler} />
+                <Button text={'返回'} plain />
                 <div className={s.oauthTip}>第三方登录</div>
                 <div className={s.oauth}>
                     <div className={s.iconBtnWrapper}><div className={cs(s.iconBtn, s.iconGoogle)} /></div>
@@ -52,4 +66,4 @@ export default withStyles(s)(observer(function RegistryCard (props) {
             </div>
         </Card>
     );
-}));
+}))));
