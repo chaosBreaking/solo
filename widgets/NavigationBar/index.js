@@ -5,6 +5,7 @@ import { forward } from '@utils/navi';
 import { NAVI_ITEMS, NAVI_FUNC_ITEMS, NAVI_ITEM_TYPE } from './constants';
 import cs from 'classnames';
 import s from './index.scss';
+import Logo from '@widgets/Logo';
 
 const CLASS_TYPE_MAP = {
     1: 'navItem',
@@ -55,7 +56,7 @@ function NavigationBar ({ store, naviItems, funcNavItems, defaultItems, mode }) 
     </>;
     return (
         <div className={containerClass}>
-            <div className={s.logo}><h1>Solo</h1></div>
+            <Logo className={s.logo} size={'large'} />
             { !!showItems && items }
         </div>
     );
