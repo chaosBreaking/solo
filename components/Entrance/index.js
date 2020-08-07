@@ -6,6 +6,7 @@ import withStyles from 'isomorphic-style-loader/withStyles';
 import { LoginCard } from '@widgets/AuthCards';
 import NavigationBar from './components/NavigationBar';
 import s from './index.scss';
+import Mask from '@widgets/Mask';
 
 @withStyles(s)
 @pageWrapper({
@@ -26,7 +27,9 @@ export default class Entrance extends Component {
                 {/* <div className={s.banner}>
                     <span className={s.bottomInfo}>Solo是什么?</span>
                 </div> */}
-                <div className={s.home} style={{ backgroundImage: `url(${bgUrl})` }}>
+                <div className={s.home} style={{
+                    backgroundImage: `url(${bgUrl})`
+                }}>
                     {/* <AuthCard /> */}
                 </div>
                 <div className={s.main}>
@@ -56,7 +59,7 @@ export default class Entrance extends Component {
                             })
                         }
                     </div>
-                    {showLoginCard && <LoginCard />}
+                    {showLoginCard && <Mask><LoginCard /></Mask>}
                 </div>
             </div>
         );
