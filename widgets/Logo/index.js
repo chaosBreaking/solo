@@ -6,8 +6,8 @@ import s from './index.scss';
 const SIZE_MAP = {
     small: { fontSize: '.08rem' },
     normal: { fontSize: '.1rem' },
-    middle: { fontSize: '.14rem' },
-    large: { fontSize: '.18rem' },
+    middle: { fontSize: '.15rem' },
+    large: { fontSize: '.2rem' },
 };
 const POSITION_MAP = {
     left: { left: 0 },
@@ -16,8 +16,8 @@ const POSITION_MAP = {
     bottom: { bottom: 0 },
 };
 
-function Logo (props) {
-    const { size = 'normal', position = 'left', onClick } = props;
+export default withStyles(s)(function Logo (props) {
+    const { className, size = 'normal', position = 'left', onClick } = props;
     const style = {};
     if (POSITION_MAP[position]) {
         Object.assign(style, {
@@ -32,11 +32,9 @@ function Logo (props) {
     const onClickLogo = e => {
         typeof onClick === 'function'
             ? onClick()
-            : forward('/index');
+            : forward('/');
     };
     return (
-        <div className={s.container} onClick={onClickLogo} style={style}>Solo</div>
+        <div className={`${s.container} ${!!className && className}`} onClick={onClickLogo} style={style}>Solo</div>
     );
-};
-
-export default withStyles(s)(Logo);
+});
