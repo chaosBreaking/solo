@@ -46,7 +46,7 @@ const getPort = url => {
     return Object.prototype.toString.call(res) === '[object Array]' ? res[0] : null;
 };
 
-module.exports = {
+export {
     getConstructorProps,
     getFuncProps,
     isEmail,
