@@ -2,27 +2,37 @@ import React, { useState } from 'react';
 import cs from 'classnames';
 
 function Input (props) {
-    const { classNames, type, placeholder, errorMsg, validateInput, getRef, } = props;
+    const {
+        classNames,
+        type = 'text',
+        placeholder,
+        validateInput,
+        getRef,
+        lazyValidate = true, // 有过输入行为后才对输入校验
+    } = props;
     const [input, updateInput] = useState('');
-    const [showError, updateError] = useState(false);
+    const [inputedFlag, updateInputFlag] = useState(false);
+    const [errorMsg, updateErrorMsg] = useState('');
     typeof getRef === 'function' && getRef(() => input);
     const updater = e => {
         e && e.stopPropagation();
-        e.target.value && updateInput(e.target.value);
-        updateError(false);
+        updateInput(e.target.value);
+        updateErrorMsg('');
+        !inputedFlag && updateInputFlag(true);
     };
     const validater = e => {
         e && e.stopPropagation();
+        if (lazyValidate && !inputedFlag) return;
         if (typeof validateInput === 'function') {
-            const isValid = validateInput(input);
+            const { isValid, msg } = validateInput(input) || {};
             if (!isValid) {
-                updateError(true);
+                updateErrorMsg(msg);
             }
         }
     };
     const { normal, error, msg } = classNames;
     const containerClass = cs(normal, {
-        [error]: showError,
+        [error]: !!errorMsg,
     });
     return (
         <div className={containerClass}>
@@ -32,7 +42,7 @@ function Input (props) {
                 onBlur={validater}
                 onChange={updater}
             />
-            {showError && <div className={msg}>{errorMsg}</div>}
+            {!!errorMsg && <div className={msg}>{errorMsg}</div>}
         </div>
     );
 };
