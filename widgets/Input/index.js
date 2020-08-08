@@ -9,27 +9,34 @@ function Input (props) {
         validateInput,
         getRef,
         lazyValidate = true, // 有过输入行为后才对输入校验
+        onChange,
     } = props;
     const [input, updateInput] = useState('');
     const [inputedFlag, updateInputFlag] = useState(false);
     const [errorMsg, updateErrorMsg] = useState('');
-    typeof getRef === 'function' && getRef(() => input);
     const updater = e => {
         e && e.stopPropagation();
         updateInput(e.target.value);
+        typeof onChange === 'function' && onChange(e.target.value);
         updateErrorMsg('');
         !inputedFlag && updateInputFlag(true);
     };
-    const validater = e => {
+    const validater = (e, { forceValidate }) => {
         e && e.stopPropagation();
-        if (lazyValidate && !inputedFlag) return;
+        if (!forceValidate && lazyValidate && !inputedFlag) return;
         if (typeof validateInput === 'function') {
             const { isValid, msg } = validateInput(input) || {};
             if (!isValid) {
                 updateErrorMsg(msg);
+                return false;
             }
+            return true;
         }
     };
+    typeof getRef === 'function' && getRef(() => ({
+        getInput: () => input,
+        doValidate: options => validater(null, options),
+    }));
     const { normal, error, msg } = classNames;
     const containerClass = cs(normal, {
         [error]: !!errorMsg,
