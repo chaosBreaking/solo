@@ -15,7 +15,7 @@ function Button (props) {
     });
     return (
         <div className={containerClass} {...rest} disabled={disabled ? 'disabled' : ''} style={wrapperStyles}>
-            <div className={s.bg} style={{ background: color, ...innerStyles }} />
+            {/* <div className={s.bg} style={{ background: color, ...innerStyles }} /> */}
             <div className={s.content}>
                 {isLoading ? <LoadingSVG /> : text}
             </div>

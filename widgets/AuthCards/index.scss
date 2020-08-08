@@ -9,8 +9,8 @@
     width: 2.8rem !important;
     height: unset !important;
     margin: auto !important;
-    padding: .1rem !important;
-    font-size: .1rem !important;
+    padding: 0 .2rem !important;
+    font-size: .09rem !important;
     transform: translateY(-50%);
 
     animation: fadeIn .5s;
@@ -24,6 +24,8 @@
 
 .title {
     position: relative;
+    margin-bottom: .1rem;
+    padding-top: .2rem;
     color: #333;
     text-align: center;
     font-size: .13rem;
@@ -55,16 +57,16 @@ input {
     height: .3rem;
     width: 100%;
     padding: .1rem;
-    margin: .1rem 0;
+    margin: .05rem 0;
     border-radius: .05rem;
-    border: 2px solid #ddd;
+    border: 1px solid #ddd;
     // background: #ddd;
     // font-weight: bold;
     color: #333;
 
     &:focus,
     &:hover {
-        border: 2px solid #888;
+        border: 1px solid #000;
     }
 }
 
@@ -83,12 +85,19 @@ input {
 .btn {
     width: 100% !important;
     height: .3rem !important;
+    background: rgba(79, 160, 226, .3) !important;
+    color: #0287f3 !important;
+    font-weight: bold !important;
+    &:hover {
+        color: #fff !important;
+        background: #2e89d4 !important;
+    }
 }
 
 .oauthTip {
     padding-top: .1rem;
     text-align: center;
-    color: #888;
+    color: #666;
 }
 
 .oauth {
@@ -169,4 +178,14 @@ input {
     top: -.05rem;
     padding-left: .05rem;
     color: #cc3e4a;
+}
+
+.loginBtn {
+    padding: .1rem 0 !important;
+    color: #666 !important;
+
+    &:hover,
+    &:active {
+        color: #000 !important;
+    }
 }

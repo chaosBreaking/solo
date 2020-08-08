@@ -21,9 +21,9 @@ function Input (props) {
         updateErrorMsg('');
         !inputedFlag && updateInputFlag(true);
     };
-    const validater = (e, { forceValidate }) => {
+    const validater = (e, options = { forceValidate: false }) => {
         e && e.stopPropagation();
-        if (!forceValidate && lazyValidate && !inputedFlag) return;
+        if (!options.forceValidate && lazyValidate && !inputedFlag) return;
         if (typeof validateInput === 'function') {
             const { isValid, msg } = validateInput(input) || {};
             if (!isValid) {
