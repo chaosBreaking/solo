@@ -2,10 +2,15 @@ import { observable, action } from 'mobx';
 import CommonStore from '@framework/CommonStore';
 import RegisterService from './service';
 import { hash } from '@utils/crypto';
+import { STAGE_MAP } from './constants';
+
+const HASH_SALT = 'OLOSOLOHASHSAH';
 
 export default class Store extends CommonStore {
     @observable dataList = [];
     @observable loadingStatus = 0;
+    @observable currentStage = STAGE_MAP.SIGNUP;
+
     service = new RegisterService();
 
     @action.bound
@@ -18,12 +23,17 @@ export default class Store extends CommonStore {
     }
 
     @action.bound
-    registerHandler = async data => {
+    switchStage (stage) {
+        this.currentStage = stage;
+    }
+
+    @action.bound
+    registerHandler = async formData => {
         const res = await this.service.newUserRegister({
-            ...data,
-            passwd: hash(data.passwd),
+            ...formData,
+            passwd: hash(formData.passwd, { salt: HASH_SALT }),
         });
-        console.log(res);
-        return res;
+        const { data } = res;
+        return data;
     }
 }

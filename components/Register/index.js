@@ -6,6 +6,7 @@ import { RegistryCard } from '@widgets/AuthCards';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import NavigationBar from '@widgets/NavigationBar';
 import s from './index.scss';
+import MultiForm from './components/MultiForm';
 
 @withStyles(s)
 @pageWrapper({
@@ -26,7 +27,8 @@ export default class Register extends Component {
         return (
             <div className={s.container}>
                 <NavigationBar defaultItems mode={'left'} />
-                <RegistryCard handleSubmit={this.handleSubmit} />
+                {/* <RegistryCard handleSubmit={this.handleSubmit} /> */}
+                <MultiForm />
             </div>
         );
     }

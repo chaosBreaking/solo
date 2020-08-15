@@ -1,11 +1,19 @@
 import axios from 'axios';
 
 export default class BaseService {
-    get (url, query = {}) {
-        return axios.get(url, {});
+    async __request (method, ...rest) {
+        const res = await axios[method](...rest);
+        const { data, headers } = res;
+        return { headers, data };
     }
 
-    post (url, params) {
-        return axios.post(url, params);
+    async get (url, queryParams = {}) {
+        return this.__request('get', url, {
+            params: queryParams,
+        });
+    }
+
+    async post (url, params, configs) {
+        return this.__request('post', url, params, configs);
     }
 };
