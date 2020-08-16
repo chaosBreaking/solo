@@ -8,6 +8,7 @@ function Input (props) {
         placeholder,
         validateInput,
         getRef,
+        maxLength = 50,
         lazyValidate = true, // 有过输入行为后才对输入校验
         onChange,
     } = props;
@@ -16,6 +17,10 @@ function Input (props) {
     const [errorMsg, updateErrorMsg] = useState('');
     const updater = e => {
         e && e.stopPropagation();
+        if (e.target.value?.length >= maxLength) {
+            e.target.value = e.target.value.slice(0, maxLength);
+            return;
+        }
         updateInput(e.target.value);
         typeof onChange === 'function' && onChange(e.target.value);
         updateErrorMsg('');
@@ -42,7 +47,7 @@ function Input (props) {
         [error]: !!errorMsg,
     });
     return (
-        <div className={containerClass}>
+        <div className={containerClass} style={{ width: '100%' }}>
             <input
                 type={type}
                 placeholder={placeholder}

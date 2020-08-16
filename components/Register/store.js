@@ -3,6 +3,7 @@ import CommonStore from '@framework/CommonStore';
 import RegisterService from './service';
 import { hash } from '@utils/crypto';
 import { STAGE_MAP } from './constants';
+import AuthService from '@framework/common/services/AuthService';
 
 const HASH_SALT = 'OLOSOLOHASHSAH';
 
@@ -11,7 +12,8 @@ export default class Store extends CommonStore {
     @observable loadingStatus = 0;
     @observable currentStage = STAGE_MAP.SIGNUP;
 
-    service = new RegisterService();
+    registerService = new RegisterService();
+    authService = new AuthService();
 
     @action.bound
     async initializeData (requestContext) {
@@ -29,11 +31,27 @@ export default class Store extends CommonStore {
 
     @action.bound
     registerHandler = async formData => {
-        const res = await this.service.newUserRegister({
-            ...formData,
-            passwd: hash(formData.passwd, { salt: HASH_SALT }),
-        });
-        const { data } = res;
-        return data;
+        try {
+            const res = await this.registerService.newUserRegister({
+                ...formData,
+                passwd: hash(formData.passwd, { salt: HASH_SALT }),
+            });
+            return res;
+        } catch (error) {
+            return { success: false, msg: error.errorMsg };
+        }
+    }
+
+    @action.bound
+    loginHandler = async formData => {
+        try {
+            const res = await this.authService.handleLogin({
+                ...formData,
+                passwd: hash(formData.passwd, { salt: HASH_SALT }),
+            });
+            return res;
+        } catch (error) {
+            return { success: false, msg: error.errorMsg };
+        }
     }
 }
