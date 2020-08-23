@@ -8,14 +8,24 @@ import Button from '@widgets/Button';
 import Input from '@widgets/Input';
 import CloseIcon from '@widgets/CloseIcon';
 import { isEmail, isPhoneNumberCN } from '@utils/validate';
-import { AUTH_TYPE, CODE_TYPES, ERROR_MSGS, defaultRef, MIN_PASSWORD_LENGTH, validateRes } from './common';
-import AuthService from '@framework/common/services/AuthService';
+import {
+    authService,
+    AUTH_TYPE,
+    CODE_TYPES,
+    ERROR_MSGS,
+    defaultRef,
+    MIN_PASSWORD_LENGTH,
+    validateRes,
+    formatPhone
+} from './common';
 import OAuthBar from './OAuthBar';
+import { toast } from 'react-toastify';
+
+const TITLE = '登录';
 
 const getSendCodeBtn = countdown => {
     return !countdown ? '发送验证码' : `重新发送(${countdown})s`;
 };
-const formatPhone = phone => ('' + phone).startsWith('+86-') ? phone : `+86-${phone}`;
 
 export default withStyles(s)(inject('store')((observer(function LoginCard (props) {
     const {
@@ -23,17 +33,24 @@ export default withStyles(s)(inject('store')((observer(function LoginCard (props
         backHandler,
         transparent,
         handleSubmit,
+        showClose,
+        showBack,
+        showRegister,
     } = props;
     const [formState, updateFormData] = useState({
         loading: false,
-        authType: AUTH_TYPE.PHONE,
+        authType: AUTH_TYPE.EMAIL,
         countdown: 0,
+    });
+    const updateState = data => updateFormData({
+        ...formState,
+        ...data,
     });
     useEffect(() => {
         let timer = null;
         timer = setTimeout(() => {
             if (formState.countdown) {
-                updateFormData({
+                updateState({
                     countdown: formState.countdown - 1,
                 });
             } else {
@@ -42,10 +59,9 @@ export default withStyles(s)(inject('store')((observer(function LoginCard (props
         }, 1000);
         return () => timer && clearTimeout(timer);
     }, [formState.countdown]);
-    const authService = new AuthService();
     const switchAuthType = () => {
         const authType = formState.authType === AUTH_TYPE.PHONE ? AUTH_TYPE.EMAIL : AUTH_TYPE.PHONE;
-        updateFormData({ authType });
+        updateState({ authType });
     };
     const refs = {
         emailRef: defaultRef,
@@ -76,32 +92,52 @@ export default withStyles(s)(inject('store')((observer(function LoginCard (props
         e && e.stopPropagation();
         const validInput = Object.values(refs).map(ref => ref().doValidate({ forceValidate: true })).every(res => !!res);
         if (!validInput) return;
-        updateFormData({
+        updateState({
             loading: true,
         });
-        await handleSubmit({
+        typeof handleSubmit === 'function' && await handleSubmit({
             email: refs.emailRef().getInput(),
             passwd: refs.passwdRef().getInput(),
+            type: formState.authType,
         });
-        updateFormData({
+        updateState({
             loading: false,
         });
     };
     const sendCode = async () => {
-        if (formState.countdown > 0 || !refs.phoneRef().getInput()) {
+        if (formState.countdown > 0) {
             return;
         }
+        toast.clearWaitingQueue();
+        if (!refs.phoneRef().getInput()) {
+            return toast.error(ERROR_MSGS.PHONE_EMPTY, {
+                position: toast.POSITION.TOP_CENTER,
+                toastId: 'empty',
+            });
+        }
+        if (!isPhoneNumberCN(refs.phoneRef().getInput())) {
+            return toast.error(ERROR_MSGS.PHONE_INVALID, {
+                position: toast.POSITION.TOP_CENTER,
+                toastId: 'invalid',
+            });
+        }
         try {
-            const res = await authService.sendValidateVode({
+            const res = await authService.sendValidateCode({
                 phone: formatPhone(refs.phoneRef().getInput()),
-                type: CODE_TYPES.REGISTER,
+                type: CODE_TYPES.LOGIN,
             });
             if (res.success) {
-                updateFormData({
+                updateState({
                     countdown: 59,
                 });
             }
         } catch (error) {
+            const { code, message } = error;
+            if (code === 400) {
+                toast.error(message, {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+            }
             return { success: false, msg: error.errorMsg };
         }
     };
@@ -119,11 +155,11 @@ export default withStyles(s)(inject('store')((observer(function LoginCard (props
     return (
         <Card className={containerClass}>
             <div className={s.title}>
-                <span>登录</span>
-                <CloseIcon className={s.close} onClick={closeBtnHandler} />
+                <span>{TITLE}</span>
+                {showClose && <CloseIcon className={s.close} onClick={closeBtnHandler} />}
             </div>
             <div className={s.loginBody} onKeyUp={e => {
-                e.keyCode === 13 && this.registBtnHandler(e);
+                e.keyCode === 13 && btnClickHandler(e);
             }} >
                 <div className={s.inputBox} key={formState.authType}>
                     {
@@ -133,7 +169,7 @@ export default withStyles(s)(inject('store')((observer(function LoginCard (props
                                     classNames={inputClass}
                                     placeholder={'邮箱'}
                                     validateInput={emailInputValidator}
-                                    onChange={email => updateFormData({ ...formState, email })}
+                                    onChange={email => updateState({ email })}
                                     getRef={func => (refs.emailRef = func)}
                                 />
                                 <Input
@@ -142,7 +178,7 @@ export default withStyles(s)(inject('store')((observer(function LoginCard (props
                                     placeholder={'输入密码'}
                                     errorMsg={'errorr'}
                                     validateInput={passwdInputValidator}
-                                    onChange={passwd => updateFormData({ ...formState, passwd })}
+                                    onChange={passwd => updateState({ passwd })}
                                     getRef={func => (refs.passwdRef = func)}
                                 />
                             </>
@@ -172,8 +208,9 @@ export default withStyles(s)(inject('store')((observer(function LoginCard (props
                     }
                 </div>
                 <Button className={s.btn} text={'登录'} loading={formState.loading} onClick={btnClickHandler} />
-                <Button text={'返回'} plain onClick={backHandler} />
-                <div className={s.oauthTip}>第三方登录</div>
+                {showBack && <Button text={'返回'} plain onClick={backHandler} />}
+                {showRegister && <Button text={'没有账号？立即注册'} plain onClick={backHandler} />}
+                <div className={s.oauthTip}>其他登录方式</div>
                 <OAuthBar authType={formState.authType} switchAuthType={switchAuthType} />
             </div>
         </Card>

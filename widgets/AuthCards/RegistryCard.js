@@ -6,16 +6,25 @@ import Card from '@widgets/Card';
 import Button from '@widgets/Button';
 import Input from '@widgets/Input';
 import { isEmail, isPhoneNumberCN } from '@utils/validate';
-import { AUTH_TYPE, CODE_TYPES, ERROR_MSGS, defaultRef, MAX_NICKNAME_LENGTH, MIN_PASSWORD_LENGTH, validateRes } from './common';
-import AuthService from '@framework/common/services/AuthService';
+import {
+    authService,
+    AUTH_TYPE,
+    CODE_TYPES,
+    ERROR_MSGS,
+    defaultRef,
+    MAX_NICKNAME_LENGTH,
+    MIN_PASSWORD_LENGTH,
+    validateRes,
+    formatPhone
+} from './common';
 import OAuthBar from './OAuthBar';
+import { toast } from 'react-toastify';
 
 // const TITLE = '创建你的社群，从这里开始'; // 放在 成为创作者 页面
 const TITLE = '即刻加入Solo';
 const getSendCodeBtn = countdown => {
     return !countdown ? '发送验证码' : `重新发送(${countdown})s`;
 };
-const formatPhone = phone => ('' + phone).startsWith('+86-') ? phone : `+86-${phone}`;
 
 export default withStyles(s)(observer(function RegistryCard (props) {
     const {
@@ -24,15 +33,19 @@ export default withStyles(s)(observer(function RegistryCard (props) {
     } = props;
     const [formState, updateFormData] = useState({
         loading: false,
-        authType: AUTH_TYPE.PHONE,
+        authType: AUTH_TYPE.EMAIL,
         haveSentCode: false,
         countdown: 0,
+    });
+    const updateState = data => updateFormData({
+        ...formState,
+        ...data,
     });
     useEffect(() => {
         let timer = null;
         timer = setTimeout(() => {
             if (formState.countdown) {
-                updateFormData({
+                updateState({
                     countdown: formState.countdown - 1,
                 });
             } else {
@@ -49,7 +62,7 @@ export default withStyles(s)(observer(function RegistryCard (props) {
         rePasswdRef: defaultRef,
         codeRef: defaultRef,
     };
-    const authService = new AuthService();
+
     const nicknameValidator = input => {
         if (!input) return validateRes(false, ERROR_MSGS.NICKNAME_EMPTY);
         if (input.length > MAX_NICKNAME_LENGTH) return validateRes(false, ERROR_MSGS.NICKNAME_LENGTH_LIMIT);
@@ -84,31 +97,55 @@ export default withStyles(s)(observer(function RegistryCard (props) {
     };
     const switchAuthType = () => {
         const authType = formState.authType === AUTH_TYPE.PHONE ? AUTH_TYPE.EMAIL : AUTH_TYPE.PHONE;
-        updateFormData({ authType });
+        updateState({ authType });
     };
     const sendCode = async () => {
-        if (formState.countdown > 0 || !refs.phoneRef().getInput()) {
+        if (formState.countdown > 0) {
             return;
         }
+        if (!refs.phoneRef().getInput()) {
+            toast.clearWaitingQueue();
+            return toast.error(ERROR_MSGS.PHONE_EMPTY, {
+                position: toast.POSITION.TOP_CENTER,
+                toastId: 'empty',
+            });
+        }
+        if (!isPhoneNumberCN(refs.phoneRef().getInput())) {
+            toast.clearWaitingQueue();
+            return toast.error(ERROR_MSGS.PHONE_INVALID, {
+                position: toast.POSITION.TOP_CENTER,
+                toastId: 'invalid',
+            });
+        }
         try {
-            const res = await authService.sendValidateVode({
+            const res = await authService.sendValidateCode({
                 phone: formatPhone(refs.phoneRef().getInput()),
                 type: CODE_TYPES.LOGIN,
             });
             if (res.success) {
-                updateFormData({
+                updateState({
                     countdown: 59,
                 });
             }
         } catch (error) {
+            const { code, message } = error;
+            if (code === 400) {
+                toast.error(message, {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+            }
             return { success: false, msg: error.errorMsg };
         }
     };
     const btnClickHandler = async e => {
         e && e.stopPropagation();
-        const validInput = Object.values(refs).map(ref => ref().doValidate({ forceValidate: true })).every(res => !!res);
+        const basicRefs = [refs.nicknameRef];
+        const authRefs = [...basicRefs, ...formState.authType === AUTH_TYPE.EMAIL
+            ? [refs.emailRef, refs.passwdRef, refs.rePasswdRef]
+            : [refs.codeRef, refs.phoneRef]];
+        const validInput = Object.values(authRefs).map(ref => ref().doValidate({ forceValidate: true })).every(res => !!res);
         if (!validInput) return;
-        updateFormData({
+        updateState({
             loading: true,
         });
         await handleSubmit({
@@ -119,7 +156,7 @@ export default withStyles(s)(observer(function RegistryCard (props) {
             code: refs.codeRef().getInput(),
             authType: formState.authType,
         });
-        updateFormData({
+        updateState({
             loading: false,
         });
     };
@@ -198,7 +235,7 @@ export default withStyles(s)(observer(function RegistryCard (props) {
             <div className={s.title}>{TITLE}</div>
             <div>
                 <div className={s.inputBox} onKeyUp={e => {
-                    e.keyCode === 13 && this.registBtnHandler(e);
+                    e.keyCode === 13 && btnClickHandler(e);
                 }}>
                     {renderForm(formState.authType)}
                 </div>

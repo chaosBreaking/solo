@@ -1,3 +1,8 @@
+import AuthService from '@framework/common/services/AuthService';
+
+export const authService = new AuthService();
+export const formatPhone = phone => ('' + phone).startsWith('+86-') ? phone : `+86-${phone}`;
+
 export const validateRes = (isValid, msg) => {
     return { isValid, msg };
 };
@@ -9,8 +14,8 @@ export const CODE_TYPES = {
 };
 export const AUTH_TYPE = {
     EMAIL: 0,
-    PHONE: 1,
-    MSG: 2,
+    PHONE_PASSWD: 1,
+    PHONE_MSG: 2,
     GITHUB: 3,
     GOOGLE: 4,
     FACEBOOK: 5,
@@ -42,3 +47,7 @@ export const defaultRef = () => ({
     getInput: () => {},
     doValidate: () => {},
 });
+
+export const getSendCodeBtn = countdown => {
+    return !countdown ? '发送验证码' : `重新发送(${countdown})s`;
+};
