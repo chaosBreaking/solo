@@ -9,9 +9,7 @@ import Input from '@widgets/Input';
 import CloseIcon from '@widgets/CloseIcon';
 import { isEmail, isPhoneNumberCN } from '@utils/validate';
 import {
-    authService,
     AUTH_TYPE,
-    CODE_TYPES,
     ERROR_MSGS,
     defaultRef,
     MIN_PASSWORD_LENGTH,
@@ -19,13 +17,9 @@ import {
     formatPhone
 } from './common';
 import OAuthBar from './OAuthBar';
-import { toast } from 'react-toastify';
+import CodeInput from './CodeInput';
 
 const TITLE = '登录';
-
-const getSendCodeBtn = countdown => {
-    return !countdown ? '发送验证码' : `重新发送(${countdown})s`;
-};
 
 export default withStyles(s)(inject('store')((observer(function LoginCard (props) {
     const {
@@ -66,6 +60,8 @@ export default withStyles(s)(inject('store')((observer(function LoginCard (props
     const refs = {
         emailRef: defaultRef,
         passwdRef: defaultRef,
+        phoneRef: defaultRef,
+        codeRef: defaultRef,
     };
     const emailInputValidator = input => {
         if (!input) return validateRes(false, ERROR_MSGS.EMAIL_EMPTY);
@@ -85,12 +81,12 @@ export default withStyles(s)(inject('store')((observer(function LoginCard (props
         if (!isPhoneNumberCN(formattedPhone)) return validateRes(false, ERROR_MSGS.PHONE_INVALID);
         return validateRes(true);
     };
-    const codeInputValidator = input => {
-        return validateRes(true);
-    };
     const btnClickHandler = async e => {
         e && e.stopPropagation();
-        const validInput = Object.values(refs).map(ref => ref().doValidate({ forceValidate: true })).every(res => !!res);
+        const authRefs = formState.authType === AUTH_TYPE.EMAIL
+            ? [refs.emailRef, refs.passwdRef]
+            : [refs.phoneRef, refs.codeRef];
+        const validInput = Object.values(authRefs).map(ref => ref().doValidate({ forceValidate: true })).every(res => !!res);
         if (!validInput) return;
         updateState({
             loading: true,
@@ -103,43 +99,6 @@ export default withStyles(s)(inject('store')((observer(function LoginCard (props
         updateState({
             loading: false,
         });
-    };
-    const sendCode = async () => {
-        if (formState.countdown > 0) {
-            return;
-        }
-        toast.clearWaitingQueue();
-        if (!refs.phoneRef().getInput()) {
-            return toast.error(ERROR_MSGS.PHONE_EMPTY, {
-                position: toast.POSITION.TOP_CENTER,
-                toastId: 'empty',
-            });
-        }
-        if (!isPhoneNumberCN(refs.phoneRef().getInput())) {
-            return toast.error(ERROR_MSGS.PHONE_INVALID, {
-                position: toast.POSITION.TOP_CENTER,
-                toastId: 'invalid',
-            });
-        }
-        try {
-            const res = await authService.sendValidateCode({
-                phone: formatPhone(refs.phoneRef().getInput()),
-                type: CODE_TYPES.LOGIN,
-            });
-            if (res.success) {
-                updateState({
-                    countdown: 59,
-                });
-            }
-        } catch (error) {
-            const { code, message } = error;
-            if (code === 400) {
-                toast.error(message, {
-                    position: toast.POSITION.TOP_CENTER,
-                });
-            }
-            return { success: false, msg: error.errorMsg };
-        }
     };
     const closeBtnHandler = e => {
         e && e.stopPropagation();
@@ -189,21 +148,10 @@ export default withStyles(s)(inject('store')((observer(function LoginCard (props
                                     validateInput={phoneInputValidator}
                                     getRef={func => (refs.phoneRef = func)}
                                 />
-                                <div style={{ display: 'flex' }}>
-                                    <Input
-                                        classNames={inputClass}
-                                        placeholder={'验证码'}
-                                        maxLength={6}
-                                        validateInput={codeInputValidator}
-                                        getRef={func => (refs.codeRef = func)}
-                                    />
-                                    <Button
-                                        className={s.sendCodeBtn}
-                                        text={getSendCodeBtn(formState.countdown)}
-                                        onClick={sendCode}
-                                        disabled={formState.countdown > 0}
-                                    />
-                                </div>
+                                <CodeInput
+                                    addRefFunc={func => (refs.codeRef = func)}
+                                    getPhoneNumberFunc={() => refs.codeRef().getInput()}
+                                />
                             </>
                     }
                 </div>

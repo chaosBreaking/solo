@@ -217,3 +217,13 @@ input {
     min-width: .7rem !important;
     margin: auto 0 auto .1rem !important;
 }
+
+:global(.Toastify__toast) {
+    border-radius: .1rem !important;
+}
+
+:global(.Toastify__toast-body) {
+    padding-left: .05rem;
+    border-radius: .1rem;
+    font-size: .1rem !important;
+}

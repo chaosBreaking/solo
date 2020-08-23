@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import withStyles from 'isomorphic-style-loader/withStyles';
-import cs from 'classnames';
-import s from './index.scss';
-import { authService, AUTH_TYPE, CODE_TYPES, getSendCodeBtn, formatPhone } from './common';
+import {
+    authService,
+    CODE_TYPES,
+    getSendCodeBtn,
+    formatPhone,
+    validateRes,
+    ERROR_MSGS
+} from './common';
+import { isPhoneNumberCN } from '@utils/validate';
 import { toast } from 'react-toastify';
 import Button from '@widgets/Button';
+import Input from '@widgets/Input';
+import s from './index.scss';
 
-export default withStyles(s)(observer(function SendCodeButton (props) {
+export default withStyles(s)(observer(function CodeInput (props) {
     const {
-        authType,
+        addRefFunc,
         getPhoneNumberFunc,
     } = props;
     const [countdown, setCountdown] = useState(0);
@@ -30,8 +38,16 @@ export default withStyles(s)(observer(function SendCodeButton (props) {
         }
         if (!getPhoneNumberFunc()) {
             toast.clearWaitingQueue();
-            return toast.error('请输入手机号码', {
+            return toast.error(ERROR_MSGS.PHONE_EMPTY, {
                 position: toast.POSITION.TOP_CENTER,
+                toastId: 'code-send-empty',
+            });
+        }
+        if (!isPhoneNumberCN(getPhoneNumberFunc())) {
+            toast.clearWaitingQueue();
+            return toast.error(ERROR_MSGS.PHONE_INVALID, {
+                position: toast.POSITION.TOP_CENTER,
+                toastId: 'code-send-invalid-phone',
             });
         }
         try {
@@ -41,19 +57,40 @@ export default withStyles(s)(observer(function SendCodeButton (props) {
             });
             if (res.success) {
                 setCountdown(59);
+                toast.success('验证码发送成功', {
+                    position: toast.POSITION.TOP_CENTER,
+                    toastId: 'code-send-success',
+                });
             }
         } catch (error) {
             const { code, message } = error;
             if (code === 400) {
                 toast.error(message, {
                     position: toast.POSITION.TOP_CENTER,
+                    toastId: 'code-send-error',
                 });
             }
             return { success: false, msg: error.errorMsg };
         }
     };
+    const codeInputValidator = input => {
+        return input
+            ? validateRes(true)
+            : validateRes(false, ERROR_MSGS.CODE_EMPTY);
+    };
+    const inputClass = {
+        error: s.errorInput,
+        msg: s.errorMsg,
+    };
     return (
-        <div className={s.btn}>
+        <div style={{ display: 'flex' }}>
+            <Input
+                classNames={inputClass}
+                placeholder={'验证码'}
+                maxLength={6}
+                validateInput={codeInputValidator}
+                getRef={addRefFunc}
+            />
             <Button
                 className={s.sendCodeBtn}
                 text={getSendCodeBtn(countdown)}

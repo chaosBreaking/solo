@@ -7,9 +7,7 @@ import Button from '@widgets/Button';
 import Input from '@widgets/Input';
 import { isEmail, isPhoneNumberCN } from '@utils/validate';
 import {
-    authService,
     AUTH_TYPE,
-    CODE_TYPES,
     ERROR_MSGS,
     defaultRef,
     MAX_NICKNAME_LENGTH,
@@ -18,13 +16,10 @@ import {
     formatPhone
 } from './common';
 import OAuthBar from './OAuthBar';
-import { toast } from 'react-toastify';
+import CodeInput from './CodeInput';
 
 // const TITLE = '创建你的社群，从这里开始'; // 放在 成为创作者 页面
 const TITLE = '即刻加入Solo';
-const getSendCodeBtn = countdown => {
-    return !countdown ? '发送验证码' : `重新发送(${countdown})s`;
-};
 
 export default withStyles(s)(observer(function RegistryCard (props) {
     const {
@@ -79,9 +74,6 @@ export default withStyles(s)(observer(function RegistryCard (props) {
         if (!isPhoneNumberCN(formattedPhone)) return validateRes(false, ERROR_MSGS.PHONE_INVALID);
         return validateRes(true);
     };
-    const codeInputValidator = input => {
-        return validateRes(true);
-    };
     const passwdInputValidator = (input, isRepeatOne) => {
         const { passwdRef, rePasswdRef } = refs;
         const originalPasswd = passwdRef().getInput();
@@ -98,44 +90,6 @@ export default withStyles(s)(observer(function RegistryCard (props) {
     const switchAuthType = () => {
         const authType = formState.authType === AUTH_TYPE.PHONE ? AUTH_TYPE.EMAIL : AUTH_TYPE.PHONE;
         updateState({ authType });
-    };
-    const sendCode = async () => {
-        if (formState.countdown > 0) {
-            return;
-        }
-        if (!refs.phoneRef().getInput()) {
-            toast.clearWaitingQueue();
-            return toast.error(ERROR_MSGS.PHONE_EMPTY, {
-                position: toast.POSITION.TOP_CENTER,
-                toastId: 'empty',
-            });
-        }
-        if (!isPhoneNumberCN(refs.phoneRef().getInput())) {
-            toast.clearWaitingQueue();
-            return toast.error(ERROR_MSGS.PHONE_INVALID, {
-                position: toast.POSITION.TOP_CENTER,
-                toastId: 'invalid',
-            });
-        }
-        try {
-            const res = await authService.sendValidateCode({
-                phone: formatPhone(refs.phoneRef().getInput()),
-                type: CODE_TYPES.LOGIN,
-            });
-            if (res.success) {
-                updateState({
-                    countdown: 59,
-                });
-            }
-        } catch (error) {
-            const { code, message } = error;
-            if (code === 400) {
-                toast.error(message, {
-                    position: toast.POSITION.TOP_CENTER,
-                });
-            }
-            return { success: false, msg: error.errorMsg };
-        }
     };
     const btnClickHandler = async e => {
         e && e.stopPropagation();
@@ -213,21 +167,10 @@ export default withStyles(s)(observer(function RegistryCard (props) {
                     validateInput={phoneInputValidator}
                     getRef={func => (refs.phoneRef = func)}
                 />
-                <div style={{ display: 'flex' }}>
-                    <Input
-                        classNames={inputClass}
-                        placeholder={'验证码'}
-                        maxLength={6}
-                        validateInput={codeInputValidator}
-                        getRef={func => (refs.codeRef = func)}
-                    />
-                    <Button
-                        className={s.sendCodeBtn}
-                        text={getSendCodeBtn(formState.countdown)}
-                        onClick={sendCode}
-                        disabled={formState.countdown > 0}
-                    />
-                </div>
+                <CodeInput
+                    addRefFunc={func => (refs.codeRef = func)}
+                    getPhoneNumberFunc={() => refs.codeRef().getInput()}
+                />
             </>;
     };
     return (
