@@ -1,4 +1,7 @@
 import axios from 'axios';
+import enhanceRequest from './enhanceRequest';
+
+enhanceRequest(axios);
 
 const getAPIUrl = apiPath => {
     const commonHost = 'http://localhost:6842/api/';
