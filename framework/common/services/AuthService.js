@@ -25,7 +25,7 @@ export default class AuthService extends BaseService {
         return data;
     }
 
-    sendValidateVode = async reqData => {
+    sendValidateCode = async reqData => {
         const res = await this.post(API.CODE, { data: reqData }).catch(error => ({ error }));
         const { error, data } = res;
         if (error) {
