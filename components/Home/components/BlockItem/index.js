@@ -6,22 +6,15 @@ import { forward } from '@utils/navi';
 import s from './index.scss';
 
 function BlockItem (props) {
-    const { leaders = Array.from({ length: 3 }), index } = props;
-    const useUniStyle = index < 2;
-    // const style = useUniStyle
-    //     ? {
-    //         width: `${index === 0 ? 50 : 33.3}%`,
-    //         height:
-    //     }
-    //     : {};
+    const { leaders = Array.from({ length: 3 }), index, isFullLine } = props;
     const clickHandler = () => {
         forward('/zone.html');
     };
     return (
         <div
             className={cs(s.container, {
-                [s.topLine]: index < 2,
-                [s.secondLine]: index >= 2 && index < 5,
+                [s.fullLine]: isFullLine,
+                // [s.secondLine]: index >= 2 && index < 5,
             })}
             onClick={clickHandler}
         >

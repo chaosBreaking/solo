@@ -7,6 +7,7 @@ import s from './index.scss';
 import MasonryList from './components/MasonryList';
 import NavigationBar from './components/NavigationBar';
 import FeedsList from './components/FeedsList';
+import SideNavi from './components/SideNavi';
 
 @withStyles(s)
 @pageWrapper({
@@ -21,9 +22,8 @@ export default class Home extends Component {
             <div className={s.container}>
                 <NavigationBar />
                 <div className={s.main}>
-                    {/* <SideNav /> */}
+                    <SideNavi />
                     <FeedsList />
-                    {/* <Recommend /> */}
                 </div>
             </div>
         );

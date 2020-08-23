@@ -2,22 +2,8 @@
 
 .container {
     position: relative;
-    width: 100%;
-}
-
-.fullscreen {
-    position: relative;
-    width: 70%;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
-
-.narrow {
-    position: relative;
-    width: 60%;
-    margin: auto;
+    width: 50%;
+    // margin-left: 10%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;

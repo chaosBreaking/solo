@@ -2,26 +2,24 @@
 
 .container {
     position: relative;
-    width: 33%;
+    width: 100%;
     height: 2rem;
     padding: .05rem;
-    margin: 0 0 .1rem 0;
+    margin-bottom: 2%;
+    margin-right: 2%;
     box-shadow: 1px 1px 10px rgba(27, 95, 160, .1);
     border-radius: .05rem;
-    background: #ddd;
+    background: #dedede;
 }
 
-.topLine {
-    width: 49%;
+.fullLine {
+    width: 100%;
     height: 2.5rem;
     box-shadow: 1px 1px 3px rgba(27, 95, 160, .1);
-    &:first-child {
-        margin-right: 1%;
-    }
 }
 
 .secondLine {
-    width: 33%;
+    width: 30%;
     height: 2rem;
     box-shadow: 1px 1px 3px rgba(27, 95, 160, .1);
 }
