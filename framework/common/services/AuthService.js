@@ -4,11 +4,21 @@ const API = {
     PRE_AUTH: '/auth/preauth',
     LOGIN: '/auth/in',
     CODE: '/auth/code',
+    REGISTER: 'auth/new',
 };
 
 export default class AuthService extends BaseService {
     handlePreAuth = async authData => {
         const res = await this.post(API.PRE_AUTH, { data: authData }).catch(error => ({ error }));
+        const { error, data } = res;
+        if (error) {
+            throw error;
+        }
+        return data;
+    }
+
+    handleRegister = async formData => {
+        const res = await this.post(API.REGISTER, { data: formData }).catch(error => ({ error }));
         const { error, data } = res;
         if (error) {
             throw error;
