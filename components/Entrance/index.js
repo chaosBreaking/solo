@@ -51,7 +51,7 @@ export default class Entrance extends Component {
                                 { name: '编辑器', url: '/editor.html' },
                                 { name: '发现', url: '/explore.html' },
                                 { name: '内容主页', url: '/home.html' },
-                                { name: '注册页', url: '/auth.html' },
+                                { name: '注册页', url: '/auth.html?state=1' },
                                 { name: '分类圈子主页', url: '/zone.html' },
                             ].map(({ name, url }) => {
                                 return (
