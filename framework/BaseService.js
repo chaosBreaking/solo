@@ -4,7 +4,7 @@ import enhanceRequest from './enhanceRequest';
 enhanceRequest(axios);
 
 const getAPIUrl = apiPath => {
-    const commonHost = 'http://localhost:6842/api/';
+    const commonHost = 'http://api.hyperii.com/api/';
     const path = apiPath.startsWith('/') ? apiPath.slice(1) : apiPath;
     return commonHost + path;
 };
