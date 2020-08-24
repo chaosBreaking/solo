@@ -8,15 +8,15 @@ import buildContext from './contextBuilder';
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
 
-// if (!__DEV__) {
-Sentry.init({
-    dsn: 'https://02608ec44c184ec485d2661cb44902e9@o438321.ingest.sentry.io/5402805',
-    integrations: [
-        new Integrations.BrowserTracing(),
-    ],
-    tracesSampleRate: 1.0,
-});
-// }
+if (!__DEV__) {
+    Sentry.init({
+        dsn: 'https://02608ec44c184ec485d2661cb44902e9@o438321.ingest.sentry.io/5402805',
+        integrations: [
+            new Integrations.BrowserTracing(),
+        ],
+        tracesSampleRate: 1.0,
+    });
+}
 
 // Enables critical path CSS rendering
 // https://github.com/kriasoft/isomorphic-style-loader
