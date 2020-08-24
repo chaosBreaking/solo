@@ -2,6 +2,7 @@ import React from 'react';
 import { Provider } from 'mobx-react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import s from '@src/static/basic.scss';
+import { withProfiler } from '@sentry/react';
 
 export default (options = {}) => {
     return Component => {
@@ -46,6 +47,6 @@ export default (options = {}) => {
             }
         }
 
-        return withStyles(s)(Page);
+        return withProfiler(withStyles(s)(Page));
     };
 };

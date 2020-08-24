@@ -5,9 +5,18 @@ import App from './components/App';
 import history from './history';
 import router from './router';
 import buildContext from './contextBuilder';
-// import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/react';
+import { Integrations } from '@sentry/tracing';
 
-// Sentry.init({ dsn: 'https://cc95f9289e7e4f79ae2c723dac9f7442@sentry.io/5188590' });
+// if (!__DEV__) {
+Sentry.init({
+    dsn: 'https://02608ec44c184ec485d2661cb44902e9@o438321.ingest.sentry.io/5402805',
+    integrations: [
+        new Integrations.BrowserTracing(),
+    ],
+    tracesSampleRate: 1.0,
+});
+// }
 
 // Enables critical path CSS rendering
 // https://github.com/kriasoft/isomorphic-style-loader
@@ -56,7 +65,7 @@ async function render (Component, ssrData = {}, context) {
                 <Component {...initialData} />
             </App>,
             container,
-            () => {},
+            () => { },
         );
     } catch (error) {
         if (__DEV__) {
