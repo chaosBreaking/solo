@@ -1,3 +1,6 @@
+/**
+ *  注册/登录页面
+ */
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import pageWrapper from '@framework/pageWrapper';

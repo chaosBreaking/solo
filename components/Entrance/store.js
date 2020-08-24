@@ -48,37 +48,6 @@ export default class Store extends CommonStore {
     }
 
     @action.bound
-    async preAuth (id) {
-        let authType, authKey;
-        if (isEmail(id)) {
-            authType = AUTH_TYPE.EMAIL;
-            authKey = 'email';
-        } else if (isPhoneNumber(id)) {
-            authType = AUTH_TYPE.PHONE;
-            authKey = 'phone';
-        } else {
-            return {
-                authType: AUTH_TYPE.ERROR,
-            };
-        }
-        const { success, data, error } = await this.authService.preAuth({
-            authType,
-            data: {
-                [authKey]: id
-            }
-        });
-        if (!success) {
-            return {
-                error
-            };
-        }
-        return {
-            authType,
-            stage: data.isNew ? STAGE_MAP.REGISTER : STAGE_MAP.LOGIN
-        };
-    }
-
-    @action.bound
     async login (authData = {}) {
         const { authType, id, passwd } = authData;
         const { success, data = {}, error } = await this.authService.login({

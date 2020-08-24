@@ -1,3 +1,6 @@
+/**
+ *  圈子聚合页
+ */
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import pageWrapper from '@framework/pageWrapper';

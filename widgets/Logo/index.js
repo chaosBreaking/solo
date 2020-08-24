@@ -1,5 +1,4 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
 import { forward } from '@utils/navi';
 import s from './index.scss';
 
@@ -16,7 +15,7 @@ const POSITION_MAP = {
     bottom: { bottom: 0 },
 };
 
-export default withStyles(s)(function Logo (props) {
+export default function Logo (props) {
     const { className, size = 'normal', position = 'left', onClick } = props;
     const style = {};
     if (POSITION_MAP[position]) {
@@ -37,4 +36,4 @@ export default withStyles(s)(function Logo (props) {
     return (
         <div className={`${s.container} ${!!className && className}`} onClick={onClickLogo} style={style}>Solo</div>
     );
-});
+};

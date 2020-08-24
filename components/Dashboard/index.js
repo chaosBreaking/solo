@@ -1,3 +1,6 @@
+/**
+ *  创作者控制台
+ */
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import withStyles from 'isomorphic-style-loader/withStyles';
