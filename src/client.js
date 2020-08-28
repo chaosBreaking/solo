@@ -7,6 +7,9 @@ import router from './router';
 import buildContext from './contextBuilder';
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
+import smoothscroll from 'smoothscroll-polyfill';
+
+smoothscroll.polyfill();
 
 if (!__DEV__) {
     Sentry.init({
