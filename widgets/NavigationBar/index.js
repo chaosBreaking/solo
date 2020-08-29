@@ -14,7 +14,10 @@ const CLASS_TYPE_MAP = {
 };
 
 const btnClickHandler = item => {
-    const { type, url } = item || {};
+    const { type, url, action } = item || {};
+    if (typeof action === 'function') {
+        return action();
+    }
     if (type === NAVI_ITEM_TYPE.LINK) {
         forward(url);
     }

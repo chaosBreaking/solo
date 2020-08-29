@@ -1,10 +1,10 @@
-$default_bg_color: #4b6dc9;
+// $default_bg_color: #4b6dc9;
+$default_bg_color: var(--theme-primary);
 $default_font_color: #fff;
 
 .container {
     position: relative;
     width: auto;
-    min-width: 1.5rem;
     height: .3rem;
     margin: auto;
     display: flex;
@@ -23,15 +23,6 @@ $default_font_color: #fff;
     }
 }
 
-.bg {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: $default_bg_color;
-}
-
 .content {
     width: 100%;
     height: 100%;
@@ -43,7 +34,7 @@ $default_font_color: #fff;
 }
 
 .loading {
-    .bg {
+    .container {
         color: transparent;
         cursor: not-allowed;
         pointer-events: auto;
@@ -54,16 +45,13 @@ $default_font_color: #fff;
     color: $default_bg_color;
     font-weight: bold;
     border: 1px solid $default_bg_color;
+    background: transparent;
 
-    .bg {
-        background: transparent;
-    }
+    &:hover,
     &:active {
         outline: unset;
-        .bg {
-            background: $default_bg_color;
-            opacity: .6;
-        }
+        background: $default_bg_color;
+        color: #fff;
     }
 }
 
@@ -81,9 +69,5 @@ $default_font_color: #fff;
         background: #efefef !important;
         color: #a6a6a6 !important;
         cursor: not-allowed !important;
-
-        .bg {
-            background: transparent !important;
-        }
     }
 }

@@ -8,111 +8,112 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    // padding-top: $NAV_HEIGHT_MAIN;
-    background: rgba(240, 248, 255, .6);
-}
-
-.home {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    // background: url('http://solo-app.test.upcdn.net/wallhaven-96w8e8.jpeg') no-repeat;
-    background: transparent;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    // border-radius: -.1rem -.1rem 0 0;
-    box-shadow: 0 .02rem .04rem 0 rgba(0, 0, 0, 0.06);
-    transition: all .3s ease-out;
-}
-
-.tepIntro {
-    background: #fff;
-    padding: .1rem;
-    text-align: center;
-
-    a {
-        font-size: .12rem;
-    }
 }
 
 .main {
-    position: absolute;
+    position: relative;
     top: 0;
     width: 100%;
     height: 100%;
+    padding-top: $NAV_HEIGHT_MAIN + .2rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
-.banner {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    min-height: 100%;
-    // background: linear-gradient(135deg, #7b4397, #dc2430 60%, #3274D5);
-    background: linear-gradient(135deg, #833ab4, #3274D5 60%, #fd1d1d);
-    overflow: hidden;
-    color: #fff;
+.header {
+    height: 2.5rem;
+    width: 7rem;
+    margin: 0 auto;
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    cursor: pointer;
-    span {
-        opacity: .1;
-        font-size: .1rem;
-        z-index: 1;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: .3rem;
+
+    .info {
         position: relative;
-    }
-    &:hover {
-        span {
-            font-size: .12rem;
-            opacity: 1;
-        }
-        +div {
-            height: 96%;
-        }
-    }
-    &:before, &:after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        min-width: 300vw;
-        min-height: 300vw;
-        background: linear-gradient(135deg, #833ab4, #3274D5 60%, #fd1d1d);
-        animation-name: rotate;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
+        width: max-content;
+        text-align: center;
+        font-size: .25rem;
+        font-weight: bolder;
     }
 
-    &:before {
-        bottom: 1%;
-        border-radius: 45%;
-        animation-duration: 8s;
+    .btn {
+        margin-top: .2rem;
+        font-size: .1rem;
+        background: #F75757;
+
+        &:hover {
+            opacity: .8;
+        }
     }
 
-    &:after {
-        top: 0;
-        opacity: .5;
-        border-radius: 47%;
-        animation-duration: 10s;
+    .headImg {
+        position: relative;
+        width: 50%;
+        height: 100%;
+        background: #ddd;
+        background: url('./head.jpg');
+        background-size: cover;
     }
 }
 
-@keyframes rotate {
-    0% {
-        transform: translate(-50%, 0) rotateZ(0deg);
+.block {
+    position: relative;
+    width: 100%;
+    margin-bottom: .3rem;
+    text-align: center;
+}
+
+.blockTitle {
+    font-size: .15rem;
+    font-weight: bolder;
+}
+
+.searchBar {
+    height: .5rem;
+    padding-top: 0 !important;
+    flex-direction: row !important;
+    justify-content: center;
+    margin-top: .2rem;
+    align-items: center;
+    font-size: .09rem;
+
+    .btn {
+        width: 20%;
+        padding: 0 .1rem;
     }
-    50% {
-        transform: translate(-50%, -2%) rotateZ(180deg);
+}
+
+.search {
+    width: 100%;
+    height: .3rem;
+    margin-right: .1rem;
+    display: flex;
+    align-items: center;
+    .iconfont {
+        font-size: .1rem;
     }
-    100% {
-        transform: translate(-50%, 0%) rotateZ(360deg);
+    // background: #eee !important;
+    div, input {
+        height: 100%;
+        padding-left: .05rem;
+        border-radius: .05rem !important;
+        font-size: .09rem !important;
+        background: #eee !important;
     }
+}
+
+.sectionCard {
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.profileCard {
+    flex-basis: 1;
+    height: 2rem;
+    margin-right: .05rem;
 }
 
 .bottomInfo {

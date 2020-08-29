@@ -1,46 +1,50 @@
-$base: 3.75;
+$desktop-base: 10; // 10rem = 100vw
+$mobile-base: 3.75; // 3.75rem = 100vw
 
 html {
-  -webkit-text-size-adjust: none;
-  font-size: calc(100vw / 3.75);
+    -webkit-text-size-adjust: none;
 
-  @media only screen and (min-width: 640px) {
-    font-size: 640px/$base;
-  }
+    @media only screen and (min-width: 640px) {
+        font-size: 640px/$mobile-base;
+    }
 
-  @media only screen and (max-width: 480px) {
-    font-size: 480px/$base;
-  }
+    @media only screen and (max-width: 480px) {
+        font-size: 480px/$mobile-base;
+    }
 
-  @media only screen and (max-width: 414px) {
-    font-size: 414px/$base;
-  }
+    @media only screen and (max-width: 414px) {
+        font-size: 414px/$mobile-base;
+    }
 
-  @media only screen and (max-width: 412px) {
-    font-size: 412px/$base;
-  }
+    @media only screen and (max-width: 412px) {
+        font-size: 412px/$mobile-base;
+    }
 
-  @media only screen and (max-width: 400px) {
-    font-size: 400px/$base;
-  }
+    @media only screen and (max-width: 400px) {
+        font-size: 400px/$mobile-base;
+    }
 
-  @media only screen and (max-width: 393px) {
-    font-size: 393px/$base;
-  }
+    @media only screen and (max-width: 393px) {
+        font-size: 393px/$mobile-base;
+    }
 
-  @media only screen and (max-width: 375px) {
-    font-size: 100px;
-  }
+    @media only screen and (max-width: 375px) {
+        font-size: 100px;
+    }
 
-  @media only screen and (max-width: 360px) {
-    font-size: 360px/$base;
-  }
+    @media only screen and (max-width: 360px) {
+        font-size: 360px/$mobile-base;
+    }
 
-  @media only screen and (max-width: 345px) {
-    font-size: 345px/$base;
-  }
+    @media only screen and (max-width: 345px) {
+        font-size: 345px/$mobile-base;
+    }
 
-  @media only screen and (max-width: 320px) {
-    font-size: 320px/$base;
-  }
+    @media only screen and (max-width: 320px) {
+        font-size: 320px/$mobile-base;
+    }
+
+    @media only screen and (min-width: 768px) {
+        font-size: calc(100vw / 10);
+    }
 }

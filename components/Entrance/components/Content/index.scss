@@ -1,0 +1,49 @@
+
+.block {
+    position: relative;
+    width: 100%;
+    margin-bottom: .3rem;
+    text-align: center;
+}
+
+.sectionCard {
+    display: flex;
+    flex-direction: column;
+}
+
+.topLine {
+    display: flex;
+    margin-bottom: .1rem;
+    align-items: flex-end;
+}
+
+.blockTitle {
+    font-size: .15rem;
+    font-weight: bolder;
+}
+
+.creators,
+.slide {
+    display: flex;
+}
+
+.slide {
+    height: 1.5rem;
+    margin-bottom: .1rem;
+}
+
+.creators {
+    height: 2rem;
+}
+
+.more {
+    position: relative;
+    right: 0;
+    margin-left: auto;
+    font-size: .1rem;
+}
+
+.profileCard {
+    height: 100%;
+    margin-right: .05rem;
+}

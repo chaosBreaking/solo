@@ -8,13 +8,14 @@ $phFontColor: #868686;
     position: relative;
     left: 0;
     width: 100%;
+    height: $barHeight;
     display: flex;
     align-items: center;
 
     input {
         position: relative;
-        height: $barHeight;
         width: 100%;
+        height: 100%;
         padding-left: .05rem;
         border-radius: .03rem;
         margin: 0;

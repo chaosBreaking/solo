@@ -4,7 +4,7 @@ import s from './static.scss';
 
 function StaticSearchBar (props) {
     const [content, setContent] = useState('');
-    const { mountRef, onChange, onClick, placeholder } = props;
+    const { mountRef, onChange, onClick, placeholder, PreIcon } = props;
     const events = { onChange, onClick };
     const onInputChange = e => {
         setContent(e.target.value);
@@ -21,6 +21,7 @@ function StaticSearchBar (props) {
     typeof mountRef === 'function' && mountRef(controller);
     return (
         <div className={s.container} {...events}>
+            {!!PreIcon && <PreIcon />}
             <input onChange={onInputChange} value={content} placeholder={placeholder} />
         </div>
     );

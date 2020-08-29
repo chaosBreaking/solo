@@ -7,7 +7,7 @@ import s from './index.scss';
 function Card (props) {
     const {
         className,
-        children
+        children,
     } = props;
     return (
         <div className={cs(s.container, className)} >

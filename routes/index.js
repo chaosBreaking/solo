@@ -37,6 +37,10 @@ const routes = {
             path: '/editor.html',
             load: () => import(/* webpackChunkName: 'editor' */ './editor'),
         },
+        {
+            path: '/verify.html',
+            load: () => import(/* webpackChunkName: 'verify' */ './verify'),
+        },
 
         // Wildcard routes, e.g. { path: '(.*)', ... } (must go last)
         // {
