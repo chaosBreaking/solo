@@ -31,7 +31,7 @@ function NavigationBar ({ store }) {
     };
     return (
         <div className={s.container}>
-            <div className={s.logo}><h1>Solo</h1></div>
+            <div className={s.logo}><h1>eqbator</h1></div>
             <div className={s.mainNav}>
                 {
                     NAVI_ITEMS.map(item => {
