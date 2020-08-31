@@ -20,19 +20,21 @@ const Section = ({ width = 7, children, ...rest }) => <Block width={width} {...r
 export default withStyles(s)(function Content ({ data }) {
     const { title } = data;
     const options = {
-        spacing: 10,
-        slidesPerView: 1,
+        spacing: 8,
+        // slidesPerView: 1,
         centered: true,
-        loop: false,
+        loop: true,
+        initial: 0,
         mode: 'snap',
+        showNaviBtn: true,
         breakpoints: {
             '(min-width: 768px)': {
                 slidesPerView: 2,
-                mode: 'free-snap'
+                // mode: 'free-snap'
             },
             '(min-width: 1200px)': {
                 slidesPerView: 3,
-                mode: 'free-snap'
+                // mode: 'free-snap'
             }
         }
     };
@@ -42,6 +44,7 @@ export default withStyles(s)(function Content ({ data }) {
             <SlideItem><Card className={s.profileCard}>2</Card></SlideItem>
             <SlideItem><Card className={s.profileCard}>3</Card></SlideItem>
         </Slider>
+
         <div className={s.creators}>
             <Card className={s.profileCard}></Card>
             <Card className={s.profileCard}></Card>
