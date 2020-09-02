@@ -18,6 +18,8 @@ $gradientColor: linear-gradient(135deg, rgb(123, 67, 151), rgb(220, 36, 48));
     font-weight: bolder;
     font-family: $fontFamily;
     border-radius: .1rem;
+    transition: all .5s ease;
+
     // background: rgba(255, 255, 255, .9);
     // background: aliceblue;
     // -webkit-box-shadow: 0px 4px 20px rgba(149, 185, 193, 0.5);
@@ -25,11 +27,23 @@ $gradientColor: linear-gradient(135deg, rgb(123, 67, 151), rgb(220, 36, 48));
     // box-shadow: 0px 4px 20px rgba(149, 185, 193, 0.5);
 }
 
+.collapsed {
+    overflow: hidden;
+    width: 1.5rem;
+
+    .funcNav,
+    .mainNav {
+        display: none;
+    }
+}
+
 .logo {
     position: relative;
     left: 0;
-    font-size: .1rem;
-    margin: 0 .2rem;
+    width: 1rem;
+    margin: .2rem;
+    font-size: .2rem;
+    font-weight: bolder;
     font-family: lemon;
     cursor: pointer;
     &:hover {
@@ -52,6 +66,8 @@ $gradientColor: linear-gradient(135deg, rgb(123, 67, 151), rgb(220, 36, 48));
 
     color: #000;
     font-size: .1rem;
+    transition: all .5s ease;
+    overflow: hidden;
 
     span {
         display: flex;
@@ -75,6 +91,8 @@ $gradientColor: linear-gradient(135deg, rgb(123, 67, 151), rgb(220, 36, 48));
     color: #666;
     font-size: .1rem;
     padding-right: .2rem;
+    transition: all .5s ease;
+    overflow: hidden;
 
     span {
         display: flex;

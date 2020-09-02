@@ -16,6 +16,23 @@ export default class Store extends CommonStore {
 
     async initializeData (requestContext) {
         this.bgUrl = BG_IMAGES[~~(Math.random() * 10) % BG_IMAGES.length];
+        this.contentList = [
+            {
+                title: '视频创作',
+            },
+            {
+                title: '摄影艺术',
+            },
+            {
+                title: '独立游戏',
+            },
+            {
+                title: 'Cosplayer',
+            },
+            {
+                title: '连载漫画',
+            },
+        ];
         return { title: 'Solo' };
     }
 

@@ -12,9 +12,10 @@ import Mask from '@widgets/Mask';
 import Button from '@widgets/Button';
 import { StaticSearchBar } from '@widgets/SearchBar';
 import Card from '@widgets/Card';
+import Content from './components/Content';
+import Bottom from './components/Footer';
 
 import s from './index.scss';
-import Content from './components/Content';
 
 const Header = props => <div className={s.header}>{props.children}</div>;
 const Title = props => <span className={s.blockTitle}>{props.text}</span>;
@@ -22,9 +23,6 @@ const Block = props => <div className={s.block} style={{ width: `${props.width |
     {props.title && <Title text={props.title} />}
     {props.children}
 </div>;
-const Section = ({ width = 7, children, ...rest }) => <Block width={width} {...rest}>
-    <div className={s.sectionCard}>{children}</div>
-</Block>;
 
 @withStyles(s)
 @pageWrapper({
@@ -38,26 +36,18 @@ export default class Entrance extends Component {
     }
 
     render () {
-        const dfcontent = [
-            {
-                title: '视频创作',
-            },
-            {
-                title: '摄影艺术',
-            },
-        ];
-        const { showLoginCard, contents = dfcontent } = this.store;
+        const { showLoginCard, contentList } = this.store;
         return (
             <div className={s.container}>
                 <NavigationBar />
                 <div className={s.main}>
                     {/* 注册要放到新的页面去做，因为注册成为创作者需要填写较多信息，所以最好进入一个纯净的新页面 */}
                     <Header>
+                        <div className={s.headImg} />
                         <div className={s.info}>
                             <span>为你所发现而来，<br />为你所热爱而停留</span>
                             <Button text={'即刻加入'} className={s.btn} />
                         </div>
-                        <div className={s.headImg} />
                     </Header>
                     <Block width={7}>
                         <span className={s.blockTitle}>探索你感兴趣的社区、圈子与创作者</span>
@@ -72,26 +62,17 @@ export default class Entrance extends Component {
                         </Card>
                     </Block>
                     {
-                        contents.map((content, idx) => <Content key={idx} data={content} />)
+                        contentList.map((content, idx) => <Content key={idx} data={content} />)
                     }
-                    {/* <Section title={'视频创作'}>
-                        <div className={s.creators}>
-                            <Card className={s.profileCard}></Card>
-                            <Card className={s.profileCard}></Card>
-                            <Card className={s.profileCard}></Card>
-                            <Card className={s.profileCard}></Card>
-                        </div>
-                        <div className={s.creators}>
-                            <Card className={s.profileCard}></Card>
-                            <Card className={s.profileCard}></Card>
-                            <Card className={s.profileCard}></Card>
-                            <Card className={s.profileCard}></Card>
-                        </div>
-                    </Section>
-                    <Section title={'摄影艺术'} >
-                    </Section> */}
+                    <Block width={7}>
+                        <span className={s.blockTitle}>发现更多夜空中闪亮的星</span>
+                        <Card className={s.searchBar} row>
+
+                        </Card>
+                    </Block>
                     {showLoginCard && <Mask><LoginCard showClose /></Mask>}
                 </div>
+                <Bottom />
             </div>
         );
     }
