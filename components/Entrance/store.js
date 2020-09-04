@@ -1,8 +1,6 @@
 import { observable, action } from 'mobx';
 import CommonStore from '@framework/CommonStore';
 import AuthService from './service';
-import { isPhoneNumber, isEmail } from '@utils/validate';
-import { STAGE_MAP, AUTH_TYPE, BG_IMAGES, ERROR_MAP } from './constants';
 import { hash } from '@utils/crypto';
 
 export default class Store extends CommonStore {
@@ -15,24 +13,63 @@ export default class Store extends CommonStore {
     }
 
     async initializeData (requestContext) {
-        this.bgUrl = BG_IMAGES[~~(Math.random() * 10) % BG_IMAGES.length];
-        this.contentList = [
-            {
-                title: '视频创作',
+        this.contentList = ['视频创作', '摄影艺术', '独立游戏', 'Cosplay'].map(title => ({
+            title,
+            content: {
+                recommend: [
+                    {
+                        name: '矢川三郎',
+                        bio: '正在创建Solo',
+                        intro: '前卫朋克幻想家，Coder，观察者，喜欢给未来加上滤镜和白噪声，汽车以及摇滚爱好者。',
+                        support: '被300+支持者孵化中',
+                        avatar: 'http://lorempixel.com/400/300?uni=' + title,
+                        img: 'https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture&uni=' + title,
+                    },
+                    {
+                        name: '矢川三郎',
+                        bio: '正在创建Solo',
+                        intro: '前卫朋克幻想家，Coder，观察者，喜欢给未来加上滤镜和白噪声，汽车以及摇滚爱好者。',
+                        support: '被300+支持者孵化中',
+                        avatar: 'http://lorempixel.com/400/300?uni=' + title,
+                        img: 'https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture&uni=' + title,
+                    },
+                    {
+                        name: '矢川三郎',
+                        bio: '正在创建Solo',
+                        intro: '前卫朋克幻想家，Coder，观察者，喜欢给未来加上滤镜和白噪声，汽车以及摇滚爱好者。',
+                        support: '被300+支持者孵化中',
+                        avatar: 'http://lorempixel.com/400/300?uni=' + title,
+                        img: 'https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture&uni=' + title,
+                    },
+                ],
+                creators: [
+                    {
+                        name: '矢川三郎',
+                        bio: '正在创建Solo',
+                        intro: '前卫朋克幻想家，Coder，观察者，喜欢给未来加上滤镜和白噪声，汽车以及摇滚爱好者。',
+                        support: '被300+支持者孵化中',
+                        avatar: 'http://lorempixel.com/400/300?uni=' + title,
+                        img: 'https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture&uni=' + title,
+                    },
+                    {
+                        name: '矢川三郎',
+                        bio: '正在创建Solo',
+                        intro: '前卫朋克幻想家，Coder，观察者，喜欢给未来加上滤镜和白噪声，汽车以及摇滚爱好者。',
+                        support: '被300+支持者孵化中',
+                        avatar: 'http://lorempixel.com/400/300?uni=' + title,
+                        img: 'https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture&uni=' + title,
+                    },
+                    {
+                        name: '矢川三郎',
+                        bio: '正在创建Solo',
+                        intro: '前卫朋克幻想家，Coder，观察者，喜欢给未来加上滤镜和白噪声，汽车以及摇滚爱好者。',
+                        support: '被300+支持者孵化中',
+                        avatar: 'http://lorempixel.com/400/300?uni=' + title,
+                        img: 'https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture&uni=' + title,
+                    },
+                ],
             },
-            {
-                title: '摄影艺术',
-            },
-            {
-                title: '独立游戏',
-            },
-            {
-                title: 'Cosplayer',
-            },
-            {
-                title: '连载漫画',
-            },
-        ];
+        }));
         return { title: 'Solo' };
     }
 

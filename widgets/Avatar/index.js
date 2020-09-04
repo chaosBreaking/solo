@@ -1,5 +1,5 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import { forward } from '@utils/navi';
 import cs from 'classnames';
 import s from './index.scss';
@@ -13,6 +13,7 @@ const SIZE_MAP = [
 ];
 
 function Avatar (props) {
+    useStyles(s);
     const { className, src, size = 'normal', onClick, flat, noMargin, inline, style: AvatarStyle = {}, isFake } = props;
     const style = { ...AvatarStyle };
     const csName = cs(s.container, {
@@ -33,4 +34,4 @@ function Avatar (props) {
     );
 };
 
-export default withStyles(s)(Avatar);
+export default Avatar;

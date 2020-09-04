@@ -51,12 +51,12 @@ const RealSlider = ({ className, options, children }) => {
                 <>
                     <ArrowLeft
                         onClick={e => e.stopPropagation() || slider.prev()}
-                        disabled={currentSlide === 0}
+                        // disabled={currentSlide === 0}
                     />
 
                     <ArrowRight
                         onClick={e => e.stopPropagation() || slider.next()}
-                        disabled={currentSlide === slider.details().size - 1}
+                        // disabled={currentSlide === slider.details().size - 1}
                     />
                 </>
             )}
