@@ -1,8 +1,13 @@
 @import '~static/constants';
-$fontFamily: 'Spectral', serif !important;
+$fontFamily: 'Spectral',
+serif !important;
 
 :global(*) {
     font-family: $fontFamily;
+}
+
+:global(.tox-notifications-container) {
+    display: none;
 }
 
 .container {

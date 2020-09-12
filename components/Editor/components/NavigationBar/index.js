@@ -21,7 +21,7 @@ const ITEMS = [
     },
 ];
 
-function NavigationBar (props) {
+function NavigationBar(props) {
     const clickNavItem = url => {
         // forward(url);
     };
@@ -47,8 +47,8 @@ function NavigationBar (props) {
                     </div>
                 </div>
                 <div className={s.right}>
-                    <div className={`${s.iconBtn} ${s.notifications}`} tooltip="消息" flow="down">🔔</div>
-                    <div className={`${s.iconBtn} ${s.createBtn}`} tooltip="创建" flow="down">+</div>
+                    <div className={s.iconBtn} tooltip="消息" flow="down"><span className={'iconfont icon-message'}></span></div>
+                    <div className={s.iconBtn} tooltip="创建" flow="down"><span className={'iconfont icon-add'}></span></div>
                     <Avatar src={'http://blog.hyperii.com/images/logo.jpg?v=6.6.0'} size={'small'} />
                 </div>
             </div>
