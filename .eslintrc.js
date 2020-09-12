@@ -26,10 +26,11 @@ module.exports = {
         'react'
     ],
     rules: {
-        indent: ['error', 4],
+        indent: ['error', 4, { SwitchCase: 1 }],
         semi: ['error', 'always'],
         'comma-dangle': 0,
         'react/prop-types': 0,
-        'no-unused-vars': ['warn']
+        'no-unused-vars': ['warn'],
+        'space-before-function-paren': 'off'
     },
 };
