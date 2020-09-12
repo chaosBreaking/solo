@@ -2,7 +2,8 @@
 @import '~static/constants';
 @import '~static/ani';
 
-$fontFamily: 'Spectral', serif !important;
+$fontFamily: 'Spectral',
+serif !important;
 $gradientColor: linear-gradient(135deg, rgb(123, 67, 151), rgb(220, 36, 48));
 
 .container {
@@ -16,12 +17,18 @@ $gradientColor: linear-gradient(135deg, rgb(123, 67, 151), rgb(220, 36, 48));
     z-index: 2;
     font-weight: bolder;
     font-family: $fontFamily;
+
+    font-family: "Quicksand", sans-serif;
+    box-shadow: 0 5px 8px #00098000, 0 5px 16px rgba(0, 9, 128, .05);
+    -webkit-transition: box-shadow .35s ease-out, background-color .35s ease-out;
+    transition: box-shadow .35s ease-out, background-color .35s ease-out;
 }
 
 .leftMode {
     .logo {
         position: relative;
     }
+
     .mainNav {
         margin: unset;
     }
@@ -29,6 +36,7 @@ $gradientColor: linear-gradient(135deg, rgb(123, 67, 151), rgb(220, 36, 48));
 
 .logoOnly {
     justify-content: center;
+
     .logo {
         position: relative;
     }
@@ -41,10 +49,12 @@ $gradientColor: linear-gradient(135deg, rgb(123, 67, 151), rgb(220, 36, 48));
     margin: 0 .2rem;
     font-family: lemon;
     cursor: pointer;
+
     &:hover {
         animation: colorfulFont 1.5s infinite ease;
         -webkit-animation: colorfulFont 1.5s infinite ease;
     }
+
     z-index: 1;
 }
 
@@ -71,6 +81,7 @@ $gradientColor: linear-gradient(135deg, rgb(123, 67, 151), rgb(220, 36, 48));
         width: .8rem;
         padding: 0 .2rem;
         cursor: pointer;
+
         &:hover {
             background-image: $gradientColor;
             -webkit-background-clip: text;
@@ -97,6 +108,7 @@ $gradientColor: linear-gradient(135deg, rgb(123, 67, 151), rgb(220, 36, 48));
         width: .8rem;
         padding: .05rem .2rem;
         cursor: pointer;
+
         &:hover {
             color: #000;
         }
@@ -114,4 +126,3 @@ $gradientColor: linear-gradient(135deg, rgb(123, 67, 151), rgb(220, 36, 48));
         color: #fff !important;
     }
 }
-

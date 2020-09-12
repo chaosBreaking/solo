@@ -8,9 +8,10 @@ import Store from './store';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import s from './index.scss';
 import MasonryList from './components/MasonryList';
-import NavigationBar from './components/NavigationBar';
+import NavigationBar from '@widgets/NavigationBar';
 import FeedsList from './components/FeedsList';
 import SideNavi from './components/SideNavi';
+import { NAVI_ITEMS } from './constants';
 
 @withStyles(s)
 @pageWrapper({
@@ -19,11 +20,11 @@ import SideNavi from './components/SideNavi';
 @inject('store')
 @observer
 export default class Home extends Component {
-    render () {
+    render() {
         const { dataList } = this.props.store;
         return (
             <div className={s.container}>
-                <NavigationBar />
+                <NavigationBar naviItems={NAVI_ITEMS} mode={'left'} />
                 <div className={s.main}>
                     <SideNavi />
                     <FeedsList />

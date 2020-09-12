@@ -40,7 +40,7 @@ const options = {
     }
 };
 
-export default withStyles(s)(function Content ({ data }) {
+export default withStyles(s)(function Content({ data }) {
     const { title, content } = data;
     const { creators, recommend } = content;
     return <Section title={title}>

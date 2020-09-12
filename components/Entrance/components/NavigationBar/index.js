@@ -33,12 +33,12 @@ function NavigationBar ({ store }) {
         return () => window.removeEventListener('scroll', listener);
     }, [collapsed]);
     const funcBtnClickHandler = item => {
-        const { type } = item || {};
+        const { type, url, params } = item || {};
         if (type === NAVI_ITEM_TYPE.BUTTON) {
             store.switchLoginCard(true);
         }
         if (type === NAVI_ITEM_TYPE.LINK || type === NAVI_ITEM_TYPE.SPECIAL) {
-            forward(item.url);
+            forward(url, params);
         }
     };
     return (

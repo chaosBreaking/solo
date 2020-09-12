@@ -18,10 +18,11 @@ import {
 } from './common';
 import OAuthBar from './OAuthBar';
 import CodeInput from './CodeInput';
+import Logo from '@widgets/Logo';
 
 const TITLE = '登录';
 
-export default withStyles(s)(inject('store')((observer(function LoginCard (props) {
+export default withStyles(s)(inject('store')((observer(function LoginCard(props) {
     const {
         store,
         backHandler,
@@ -113,6 +114,7 @@ export default withStyles(s)(inject('store')((observer(function LoginCard (props
     };
     return (
         <Card className={containerClass}>
+            <Logo className={s.logo} noLink size={'large'} />
             <div className={s.title}>
                 <span>{TITLE}</span>
                 {showClose && <CloseIcon className={s.close} onClick={closeBtnHandler} />}

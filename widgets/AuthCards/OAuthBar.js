@@ -5,7 +5,7 @@ import cs from 'classnames';
 import s from './index.scss';
 import { AUTH_TYPE } from './common';
 
-export default withStyles(s)(observer(function OAuthBar (props) {
+export default withStyles(s)(observer(function OAuthBar(props) {
     const {
         authType,
         switchAuthType,
@@ -18,9 +18,9 @@ export default withStyles(s)(observer(function OAuthBar (props) {
                     onClick={switchAuthType}
                 />
             </div>
-            <div className={s.iconBtnWrapper}><div className={cs(s.iconBtn, s.iconGoogle)} /></div>
+            {/* <div className={s.iconBtnWrapper}><div className={cs(s.iconBtn, s.iconGoogle)} /></div> */}
             <div className={s.iconBtnWrapper}><div className={cs(s.iconBtn, s.iconGithub)} /></div>
-            <div className={s.iconBtnWrapper}><div className={cs(s.iconBtn, s.iconFacebook)} /></div>
+            {/* <div className={s.iconBtnWrapper}><div className={cs(s.iconBtn, s.iconFacebook)} /></div> */}
         </div>
     );
 }));

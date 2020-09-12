@@ -15,7 +15,7 @@ import Button from '@widgets/Button';
 import Input from '@widgets/Input';
 import s from './index.scss';
 
-export default withStyles(s)(observer(function CodeInput (props) {
+export default withStyles(s)(observer(function CodeInput(props) {
     const {
         addRefFunc,
         getPhoneNumberFunc,
@@ -43,7 +43,7 @@ export default withStyles(s)(observer(function CodeInput (props) {
                 toastId: 'code-send-empty',
             });
         }
-        if (!isPhoneNumberCN(getPhoneNumberFunc())) {
+        if (!isPhoneNumberCN(formatPhone(getPhoneNumberFunc()))) {
             toast.clearWaitingQueue();
             return toast.error(ERROR_MSGS.PHONE_INVALID, {
                 position: toast.POSITION.TOP_CENTER,

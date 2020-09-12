@@ -17,11 +17,12 @@ import {
 } from './common';
 import OAuthBar from './OAuthBar';
 import CodeInput from './CodeInput';
+import Logo from '@widgets/Logo';
 
 // const TITLE = '创建你的社群，从这里开始'; // 放在 成为创作者 页面
-const TITLE = '即刻加入Solo';
+const TITLE = '即刻加入';
 
-export default withStyles(s)(observer(function RegistryCard (props) {
+export default withStyles(s)(observer(function RegistryCard(props) {
     const {
         handleSubmit,
         switchLogin,
@@ -169,12 +170,13 @@ export default withStyles(s)(observer(function RegistryCard (props) {
                 />
                 <CodeInput
                     addRefFunc={func => (refs.codeRef = func)}
-                    getPhoneNumberFunc={() => refs.codeRef().getInput()}
+                    getPhoneNumberFunc={() => refs.phoneRef().getInput()}
                 />
             </>;
     };
     return (
         <Card className={s.container} key={formState.authType}>
+            <Logo className={s.logo} noLink size={'large'} />
             <div className={s.title}>{TITLE}</div>
             <div>
                 <div className={s.inputBox} onKeyUp={e => {

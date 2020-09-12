@@ -7,10 +7,12 @@ export const validateRes = (isValid, msg) => {
     return { isValid, msg };
 };
 export const CODE_TYPES = {
-    REGISTER: 'C0',
-    LOGIN: 'C1',
-    RESET_PASSWORD: 'C2',
-    RESET_PHONE: 'C3',
+    REGISTER: 1,
+    LOGIN: 2,
+    EMAIL_AUTH: 3,
+    RESET_PASSWORD: 4,
+    RESET_PHONE: 5,
+    VERIFY_EMAIL: 6,
 };
 export const AUTH_TYPE = {
     EMAIL: 0,
@@ -44,8 +46,8 @@ export const ERROR_MSGS = {
 };
 
 export const defaultRef = () => ({
-    getInput: () => {},
-    doValidate: () => {},
+    getInput: () => { },
+    doValidate: () => { },
 });
 
 export const getSendCodeBtn = countdown => {

@@ -23,7 +23,7 @@ const btnClickHandler = item => {
     }
 };
 
-function NavigationBar ({ store, naviItems, funcNavItems, defaultItems, mode }) {
+function NavigationBar({ store, naviItems, funcNavItems, defaultItems, mode, bgColor }) {
     const funcBtnClickHandler = item => {
         const { type } = item || {};
         if (type === NAVI_ITEM_TYPE.BUTTON) {
@@ -58,9 +58,9 @@ function NavigationBar ({ store, naviItems, funcNavItems, defaultItems, mode }) 
         </div>}
     </>;
     return (
-        <div className={containerClass}>
+        <div className={containerClass} style={{ background: bgColor }}>
             <Logo className={s.logo} size={'large'} />
-            { !!showItems && items }
+            {!!showItems && items}
         </div>
     );
 };

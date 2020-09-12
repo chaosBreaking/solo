@@ -1,4 +1,3 @@
-
 .block {
     position: relative;
     width: 100%;
@@ -13,12 +12,12 @@
 
 .topLine {
     display: flex;
-    margin: .1rem 0 .2rem;
+    margin: .1rem 0;
     align-items: flex-end;
 }
 
 .blockTitle {
-    font-size: .2rem;
+    font-size: .16rem;
     font-weight: bolder;
 }
 
@@ -46,7 +45,6 @@
     position: relative;
     right: 0;
     margin-left: auto;
-    font-size: .14rem;
+    font-size: .12rem;
     cursor: pointer;
 }
-

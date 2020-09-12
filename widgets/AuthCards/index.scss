@@ -30,14 +30,19 @@
     box-shadow: none !important;
 }
 
+.logo {
+    padding-top: .2rem;
+    text-align: center;
+}
+
 .title {
     position: relative;
     margin-bottom: .1rem;
-    padding-top: .2rem;
+    padding-top: .1rem;
     color: #333;
-    text-align: center;
-    font-size: .13rem;
-    font-weight: bold;
+    text-align: left;
+    font-size: .12rem;
+    // font-weight: bold;
     font-family: lemon !important;
 }
 
@@ -60,8 +65,8 @@
     flex-direction: column;
     border-radius: .05rem;
 
-    animation: slideIn .5s;
-    -webkit-animation: slideIn .5s;
+    animation: upIn .5s;
+    -webkit-animation: upIn .5s;
 }
 
 input {
@@ -69,7 +74,7 @@ input {
     width: 100%;
     padding: .1rem;
     margin: .05rem 0;
-    border-radius: .05rem;
+    border-radius: .03rem;
     border: 1px solid #ddd;
     // background: #ddd;
     // font-weight: bold;
@@ -96,12 +101,13 @@ input {
 .btn {
     width: 100% !important;
     height: .3rem !important;
-    background: rgba(79, 160, 226, .3) !important;
-    color: #0287f3 !important;
     font-weight: bold !important;
-    &:hover {
-        color: #fff !important;
-        background: #2e89d4 !important;
+    font-size: .1rem !important;
+
+    &:active {
+        color: var(--theme-primary) !important;
+        border: 1px solid var(--theme-primary);
+        background: transparent !important;
     }
 }
 
@@ -119,7 +125,7 @@ input {
     margin-top: .1rem;
     padding: .025rem;
     border-radius: .1rem;
-    background: #eee;
+    // background: #eee;
 }
 
 .iconBtnWrapper {
@@ -153,7 +159,7 @@ input {
     margin-top: 0rem;
 
     &:hover {
-        opacity: 1;
+        opacity: .8;
     }
 }
 
@@ -168,7 +174,7 @@ input {
 }
 
 .iconGithub {
-    background: url('http://solo-app.test.upcdn.net/GitHub.png') no-repeat;
+    background: url('https://fss.hyperii.com/89e577df281d8c8f25d3.png/GitHub.png') no-repeat;
     background-size: cover;
 }
 
@@ -178,26 +184,26 @@ input {
 }
 
 .iconPhone {
-    background: url('http://solo-app.test.upcdn.net/phone.png') no-repeat;
+    background: url('https://fss.hyperii.com/9939da444b8154856b81.png/phone.png') no-repeat;
     background-size: cover;
 }
 
 .iconEmail {
-    background: url('http://solo-app.test.upcdn.net/email.png') no-repeat;
+    background: url('https://fss.hyperii.com/bd93a2c721bb4cd00de8.png/email.png') no-repeat;
     background-size: cover;
     transform: scale(.9);
 }
 
 .errorInput {
     input {
-        background: #f5dbdc;
+        // background: #f5dbdc;
         border: 1px solid #cc3e4a;
     }
 }
 
 .errorMsg {
     position: relative;
-    top: -.05rem;
+    top: -.02rem;
     padding-left: .05rem;
     color: #cc3e4a;
 }
@@ -219,7 +225,7 @@ input {
 }
 
 :global(.Toastify__toast) {
-    border-radius: .1rem !important;
+    border-radius: .05rem !important;
 }
 
 :global(.Toastify__toast-body) {

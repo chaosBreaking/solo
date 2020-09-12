@@ -9,9 +9,11 @@
     font-family: lemon !important;
     font-size: .1rem;
     line-height: 1;
+    color: var(--theme-primary) !important;
     cursor: pointer;
-    &:hover {
-        animation: colorfulFont 1.5s infinite ease;
-        -webkit-animation: colorfulFont 1.5s infinite ease;
-    }
+
+    // &:hover {
+    //     animation: colorfulFont 1.5s infinite ease;
+    //     -webkit-animation: colorfulFont 1.5s infinite ease;
+    // }
 }

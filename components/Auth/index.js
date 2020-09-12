@@ -19,10 +19,10 @@ import ToastContainer from '@widgets/Toast';
 @inject('store')
 @observer
 export default class AuthPage extends Component {
-    render () {
+    render() {
         return (
             <div className={s.container}>
-                <NavigationBar defaultItems mode={'left'} />
+                <NavigationBar defaultItems mode={'left'} bgColor={'#fff'} />
                 <MultiForm />
                 <ToastContainer limit={1} pauseOnFocusLoss={false} />
             </div>

@@ -1,6 +1,8 @@
 import React from 'react';
 import { forward } from '@utils/navi';
+import cs from 'classnames';
 import s from './index.scss';
+import useStyles from 'isomorphic-style-loader/useStyles';
 
 const SIZE_MAP = {
     small: { fontSize: '.08rem' },
@@ -15,8 +17,9 @@ const POSITION_MAP = {
     bottom: { bottom: 0 },
 };
 
-export default function Logo (props) {
-    const { className, size = 'normal', position = 'left', onClick } = props;
+export default function Logo(props) {
+    useStyles(s);
+    const { className, size = 'normal', position = 'left', onClick, noLink } = props;
     const style = {};
     if (POSITION_MAP[position]) {
         Object.assign(style, {
@@ -29,11 +32,13 @@ export default function Logo (props) {
         });
     }
     const onClickLogo = e => {
-        typeof onClick === 'function'
-            ? onClick()
-            : forward('/');
+        if (!noLink) {
+            typeof onClick === 'function'
+                ? onClick()
+                : forward('/');
+        }
     };
     return (
-        <div className={`${s.container} ${!!className && className}`} onClick={onClickLogo} style={style}>Solo</div>
+        <div className={cs(s.container, className)} onClick={onClickLogo} style={style}>Solo</div>
     );
 };

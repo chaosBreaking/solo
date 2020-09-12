@@ -81,6 +81,9 @@ export const NAVI_FUNC_ITEMS = [
     {
         title: '注册',
         url: '/auth.html',
+        params: {
+            state: 1,
+        },
         type: NAVI_ITEM_TYPE.SPECIAL,
     },
 ];
