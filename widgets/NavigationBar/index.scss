@@ -20,6 +20,13 @@ $gradientColor: linear-gradient(135deg, rgb(123, 67, 151), rgb(220, 36, 48));
     font-family: $fontFamily;
 
     @include naviShadow();
+
+    input {
+        color: #333;
+        background: #ddd !important;
+
+        @include placeholderStyle(#888);
+    }
 }
 
 .leftMode {

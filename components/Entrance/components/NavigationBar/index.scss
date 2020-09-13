@@ -1,8 +1,10 @@
 @import '~static/color';
 @import '~static/constants';
 @import '~static/ani';
+@import '~static/mixin';
 
-$fontFamily: 'Spectral', serif !important;
+$fontFamily: 'Spectral',
+serif !important;
 $gradientColor: linear-gradient(135deg, rgb(123, 67, 151), rgb(220, 36, 48));
 
 .container {
@@ -19,17 +21,14 @@ $gradientColor: linear-gradient(135deg, rgb(123, 67, 151), rgb(220, 36, 48));
     font-family: $fontFamily;
     border-radius: .1rem;
     transition: all .5s ease;
+    background-color: #fff;
 
-    // background: rgba(255, 255, 255, .9);
-    // background: aliceblue;
-    // -webkit-box-shadow: 0px 4px 20px rgba(149, 185, 193, 0.5);
-    // -moz-box-shadow: 0px 4px 20px rgba(149, 185, 193, 0.5);
-    // box-shadow: 0px 4px 20px rgba(149, 185, 193, 0.5);
+    @include naviShadow();
 }
 
 .collapsed {
     overflow: hidden;
-    width: 1.5rem;
+    width: 1rem;
 
     .funcNav,
     .mainNav {
@@ -45,11 +44,8 @@ $gradientColor: linear-gradient(135deg, rgb(123, 67, 151), rgb(220, 36, 48));
     font-size: .2rem;
     font-weight: bolder;
     font-family: lemon;
+    color: var(--theme-primary);
     cursor: pointer;
-    &:hover {
-        animation: colorfulFont 1.5s infinite ease;
-        -webkit-animation: colorfulFont 1.5s infinite ease;
-    }
     z-index: 1;
 }
 
@@ -77,6 +73,7 @@ $gradientColor: linear-gradient(135deg, rgb(123, 67, 151), rgb(220, 36, 48));
         height: 100%;
         padding: 0 .1rem;
         cursor: pointer;
+
         &:hover {
             color: var(--theme-primary);
         }
@@ -102,6 +99,7 @@ $gradientColor: linear-gradient(135deg, rgb(123, 67, 151), rgb(220, 36, 48));
         height: 100%;
         padding: .03rem .1rem;
         cursor: pointer;
+
         &:hover {
             color: #000;
         }
@@ -120,4 +118,3 @@ $gradientColor: linear-gradient(135deg, rgb(123, 67, 151), rgb(220, 36, 48));
         color: #fff !important;
     }
 }
-

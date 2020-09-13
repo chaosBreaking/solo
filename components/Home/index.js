@@ -21,10 +21,9 @@ import { NAVI_ITEMS } from './constants';
 @observer
 export default class Home extends Component {
     render() {
-        const { dataList } = this.props.store;
         return (
             <div className={s.container}>
-                <NavigationBar naviItems={NAVI_ITEMS} mode={'left'} />
+                <NavigationBar naviItems={NAVI_ITEMS} mode={'left'} bgColor={'#fff'} />
                 <div className={s.main}>
                     <SideNavi />
                     <FeedsList />

@@ -8,6 +8,10 @@ $iconHeight: .14rem;
 
 @include tooltip();
 
+:global(.iconfont) {
+    font-size: .13rem;
+}
+
 .container {
     position: fixed;
     top: 0;
@@ -65,7 +69,6 @@ $iconHeight: .14rem;
     position: relative;
     display: inline-block;
     width: $iconWidth;
-    height: $iconHeight;
     cursor: pointer;
 }
 

@@ -16,6 +16,9 @@ import Content from './components/Content';
 import Bottom from './components/Footer';
 
 import s from './index.scss';
+import { forward } from '@utils/navi';
+
+import HeadSvg from './HeadSvg';
 
 const Header = props => <div className={s.header}>{props.children}</div>;
 const Title = props => <span className={s.blockTitle}>{props.text}</span>;
@@ -31,11 +34,17 @@ const Block = props => <div className={s.block} style={{ width: `${props.width |
 @inject('store')
 @observer
 export default class Entrance extends Component {
-    get store () {
+    get store() {
         return this.props.store;
     }
 
-    render () {
+    gotoSignupPage() {
+        forward('/auth.html', {
+            state: 1,
+        });
+    }
+
+    render() {
         const { showLoginCard, contentList } = this.store;
         return (
             <div className={s.container}>
@@ -43,10 +52,10 @@ export default class Entrance extends Component {
                 <div className={s.main}>
                     {/* 注册要放到新的页面去做，因为注册成为创作者需要填写较多信息，所以最好进入一个纯净的新页面 */}
                     <Header>
-                        <div className={s.headImg} />
+                        <HeadSvg />
                         <div className={s.info}>
                             <span>为你所发现而来，<br />为你所热爱而停留</span>
-                            <Button text={'即刻加入'} className={s.btn} />
+                            <Button text={'即刻加入'} className={s.btn} onClick={this.gotoSignupPage} />
                         </div>
                     </Header>
                     <Block width={7}>

@@ -4,8 +4,10 @@ import withStyles from 'isomorphic-style-loader/withStyles';
 import { forward } from '@utils/navi';
 import { NAVI_ITEMS, NAVI_FUNC_ITEMS, NAVI_ITEM_TYPE } from './constants';
 import cs from 'classnames';
-import s from './index.scss';
 import Logo from '@widgets/Logo';
+import { FlexSearchBar } from '@widgets/SearchBar';
+
+import s from './index.scss';
 
 const CLASS_TYPE_MAP = {
     1: 'navItem',
@@ -23,7 +25,7 @@ const btnClickHandler = item => {
     }
 };
 
-function NavigationBar({ store, naviItems, funcNavItems, defaultItems, mode, bgColor }) {
+function NavigationBar({ store, naviItems, funcNavItems, defaultItems, mode, bgColor, withSearch }) {
     const funcBtnClickHandler = item => {
         const { type } = item || {};
         if (type === NAVI_ITEM_TYPE.BUTTON) {
@@ -60,6 +62,7 @@ function NavigationBar({ store, naviItems, funcNavItems, defaultItems, mode, bgC
     return (
         <div className={containerClass} style={{ background: bgColor }}>
             <Logo className={s.logo} size={'large'} />
+            {withSearch && <FlexSearchBar />}
             {!!showItems && items}
         </div>
     );

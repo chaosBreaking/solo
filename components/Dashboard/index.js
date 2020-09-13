@@ -20,7 +20,7 @@ import s from './index.scss';
 })
 @observer
 export default class Dashboard extends Component {
-    render () {
+    render() {
         return (
             <div className={s.container}>
                 <NavigationBar />

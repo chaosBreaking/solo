@@ -8,8 +8,8 @@ export default class Store extends CommonStore {
     contentService = new ContentService();
 
     @action.bound
-    async initializeData (requestContext) {
-        this.dataList = Array.from({ length: 21 }).map((_, index) => ({
+    async initializeData(requestContext) {
+        this.dataList = Array.from({ length: 5 }).map((_, index) => ({
             index,
             height: Math.random() + 1
         }));
@@ -17,7 +17,7 @@ export default class Store extends CommonStore {
     }
 
     @action.bound
-    async loadMore () {
+    async loadMore() {
         this.loadingStatus = 1;
         const offset = this.dataList.length;
         const data = await new Promise(resolve => {
