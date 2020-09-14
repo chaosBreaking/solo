@@ -1,5 +1,5 @@
 /**
- *  创作者主页
+ *  创作者控制台
  */
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
@@ -10,8 +10,10 @@ import NavigationBar from './components/NavigationBar';
 import UserZone from './components/UserZone';
 import Timeline from './components/Timeline';
 import Recommend from './components/Recommend';
+import SideNavi from './components/SideNavi';
 
 import s from './index.scss';
+import Pannel from './components/Pannel';
 
 @withStyles(s)
 @inject('store')
@@ -19,16 +21,15 @@ import s from './index.scss';
     Store
 })
 @observer
-export default class Dashboard extends Component {
+export default class Manage extends Component {
     render() {
         return (
             <div className={s.container}>
                 <NavigationBar />
                 <div className={s.main}>
-                    <UserZone />
-                    <div className={s.scrollZone}>
-                        <Timeline />
-                        <Recommend />
+                    <SideNavi />
+                    <div className={s.body}>
+                        <Pannel />
                     </div>
                 </div>
             </div>

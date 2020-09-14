@@ -1,0 +1,99 @@
+@import '~static/color';
+@import '~static/constants';
+@import '~static/ani';
+@import '~static/mixin';
+
+$iconWidth: .14rem;
+$iconHeight: .14rem;
+
+@include tooltip();
+
+:global(.iconfont) {
+    font-size: .13rem;
+}
+
+.container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: $NAV_HEIGHT_MAIN;
+    display: flex;
+    padding-left: .1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .3);
+    margin-bottom: .02rem;
+    background: #fff;
+    z-index: 1;
+
+    @include naviShadow();
+}
+
+.mainNav {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #333;
+    font-size: .1rem;
+}
+
+.left {
+    height: 100%;
+    flex: 1 0 auto;
+    display: flex;
+    justify-self: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+
+    input {
+        color: #333;
+        background: #ddd !important;
+
+        @include placeholderStyle(#888);
+    }
+
+}
+
+.right {
+    height: 100%;
+    flex: 0 1 auto;
+    display: flex;
+    justify-self: flex-end;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.iconBtn {
+    margin-left: .1rem;
+    position: relative;
+    display: inline-block;
+    width: $iconWidth;
+    cursor: pointer;
+}
+
+.items {
+    position: relative;
+    height: 100%;
+    margin-left: .2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.navItem {
+    width: .5rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .1rem;
+    text-align: center;
+    letter-spacing: .01rem;
+    color: #333;
+    cursor: pointer;
+
+    &:hover {
+        color: #666;
+    }
+}

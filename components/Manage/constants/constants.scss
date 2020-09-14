@@ -1,0 +1,7 @@
+@mixin divider($pos: bottom, $color: #aaa, $marginTop: .05rem, $marginBottom: .05rem) {
+    border-#{$pos}: 1px solid $color;
+    padding-#{$pos}: $marginTop;
+    margin-bottom: $marginBottom;
+}
+
+$LEFT_ZONE_WIDTH: 2rem;

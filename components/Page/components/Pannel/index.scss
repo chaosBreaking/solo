@@ -1,0 +1,32 @@
+@import '~static/color';
+@import '~static/constants';
+@import '~static/ani';
+
+.container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: .2rem;
+}
+
+.title {
+    // padding-bottom: .1rem;
+    font-weight: bold;
+    font-size: .12rem;
+}
+
+.main {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: .1rem;
+}
+
+.right,
+.left {
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+}

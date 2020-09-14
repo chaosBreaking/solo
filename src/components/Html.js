@@ -6,7 +6,7 @@ import config from '../config';
 
 /* eslint-disable react/no-danger */
 
-export default function Html ({
+export default function Html({
     title,
     description,
     styles,
@@ -26,7 +26,7 @@ export default function Html ({
                     <link key={script} rel="preload" href={script} as="script" />
                 ))}
                 <link rel="manifest" href="/site.webmanifest" />
-                <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1780295_t78m1jup7x9.css"></link>
+                <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1780295_y1o3lmrlkm.css"></link>
                 {styles.map(style => (
                     <style
                         key={style.id}

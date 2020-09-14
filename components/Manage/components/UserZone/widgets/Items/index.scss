@@ -1,0 +1,49 @@
+@import '../../../../constants/constants.scss';
+
+.container {
+    width: 100%;
+    margin-top: .1rem;
+    background: #eee;
+    border-radius: .05rem;
+    padding: .05rem;
+}
+
+.title {
+    font-size: .09rem;
+    font-weight: 600;
+    width: 100%;
+    @include divider();
+}
+
+.main {
+    position: relative;
+    width: 100%;
+    font-size: .08rem;
+}
+
+.item {
+    line-height: 2;
+    cursor: pointer;
+
+    &:hover {
+        .name {
+            color: #000;
+            text-decoration: underline;
+        }
+    }
+}
+
+.icon {
+    padding-right: .05rem;
+}
+
+.name {
+    color: #3f3f3f;
+}
+
+.more {
+    font-size: .06rem;
+    color: #666;
+    cursor: pointer;
+    @include divider(top, #ddd,.05rem, 0);
+}

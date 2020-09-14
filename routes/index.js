@@ -22,6 +22,10 @@ const routes = {
             load: () => import(/* webpackChunkName: 'dashboard' */ './dashboard'),
         },
         {
+            path: '/manage.html',
+            load: () => import(/* webpackChunkName: 'manage' */ './manage'),
+        },
+        {
             path: '/zone.html',
             load: () => import(/* webpackChunkName: 'zone' */ './zone'),
         },
@@ -36,6 +40,10 @@ const routes = {
         {
             path: '/editor.html',
             load: () => import(/* webpackChunkName: 'editor' */ './editor'),
+        },
+        {
+            path: '/page.html',
+            load: () => import(/* webpackChunkName: 'page' */ './page'),
         },
         {
             path: '/verify.html',
