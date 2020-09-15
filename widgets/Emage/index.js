@@ -1,19 +1,25 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import cs from 'classnames';
 import s from './index.scss';
 
-function Emage (props) {
+function Emage(props) {
+    useStyles(s);
     const {
+        src,
         className,
-        children
+        isFake,
     } = props;
     return (
         <div className={cs(s.container, className)} >
-            { children }
+            {
+                isFake
+                    ? <div className={s.fake} />
+                    : <img src={src} />
+            }
         </div>
     );
 };
 
-export default withStyles(s)(observer(Emage));
+export default observer(Emage);

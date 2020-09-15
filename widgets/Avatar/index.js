@@ -10,6 +10,7 @@ const SIZE_MAP = [
     'normal',
     'middle',
     'large',
+    'extra',
 ];
 
 function Avatar(props) {
@@ -28,7 +29,7 @@ function Avatar(props) {
         typeof onClick === 'function' && onClick();
     };
     return (
-        <div className={`${csName} ${className}`} onClick={onClickAvatar} style={style}>
+        <div className={cs(csName, className)} onClick={onClickAvatar} style={style}>
             {!isFake && <img className={s.image} src={src} alt={''} />}
         </div>
     );

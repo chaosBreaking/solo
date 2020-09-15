@@ -1,0 +1,28 @@
+@import '~static/color';
+@import '~static/constants';
+
+.container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cover {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.img {
+    position: relative;
+    width: 100%;
+    flex: 1 0 auto;
+    height: 2.2rem !important;
+}
+
+.avatar {
+    margin-top: -.3rem;
+    transform: translateY(-50%);
+}

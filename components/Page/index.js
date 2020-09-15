@@ -6,14 +6,11 @@ import { observer, inject } from 'mobx-react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import pageWrapper from '@framework/pageWrapper';
 import Store from './store';
-import NavigationBar from './components/NavigationBar';
-import UserZone from './components/UserZone';
-import Timeline from './components/Timeline';
-import Recommend from './components/Recommend';
-import SideNavi from './components/SideNavi';
+import NavigationBar from '@widgets/NavigationBar';
+import Head from './components/Head';
+import Main from './components/Main';
 
 import s from './index.scss';
-import Pannel from './components/Pannel';
 
 @withStyles(s)
 @inject('store')
@@ -21,13 +18,14 @@ import Pannel from './components/Pannel';
     Store
 })
 @observer
-export default class Page extends Component {
+export default class PersonalPage extends Component {
     render() {
         return (
             <div className={s.container}>
-                <NavigationBar />
+                {/* <NavigationBar defaultItems /> */}
                 <div className={s.main}>
-
+                    <Head />
+                    <Main />
                 </div>
             </div>
         );
