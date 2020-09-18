@@ -3,15 +3,17 @@
 
 .container {
     position: relative;
-    width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    font-size: .1rem;
 }
 
 .cover {
+    height: 2rem;
     width: 100%;
     display: flex;
-    justify-content: center;
+    // justify-content: center;
     flex-wrap: wrap;
 }
 
@@ -19,10 +21,77 @@
     position: relative;
     width: 100%;
     flex: 1 0 auto;
-    height: 2.2rem !important;
+    height: 2rem !important;
 }
 
 .avatar {
-    margin-top: -.3rem;
+    // margin-bottom: -.3rem !important;
+    position: absolute !important;
+    margin: 0 !important;
     transform: translateY(-50%);
+}
+
+.headLine {
+    display: flex;
+    width: 7rem;
+}
+
+.info {
+    margin-left: 1.1rem;
+    padding-top: .1rem;
+    line-height: 1.5;
+
+    h1 {
+        font-size: .15rem;
+        line-height: 1;
+        margin: 0;
+    }
+}
+
+.subTitle {
+    font-size: .08rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.funcs {
+    position: relative;
+    right: 0;
+    padding: .1rem 0;
+    margin-left: auto;
+    display: flex;
+}
+
+.star,
+.support {
+    height: .28rem;
+    cursor: pointer;
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+}
+
+.support {
+    width: 1rem;
+    text-align: center;
+    font-size: .1rem;
+    background: var(--theme-primary);
+    color: #fff;
+}
+
+.star {
+    width: .5rem;
+    margin-left: .1rem;
+    font-size: .1rem;
+    color: var(--theme-primary);
+    border: 2px solid var(--theme-primary);
+}
+
+.chat,
+.share {
+    margin-left: auto;
+    color: #666;
+    cursor: pointer;
 }

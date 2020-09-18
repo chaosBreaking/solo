@@ -1,68 +1,148 @@
-import { observable, action } from 'mobx';
+import { observable, action, runInAction, computed } from 'mobx';
 import CommonStore from '@framework/CommonStore';
+import ContentService from './service';
+import { hash } from '@utils/crypto';
+import { NAVI_ITEMS, SIDE_NAVI_ITEMS } from './constants';
 
-const getRandomString = length => Array.from({ length }).fill(String.fromCharCode(~~(65 + 100 * Math.random() % 32)));
+const TABS = {
+    NEWS: 0,
+    RESOURCE: 1,
+    MOD: 2,
+    FORMAT: 3,
+};
 
 export default class Store extends CommonStore {
-    @observable
-    repoList = [];
+    @observable activeTab = TABS.NEWS;
+    @observable contentData = [[], [], [], []];
+    @observable loadingStatusMap = [0, 0, 0, 0];
+    @observable showLoginCard = false;
+    @observable mainTabs = [];
+    @observable offsetList = {
+        [TABS.NEWS]: 0,
+        [TABS.RESOURCE]: 0,
+        [TABS.MOD]: 0,
+        [TABS.FORMAT]: 0,
+    };
 
-    @observable
-    timeline = [];
+    contentService = new ContentService();
+    count = 20;
 
-    @observable
-    loadingStatus = 0;
+    @computed get dataList() {
+        return this.contentData[this.activeTab];
+    }
 
-    @observable
-    activeTab = 0;
+    @computed get offset() {
+        return this.offsetList[this.activeTab];
+    }
 
-    @observable
-    loadingActivityStatus = 0;
+    @computed get loadingStatus() {
+        return this.loadingStatusMap[this.activeTab];
+    }
+
+    get offsetId() {
+        return this.dataList.slice(1)?._id;
+    }
+
+    @action.bound
+    loadDataToCurrentTab = data => {
+        this.contentData[this.activeTab] = this.contentData[this.activeTab].concat(data);
+        this.offsetList[this.activeTab] += data.length;
+    }
 
     @action.bound
     async initializeData(requestContext) {
-        this.repoList = Array.from({ length: 10 }).map((_, index) => ({
-            index,
-            title: getRandomString(8)
-        }));
-        this.timeline = Array.from({ length: 10 }).map((_, index) => ({
-            index,
-            title: getRandomString(8)
-        }));
+        await Promise.all([
+            this.initTabs(),
+            this.loadDataToCurrentTab(await this.queryData()),
+        ]);
         return {};
     }
 
     @action.bound
-    async loadMore() {
-        this.loadingStatus = 1;
-        const data = await new Promise(resolve => {
-            setTimeout(() => {
-                resolve(
-                    Array.from({ length: 5 }).map((_, index) => ({
-                        index,
-                        title: getRandomString(8)
-                    }))
-                );
-            }, 1000);
-        });
-        this.repoList.push(...data);
-        this.loadingStatus = 0;
+    async initTabs(options = {}) {
+        try {
+            // const res = await this.contentService.getTabs() || [];
+            // const { data } = res;
+            this.mainTabs = this.mainTabs.concat(NAVI_ITEMS);
+        } catch (error) {
+            return [];
+        }
     }
 
     @action.bound
-    async loadMoreActivity() {
-        this.loadingActivityStatus = 1;
-        const data = await new Promise(resolve => {
-            setTimeout(() => {
-                resolve(
-                    Array.from({ length: 10 }).map((_, index) => ({
-                        index,
-                        title: getRandomString(8)
-                    }))
-                );
-            }, 1000);
+    async queryData(options = {}) {
+        const params = {
+            tab: this.activeTab,
+            subTab: this.activeSubTab,
+            offset: this.offsetList[this.activeTab] || 0,
+            offsetId: this.offsetId,
+            count: this.count,
+            ...options,
+        };
+        try {
+            const res = await this.contentService.getContentData(params);
+            return res;
+        } catch (error) {
+            this.setLoadingStatus(-1);
+            return [];
+        }
+    }
+
+    @action.bound
+    setLoadingStatus(status) {
+        this.loadingStatusMap[this.activeTab] = status;
+    }
+
+    @action.bound
+    async loadMore() {
+        this.setLoadingStatus(1);
+        const data = await this.queryData();
+        if (!data.length) {
+            return runInAction(() => {
+                this.setLoadingStatus(-1);
+            });
+        }
+        runInAction(() => {
+            this.loadDataToCurrentTab(data);
+            this.setLoadingStatus(0);
         });
-        this.timeline.push(...data);
-        this.loadingActivityStatus = 0;
+    }
+
+    @action.bound
+    switchRegistryCardCard(val) {
+        this.showRegistryCard = val;
+    }
+
+    @action.bound
+    switchLoginCard(val) {
+        this.showLoginCard = val;
+    }
+
+    @action.bound
+    setActiveTab(id) {
+        this.activeTab = +id;
+        this.activeSubTab = 0;
+    }
+
+    @action.bound
+    setSubActiveTab(id) {
+        this.activeSubTab = +id;
+        this.loadMore();
+    }
+
+    @action.bound
+    async login(authData = {}) {
+        const { authType, id, passwd } = authData;
+        const { success, data = {}, error } = await this.authService.login({
+            authType,
+            id,
+            passwd: hash(passwd)
+        });
+        if (!success) {
+            return { error };
+        }
+        const { token } = data;
+        localStorage.setItem('AccessToken', token);
+        return { success };
     }
 }

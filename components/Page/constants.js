@@ -1,11 +1,19 @@
 export const NAVI_ITEMS = [
     {
-        title: '探索',
-        url: ''
+        title: '介绍',
+        id: 0,
     },
     {
-        title: '活动',
-        url: ''
+        title: '仓库',
+        id: 1,
+    },
+    {
+        title: '动态',
+        id: 2,
+    },
+    {
+        title: '神奇百货',
+        id: 3,
     },
 ];
 export const SIDE_NAVI_ITEMS = [
