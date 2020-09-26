@@ -1,14 +1,17 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import Card from '@widgets/Card';
 import Uploader from '../Uploader';
+import { UPLOAD_API } from '../../constants';
+
 import s from './index.scss';
 
-function Cover (props) {
+function Cover(props) {
+    useStyles(s);
     return <Card className={s.card}>
         <div className={s.title}>封面</div>
-        <Uploader />
+        <Uploader serverUrl={UPLOAD_API} />
     </Card>;
 };
 
-export default withStyles(s)(Cover);
+export default Cover;

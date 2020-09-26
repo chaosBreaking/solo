@@ -1,7 +1,5 @@
 import React from 'react';
-import { observer } from 'mobx-react';
 import useStyles from 'isomorphic-style-loader/useStyles';
-import cs from 'classnames';
 import s from './index.scss';
 
 function Emage(props) {
@@ -10,16 +8,17 @@ function Emage(props) {
         src,
         className,
         isFake,
+        ...rest
     } = props;
     return (
-        <div className={cs(s.container, className)} >
+        <>
             {
                 isFake
                     ? <div className={s.fake} />
-                    : <img src={src} />
+                    : <img className={className} src={src} {...rest} />
             }
-        </div>
+        </>
     );
 };
 
-export default observer(Emage);
+export default React.memo(Emage);

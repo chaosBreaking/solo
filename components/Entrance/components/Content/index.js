@@ -44,11 +44,11 @@ export default withStyles(s)(function Content({ data }) {
     const { title, content } = data;
     const { creators, recommend } = content;
     return <Section title={title}>
-        <Slider className={s.slider} options={options}>
+        {/* <Slider className={s.slider} options={options}>
             {
                 recommend.map((item, idx) => <RecommendCard key={idx} data={item} idx={idx} />)
             }
-        </Slider>
+        </Slider> */}
         <div className={s.creators}>
             {
                 creators.map((item, idx) => <ProfileCard key={idx} data={item} idx={idx} />)

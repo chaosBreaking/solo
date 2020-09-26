@@ -17,14 +17,16 @@ $introFontColor: #666;
     // min-height: 1rem;
     margin-bottom: .1rem;
     border-radius: .04rem !important;
+    box-shadow: none !important;
 }
 
 .title {
     display: flex;
     align-items: center;
     font-size: .1rem;
+    font-weight: bold;
     text-align: left;
-    color: #666;
+    color: #186e60;
     padding-top: .05rem;
     padding-bottom: .1rem;
 
@@ -35,7 +37,7 @@ $introFontColor: #666;
         width: .02rem;
         height: .1rem;
         margin-right: .03rem;
-        background: #666;
+        background: #186e60;
     }
 }
 
@@ -46,6 +48,7 @@ $introFontColor: #666;
     padding-bottom: .02rem;
     border-bottom: 1px solid #666;
     color: $introFontColor;
+
     &::-webkit-input-placeholder {
         color: $introFontColor;
         font-weight: bold;
@@ -90,8 +93,10 @@ $introFontColor: #666;
     background: #eee;
     padding: 0 .04rem;
     margin-right: .05rem;
+    margin-bottom: .05rem;
     border-radius: .02rem;
     cursor: pointer;
+
     &:hover {
         opacity: .5;
     }

@@ -11,13 +11,12 @@ function Head(props) {
     return (
         <div className={s.container}>
             <div className={s.cover}>
-                <Emage className={s.img} isFake />
+                <div className={s.img} style={{ backgroundImage: 'url(\'https://fss.hyperii.com/d4268d32fca3dd64fa13.jpg/wallhaven-13mk9v.jpg' }} />
             </div>
             <div className={s.headLine}>
-                <Avatar className={s.avatar} isFake size={'extra'} />
+                <Avatar className={s.avatar} src={'https://fss.hyperii.com/4e4879968556953336b6.png/avatar.png'} size={'extra'} />
                 <div className={s.info}>
                     <h1>矢川三郎</h1>
-                    <p className={s.link}>coloc.com/page/矢川三郎</p>
                     <p className={s.subTitle}>正在创造coloc</p>
                 </div>
                 <div className={s.funcs}>

@@ -11,8 +11,8 @@ const loadingStyles = {
 };
 
 const LoadingUI = props => props?.error
-    ? <div>Error! <button onClick={ props.retry }>Retry</button></div>
-    : <div style={loadingStyles}><LoadingRipple size={'original'} /><br /><h1>编辑器加载中...</h1></div>;
+    ? <div>Error! <button onClick={props.retry}>Retry</button></div>
+    : <div style={loadingStyles}><LoadingRipple size={'original'} /><br /><h1>编辑器加载中, 先写个标题吧～</h1></div>;
 
 const LoadableEditor = Loadable({
     loader: () => import('./editor'),
@@ -21,6 +21,6 @@ const LoadableEditor = Loadable({
     timeout: 10000,
 });
 
-export default function Editor (props) {
+export default function Editor(props) {
     return <LoadableEditor {...props} LoadingUI={LoadingUI} />;
 };

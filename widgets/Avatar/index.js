@@ -3,6 +3,7 @@ import useStyles from 'isomorphic-style-loader/useStyles';
 import { forward } from '@utils/navi';
 import cs from 'classnames';
 import s from './index.scss';
+import Emage from '@widgets/Emage';
 
 const SIZE_MAP = [
     'mini',
@@ -30,7 +31,7 @@ function Avatar(props) {
     };
     return (
         <div className={cs(csName, className)} onClick={onClickAvatar} style={style}>
-            {!isFake && <img className={s.image} src={src} alt={''} />}
+            {!isFake && <Emage className={s.image} src={src} alt={''} onError={null} />}
         </div>
     );
 };

@@ -34,6 +34,7 @@ export default withStyles(s)(inject('store')(observer(function NavigationBar({ s
         }
     };
     const switchLogin = () => {
+        history.pushState(null, '', location.href);
         store.switchStage(STAGE_MAP.LOGIN);
     };
     const backHandler = () => {

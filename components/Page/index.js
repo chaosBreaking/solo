@@ -13,16 +13,16 @@ import Main from './components/Main';
 import s from './index.scss';
 
 @withStyles(s)
-@inject('store')
 @pageWrapper({
     Store
 })
+@inject('store')
 @observer
 export default class PersonalPage extends Component {
     render() {
         return (
             <div className={s.container}>
-                {/* <NavigationBar defaultItems /> */}
+                <NavigationBar defaultItems withSearch mode={'left'} bgColor={'#fff'} />
                 <div className={s.main}>
                     <Head />
                     <Main />

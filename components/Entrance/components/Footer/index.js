@@ -3,17 +3,16 @@ import useStyles from 'isomorphic-style-loader/useStyles';
 import { forward } from '@utils/navi';
 import Button from '@widgets/Button';
 import Footer from '@widgets/Footer';
-import Card from '@widgets/Card';
 
 import s from './index.scss';
 
 const Item = ({ children }) => <span>{children}</span>;
 const Column = ({ title, children, }) => <div className={s.column}>
     <p>{title}</p>
-    { children }
+    {children}
 </div>;
 
-export default function Bottom ({ store }) {
+export default function Bottom({ store }) {
     useStyles(s);
     return (
         <Footer>

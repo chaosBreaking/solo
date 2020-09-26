@@ -1,31 +1,31 @@
 $desktop-base: 10; // 10rem = 100vw
-$mobile-base: 3.75; // 3.75rem = 100vw
+$baseRatio: 3.75; // 3.75rem = 100vw
 
 html {
     -webkit-text-size-adjust: none;
 
     @media only screen and (min-width: 640px) {
-        font-size: 640px/$mobile-base;
+        font-size: 640px/$baseRatio;
     }
 
     @media only screen and (max-width: 480px) {
-        font-size: 480px/$mobile-base;
+        font-size: 480px/$baseRatio;
     }
 
     @media only screen and (max-width: 414px) {
-        font-size: 414px/$mobile-base;
+        font-size: 414px/$baseRatio;
     }
 
     @media only screen and (max-width: 412px) {
-        font-size: 412px/$mobile-base;
+        font-size: 412px/$baseRatio;
     }
 
     @media only screen and (max-width: 400px) {
-        font-size: 400px/$mobile-base;
+        font-size: 400px/$baseRatio;
     }
 
     @media only screen and (max-width: 393px) {
-        font-size: 393px/$mobile-base;
+        font-size: 393px/$baseRatio;
     }
 
     @media only screen and (max-width: 375px) {
@@ -33,18 +33,18 @@ html {
     }
 
     @media only screen and (max-width: 360px) {
-        font-size: 360px/$mobile-base;
+        font-size: 360px/$baseRatio;
     }
 
     @media only screen and (max-width: 345px) {
-        font-size: 345px/$mobile-base;
+        font-size: 345px/$baseRatio;
     }
 
     @media only screen and (max-width: 320px) {
-        font-size: 320px/$mobile-base;
+        font-size: 320px/$baseRatio;
     }
 
-    @media only screen and (min-width: 768px) {
+    @media only screen and (max-width: 768px) {
         font-size: calc(100vw / 10);
     }
 }

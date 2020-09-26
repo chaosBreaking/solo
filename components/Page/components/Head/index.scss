@@ -1,16 +1,19 @@
 @import '~static/color';
 @import '~static/constants';
 
+$coverHeight: 45vh;
+
 .container {
+    width: 100%;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: .1rem;
+    font-size: .08rem;
 }
 
 .cover {
-    height: 2rem;
+    height: $coverHeight;
     width: 100%;
     display: flex;
     // justify-content: center;
@@ -21,14 +24,29 @@
     position: relative;
     width: 100%;
     flex: 1 0 auto;
-    height: 2rem !important;
+    height: $coverHeight !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 }
 
 .avatar {
-    // margin-bottom: -.3rem !important;
     position: absolute !important;
     margin: 0 !important;
     transform: translateY(-50%);
+
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 104%;
+        height: 104%;
+        background: #fff;
+        border-radius: 50%;
+        top: -2%;
+        left: -2%;
+        z-index: -1;
+    }
 }
 
 .headLine {
@@ -37,19 +55,19 @@
 }
 
 .info {
-    margin-left: 1.1rem;
+    margin-left: 1rem;
     padding-top: .1rem;
     line-height: 1.5;
 
     h1 {
-        font-size: .15rem;
+        font-size: .13rem;
         line-height: 1;
         margin: 0;
     }
 }
 
 .subTitle {
-    font-size: .08rem;
+    margin-top: .1rem;
     font-weight: bold;
     color: #333;
 }
@@ -57,9 +75,11 @@
 .funcs {
     position: relative;
     right: 0;
-    padding: .1rem 0;
+    padding-top: .2rem;
     margin-left: auto;
     display: flex;
+    font-weight: bold;
+    font-size: .1rem;
 }
 
 .star,
@@ -76,7 +96,6 @@
 .support {
     width: 1rem;
     text-align: center;
-    font-size: .1rem;
     background: var(--theme-primary);
     color: #fff;
 }
@@ -84,14 +103,6 @@
 .star {
     width: .5rem;
     margin-left: .1rem;
-    font-size: .1rem;
     color: var(--theme-primary);
     border: 2px solid var(--theme-primary);
-}
-
-.chat,
-.share {
-    margin-left: auto;
-    color: #666;
-    cursor: pointer;
 }

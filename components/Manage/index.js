@@ -16,10 +16,10 @@ import s from './index.scss';
 import Pannel from './components/Pannel';
 
 @withStyles(s)
-@inject('store')
 @pageWrapper({
     Store
 })
+@inject('store')
 @observer
 export default class Manage extends Component {
     render() {

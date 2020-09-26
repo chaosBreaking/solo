@@ -10,20 +10,23 @@ import NavigationBar from './components/NavigationBar';
 import LeftBar from './components/LeftBar';
 import Store from './store';
 import s from './index.scss';
+import ToastContainer from '@widgets/Toast';
 
 @withStyles(s)
-@inject('store')
 @pageWrapper({
     Store
 })
+@inject('store')
 @observer
 export default class EditorPage extends Component {
-    render () {
+    render() {
+        const { editorContent, onEditorInit, saveContent, publishContent, handleEditorChange } = this.props.store;
         return (
             <div className={s.container}>
-                <NavigationBar />
+                <NavigationBar saveContent={saveContent} publishContent={publishContent} />
                 <LeftBar />
-                <Editor />
+                <Editor onInit={onEditorInit} content={editorContent} handleEditorChange={handleEditorChange} />
+                <ToastContainer limit={1} pauseOnFocusLoss={false} />
             </div>
         );
     }

@@ -1,0 +1,51 @@
+@import '~static/mixin';
+
+.section {
+    position: relative;
+    height: 100%;
+    @include displayFlex(unset, unset, column);
+    margin-top: .1rem;
+
+    font-size: .09rem;
+    @include shadowCard();
+}
+
+.block {
+    width: 100%;
+    display: flex;
+}
+
+.head {
+    padding-bottom: .1rem;
+    margin-bottom: .1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.info {
+    position: relative;
+    flex: 1 0 auto;
+    height: max-content;
+    color: #333;
+    @include displayFlex(center, center, column-reverse);
+
+    &:not(:last-child) {
+        @include divider(right, 70%, 1px);
+    }
+
+    .num {
+        font-size: .11rem;
+        font-weight: bolder;
+        color: var(--theme-primary);
+    }
+}
+
+.rank {
+    flex-direction: column;
+    align-items: center;
+
+    .title {
+        align-self: flex-start;
+        font-weight: bold;
+        margin-bottom: .1rem;
+    }
+}

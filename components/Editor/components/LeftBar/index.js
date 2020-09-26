@@ -1,16 +1,18 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
-import { forward } from '@utils/navi';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import TagInput from './TagInput';
 import Previewer from './Previewer';
-import s from './index.scss';
 import Cover from './Cover';
 import IntroCard from './IntroCard';
+import { forward } from '@utils/navi';
 
-function LeftBar (props) {
+import s from './index.scss';
+
+function LeftBar(props) {
+    useStyles(s);
     return (
         <div className={s.container}>
-            <Previewer />
+            {/* <Previewer /> */}
             <Cover />
             <IntroCard />
             <TagInput />
@@ -18,4 +20,4 @@ function LeftBar (props) {
     );
 };
 
-export default withStyles(s)(LeftBar);
+export default LeftBar;

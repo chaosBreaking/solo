@@ -4,14 +4,13 @@
     flex-direction: column;
     align-items: center;
     color: #fff;
-    font-size: .14rem;
+    font-size: .12rem;
 }
 
 .topLine {
     width: 5rem;
-    height: .5rem;
     margin: .1rem 0;
-    padding: .2rem 0;
+    padding: .1rem 0;
     display: flex;
     align-items: center;
     border-bottom: 1px solid #888;
@@ -19,9 +18,10 @@
 
 .btn {
     color: #fff;
-    width: 1rem;
-    margin: 0 0 0 .1rem !important;
-    font-size: .12rem !important;
+    // width: .8rem;
+    padding: .02rem .1rem !important;
+    margin-left: .1rem !important;
+    font-size: .11rem !important;
 
     border-color: #fff !important;
     border-width: 2px !important;
@@ -36,18 +36,20 @@
     width: 5rem;
     display: flex;
     justify-content: space-between;
-    margin-top: .1rem;;
+    margin-top: .1rem;
 }
 
 .column {
     display: flex;
     flex-direction: column;
+
     p {
         margin-bottom: .1rem;
     }
+
     span {
         color: #ddd;
-        font-size: .12rem;
+        font-size: .1rem;
         margin-bottom: .1rem;
         cursor: pointer;
     }

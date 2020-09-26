@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import Loadable from 'react-loadable';
 import LoadingRipple from '@widgets/LoadingRipple';
 import s from './index.scss';
@@ -14,7 +13,7 @@ const loadingStyles = {
 };
 
 const LoadingUI = props => props?.error
-    ? <div>Error! <button onClick={ props.retry }>Retry</button></div>
+    ? <div>Error! <button onClick={props.retry}>Retry</button></div>
     : <div style={loadingStyles}><LoadingRipple size={'normal'} /><br /><h1>加载中...</h1></div>;
 
 const LoadableUploader = Loadable({
@@ -24,11 +23,12 @@ const LoadableUploader = Loadable({
     timeout: 10000,
 });
 
-function Uploader () {
+function Uploader({ serverUrl }) {
+    useStyles(s);
     return (
         <div className={s.container}>
-            <LoadableUploader />
+            <LoadableUploader serverUrl={serverUrl} />
         </div>
     );
 }
-export default withStyles(s)(Uploader);
+export default Uploader;

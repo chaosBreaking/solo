@@ -14,10 +14,10 @@ import Recommend from './components/Recommend';
 import s from './index.scss';
 
 @withStyles(s)
-@inject('store')
 @pageWrapper({
     Store
 })
+@inject('store')
 @observer
 export default class Dashboard extends Component {
     render() {

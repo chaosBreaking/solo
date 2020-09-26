@@ -48,7 +48,7 @@ $iconHeight: .14rem;
 
     input {
         color: #333;
-        background: #ddd !important;
+        background: #eee !important;
 
         @include placeholderStyle(#888);
     }
@@ -96,4 +96,30 @@ $iconHeight: .14rem;
     &:hover {
         color: #666;
     }
+}
+
+.publish,
+.save {
+    padding: .03rem .05rem;
+    border-radius: 1rem;
+    margin-right: .1rem;
+    cursor: pointer;
+    opacity: .8;
+    white-space: nowrap;
+
+    &:hover,
+    &:active {
+        opacity: 1;
+    }
+}
+
+.save {
+    border: 2px solid #186e60;
+    color: #186e60;
+}
+
+.publish {
+    padding: .03rem .1rem;
+    background: var(--theme-primary);
+    color: #fff;
 }

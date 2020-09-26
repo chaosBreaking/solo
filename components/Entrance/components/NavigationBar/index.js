@@ -1,6 +1,5 @@
 import React from 'react';
-import { observer, inject } from 'mobx-react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import cs from 'classnames';
 import { forward } from '@utils/navi';
 import { NAVI_ITEMS, NAVI_FUNC_ITEMS, NAVI_ITEM_TYPE } from '../../constants';
@@ -20,7 +19,8 @@ const btnClickHandler = item => {
     }
 };
 
-function NavigationBar ({ store }) {
+function NavigationBar({ store }) {
+    useStyles(s);
     const [collapsed, setCollapsed] = React.useState(false);
     React.useEffect(() => {
         const listener = window.addEventListener('scroll', () => requestAnimationFrame(() => {
@@ -65,4 +65,4 @@ function NavigationBar ({ store }) {
     );
 };
 
-export default withStyles(s)(inject('store')(NavigationBar));
+export default NavigationBar;

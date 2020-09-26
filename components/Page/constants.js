@@ -1,6 +1,6 @@
 export const NAVI_ITEMS = [
     {
-        title: '介绍',
+        title: '主页',
         id: 0,
     },
     {

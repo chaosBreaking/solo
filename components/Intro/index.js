@@ -4,10 +4,10 @@ import pageWrapper from '@framework/pageWrapper';
 import Store from './store';
 import s from './index.scss';
 
-@inject('store')
 @pageWrapper({
     Store
 })
+@inject('store')
 @observer
 export default class Intro extends Component {
     state = {
@@ -15,10 +15,10 @@ export default class Intro extends Component {
         show: false
     }
 
-    componentDidMount () {
+    componentDidMount() {
     }
 
-    render () {
+    render() {
         return (
             <div className={s.container}>
             </div>

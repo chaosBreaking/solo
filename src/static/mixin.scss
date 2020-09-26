@@ -133,3 +133,31 @@
         color: $fontColor !important;
     }
 }
+
+@mixin shadowCard($padding: .1rem, $radius: .05rem, $shadow: (1px 0 4px rgba(0, 2, 4, .055), 0 7px 18px rgba(1, 1, 1, .05))) {
+    padding: $padding;
+    border-radius: $radius;
+    box-shadow: $shadow;
+}
+
+@mixin divider($position: right, $height: 100%, $width: 2px, $color: #ddd) {
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        height: $height;
+        width: $width;
+        background: $color;
+        #{$position}: 0;
+        border-radius: 1rem;
+        margin: auto;
+    }
+}
+
+@mixin displayFlex($justify: flex-start, $align: flex-start, $direction: row) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
