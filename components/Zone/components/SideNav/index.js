@@ -1,8 +1,9 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import s from './index.scss';
 
-function SideNav (props) {
+export default function SideNav(props) {
+    useStyles(s);
     return (
         <div className={s.container}>
             <span>最新</span>
@@ -12,5 +13,3 @@ function SideNav (props) {
         </div >
     );
 };
-
-export default withStyles(s)(SideNav);

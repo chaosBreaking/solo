@@ -1,6 +1,6 @@
 import React from 'react';
 import { inject } from 'mobx-react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import { forward } from '@utils/navi';
 import { NAVI_ITEMS, NAVI_FUNC_ITEMS, NAVI_ITEM_TYPE } from './constants';
 import cs from 'classnames';
@@ -25,7 +25,8 @@ const btnClickHandler = item => {
     }
 };
 
-function NavigationBar({ store, naviItems, funcNavItems, defaultItems, mode, bgColor, withSearch }) {
+function NavigationBar({ store, naviItems, funcNavItems, defaultItems, mode, bgColor = '#fff', withSearch, transparent }) {
+    useStyles(s);
     const funcBtnClickHandler = item => {
         const { type } = item || {};
         if (type === NAVI_ITEM_TYPE.BUTTON) {
@@ -60,7 +61,7 @@ function NavigationBar({ store, naviItems, funcNavItems, defaultItems, mode, bgC
         </div>}
     </>;
     return (
-        <div className={containerClass} style={{ background: bgColor }}>
+        <div className={containerClass} style={{ background: transparent ? '' : bgColor }}>
             <Logo className={s.logo} size={'large'} />
             {withSearch && <FlexSearchBar />}
             {!!showItems && items}
@@ -68,4 +69,4 @@ function NavigationBar({ store, naviItems, funcNavItems, defaultItems, mode, bgC
     );
 };
 
-export default withStyles(s)(inject('store')(NavigationBar));
+export default (inject('store')(NavigationBar));

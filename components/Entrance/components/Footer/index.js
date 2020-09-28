@@ -12,7 +12,7 @@ const Column = ({ title, children, }) => <div className={s.column}>
     {children}
 </div>;
 
-export default function Bottom({ store }) {
+export default React.memo(function Bottom({ store }) {
     useStyles(s);
     return (
         <Footer>
@@ -41,4 +41,4 @@ export default function Bottom({ store }) {
             </div>
         </Footer>
     );
-};
+});

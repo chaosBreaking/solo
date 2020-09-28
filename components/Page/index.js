@@ -1,5 +1,5 @@
 /**
- *  创作者主页
+ *  创作者个人主页
  */
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';

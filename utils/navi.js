@@ -18,6 +18,15 @@ export const buildQuery = params => {
     }, '').slice(0, -1);
 };
 
+export const replaceQuery = params => {
+    const original = parseQuery();
+    const final = {
+        ...original,
+        ...params,
+    };
+    return buildQuery(final);
+};
+
 export const forward = (url = '', params) => {
     const { origin } = location;
     let destUrl = origin;

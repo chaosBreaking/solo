@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { observer, inject } from 'mobx-react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import cs from 'classnames';
 import s from './index.scss';
 import Card from '@widgets/Card';
@@ -22,7 +22,8 @@ import Logo from '@widgets/Logo';
 
 const TITLE = '登录';
 
-export default withStyles(s)(inject('store')((observer(function LoginCard(props) {
+export default (inject('store')((observer(function LoginCard(props) {
+    useStyles(s);
     const {
         store,
         backHandler,

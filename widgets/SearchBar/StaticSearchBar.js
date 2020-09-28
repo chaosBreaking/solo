@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import s from './static.scss';
 
-function StaticSearchBar (props) {
+export default function StaticSearchBar(props) {
+    useStyles(s);
     const [content, setContent] = useState('');
     const { mountRef, onChange, onClick, placeholder, PreIcon } = props;
     const events = { onChange, onClick };
@@ -11,10 +12,10 @@ function StaticSearchBar (props) {
         typeof onChange === 'function' && onChange(e.target.value);
     };
     const controller = {
-        getContent () {
+        getContent() {
             return content;
         },
-        setContent (content) {
+        setContent(content) {
             setContent(content);
         }
     };
@@ -26,5 +27,3 @@ function StaticSearchBar (props) {
         </div>
     );
 };
-
-export default withStyles(s)(StaticSearchBar);

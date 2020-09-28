@@ -7,7 +7,7 @@ import s from './index.scss';
 // const MockImg = ({ uni, src }) => <div style={{ position: 'absolute', width: '100%', height: '100%', background: '#eee' }}></div>;
 const MockImg = ({ uni, src }) => <img src={src || 'https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture' + '&c=' + uni} />;
 
-export default function RecommendCard({ data, idx }) {
+export default React.memo(function RecommendCard({ data, idx }) {
     useStyles(s);
     const { name, bio, avatar, img } = data;
     return <SlideItem>
@@ -22,4 +22,4 @@ export default function RecommendCard({ data, idx }) {
             </div>
         </div>
     </SlideItem>;
-};
+});

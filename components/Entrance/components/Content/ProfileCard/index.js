@@ -5,7 +5,7 @@ import Emage from '@widgets/Emage';
 
 import s from './index.scss';
 
-export default function ProfileCard({ data, idx }) {
+export default React.memo(function ProfileCard({ data, idx }) {
     useStyles(s);
     const { name, bio, avatar, intro, support, img } = data;
 
@@ -23,4 +23,4 @@ export default function ProfileCard({ data, idx }) {
             <p className={s.extra}>{support}</p>
         </div>
     </div>;
-};
+});

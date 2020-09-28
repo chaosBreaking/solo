@@ -1,5 +1,5 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import Logo from '@widgets/Logo';
 import { FlexSearchBar } from '@widgets/SearchBar';
 import Avatar from '@widgets/Avatar';
@@ -21,7 +21,8 @@ const ITEMS = [
     },
 ];
 
-function NavigationBar(props) {
+export default function NavigationBar(props) {
+    useStyles(s);
     const clickNavItem = url => {
         // forward(url);
     };
@@ -56,5 +57,3 @@ function NavigationBar(props) {
         </div>
     );
 };
-
-export default withStyles(s)(NavigationBar);

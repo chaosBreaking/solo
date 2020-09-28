@@ -8,7 +8,7 @@ import { forward } from '@utils/navi';
 
 import s from './index.scss';
 
-function LeftBar(props) {
+export default function LeftBar(props) {
     useStyles(s);
     return (
         <div className={s.container}>
@@ -19,5 +19,3 @@ function LeftBar(props) {
         </div>
     );
 };
-
-export default LeftBar;

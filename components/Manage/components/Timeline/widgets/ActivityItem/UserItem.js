@@ -1,11 +1,12 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import Avatar from '@widgets/Avatar';
 import cs from 'classnames';
 import s from './user.scss';
 
-function UserItem (props) {
+function UserItem(props) {
+    useStyles(s);
     const {
         owner = '矢川六郎',
         bio = '前卫朋克幻想家，Coder，观察者，喜欢给未来加上滤镜和白噪声，汽车以及摇滚爱好者。',
@@ -36,4 +37,4 @@ function UserItem (props) {
     );
 };
 
-export default withStyles(s)(observer(UserItem));
+export default (observer(UserItem));

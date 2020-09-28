@@ -1,10 +1,11 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import cs from 'classnames';
 import LoadingSVG from '@widgets/LoadingSVG';
 import s from './index.scss';
 
-function Button (props) {
+function Button(props) {
+    useStyles(s);
     const { className, color, text, loading, disabled, wrapperStyles, innerStyles, plain, hollow, ...rest } = props;
     const isLoading = !disabled && loading;
     const containerClass = cs(s.container, className, {
@@ -23,4 +24,4 @@ function Button (props) {
     );
 };
 
-export default withStyles(s)(Button);
+export default Button;

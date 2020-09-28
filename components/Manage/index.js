@@ -11,9 +11,9 @@ import UserZone from './components/UserZone';
 import Timeline from './components/Timeline';
 import Recommend from './components/Recommend';
 import SideNavi from './components/SideNavi';
+import Pannel from './components/Pannel';
 
 import s from './index.scss';
-import Pannel from './components/Pannel';
 
 @withStyles(s)
 @pageWrapper({

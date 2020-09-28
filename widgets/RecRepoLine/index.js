@@ -1,5 +1,5 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import s from './index.scss';
 import RepoTags from '@widgets/RepoTags';
 
@@ -21,7 +21,8 @@ const RepoItem = ({ data }) => {
     </div>;
 };
 
-function RecRepoLine (props) {
+export default function RecRepoLine(props) {
+    useStyles(s);
     const { data } = props;
     const list = Object.prototype.toString.call(data) === '[object Array]'
         ? data
@@ -34,5 +35,3 @@ function RecRepoLine (props) {
         </div>
     );
 };
-
-export default withStyles(s)(RecRepoLine);

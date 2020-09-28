@@ -1,6 +1,5 @@
 import React from 'react';
-import { observer } from 'mobx-react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import Avatar from '@widgets/Avatar';
 import RepoItem from './RepoItem';
 import UserItem from './UserItem';
@@ -14,7 +13,8 @@ const ACT_TYPE_MAP = {
     4: '打赏了作品',
 };
 
-function ActivityItem ({ data, idx }) {
+function ActivityItem({ data, idx }) {
+    useStyles(s);
     const {
         name = 'chaosBreaking',
         subject = 'Someone Newby',
@@ -42,4 +42,4 @@ function ActivityItem ({ data, idx }) {
     );
 };
 
-export default withStyles(s)(observer(ActivityItem));
+export default React.memo(ActivityItem);

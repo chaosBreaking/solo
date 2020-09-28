@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import {
     authService,
     CODE_TYPES,
@@ -15,7 +15,8 @@ import Button from '@widgets/Button';
 import Input from '@widgets/Input';
 import s from './index.scss';
 
-export default withStyles(s)(observer(function CodeInput(props) {
+export default (observer(function CodeInput(props) {
+    useStyles(s);
     const {
         addRefFunc,
         getPhoneNumberFunc,

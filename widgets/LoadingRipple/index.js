@@ -1,5 +1,5 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import s from './index.scss';
 
 const SIZE_MAP = {
@@ -11,7 +11,8 @@ const SIZE_MAP = {
     large: 1.2,
 };
 
-export default withStyles(s)(function LoadingRipple (props) {
+export default React.memo(function LoadingRipple(props) {
+    useStyles(s);
     const scale = SIZE_MAP[props.size || 'normal'];
     return (
         <div className={s['lds-ripple']} style={{ transform: `scale(${scale})` }}>

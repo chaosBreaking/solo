@@ -33,4 +33,4 @@ function Analytics(props) {
     );
 };
 
-export default observer(Analytics);
+export default React.memo(Analytics);

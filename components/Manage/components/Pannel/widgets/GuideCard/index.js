@@ -22,4 +22,4 @@ function GuideCard(props) {
     );
 };
 
-export default observer(GuideCard);
+export default React.memo(GuideCard);

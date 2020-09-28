@@ -22,4 +22,4 @@ function ShareCard(props) {
     );
 };
 
-export default observer(ShareCard);
+export default React.memo(ShareCard);

@@ -1,5 +1,5 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import s from './index.scss';
 
 const LANG_MAP = {
@@ -17,18 +17,19 @@ const REPO_TYPE = {
 
 const mapTags = (type, data) => {
     switch (type) {
-    case 'repoType': return <><span className={s.icon}>📖</span>{REPO_TYPE[data.repoType]}</>;
-    case 'langType': return <><span className={s.icon}>🌍</span>{LANG_MAP[data.langType]}</>;
-    case 'stars': return <><span className={s.icon}>⭐️</span>{data.stars}</>;
-    case 'sponsors': return <><span className={s.icon}>💓</span>{data.sponsors}人赞助</>;
-    case 'ts': return <><span className={s.icon}>🆕</span>{data.ts}</>;
-    case 'repoNum': return <><span className={s.icon}>📦</span>12个作品集</>;
-    case 'followers': return <><span className={s.icon}>👀</span>8964人关注</>;
-    case 'join': return <><span className={s.icon}>🤝</span>{new Date().toLocaleDateString()} 加入</>;
+        case 'repoType': return <><span className={s.icon}>📖</span>{REPO_TYPE[data.repoType]}</>;
+        case 'langType': return <><span className={s.icon}>🌍</span>{LANG_MAP[data.langType]}</>;
+        case 'stars': return <><span className={s.icon}>⭐️</span>{data.stars}</>;
+        case 'sponsors': return <><span className={s.icon}>💓</span>{data.sponsors}人赞助</>;
+        case 'ts': return <><span className={s.icon}>🆕</span>{data.ts}</>;
+        case 'repoNum': return <><span className={s.icon}>📦</span>12个作品集</>;
+        case 'followers': return <><span className={s.icon}>👀</span>8964人关注</>;
+        case 'join': return <><span className={s.icon}>🤝</span>{new Date().toLocaleDateString()} 加入</>;
     }
 };
 
-function RepoTags ({ data }) {
+export default function RepoTags({ data }) {
+    useStyles(s);
     const tags = Object.prototype.toString.call(data) === '[object Array]'
         ? data
         : [data];
@@ -40,5 +41,3 @@ function RepoTags ({ data }) {
         </div>
     );
 };
-
-export default withStyles(s)(RepoTags);

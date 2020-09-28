@@ -1,13 +1,24 @@
 import React from 'react';
-import { observer, inject } from 'mobx-react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import { observer } from 'mobx-react';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import { RegistryCard, LoginCard } from '@widgets/AuthCards';
 import { STAGE_MAP } from '../../constants';
 import { toast } from 'react-toastify';
-import { replacePage } from '@utils/navi';
+import { replaceQuery, replacePage } from '@utils/navi';
 import s from './index.scss';
+import useStores from '@framework/util';
 
-export default withStyles(s)(inject('store')(observer(function NavigationBar({ store }) {
+export default observer(function NavigationBar() {
+    useStyles(s);
+    const { store } = useStores();
+    React.useEffect(() => {
+        const detain = window.addEventListener('popstate', () => {
+            if (history.state.state) {
+                store.switchStage(history.state.state);
+            }
+        });
+        return () => window.removeEventListener('popstate', detain);
+    });
     const handleLoginSubmit = async formData => {
         const res = await store.loginHandler(formData);
         if (res.success) {
@@ -21,12 +32,7 @@ export default withStyles(s)(inject('store')(observer(function NavigationBar({ s
     const handleRegisterSubmit = async formData => {
         const res = await store.registerHandler(formData);
         if (res.success) {
-            toast.info('注册成功，即将开启Solo之旅...', {
-                position: toast.POSITION.TOP_CENTER,
-            });
-            setTimeout(() => {
-                replacePage('/home.html');
-            });
+            replacePage('/home.html');
         } else {
             toast.error(res.msg, {
                 position: toast.POSITION.TOP_CENTER,
@@ -34,7 +40,7 @@ export default withStyles(s)(inject('store')(observer(function NavigationBar({ s
         }
     };
     const switchLogin = () => {
-        history.pushState(null, '', location.href);
+        history.pushState({ state: STAGE_MAP.SIGNUP }, '', `${location.origin}${location.pathname}?${replaceQuery({ state: STAGE_MAP.SIGNUP })}`);
         store.switchStage(STAGE_MAP.LOGIN);
     };
     const backHandler = () => {
@@ -49,4 +55,4 @@ export default withStyles(s)(inject('store')(observer(function NavigationBar({ s
         }
     };
     return renderBody();
-})));
+});

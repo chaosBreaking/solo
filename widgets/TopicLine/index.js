@@ -1,8 +1,9 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import s from './index.scss';
 
-function TopicLine (props) {
+export default function TopicLine(props) {
+    useStyles(s);
     const { data = [] } = props;
     const list = Object.prototype.toString.call(data) === '[object Array]'
         ? data
@@ -22,5 +23,3 @@ function TopicLine (props) {
         </div>
     );
 };
-
-export default withStyles(s)(TopicLine);

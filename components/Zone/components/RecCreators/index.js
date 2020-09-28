@@ -1,9 +1,10 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import Avatar from '@widgets/Avatar';
 import s from './index.scss';
 
-function RecCreators (props) {
+export default function RecCreators(props) {
+    useStyles(s);
     const { data, configs = {} } = props;
     const {
         hideBtn = false,
@@ -35,5 +36,3 @@ function RecCreators (props) {
         </div>
     );
 };
-
-export default withStyles(s)(RecCreators);

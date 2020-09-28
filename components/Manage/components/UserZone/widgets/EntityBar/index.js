@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import Avatar from '@widgets/Avatar';
 import s from './index.scss';
 
@@ -26,7 +26,8 @@ const mock = [
     },
 ];
 
-function EntityBar (props) {
+function EntityBar(props) {
+    useStyles(s);
     const { lines = mock } = props;
     const [expanded, setExpanded] = useState(false);
     const [activeSubject, setActiveSubject] = useState(lines[0]);
@@ -60,4 +61,4 @@ function EntityBar (props) {
     );
 };
 
-export default withStyles(s)(EntityBar);
+export default React.memo(EntityBar);

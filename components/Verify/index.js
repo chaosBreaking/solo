@@ -1,5 +1,5 @@
 /**
- *  注册/登录页面
+ *  账号邮件验证页面
  */
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
@@ -19,11 +19,11 @@ import Card from '@widgets/Card';
 @inject('store')
 @observer
 export default class VerifyPage extends Component {
-    componentDidMount () {
+    componentDidMount() {
         // const
     }
 
-    render () {
+    render() {
         return (
             <div className={s.container}>
                 <NavigationBar defaultItems mode={'left'} />

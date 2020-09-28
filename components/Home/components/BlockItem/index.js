@@ -1,11 +1,12 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import Avatar from '@widgets/Avatar';
 import cs from 'classnames';
 import { forward } from '@utils/navi';
 import s from './index.scss';
 
-function BlockItem (props) {
+function BlockItem(props) {
+    useStyles(s);
     const { leaders = Array.from({ length: 3 }), index, isFullLine } = props;
     const clickHandler = () => {
         forward('/zone.html');
@@ -42,4 +43,4 @@ function BlockItem (props) {
     );
 };
 
-export default withStyles(s)(BlockItem);
+export default React.memo(BlockItem);

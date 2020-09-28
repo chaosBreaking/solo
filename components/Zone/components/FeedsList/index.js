@@ -1,10 +1,11 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import s from './index.scss';
 import { inject } from 'mobx-react';
 import BlockItem from '../BlockItem';
 
-function FeedsList (props) {
+function FeedsList(props) {
+    useStyles(s);
     const { dataList } = props.store;
     return <div className={s.container}>
         {
@@ -13,4 +14,4 @@ function FeedsList (props) {
     </div>;
 };
 
-export default withStyles(s)(inject('store')(FeedsList));
+export default inject('store')(FeedsList);

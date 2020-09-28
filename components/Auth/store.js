@@ -14,7 +14,7 @@ export default class Store extends CommonStore {
     authService = new AuthService();
 
     @action.bound
-    async initializeData (requestContext) {
+    async initializeData(requestContext) {
         const { query } = requestContext;
         const { state = STAGE_MAP.LOGIN } = query;
         this.currentStage = +state;
@@ -22,7 +22,7 @@ export default class Store extends CommonStore {
     }
 
     @action.bound
-    switchStage (stage) {
+    switchStage(stage) {
         this.currentStage = stage;
     }
 

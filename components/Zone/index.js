@@ -6,12 +6,12 @@ import { observer, inject } from 'mobx-react';
 import pageWrapper from '@framework/pageWrapper';
 import Store from './store';
 import withStyles from 'isomorphic-style-loader/withStyles';
-import s from './index.scss';
-import NavigationBar from './components/NavigationBar';
 import Recommend from './components/Recommend';
 import FeedsList from './components/FeedsList';
 import TopCard from './components/TopCard';
 import SideNav from './components/SideNav';
+import NavigationBar from '@widgets/NavigationBar';
+import s from './index.scss';
 
 @withStyles(s)
 @pageWrapper({
@@ -20,10 +20,10 @@ import SideNav from './components/SideNav';
 @inject('store')
 @observer
 export default class Zone extends Component {
-    render () {
+    render() {
         return (
             <div className={s.container}>
-                <NavigationBar />
+                <NavigationBar defaultItems />
                 <div className={s.main}>
                     <TopCard />
                     <SideNav />

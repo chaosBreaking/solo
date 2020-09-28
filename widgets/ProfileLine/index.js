@@ -1,8 +1,9 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import s from './index.scss';
 
-function ProfileLine (props) {
+export default function ProfileLine(props) {
+    useStyles(s);
     const { data, configs = {} } = props;
     const {
         hideBtn = false,
@@ -31,5 +32,3 @@ function ProfileLine (props) {
         </div>
     );
 };
-
-export default withStyles(s)(ProfileLine);

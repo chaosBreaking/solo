@@ -31,7 +31,7 @@ class App extends React.Component {
         return <>
             {!this.state.mounted && <LoadingUI />}
             <Editor
-                tinymceScriptSrc='/tinymce.min.js'
+                tinymceScriptSrc='http://fs.hyperii.com/script/tinymce.min.js'
                 initialValue={initialContent}
                 value={content}
                 // skin='dark'

@@ -1,5 +1,5 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import Avatar from '@widgets/Avatar';
 import cs from 'classnames';
 import s from './index.scss';
@@ -9,7 +9,8 @@ const content = `我为什么创建Solo...更好的连接创作者和观众，�
 创作者从创作到发布，获得关注和支持以及报酬。
 订阅者和支持者获得与创作者/博主的互动机会、相关经验和第一手的信息以及资料。`;
 
-function BlockItem (props) {
+function BlockItem(props) {
+    useStyles(s);
     return (
         <div className={s.container}>
             <Emage className={s.image} />
@@ -25,4 +26,4 @@ function BlockItem (props) {
     );
 };
 
-export default withStyles(s)(BlockItem);
+export default React.memo(BlockItem);

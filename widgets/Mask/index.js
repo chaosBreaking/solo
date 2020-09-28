@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { forward } from '@utils/navi';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import s from './index.scss';
 
-export default withStyles(s)(function Mask (props) {
+export default React.memo(function Mask(props) {
+    useStyles(s);
     const { className, onClickMask } = props;
     const [showMask, updateMask] = useState(true);
     const onClick = e => {

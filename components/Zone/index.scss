@@ -1,11 +1,11 @@
 @import '~static/color';
 @import '~static/constants';
 
-$TOP: $NAV_HEIGHT_MAIN + .1rem;
+$TOP: $NAV_HEIGHT_MAIN+.1rem;
 
 body {
     overflow: hidden !important;
-    font-family: 'Quicksand',arial,sans-serif !important;
+    font-family: 'Quicksand', arial, sans-serif !important;
 }
 
 .container {
@@ -21,7 +21,7 @@ body {
 
 .main {
     position: relative;
-    width: 60vw;
+    width: 6rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

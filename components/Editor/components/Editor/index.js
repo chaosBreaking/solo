@@ -5,7 +5,7 @@ import Editor from '@widgets/Editor';
 import s from './index.scss';
 import useStores from '@framework/util';
 
-function EditorWrapper(props) {
+export default observer(function EditorWrapper(props) {
     useStyles(s);
     const { store } = useStores();
     const { editorTitle, setEditorTitle } = store;
@@ -21,6 +21,4 @@ function EditorWrapper(props) {
             <Editor type={'classic'} {...props} />
         </div>
     );
-};
-
-export default observer(EditorWrapper);
+});

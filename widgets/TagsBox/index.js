@@ -1,8 +1,9 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import s from './index.scss';
 
-function TagsBox (props) {
+export default function TagsBox(props) {
+    useStyles(s);
     const { tags } = props;
     return (
         <div className={s.container}>
@@ -14,5 +15,3 @@ function TagsBox (props) {
         </div>
     );
 };
-
-export default withStyles(s)(TagsBox);

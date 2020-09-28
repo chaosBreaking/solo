@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function HeadSvg() {
+export default React.memo(function HeadSvg() {
     return <div><svg width="600px" height="505px" viewBox="0 0 600 505" version="1.1" xmlns="http://www.w3.org/2000/svg">
         <title>办公</title>
         <defs>
@@ -203,4 +203,4 @@ export default function HeadSvg() {
         </g >
     </svg >
     </div >;
-}
+});

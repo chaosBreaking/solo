@@ -1,5 +1,5 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import Slider from '@widgets/Slider';
 import ProfileCard from './ProfileCard';
 import RecommendCard from './RecommendCard';
@@ -40,7 +40,8 @@ const options = {
     }
 };
 
-export default withStyles(s)(function Content({ data }) {
+export default React.memo(function Content({ data }) {
+    useStyles(s);
     const { title, content } = data;
     const { creators, recommend } = content;
     return <Section title={title}>

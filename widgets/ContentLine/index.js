@@ -1,8 +1,9 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import s from './index.scss';
 
-function ContentLine (props) {
+export default function ContentLine(props) {
+    useStyles(s);
     const { data = [] } = props;
     const list = Object.prototype.toString.call(data) === '[object Array]'
         ? data
@@ -28,5 +29,3 @@ function ContentLine (props) {
         </div>
     );
 };
-
-export default withStyles(s)(ContentLine);

@@ -1,10 +1,11 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import ProfileLine from '@widgets/ProfileLine';
 import s from './index.scss';
 import RecRepoLine from '@widgets/RecRepoLine';
 
-function Recommend (props) {
+function Recommend(props) {
+    useStyles(s);
     const profiles = [{
         avatar: 'https://api.ixiaowai.cn/api/api.php',
         nickname: 'Allon',
@@ -74,4 +75,4 @@ function Recommend (props) {
     );
 };
 
-export default withStyles(s)(Recommend);
+export default React.memo(Recommend);

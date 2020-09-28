@@ -1,5 +1,5 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import s from './index.scss';
 
 const SIZE_MAP = {
@@ -9,7 +9,8 @@ const SIZE_MAP = {
     large: 0.7,
 };
 
-export default withStyles(s)(function Spinner (props) {
+export default function Spinner(props) {
+    useStyles(s);
     const scale = SIZE_MAP[props.size || 'normal'];
     return <div className={s['lds-spinner']} style={{ transform: `scale(${scale})` }}>
         <div></div>
@@ -25,4 +26,4 @@ export default withStyles(s)(function Spinner (props) {
         <div></div>
         <div></div>
     </div>;
-});
+};

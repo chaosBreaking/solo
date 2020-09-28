@@ -84,7 +84,7 @@ $coverHeight: 45vh;
 
 .star,
 .support {
-    height: .28rem;
+    height: .25rem;
     cursor: pointer;
     line-height: 1;
     display: flex;
@@ -94,14 +94,14 @@ $coverHeight: 45vh;
 }
 
 .support {
-    width: 1rem;
+    width: .8rem;
     text-align: center;
     background: var(--theme-primary);
     color: #fff;
 }
 
 .star {
-    width: .5rem;
+    width: .4rem;
     margin-left: .1rem;
     color: var(--theme-primary);
     border: 2px solid var(--theme-primary);

@@ -36,4 +36,4 @@ function UserItem(props) {
     );
 };
 
-export default observer(UserItem);
+export default React.memo(UserItem);

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import s from './flex.scss';
 
-function SearchBar (props) {
+export default function SearchBar(props) {
+    useStyles(s);
     const [content, setContent] = useState('');
     const { mountRef, onChange, onClick, placeholder = '搜索或者跳转到...' } = props;
     const events = { onChange, onClick };
@@ -11,10 +12,10 @@ function SearchBar (props) {
         typeof onChange === 'function' && onChange(e.target.value);
     };
     const controller = {
-        getContent () {
+        getContent() {
             return content;
         },
-        setContent (content) {
+        setContent(content) {
             setContent(content);
         }
     };
@@ -25,5 +26,3 @@ function SearchBar (props) {
         </div>
     );
 };
-
-export default withStyles(s)(SearchBar);

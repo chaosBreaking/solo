@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import s from './index.scss';
 import Card from '@widgets/Card';
 import Button from '@widgets/Button';
@@ -22,7 +22,8 @@ import Logo from '@widgets/Logo';
 // const TITLE = '创建你的社群，从这里开始'; // 放在 成为创作者 页面
 const TITLE = '即刻加入';
 
-export default withStyles(s)(observer(function RegistryCard(props) {
+export default (observer(function RegistryCard(props) {
+    useStyles(s);
     const {
         handleSubmit,
         switchLogin,
@@ -185,7 +186,7 @@ export default withStyles(s)(observer(function RegistryCard(props) {
                     {renderForm(formState.authType)}
                 </div>
                 <Button className={s.btn} text={'注册'} loading={formState.loading} onClick={btnClickHandler} />
-                <div className={s.oauthTip}>其他登录方式</div>
+                <div className={s.oauthTip}>其他注册方式</div>
                 <OAuthBar authType={formState.authType} switchAuthType={switchAuthType} />
                 <Button text={'已有账号？点击登录'} plain className={s.loginBtn} onClick={switchLogin} />
             </div>

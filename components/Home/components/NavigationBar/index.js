@@ -1,10 +1,11 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import { forward } from '@utils/navi';
 import { NAVI_ITEMS } from '../../constants';
 import s from './index.scss';
 
-function NavigationBar (props) {
+function NavigationBar(props) {
+    useStyles(s);
     return (
         <div className={s.container}>
             <div className={s.mainNav}>
@@ -20,4 +21,4 @@ function NavigationBar (props) {
     );
 };
 
-export default withStyles(s)(NavigationBar);
+export default React.memo(NavigationBar);

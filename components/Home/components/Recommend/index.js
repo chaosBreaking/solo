@@ -1,12 +1,13 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import TagsBox from '@widgets/TagsBox';
 import ProfileLine from '@widgets/ProfileLine';
 import ContentLine from '@widgets/ContentLine';
 import TopicLine from '@widgets/TopicLine';
 import s from './index.scss';
 
-function Recommend (props) {
+function Recommend(props) {
+    useStyles(s);
     const tags = ['COV-19', 'Anti-996', 'Utopia', 'Tech', 'Artificial Intelligence', 'hack', 'BlockChain', 'Pink'];
     const profiles = [{
         avatar: 'https://api.ixiaowai.cn/api/api.php',
@@ -63,23 +64,23 @@ function Recommend (props) {
             <div className={s.body}>
                 <div className={s.content}>
                     <div className={s.title}>为你推荐</div>
-                    <ContentLine data={content}/>
+                    <ContentLine data={content} />
                 </div>
                 <div className={s.topic}>
                     <div className={s.title}>话题趋势</div>
-                    <TopicLine data={topics}/>
+                    <TopicLine data={topics} />
                 </div>
                 <div className={s.trendence}>
                     <span className={s.title}>热门标签</span>
-                    <TagsBox tags={tags}/>
+                    <TagsBox tags={tags} />
                 </div>
                 <div>
                     <div className={s.title}>热门博主</div>
-                    <ProfileLine data={profiles}/>
+                    <ProfileLine data={profiles} />
                 </div>
             </div>
         </div>
     );
 };
 
-export default withStyles(s)(Recommend);
+export default React.memo(Recommend);

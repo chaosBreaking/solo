@@ -1,8 +1,9 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import s from './index.scss';
 
-function PostsCard (props) {
+function PostsCard(props) {
+    useStyles(s);
     const height = 2 * Math.random() + 1;
     const heat = ~~(Math.random() * 1000);
     return (
@@ -36,4 +37,4 @@ function PostsCard (props) {
     );
 };
 
-export default withStyles(s)(PostsCard);
+export default PostsCard;

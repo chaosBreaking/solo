@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import cs from 'classnames';
 import s from './index.scss';
 import { AUTH_TYPE } from './common';
 
-export default withStyles(s)(observer(function OAuthBar(props) {
+export default (observer(function OAuthBar(props) {
+    useStyles(s);
     const {
         authType,
         switchAuthType,
@@ -19,7 +20,7 @@ export default withStyles(s)(observer(function OAuthBar(props) {
                 />
             </div>
             {/* <div className={s.iconBtnWrapper}><div className={cs(s.iconBtn, s.iconGoogle)} /></div> */}
-            <div className={s.iconBtnWrapper}><div className={cs(s.iconBtn, s.iconGithub)} /></div>
+            {/* <div className={s.iconBtnWrapper}><div className={cs(s.iconBtn, s.iconGithub)} /></div> */}
             {/* <div className={s.iconBtnWrapper}><div className={cs(s.iconBtn, s.iconFacebook)} /></div> */}
         </div>
     );

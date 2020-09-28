@@ -1,12 +1,13 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import { forward } from '@utils/navi';
 import { NAVI_ITEMS } from '../../constants';
 import s from './index.scss';
 
 const SUB_ITEMS = ['科技', '赛博文化', '密码朋克', '媒体', '艺术'];
 
-function NavigationBar (props) {
+function NavigationBar(props) {
+    useStyles(s);
     const { subNav = SUB_ITEMS } = props;
     const naviToIndex = e => {
         forward('/index');
@@ -34,4 +35,4 @@ function NavigationBar (props) {
     );
 };
 
-export default withStyles(s)(NavigationBar);
+export default React.memo(NavigationBar);

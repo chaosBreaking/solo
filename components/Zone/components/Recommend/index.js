@@ -1,5 +1,5 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import TagsBox from '@widgets/TagsBox';
 import ProfileLine from '@widgets/ProfileLine';
 import ContentLine from '@widgets/ContentLine';
@@ -9,7 +9,8 @@ import Card from '@widgets/Card';
 import { StaticSearchBar } from '@widgets/SearchBar';
 import Button from '@widgets/Button';
 
-function Recommend (props) {
+export default function Recommend(props) {
+    useStyles(s);
     const tags = ['COV-19', 'Anti-996', 'Utopia', 'Tech', 'Artificial Intelligence', 'hack', 'BlockChain', 'Pink'];
     // const profiles = [{
     //     // avatar: 'https://api.ixiaowai.cn/api/api.php',
@@ -75,15 +76,15 @@ function Recommend (props) {
                 </Card> */}
                 <Card className={s.card}>
                     <div className={s.title}>为你推荐</div>
-                    <ContentLine data={content}/>
+                    <ContentLine data={content} />
                 </Card>
                 <Card className={s.card}>
                     <div className={s.title}>话题趋势</div>
-                    <TopicLine data={topics}/>
+                    <TopicLine data={topics} />
                 </Card>
                 <Card className={s.card}>
                     <span className={s.title}>热门标签</span>
-                    <TagsBox tags={tags}/>
+                    <TagsBox tags={tags} />
                 </Card>
                 <Card className={s.card}>
                     <div className={s.title}>订阅圈子</div>
@@ -99,5 +100,3 @@ function Recommend (props) {
         </div>
     );
 };
-
-export default withStyles(s)(Recommend);

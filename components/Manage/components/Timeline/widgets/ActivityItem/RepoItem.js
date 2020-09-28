@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import Avatar from '@widgets/Avatar';
 import cs from 'classnames';
 import s from './repo.scss';
@@ -18,7 +18,8 @@ const REPO_TYPE = {
     4: '评论',
 };
 
-function RepoItem (props) {
+function RepoItem(props) {
+    useStyles(s);
     const {
         owner = '矢川六郎',
         repoName = '前卫朋克散文集',
@@ -51,4 +52,4 @@ function RepoItem (props) {
     );
 };
 
-export default withStyles(s)(observer(RepoItem));
+export default (observer(RepoItem));

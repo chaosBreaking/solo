@@ -1,5 +1,5 @@
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import ProfileLine from '@widgets/ProfileLine';
 import Card from '@widgets/Card';
 import s from './index.scss';
@@ -7,7 +7,9 @@ import BlockItem from '../BlockItem';
 import Emage from '@widgets/Emage';
 import RecCreators from '../RecCreators';
 
-function TopCard (props) {
+export default function TopCard(props) {
+    useStyles(s);
+
     const profiles = [{
         avatar: 'https://api.ixiaowai.cn/api/api.php',
         nickname: '梁伊尔',
@@ -47,5 +49,3 @@ function TopCard (props) {
         </div >
     );
 };
-
-export default withStyles(s)(TopCard);
