@@ -13,7 +13,7 @@ function SideNavi(props) {
     const active = 0;
     const handleClick = item => {
         const { url } = item;
-        forward(url);
+        url && forward(url);
     };
     return (
         <div className={s.container}>

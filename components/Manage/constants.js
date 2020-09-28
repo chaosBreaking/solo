@@ -14,15 +14,18 @@ export const SIDE_NAVI_ITEMS = [
     },
     {
         title: '我的主页',
+        url: 'page.html',
     },
     {
         title: '创作空间',
+        url: 'dashboard.html',
     },
     {
         title: '新闻',
     },
     {
         title: '发现',
+        url: 'zone.html',
     },
     {
         title: '粉丝',

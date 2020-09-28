@@ -21,10 +21,33 @@ const ITEMS = [
     },
 ];
 
+const tooltips = [
+    {
+        title: '控制台',
+        icon: 'icon-dashboard',
+        url: 'manage.html',
+    },
+    {
+        title: '消息',
+        icon: 'icon-message',
+        url: '',
+    },
+    {
+        title: '新建',
+        icon: 'icon-add',
+        url: '',
+    },
+];
+
 export default function NavigationBar(props) {
     useStyles(s);
-    const clickNavItem = url => {
-        // forward(url);
+    const clickNavItem = item => {
+        const { url } = item;
+        url && forward(url);
+    };
+    const handleTooltipClick = item => {
+        const { url } = item;
+        url && forward(url);
     };
 
     return (
@@ -39,7 +62,7 @@ export default function NavigationBar(props) {
                                 item => <div
                                     className={s.navItem}
                                     key={item.title}
-                                    onClick={clickNavItem.bind(this, item.url)}
+                                    onClick={() => clickNavItem(item)}
                                 >
                                     {item.title}
                                 </div>
@@ -48,9 +71,17 @@ export default function NavigationBar(props) {
                     </div>
                 </div>
                 <div className={s.right}>
-                    <div className={s.iconBtn} tooltip="控制台" flow="down"><span className={'iconfont icon-dashboard'}></span></div>
-                    <div className={s.iconBtn} tooltip="消息" flow="down"><span className={'iconfont icon-message'}></span></div>
-                    <div className={s.iconBtn} tooltip="创建" flow="down"><span className={'iconfont icon-add'}></span></div>
+                    {
+                        tooltips.map((item, index) => <div
+                            key={index}
+                            className={s.iconBtn}
+                            tooltip={item.title}
+                            flow="down"
+                            onClick={() => handleTooltipClick(item)}
+                        >
+                            <span className={`iconfont ${item.icon}`} />
+                        </div>)
+                    }
                     <Avatar src={'http://blog.hyperii.com/images/logo.jpg?v=6.6.0'} size={'small'} />
                 </div>
             </div>
