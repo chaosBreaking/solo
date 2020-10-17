@@ -1,5 +1,5 @@
 import React from 'react';
-import { inject, observer } from 'mobx-react';
+import { observer } from 'mobx-react';
 import useStyles from 'isomorphic-style-loader/useStyles';
 import { forward } from '@utils/navi';
 import { SIDE_NAVI_ITEMS } from '../../constants';
