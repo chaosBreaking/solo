@@ -216,7 +216,8 @@ async function start () {
                 // https://www.browsersync.io/docs/options
                 server: 'src/server.js',
                 middleware: [server],
-                open: !process.argv.includes('--silent'),
+                open: false,
+                // open: !process.argv.includes('--silent'),
                 ...(isDebug ? {} : { notify: false, ui: false }),
                 ...(port ? { port } : null),
             },
