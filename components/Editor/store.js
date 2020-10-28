@@ -2,6 +2,7 @@ import { observable, action } from 'mobx';
 import CommonStore from '@framework/CommonStore';
 import { toast } from 'react-toastify';
 import ContentService from './service';
+import uploader from '@utils/upload';
 
 const SESSION_KEY = 'EDITOR_SESSION_CONTENT';
 
@@ -18,7 +19,13 @@ export default class Store extends CommonStore {
 
     @action.bound
     async initializeData(requestContext) {
+        await this.initUploader();
         return {};
+    }
+
+    async initUploader() {
+        const { token } = await this.contentService.requestTokenFunc();
+        this.uploader = uploader(token);
     }
 
     @action.bound
@@ -56,14 +63,17 @@ export default class Store extends CommonStore {
 
     @action.bound
     loadSession() {
-        const sessionData = JSON.parse(localStorage.getItem(SESSION_KEY));
-        if (sessionData) {
-            const { title, content, intro, tags, img } = sessionData;
-            this.editorContent = content;
-            this.editorTitle = title;
-            this.introContent = intro;
-            this.tags = tags;
-            this.coverImgUrl = img;
+        try {
+            const sessionData = JSON.parse(localStorage.getItem(SESSION_KEY));
+            if (sessionData) {
+                const { title, content, intro, tags, img } = sessionData;
+                this.editorContent = content;
+                this.editorTitle = title;
+                this.introContent = intro;
+                this.tags = tags;
+                this.coverImgUrl = img;
+            }
+        } catch (error) {
         }
     }
 
@@ -86,10 +96,10 @@ export default class Store extends CommonStore {
     publishContent = async () => {
         const data = {
             title: this.editorTitle,
-            content: this.editorContent,
             intro: this.introContent,
+            content: this.editorContent,
+            cover: this.coverImgUrl,
             tags: this.tags,
-            img: this.coverImgUrl,
         };
         const res = await this.contentService.publishContent(data);
     }

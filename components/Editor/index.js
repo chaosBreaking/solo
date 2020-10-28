@@ -8,9 +8,9 @@ import withStyles from 'isomorphic-style-loader/withStyles';
 import Editor from './components/Editor';
 import NavigationBar from './components/NavigationBar';
 import LeftBar from './components/LeftBar';
+import ToastContainer from '@widgets/Toast';
 import Store from './store';
 import s from './index.scss';
-import ToastContainer from '@widgets/Toast';
 
 @withStyles(s)
 @pageWrapper({

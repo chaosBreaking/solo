@@ -23,11 +23,11 @@ const LoadableUploader = Loadable({
     timeout: 10000,
 });
 
-function Uploader({ serverUrl }) {
+function Uploader(props) {
     useStyles(s);
     return (
         <div className={s.container}>
-            <LoadableUploader serverUrl={serverUrl} />
+            <LoadableUploader {...props} />
         </div>
     );
 }
