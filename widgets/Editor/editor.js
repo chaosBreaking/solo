@@ -44,24 +44,30 @@ export default class Editor extends React.Component {
                 tinymceScriptSrc='http://fs.hyperii.com/script/tinymce.min.js'
                 initialValue={initialContent}
                 value={content}
-                // skin='dark'
                 outputFormat='html'
                 apiKey="yhv7e7rccduf41j39x83x364fdzt91183p8v3thgkw4zm9iw"
                 init={{
+                    document_base_url: 'http://fs.hyperii.com',
+                    skin_url: 'http://fs.hyperii.com/script',
+                    theme_url: 'http://fs.hyperii.com/script/theme.js',
                     plugins: [
                         // 'autolink',
                         // 'codesample',
-                        'link',
+                        // 'link',
                         // 'lists',
                         // // 'media',
                         // 'powerpaste',
                         // 'table',
                         // 'quickimage',
-                        'quickbars',
+                        // 'quickbars',
                         // 'codesample',
                         // 'help',
                         // 'wordcount', // 暂时不用
                     ],
+                    external_plugins: {
+                        link: 'http://fs.hyperii.com/script/link.js',
+                        quickbars: 'http://fs.hyperii.com/script/quickbar.js',
+                    },
                     quickbars_insert_toolbar: 'quickimage quicktable codesample', // 插入菜单
                     quickbars_selection_toolbar: 'bold italic underline | blockquote quicklink | fontsizeselect', // 选中后菜单
                     contextmenu: 'undo redo | inserttable | cell row column deletetable', // 右键context菜单
@@ -74,6 +80,7 @@ export default class Editor extends React.Component {
                     height: '90%',
                     // min_height: 800,
                     language: 'zh_CN',
+                    language_url: 'http://fs.hyperii.com/script/zh_CN.js',
                     // plugins,
                     // menubar,
                     // toolbar,
