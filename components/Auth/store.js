@@ -11,7 +11,7 @@ export default class Store extends CommonStore {
     @observable loadingStatus = 0;
     @observable currentStage;
 
-    authService = new AuthService();
+    authService;
 
     @action.bound
     async initializeData(requestContext) {
@@ -19,6 +19,10 @@ export default class Store extends CommonStore {
         const { state = STAGE_MAP.LOGIN } = query;
         this.currentStage = +state;
         return {};
+    }
+
+    initService(axios) {
+        this.authService = new AuthService(axios);
     }
 
     @action.bound

@@ -15,12 +15,16 @@ export default class Store extends CommonStore {
     @observable coverImgUrl = '';
     @observable tags = [];
 
-    contentService = new ContentService();
+    contentService;
 
     @action.bound
     async initializeData(requestContext) {
         await this.initUploader();
         return {};
+    }
+
+    initService(axios) {
+        this.contentService = new ContentService(axios);
     }
 
     async initUploader() {
@@ -101,6 +105,7 @@ export default class Store extends CommonStore {
             cover: this.coverImgUrl,
             tags: this.tags,
         };
-        const res = await this.contentService.publishContent(data);
+        // const res = await this.contentService.publishContent(data);
+        console.log(data);
     }
 }

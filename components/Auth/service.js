@@ -1,12 +1,9 @@
 import BaseService from '@framework/BaseService';
-
-const URLs = {
-    REGISTER: 'auth/new',
-};
+import { API_MAP } from '@constants/api';
 
 export default class RegisterService extends BaseService {
     newUserRegister = async formData => {
-        const res = await this.post(URLs.REGISTER, { data: formData }).catch(error => ({ error }));
+        const res = await this.post(API_MAP.REGISTER, { data: formData }).catch(error => ({ error }));
         const { error, data } = res;
         if (error) {
             throw error;

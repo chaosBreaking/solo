@@ -1,16 +1,10 @@
 import { observable, action } from 'mobx';
 import CommonStore from '@framework/CommonStore';
-import AuthService from './service';
-import { hash } from '@utils/crypto';
 
 export default class Store extends CommonStore {
     @observable showExplore = true;
     @observable showLoginCard = false;
     @observable showRegistryCard = false;
-    constructor(props) {
-        super(props);
-        this.authService = new AuthService();
-    }
 
     async initializeData(requestContext) {
         this.contentList = ['视频创作', '摄影艺术', '独立游戏', 'Cosplay'].map(title => ({
@@ -107,21 +101,5 @@ export default class Store extends CommonStore {
     @action.bound
     changeAuthType(type) {
         this.authType = type;
-    }
-
-    @action.bound
-    async login(authData = {}) {
-        const { authType, id, passwd } = authData;
-        const { success, data = {}, error } = await this.authService.login({
-            authType,
-            id,
-            passwd: hash(passwd)
-        });
-        if (!success) {
-            return { error };
-        }
-        const { token } = data;
-        localStorage.setItem('AccessToken', token);
-        return { success };
     }
 }

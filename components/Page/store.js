@@ -24,7 +24,7 @@ export default class Store extends CommonStore {
         [TABS.FORMAT]: 0,
     };
 
-    contentService = new ContentService();
+    contentService;
     count = 20;
 
     @computed get dataList() {
@@ -56,6 +56,10 @@ export default class Store extends CommonStore {
             this.loadDataToCurrentTab(await this.queryData()),
         ]);
         return {};
+    }
+
+    initService(axios) {
+        this.contentService = new ContentService(axios);
     }
 
     @action.bound
