@@ -37,7 +37,7 @@ const context = buildContext();
 
 const container = document.getElementById('app');
 
-async function init () {
+async function init() {
     let route;
     try {
         route = await router.resolve(context);
@@ -54,15 +54,15 @@ async function init () {
     render(route.component, window.__ssrData, context);
 }
 
-async function render (Component, ssrData = {}, context) {
+async function render(Component, ssrData = {}, context) {
     try {
-        const isInitialRender = ssrData.ssr;
+        const isServerRender = ssrData.ssr;
         const initialData = { context };
-        // const initialData = isInitialRender ? { ...ssrData.store } : { ...await Component.initializeProps(context) };
-        initialData.store = isInitialRender
+        initialData.store = isServerRender
             ? await Component.rebuildStore({ context, ...ssrData.store })
             : await Component.initializeProps(context);
-        const renderReactApp = isInitialRender ? ReactDOM.hydrate : ReactDOM.render;
+        const renderReactApp = isServerRender ? ReactDOM.hydrate : ReactDOM.render;
+
         renderReactApp(
             <App insertCss={insertCss}>
                 <Component {...initialData} />

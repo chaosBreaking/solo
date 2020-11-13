@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
+import { observer } from 'mobx-react';
+import useStores from '@framework/util';
 import useStyles from 'isomorphic-style-loader/useStyles';
 import Card from '@widgets/Card';
-import useStores from '@framework/util';
 
 import s from './index.scss';
 
-export default function TagInput(props) {
+export default observer(function TagInput(props) {
     useStyles(s);
     const { store } = useStores();
     const { tags: tagsArray, setTags: updateTagsArray } = store;
-    // const [tagsArray, updateTagsArray] = useState([]);
     const [currentTag, changeCurrentTag] = useState('');
     const addTag = () => {
         if (currentTag && !tagsArray.includes(currentTag.trim())) {
@@ -34,4 +34,4 @@ export default function TagInput(props) {
             />
         </div>
     </Card>;
-};
+});

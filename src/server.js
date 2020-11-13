@@ -7,6 +7,7 @@ import config from './config';
 import routeHandler from './middlewares/routeHandler';
 import renderHandler from './middlewares/renderHandler';
 import errorHandler from './middlewares/errorHandler';
+import loginHandler from './middlewares/loginHandler';
 
 process.on('unhandledRejection', (reason, p) => {
     console.error('Unhandled Rejection at:', p, 'reason:', reason);
@@ -40,8 +41,8 @@ app.use(bodyParser.json());
 //
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------
-app.get('*.html', routeHandler, renderHandler);
-app.get('*', routeHandler, renderHandler);
+app.get('*.html', routeHandler, loginHandler, renderHandler);
+app.get('*', routeHandler, loginHandler, renderHandler);
 
 //
 // Error handling

@@ -10,7 +10,7 @@ export default axios => {
         return data;
     }, err => {
         if (err.response) {
-            return Promise.reject(new Error({ code: err.response.status, message: err.response.message }));
+            return Promise.reject(err.response);
         }
         err.message = '无网络，请检查网络连接';
         err.code = 400;

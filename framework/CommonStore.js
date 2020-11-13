@@ -1,13 +1,13 @@
 export default class CommonStore {
-    constructor (props) {
+    constructor(props) {
         Object.assign(this, props);
     }
 
-    get rootStore () {
+    get rootStore() {
         return typeof this.getRoot === 'function' && this.getRoot();
     }
 
-    get context () {
+    get context() {
         return typeof this.getContext === 'function' && this.getContext();
     }
 
@@ -17,7 +17,17 @@ export default class CommonStore {
      * @returns
      * @memberof CommonStore
      */
-    async initializeData (requestContext) {
+    async initializeData(requestContext) {
+        return {};
+    }
+
+    /**
+     * @desc 创建同构axios
+     * @param {*} enhancedAxios
+     * @returns
+     * @memberof CommonStore
+     */
+    async initService(enhancedAxios) {
         return {};
     }
 
@@ -27,7 +37,7 @@ export default class CommonStore {
      * @returns
      * @memberof CommonStore
      */
-    async prepareServerData () {}
+    async prepareServerData() { }
 
     /**
      * @desc 客户端渲染数据hook
@@ -35,5 +45,5 @@ export default class CommonStore {
      * @returns
      * @memberof CommonStore
      */
-    async prepareClientData () {}
+    async prepareClientData() { }
 }
