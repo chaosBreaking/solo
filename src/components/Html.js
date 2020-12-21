@@ -13,6 +13,7 @@ export default function Html({
     scripts,
     rawData,
     children,
+    mdStyles,
 }) {
     return (
         <html lang="en">
@@ -26,7 +27,7 @@ export default function Html({
                     <link key={script} rel="preload" href={script} as="script" />
                 ))}
                 <link rel="manifest" href="/site.webmanifest" />
-                <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1780295_y1o3lmrlkm.css"></link>
+                <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1780295_n85oua5u2l.css"></link>
                 {styles.map(style => (
                     <style
                         key={style.id}
@@ -34,6 +35,7 @@ export default function Html({
                         dangerouslySetInnerHTML={{ __html: style.cssText }}
                     />
                 ))}
+                <style id="jss-server-side">${mdStyles}</style>
             </head>
             <body>
                 <div id="app" dangerouslySetInnerHTML={{ __html: children }} />

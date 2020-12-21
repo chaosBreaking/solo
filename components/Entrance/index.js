@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-import pageWrapper from '@framework/pageWrapper';
+import createPage from '@framework/createPage';
 import Store from './store';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import { LoginCard } from '@widgets/AuthCards';
@@ -28,7 +28,7 @@ const Block = props => <div className={s.block} style={{ width: `${props.width |
 </div>;
 
 @withStyles(s)
-@pageWrapper({
+@createPage({
     Store
 })
 @inject('store')

@@ -43,14 +43,14 @@ export default {
     },
 
     resolve: {
-    // Allow absolute paths in imports, e.g. import Button from 'components/Button'
-    // Keep in sync with .flowconfig and .eslintrc
+        // Allow absolute paths in imports, e.g. import Button from 'components/Button'
+        // Keep in sync with .flowconfig and .eslintrc
         modules: ['node_modules', 'src'],
         alias
     },
 
     module: {
-    // Make missing exports an error instead of warning
+        // Make missing exports an error instead of warning
         strictExportPresence: true,
 
         rules: [
@@ -68,8 +68,8 @@ export default {
                     babelrc: false,
                     configFile: false,
                     presets: [
-                    // A Babel preset that can automatically determine the Babel plugins and polyfills
-                    // https://github.com/babel/babel-preset-env
+                        // A Babel preset that can automatically determine the Babel plugins and polyfills
+                        // https://github.com/babel/babel-preset-env
                         [
                             '@babel/preset-env',
                             {
@@ -123,7 +123,7 @@ export default {
                         exclude: /node_modules/,
                         loader: 'css-loader',
                         options: {
-                        // CSS Loader https://github.com/webpack/css-loader
+                            // CSS Loader https://github.com/webpack/css-loader
                             importLoaders: 1,
                             sourceMap: isDebug,
                             // CSS Modules https://github.com/css-modules/css-modules

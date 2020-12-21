@@ -9,7 +9,7 @@ import { format } from './run';
  * Copies static files such as robots.txt, favicon.ico to the
  * output (build) folder.
  */
-async function copy () {
+async function copy() {
     await makeDir('build');
     await Promise.all([
         writeFile(
@@ -42,17 +42,17 @@ async function copy () {
                 src.startsWith('src') ? path.relative('src', src) : src,
             );
             switch (event) {
-            case 'add':
-            case 'change':
-                await makeDir(path.dirname(dist));
-                await copyFile(filePath, dist);
-                break;
-            case 'unlink':
-            case 'unlinkDir':
-                cleanDir(dist, { nosort: true, dot: true });
-                break;
-            default:
-                return;
+                case 'add':
+                case 'change':
+                    await makeDir(path.dirname(dist));
+                    await copyFile(filePath, dist);
+                    break;
+                case 'unlink':
+                case 'unlinkDir':
+                    cleanDir(dist, { nosort: true, dot: true });
+                    break;
+                default:
+                    return;
             }
             const end = new Date();
             const time = end.getTime() - start.getTime();

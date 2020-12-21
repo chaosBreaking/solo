@@ -1,13 +1,6 @@
 import { setCookie } from '@utils/cookie';
 import { replacePage } from '@utils/navi';
 
-const getAPIUrl = apiPath => {
-    const commonHost = __DEV__ ? 'http://localhost:6057/api/' : 'http://api.hyperii.com/api/';
-
-    const path = apiPath.startsWith('/') ? apiPath.slice(1) : apiPath;
-    return commonHost + path;
-};
-
 export default class BaseService {
     constructor(axios) {
         if (!axios) {
@@ -32,7 +25,7 @@ export default class BaseService {
 
     async get(url, queryParams = {}, configs = {}) {
         try {
-            const token = localStorage.getItem('accessToken');
+            const token = localStorage.getItem('token');
             configs.headers = {
                 token
             };
@@ -46,7 +39,7 @@ export default class BaseService {
 
     async post(url, params, configs = {}) {
         try {
-            const token = localStorage.getItem('accessToken');
+            const token = localStorage.getItem('token');
             configs.headers = {
                 token
             };
@@ -61,7 +54,7 @@ export default class BaseService {
             setCookie({ token: '' });
             replacePage('/auth.html');
         } else {
-
+            this.axios.__res.redirect('/auth.html');
         }
     }
 };

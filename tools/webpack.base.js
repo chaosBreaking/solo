@@ -43,14 +43,14 @@ export default {
     },
 
     resolve: {
-    // Allow absolute paths in imports, e.g. import Button from 'components/Button'
-    // Keep in sync with .flowconfig and .eslintrc
+        // Allow absolute paths in imports, e.g. import Button from 'components/Button'
+        // Keep in sync with .flowconfig and .eslintrc
         modules: ['node_modules', 'src'],
         alias
     },
 
     module: {
-    // Make missing exports an error instead of warning
+        // Make missing exports an error instead of warning
         strictExportPresence: true,
 
         rules: [
@@ -68,8 +68,8 @@ export default {
                     babelrc: false,
                     configFile: false,
                     presets: [
-                    // A Babel preset that can automatically determine the Babel plugins and polyfills
-                    // https://github.com/babel/babel-preset-env
+                        // A Babel preset that can automatically determine the Babel plugins and polyfills
+                        // https://github.com/babel/babel-preset-env
                         [
                             '@babel/preset-env',
                             {
@@ -128,11 +128,23 @@ export default {
                         loader: ['happypack/loader?id=extCss']
                     },
                     {
+                        loader: 'postcss-loader',
+                        options: {
+                            config: {
+                                path: './tools/postcss.config.js',
+                            },
+                        },
+                    },
+                    {
                         // Compile Sass to CSS
                         // https://github.com/webpack-contrib/sass-loader
                         // Install dependencies before uncommenting: yarn add --dev sass-loader node-sass
                         test: /\.(scss|sass)$/,
                         loader: 'sass-loader',
+                    },
+                    {
+                        test: /\.less$/,
+                        loader: 'style!css!less'
                     },
                 ],
             },
@@ -274,6 +286,14 @@ export default {
                         // modules: {
                         //     localIdentName: isDebug ? '[path][name]-[local]-[hash:base64:5]' : '[local]-[hash:base64:5]'
                         // }
+                    },
+                },
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        config: {
+                            path: './tools/postcss.config.js',
+                        },
                     },
                 },
                 'sass-loader'

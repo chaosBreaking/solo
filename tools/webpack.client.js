@@ -113,7 +113,7 @@ export default {
             new OptimizeCssAssetsPlugin({
                 cssProcessor: require('cssnano'),
                 cssProcessorOptions: {
-                    autoprefixer: { browsers: ['android 4.2', 'ios 7'], add: true },
+                    // autoprefixer: { browsers: ['android 4.2', 'ios 7'], add: true },
                     discardComments: { removeAll: true },
                     zindex: false,
                     reduceIdents: false

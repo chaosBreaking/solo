@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-import pageWrapper from '@framework/pageWrapper';
+import createPage from '@framework/createPage';
 import Store from './store';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import s from './index.scss';
@@ -9,13 +9,13 @@ import NavigationBar from './components/NavigationBar';
 import Recommend from './components/Recommend';
 
 @withStyles(s)
-@pageWrapper({
+@createPage({
     Store
 })
 @inject('store')
 @observer
 export default class Explore extends Component {
-    render () {
+    render() {
         const { dataList } = this.props.store;
         return (
             <div className={s.container}>

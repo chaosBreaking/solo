@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-import pageWrapper from '@framework/pageWrapper';
+import createPage from '@framework/createPage';
 import Store from './store';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import Recommend from './components/Recommend';
@@ -14,7 +14,7 @@ import NavigationBar from '@widgets/NavigationBar';
 import s from './index.scss';
 
 @withStyles(s)
-@pageWrapper({
+@createPage({
     Store
 })
 @inject('store')

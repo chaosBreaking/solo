@@ -1,6 +1,7 @@
+import axios from '@framework/axios';
 import AuthService from '@framework/common/services/AuthService';
 
-export const authService = new AuthService();
+export const authService = new AuthService(axios);
 export const formatPhone = phone => ('' + phone).startsWith('+86-') ? phone : `+86-${phone}`;
 
 export const validateRes = (isValid, msg) => {

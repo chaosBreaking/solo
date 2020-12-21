@@ -17,12 +17,12 @@ const isDebug = !process.argv.includes('--release');
 const watchOptions = {
     // Watching may not work with NFS and machines in VirtualBox
     // Uncomment next line if it is your case (use true or interval in milliseconds)
-    // poll: true,
+    poll: true,
     // Decrease CPU or memory usage in some file systems
-    // ignored: /node_modules/,
+    ignored: /node_modules/,
 };
 
-function createCompilationPromise (name, compiler, config) {
+function createCompilationPromise(name, compiler, config) {
     return new Promise((resolve, reject) => {
         let timeStart = new Date();
         compiler.hooks.compile.tap(name, () => {
@@ -57,7 +57,7 @@ let server;
  * Launches a development web server with "live reload" functionality -
  * synchronizing URLs, interactions and code changes across multiple devices.
  */
-async function start () {
+async function start() {
     if (server) return server;
     server = express();
     server.use(errorOverlayMiddleware());
@@ -85,7 +85,7 @@ async function start () {
 
     serverConfig.output.hotUpdateMainFilename = 'updates/[hash].hot-update.json';
     serverConfig.output.hotUpdateChunkFilename =
-    'updates/[id].[hash].hot-update.js';
+        'updates/[id].[hash].hot-update.js';
     serverConfig.module.rules = serverConfig.module.rules.filter(
         x => x.loader !== 'null-loader',
     );
@@ -143,7 +143,7 @@ async function start () {
             .catch(error => console.error(error));
     });
 
-    function checkForUpdate (fromUpdate) {
+    function checkForUpdate(fromUpdate) {
         const hmrPrefix = '[\x1b[35mHMR\x1b[0m] ';
         if (!app.hot) {
             throw new Error(`${hmrPrefix}Hot Module Replacement is disabled.`);

@@ -23,7 +23,7 @@ const routes = [
     '/404', // https://help.github.com/articles/creating-a-custom-404-page-for-your-github-pages-site/
 ];
 
-async function render () {
+async function render() {
     const server = await runServer();
 
     // add dynamic routes
@@ -52,8 +52,7 @@ async function render () {
             await writeFile(dist, text);
             const time = timeEnd.getTime() - timeStart.getTime();
             console.info(
-                `#${index + 1} ${dist} => ${response.status} ${
-                    response.statusText
+                `#${index + 1} ${dist} => ${response.status} ${response.statusText
                 } (${time} ms)`,
             );
         }),

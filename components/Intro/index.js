@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-import pageWrapper from '@framework/pageWrapper';
+import createPage from '@framework/createPage';
 import Store from './store';
 import s from './index.scss';
 
-@pageWrapper({
+@createPage({
     Store
 })
 @inject('store')

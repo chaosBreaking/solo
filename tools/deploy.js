@@ -35,7 +35,7 @@ const options = { cwd: path.resolve(__dirname, '../build') };
 /**
  * Deploy the contents of the `/build` folder to a remote server via Git.
  */
-async function deploy () {
+async function deploy() {
     // Initialize a new repository
     await makeDir('build');
     await spawn('git', ['init', '--quiet'], options);
@@ -50,7 +50,7 @@ async function deploy () {
         );
         isRemoteExists = true;
     } catch (error) {
-    /* skip */
+        /* skip */
     }
     await spawn(
         'git',

@@ -8,6 +8,7 @@ import buildContext from './contextBuilder';
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
 import smoothscroll from 'smoothscroll-polyfill';
+import { getCookieByName } from '@utils/cookie';
 
 smoothscroll.polyfill();
 
@@ -59,7 +60,7 @@ async function render(Component, ssrData = {}, context) {
         const isServerRender = ssrData.ssr;
         const initialData = { context };
         initialData.store = isServerRender
-            ? await Component.rebuildStore({ context, ...ssrData.store })
+            ? await Component.rebuildStore(context, ssrData.store)
             : await Component.initializeProps(context);
         const renderReactApp = isServerRender ? ReactDOM.hydrate : ReactDOM.render;
 
@@ -77,5 +78,20 @@ async function render(Component, ssrData = {}, context) {
         console.error(error);
     }
 }
+
+(function syncAccessToken() {
+    const accessToken = getCookieByName('token');
+
+    const originToken = localStorage.getItem('token') || '';
+    try {
+        if (accessToken.length > 0 && originToken !== accessToken) {
+            localStorage.setItem('token', accessToken);
+        }
+        if (accessToken.length === 0) {
+            localStorage.setItem('token', null);
+        }
+    } catch (error) {
+    }
+})();
 
 init();

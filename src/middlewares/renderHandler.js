@@ -5,6 +5,7 @@ import config from '../config';
 import App from '../components/App';
 import Html from '../components/Html';
 import buildContext from '../contextBuilder';
+import { ServerStyleSheets } from '@material-ui/core/styles';
 
 export default async (req, res, next) => {
     try {
@@ -15,6 +16,7 @@ export default async (req, res, next) => {
         }
         const css = new Set();
         const scripts = new Set();
+        const sheets = new ServerStyleSheets();
         // Enables critical path CSS rendering
         // https://github.com/kriasoft/isomorphic-style-loader
         const insertCss = (...styles) => {
@@ -46,18 +48,20 @@ export default async (req, res, next) => {
             const store = await Component.initializeProps(context);
             rawData.store = store;
             data.children = ReactDOM.renderToString(
-                <App insertCss={insertCss}>
-                    <Component {...rawData} />
-                </App>,
+                sheets.collect(
+                    <App insertCss={insertCss}>
+                        <Component {...rawData} />
+                    </App>,
+                ),
             );
         }
-
         data.app = {
             apiUrl: config.api.clientUrl,
         };
         data.rawData = rawData;
         data.styles = [{ id: 'css', cssText: [...css].join('') }];
         data.scripts = Array.from(scripts);
+        data.mdStyles = sheets.toString();
 
         const html = ReactDOM.renderToStaticMarkup(<Html {...data} />);
         res.status(route.status || 200);

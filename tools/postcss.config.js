@@ -14,8 +14,8 @@ module.exports = () => ({
     // The list of plugins for PostCSS
     // https://github.com/postcss/postcss
     plugins: [
-    // Transfer @import rule by inlining content, e.g. @import 'normalize.css'
-    // https://github.com/postcss/postcss-import
+        // Transfer @import rule by inlining content, e.g. @import 'normalize.css'
+        // https://github.com/postcss/postcss-import
         require('postcss-import')(),
         // W3C calc() function, e.g. div { height: calc(100px - 2em); }
         // https://github.com/postcss/postcss-calc
@@ -35,7 +35,10 @@ module.exports = () => ({
         require('postcss-preset-env')({
             stage: 3,
             browsers: pkg.browserslist,
-            autoprefixer: { flexbox: 'no-2009' },
+            autoprefixer: {
+                browsers: ['android 4.2', 'ios 7'],
+                add: true
+            },
         }),
         // CSS Nano http://cssnano.co/
         ...(isDebug

@@ -112,7 +112,7 @@
 }
 
 @mixin naviShadow {
-    box-shadow: 0 5px 8px #00098000, 0 5px 16px rgba(0, 9, 128, .05);
+    box-shadow: 0 2px 2px #00098000, 0 2px 2px rgba(0, 9, 128, .05);
     -webkit-transition: box-shadow .35s ease-out, background-color .35s ease-out;
     transition: box-shadow .35s ease-out, background-color .35s ease-out;
 }

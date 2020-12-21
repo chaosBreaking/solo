@@ -15,9 +15,9 @@ const serverPath = path.join(
 );
 
 // Launch or restart the Node.js server
-function runServer () {
+function runServer() {
     return new Promise(resolve => {
-        function onStdOut (data) {
+        function onStdOut(data) {
             const time = new Date().toTimeString();
             const match = data.toString('utf8').match(RUNNING_REGEXP);
 

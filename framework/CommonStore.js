@@ -3,10 +3,6 @@ export default class CommonStore {
         Object.assign(this, props);
     }
 
-    get rootStore() {
-        return typeof this.getRoot === 'function' && this.getRoot();
-    }
-
     get context() {
         return typeof this.getContext === 'function' && this.getContext();
     }
@@ -46,4 +42,8 @@ export default class CommonStore {
      * @memberof CommonStore
      */
     async prepareClientData() { }
+
+    hydrateData(ssrData) {
+        Object.assign(this, ssrData);
+    }
 }

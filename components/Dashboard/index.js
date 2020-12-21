@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import withStyles from 'isomorphic-style-loader/withStyles';
-import pageWrapper from '@framework/pageWrapper';
+import createPage from '@framework/createPage';
 import Store from './store';
 import NavigationBar from './components/NavigationBar';
 import UserZone from './components/UserZone';
@@ -14,7 +14,7 @@ import Recommend from './components/Recommend';
 import s from './index.scss';
 
 @withStyles(s)
-@pageWrapper({
+@createPage({
     Store
 })
 @inject('store')
