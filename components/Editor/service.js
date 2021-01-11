@@ -7,7 +7,7 @@ const API = {
 
 export default class ContentService extends BaseService {
     publishContent = async formData => {
-        const res = await this.post(API.PUBLISH, { data: formData }).catch(error => ({ error }));
+        const res = await this.post(API.PUBLISH, formData).catch(error => ({ error }));
         const { error, data } = res;
         if (error) {
             throw error;
@@ -16,7 +16,7 @@ export default class ContentService extends BaseService {
     }
 
     requestTokenFunc = async params => {
-        const res = await this.post(API.REQUEST_TOKEN, params).catch(error => ({ error }));
+        const res = await this.get(API.REQUEST_TOKEN, params).catch(error => ({ error }));
         const { error, data } = res;
         if (error) {
             throw error;

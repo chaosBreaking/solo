@@ -5,7 +5,6 @@ import ContentService from './service';
 export default class Store extends CommonStore {
     @observable dataList = [];
     @observable loadingStatus = 0;
-    contentService = new ContentService();
 
     @action.bound
     async initializeData(requestContext) {
@@ -30,5 +29,9 @@ export default class Store extends CommonStore {
         });
         this.dataList.push(...data);
         this.loadingStatus = 0;
+    }
+
+    initService(...props) {
+        this.contentService = new ContentService(...props);
     }
 }

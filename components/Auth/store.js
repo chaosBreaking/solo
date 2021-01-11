@@ -3,6 +3,7 @@ import CommonStore from '@framework/CommonStore';
 import { hash } from '@utils/crypto';
 import { STAGE_MAP } from './constants';
 import AuthService from '@framework/common/services/AuthService';
+import { setCookie } from '@utils/cookie';
 
 const HASH_SALT = 'OLOSOLOHASHSAH';
 
@@ -30,13 +31,25 @@ export default class Store extends CommonStore {
         this.currentStage = stage;
     }
 
+    storeToken(token) {
+        setCookie({
+            token
+        });
+        localStorage.setItem('token', token);
+    }
+
     @action.bound
     registerHandler = async formData => {
         try {
+            const { passwd, ...rest } = formData;
             const res = await this.authService.handleRegister({
-                ...formData,
-                passwd: hash(formData.passwd, { salt: HASH_SALT }),
+                ...rest,
+                password: hash(formData.passwd, { salt: HASH_SALT }),
             });
+            if (res.success) {
+                const { accessToken } = res;
+                this.storeToken(accessToken);
+            }
             return res;
         } catch (error) {
             return { success: false, msg: error.message };
@@ -46,10 +59,15 @@ export default class Store extends CommonStore {
     @action.bound
     loginHandler = async formData => {
         try {
+            const { passwd, ...rest } = formData;
             const res = await this.authService.handleLogin({
-                ...formData,
-                passwd: hash(formData.passwd, { salt: HASH_SALT }),
+                ...rest,
+                password: hash(formData.passwd, { salt: HASH_SALT }),
             });
+            if (res.success) {
+                const { accessToken } = res;
+                this.storeToken(accessToken);
+            }
             return res;
         } catch (error) {
             return { success: false, msg: error.message };

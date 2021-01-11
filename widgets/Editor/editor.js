@@ -5,7 +5,7 @@ const plugins = 'formatpainter print preview paste importcss searchreplace autol
 const toolbar = 'undo redo | bold italic underline strikethrough formatpainter | fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat pagebreak | charmap emoticons image media | save print link anchor codesample insertfile template | fullscreen code preview';
 // 'code codesample undo redo restoredraft | cut copy paste pastetext | forecolor backcolor searchreplace bold italic underline strikethrough link anchor | alignleft aligncenter alignright alignjustify outdent indent | bullist numlist | formatselect fontselect fontsizeselect | blockquote subscript superscript removeformat | table image media charmap emoticons hr pagebreak insertdatetime print preview',
 const menubar = false;
-const fontsizeFormats = '16px 20px 24px';
+const fontsizeFormats = '22px 24px 26px';
 // 'file edit view insert format tools table help';
 const fontFamily = "'Spectral', Serif;";
 const DEFAULT_CONTENT = '';
@@ -68,7 +68,8 @@ export default class Editor extends React.Component {
                         link: 'http://fs.hyperii.com/script/link.js',
                         quickbars: 'http://fs.hyperii.com/script/quickbar.js',
                     },
-                    quickbars_insert_toolbar: 'quickimage quicktable codesample', // 插入菜单
+                    // quickbars_insert_toolbar: 'quickimage quicktable codesample', // 插入菜单
+                    quickbars_insert_toolbar: false,
                     quickbars_selection_toolbar: 'bold italic underline | blockquote quicklink | fontsizeselect', // 选中后菜单
                     contextmenu: 'undo redo | inserttable | cell row column deletetable', // 右键context菜单
                     powerpaste_word_import: 'clean',
@@ -89,7 +90,7 @@ export default class Editor extends React.Component {
                     fontsize_formats: fontsizeFormats,
                     content_style: `
                     * { font-family: 'Spectral', serif }
-                    .mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before { font-size: 18px; font-family: 'Spectral', serif !important; }
+                    .mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before { font-size: 20px; font-family: 'Spectral', serif !important; }
                     `,
                     placeholder: '输入正文 ...',
                     // automatic_uploads: false,

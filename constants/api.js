@@ -1,7 +1,7 @@
 export const API_MAP = {
     PRE_AUTH: '/auth/preauth',
-    LOGIN: '/auth/in',
+    LOGIN: '/auth/login',
     CODE: '/auth/code',
-    REGISTER: 'auth/new',
+    REGISTER: 'auth/register',
     VERIFY_TOKEN: '/auth/verify_token',
 };

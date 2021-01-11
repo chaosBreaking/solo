@@ -110,7 +110,7 @@ export default (observer(function RegistryCard(props) {
             phone: formatPhone(refs.phoneRef().getInput()),
             passwd: refs.passwdRef().getInput(),
             code: refs.codeRef().getInput(),
-            authType: formState.authType,
+            type: formState.authType,
         });
         updateState({
             loading: false,

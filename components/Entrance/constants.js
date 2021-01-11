@@ -68,15 +68,10 @@ export const NAVI_FUNC_ITEMS = [
         url: '',
         type: NAVI_ITEM_TYPE.COLLECTION,
     },
-    // {
-    //     title: '登录',
-    //     url: '',
-    //     type: NAVI_ITEM_TYPE.BUTTON,
-    // },
     {
         title: '登录',
         url: '/auth.html',
-        type: NAVI_ITEM_TYPE.BUTTON,
+        type: NAVI_ITEM_TYPE.LINK,
     },
     {
         title: '注册',

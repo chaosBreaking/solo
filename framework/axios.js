@@ -2,6 +2,6 @@ import axios from 'axios';
 import enhanceRequest from './enhanceRequest';
 
 enhanceRequest(axios);
-axios.defaults.baseURL = __DEV__ ? 'http://localhost:6057/api/' : 'http://api.hyperii.com/api/';
+axios.defaults.baseURL = __DEV__ ? 'http://localhost:6057/api/v1' : 'http://api.hyperii.com/api/v1';
 
 export default axios;

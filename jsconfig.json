@@ -11,6 +11,9 @@
             "@src/*": [
                 "src/*"
             ],
+            "@constants/*": [
+                "constants/*"
+            ],
             "@static/*": [
                 "src/static/*"
             ],

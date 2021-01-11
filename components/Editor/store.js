@@ -3,6 +3,7 @@ import CommonStore from '@framework/CommonStore';
 import { toast } from 'react-toastify';
 import ContentService from './service';
 import uploader from '@utils/upload';
+import showSpinner from '@utils/spinner';
 
 const SESSION_KEY = 'EDITOR_SESSION_CONTENT';
 
@@ -27,6 +28,7 @@ export default class Store extends CommonStore {
         this.contentService = new ContentService(axios);
     }
 
+    @action.bound
     async initUploader() {
         const { token } = await this.contentService.requestTokenFunc();
         this.uploader = uploader(token);
@@ -105,7 +107,8 @@ export default class Store extends CommonStore {
             cover: this.coverImgUrl,
             tags: this.tags,
         };
-        // const res = await this.contentService.publishContent(data);
-        console.log(data);
+        showSpinner();
+        const res = await this.contentService.publishContent(data);
+        console.log(res);
     }
 }

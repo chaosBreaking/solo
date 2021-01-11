@@ -8,7 +8,7 @@ export default class AuthService extends BaseService {
     }
 
     handlePreAuth = async authData => {
-        const res = await this.post(API_MAP.PRE_AUTH, { data: authData }).catch(error => ({ error }));
+        const res = await this.post(API_MAP.PRE_AUTH, authData).catch(error => ({ error }));
         const { error, data } = res;
         if (error) {
             throw error;
@@ -17,7 +17,7 @@ export default class AuthService extends BaseService {
     }
 
     handleRegister = async formData => {
-        const res = await this.post(API_MAP.REGISTER, { data: formData }).catch(error => ({ error }));
+        const res = await this.post(API_MAP.REGISTER, formData).catch(error => ({ error }));
         const { error, data } = res;
         if (error) {
             throw error;
@@ -26,7 +26,7 @@ export default class AuthService extends BaseService {
     }
 
     handleLogin = async authData => {
-        const res = await this.post(API_MAP.LOGIN, { data: authData }).catch(error => ({ error }));
+        const res = await this.post(API_MAP.LOGIN, authData).catch(error => ({ error }));
         const { error, data } = res;
         if (error) {
             throw error;
@@ -35,7 +35,7 @@ export default class AuthService extends BaseService {
     }
 
     sendValidateCode = async reqData => {
-        const res = await this.post(API_MAP.CODE, { data: reqData }).catch(error => ({ error }));
+        const res = await this.post(API_MAP.CODE, reqData).catch(error => ({ error }));
         const { error, data } = res;
         if (error) {
             throw error;

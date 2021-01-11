@@ -6,7 +6,6 @@ import { observer, inject } from 'mobx-react';
 import createPage from '@framework/createPage';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import Store from './store';
-import NavigationBar from '@widgets/NavigationBar';
 import s from './index.scss';
 import MultiForm from './components/MultiForm';
 import ToastContainer from '@widgets/Toast';
