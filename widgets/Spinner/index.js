@@ -1,6 +1,6 @@
 import React from 'react';
-import { Spinner as Spinkit } from 'react-spinkit';
+import { CubeGrid } from 'better-react-spinkit';
 
-export default function Spinner({ name = 'circle', color = '--theme-primary' }) {
-    return <Spinkit name={name} color={color} />;
+export default function Spinner({ size = 18, color = '--theme-primary' }) {
+    return <CubeGrid size={size} color={color} />;
 };
