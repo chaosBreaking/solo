@@ -26,20 +26,14 @@ export default class AuthService extends BaseService {
     }
 
     handleLogin = async authData => {
-        const res = await this.post(API_MAP.LOGIN, authData).catch(error => ({ error }));
-        const { error, data } = res;
-        if (error) {
-            throw error;
-        }
+        const res = await this.post(API_MAP.LOGIN, authData);
+        const { data } = res;
         return data;
     }
 
     sendValidateCode = async reqData => {
         const res = await this.post(API_MAP.CODE, reqData).catch(error => ({ error }));
-        const { error, data } = res;
-        if (error) {
-            throw error;
-        }
+        const { data } = res;
         return data;
     }
 };

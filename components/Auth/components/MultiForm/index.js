@@ -2,7 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import useStyles from 'isomorphic-style-loader/useStyles';
 import { RegistryCard, LoginCard } from '@widgets/AuthCards';
-import { STAGE_MAP } from '../../constants';
+import { STAGE_MAP, PAGE_AFTER_LOGIN } from '../../constants';
 import { toast } from 'react-toastify';
 import { replaceQuery, replacePage } from '@utils/navi';
 import s from './index.scss';
@@ -22,20 +22,22 @@ export default observer(function NavigationBar() {
     const handleLoginSubmit = async formData => {
         const res = await store.loginHandler(formData);
         if (res.success) {
-            replacePage('/home.html');
+            replacePage(PAGE_AFTER_LOGIN);
         } else {
             toast.error(res.msg, {
-                position: toast.POSITION.TOP_CENTER,
+                position: toast.POSITION.TOP_LEFT,
+                progressStyle: { display: 'none' }
             });
         }
     };
     const handleRegisterSubmit = async formData => {
         const res = await store.registerHandler(formData);
         if (res.success) {
-            replacePage('/home.html');
+            replacePage(PAGE_AFTER_LOGIN);
         } else {
             toast.error(res.msg, {
-                position: toast.POSITION.TOP_CENTER,
+                position: toast.POSITION.TOP_LEFT,
+                progressStyle: { display: 'none' }
             });
         }
     };

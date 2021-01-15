@@ -3,3 +3,5 @@ export const STAGE_MAP = {
     SIGNUP: 1,
     USER_TYPE: 2,
 };
+
+export const PAGE_AFTER_LOGIN = 'home.html';

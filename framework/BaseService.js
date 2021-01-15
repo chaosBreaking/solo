@@ -1,6 +1,7 @@
 import { setCookie } from '@utils/cookie';
 import { replacePage } from '@utils/navi';
 
+const AUTH_PAGE = '/auth.html';
 export default class BaseService {
     constructor(axios) {
         if (!axios) {
@@ -20,6 +21,7 @@ export default class BaseService {
                 this.redirectLogin();
                 throw new Error('Need login');
             }
+            throw error;
         }
     }
 
@@ -30,6 +32,10 @@ export default class BaseService {
                 token
             };
         } catch (error) {
+            return {
+                success: false,
+                error: error?.message
+            };
         }
         return this.__request('get', url, {
             params: queryParams,
@@ -44,6 +50,10 @@ export default class BaseService {
                 token
             };
         } catch (error) {
+            return {
+                success: false,
+                error: error?.message
+            };
         }
         return this.__request('post', url, params, configs);
     }
@@ -52,9 +62,9 @@ export default class BaseService {
         if (process.env.BROWSER) {
             localStorage.removeItem('token');
             setCookie({ token: '' });
-            replacePage('/auth.html');
+            replacePage(AUTH_PAGE);
         } else {
-            this.axios.__res.redirect('/auth.html');
+            this.axios.__res.redirect(AUTH_PAGE);
         }
     }
 };
