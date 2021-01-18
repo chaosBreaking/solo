@@ -18,6 +18,7 @@ import {
 import OAuthBar from './OAuthBar';
 import CodeInput from './CodeInput';
 import Logo from '@widgets/Logo';
+import { formatAuthData } from '@framework/auth';
 
 // const TITLE = '创建你的社群，从这里开始'; // 放在 成为创作者 页面
 const TITLE = '即刻加入';
@@ -104,7 +105,7 @@ export default (observer(function RegistryCard(props) {
         updateState({
             loading: true,
         });
-        await handleSubmit({
+        const authData = formatAuthData({
             nickname: refs.nicknameRef().getInput(),
             email: refs.emailRef().getInput(),
             phone: formatPhone(refs.phoneRef().getInput()),
@@ -112,6 +113,7 @@ export default (observer(function RegistryCard(props) {
             code: refs.codeRef().getInput(),
             type: formState.authType,
         });
+        typeof handleSubmit === 'function' && await handleSubmit(authData);
         updateState({
             loading: false,
         });

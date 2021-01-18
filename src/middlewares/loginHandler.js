@@ -1,8 +1,9 @@
 import axios from '@framework/axios';
 import { API_MAP } from '@constants/api';
+import { ACCESS_TOKEN_KEY } from '@framework/auth';
 
 const COOKIE_KEY_MAP = {
-    AccessToken: 'token',
+    AccessToken: ACCESS_TOKEN_KEY,
     UID: 'userId',
     UA: 'ua',
 };
@@ -14,7 +15,6 @@ function getUserAgent(req) {
 function clearData(res) {
     res.clearCookie(COOKIE_KEY_MAP.AccessToken);
     res.clearCookie(COOKIE_KEY_MAP.UID);
-    res.clearCookie(COOKIE_KEY_MAP.UIN);
 }
 
 function setCookie(req, res, key, value) {

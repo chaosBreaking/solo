@@ -19,6 +19,7 @@ import {
 import OAuthBar from './OAuthBar';
 import CodeInput from './CodeInput';
 import Logo from '@widgets/Logo';
+import { formatAuthData } from '@framework/auth';
 
 const TITLE = '登录';
 
@@ -93,11 +94,12 @@ export default (inject('store')((observer(function LoginCard(props) {
         updateState({
             loading: true,
         });
-        typeof handleSubmit === 'function' && await handleSubmit({
+        const authData = formatAuthData({
             email: refs.emailRef().getInput(),
             passwd: refs.passwdRef().getInput(),
             type: formState.authType,
         });
+        typeof handleSubmit === 'function' && await handleSubmit(authData);
         updateState({
             loading: false,
         });

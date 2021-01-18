@@ -1,11 +1,8 @@
 import { observable, action } from 'mobx';
 import CommonStore from '@framework/CommonStore';
-import { hash } from '@utils/crypto';
 import { STAGE_MAP } from './constants';
 import AuthService from '@framework/common/services/AuthService';
-import { setCookie } from '@utils/cookie';
-
-const HASH_SALT = 'OLOSOLOHASHSAH';
+import { setAccessToken } from '@framework/auth';
 
 export default class Store extends CommonStore {
     @observable dataList = [];
@@ -32,20 +29,13 @@ export default class Store extends CommonStore {
     }
 
     storeToken(token) {
-        setCookie({
-            token
-        });
-        localStorage.setItem('token', token);
+        setAccessToken(token);
     }
 
     @action.bound
     registerHandler = async formData => {
         try {
-            const { passwd, ...rest } = formData;
-            const res = await this.authService.handleRegister({
-                ...rest,
-                password: hash(formData.passwd, { salt: HASH_SALT }),
-            });
+            const res = await this.authService.handleRegister(formData);
             if (res.success) {
                 const { accessToken } = res;
                 this.storeToken(accessToken);
@@ -59,11 +49,7 @@ export default class Store extends CommonStore {
     @action.bound
     loginHandler = async formData => {
         try {
-            const { passwd, ...rest } = formData;
-            const res = await this.authService.handleLogin({
-                ...rest,
-                password: hash(formData.passwd, { salt: HASH_SALT }),
-            });
+            const res = await this.authService.handleLogin(formData);
             if (res.success) {
                 const { accessToken } = res;
                 this.storeToken(accessToken);

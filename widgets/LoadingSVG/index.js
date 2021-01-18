@@ -1,9 +1,9 @@
 import React from 'react';
 
 const styles = {
-    position: 'absolute',
     left: 0,
     right: 0,
+    bottom: 0,
     margin: 'auto',
     width: '100%',
     textAlign: 'center',
@@ -17,7 +17,7 @@ const colorMap = {
     bright: '#fff',
 };
 
-export default function LoadingSVG ({ theme = 'bright' }) {
+export default function LoadingSVG({ theme = 'bright' }) {
     const color = colorMap[theme];
     return <div style={styles}>
         <svg version="1.1" id="loading" x="0px" y="0px" width=".22rem" height=".34rem" viewBox="0 0 24 30">

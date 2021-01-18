@@ -34,10 +34,6 @@ const routes = {
             load: () => import(/* webpackChunkName: 'explore' */ './explore'),
         },
         {
-            path: '/intro.html',
-            load: () => import(/* webpackChunkName: 'intro' */ './intro'),
-        },
-        {
             path: '/editor.html',
             load: () => import(/* webpackChunkName: 'editor' */ './editor'),
         },

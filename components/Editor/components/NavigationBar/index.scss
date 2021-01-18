@@ -100,7 +100,8 @@ $iconHeight: .14rem;
 
 .publish,
 .save {
-    padding: .03rem .05rem;
+    padding: .05rem;
+    line-height: 1;
     border-radius: 1rem;
     margin-right: .1rem;
     cursor: pointer;
@@ -114,12 +115,12 @@ $iconHeight: .14rem;
 }
 
 .save {
-    border: 2px solid #186e60;
+    border: 1px solid #186e60;
     color: #186e60;
 }
 
 .publish {
-    padding: .04rem .1rem;
+    padding: .06rem .1rem;
     background: var(--theme-primary);
     color: #fff;
 }

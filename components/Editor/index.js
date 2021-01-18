@@ -11,6 +11,8 @@ import LeftBar from './components/LeftBar';
 import ToastContainer from '@widgets/Toast';
 import Store from './store';
 import s from './index.scss';
+import { LoginCard } from '@widgets/AuthCards';
+import Mask from '@widgets/Mask';
 
 @withStyles(s)
 @createPage({
@@ -20,13 +22,28 @@ import s from './index.scss';
 @observer
 export default class EditorPage extends Component {
     render() {
-        const { editorContent, onEditorInit, saveContent, publishContent, handleEditorChange } = this.props.store;
+        const {
+            editorContent,
+            onEditorInit,
+            saveContent,
+            publishContent,
+            handleEditorChange,
+            handleLoginSubmit,
+            showLoginCard,
+            switchLoginCard,
+        } = this.props.store;
         return (
             <div className={s.container}>
                 <NavigationBar saveContent={saveContent} publishContent={publishContent} />
                 <LeftBar />
                 <Editor onInit={onEditorInit} content={editorContent} handleEditorChange={handleEditorChange} />
                 <ToastContainer limit={1} pauseOnFocusLoss={false} />
+                {
+                    showLoginCard && <div className={s.authModal}>
+                        <Mask zIndex={0} onClick={() => switchLoginCard(false)} />
+                        <LoginCard handleSubmit={handleLoginSubmit} />
+                    </div>
+                }
             </div>
         );
     }

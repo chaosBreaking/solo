@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import useStyles from 'isomorphic-style-loader/useStyles';
 import s from './static.scss';
 

@@ -1,5 +1,5 @@
-import { setCookie } from '@utils/cookie';
 import { replacePage } from '@utils/navi';
+import { getAccessToken, setAccessToken } from './auth';
 
 const AUTH_PAGE = '/auth.html';
 export default class BaseService {
@@ -12,31 +12,22 @@ export default class BaseService {
 
     async __request(method, url, ...rest) {
         try {
+            // 每次请求都要从cookie拿token
+            const token = getAccessToken();
+            this.axios.defaults.headers.common.token = token;
             const res = await this.axios[method](url, ...rest);
             const { data, headers } = res;
             return { headers, data };
         } catch (error) {
             const { status } = error;
-            if (status === 403) {
+            if (status === 403 || status === 401) {
                 this.redirectLogin();
-                throw new Error('Need login');
             }
             throw error;
         }
     }
 
     async get(url, queryParams = {}, configs = {}) {
-        try {
-            const token = localStorage.getItem('token');
-            configs.headers = {
-                token
-            };
-        } catch (error) {
-            return {
-                success: false,
-                error: error?.message
-            };
-        }
         return this.__request('get', url, {
             params: queryParams,
             ...configs
@@ -44,24 +35,12 @@ export default class BaseService {
     }
 
     async post(url, params, configs = {}) {
-        try {
-            const token = localStorage.getItem('token');
-            configs.headers = {
-                token
-            };
-        } catch (error) {
-            return {
-                success: false,
-                error: error?.message
-            };
-        }
         return this.__request('post', url, params, configs);
     }
 
     redirectLogin() {
         if (process.env.BROWSER) {
-            localStorage.removeItem('token');
-            setCookie({ token: '' });
+            setAccessToken('');
             replacePage(AUTH_PAGE);
         } else {
             this.axios.__res.redirect(AUTH_PAGE);

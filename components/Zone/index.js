@@ -10,7 +10,7 @@ import Recommend from './components/Recommend';
 import FeedsList from './components/FeedsList';
 import TopCard from './components/TopCard';
 import SideNav from './components/SideNav';
-import NavigationBar from '@widgets/NavigationBar';
+import NavigationBar from './components/NavigationBar';
 import s from './index.scss';
 
 @withStyles(s)
@@ -26,10 +26,10 @@ export default class Zone extends Component {
                 <NavigationBar defaultItems />
                 <div className={s.main}>
                     <TopCard />
-                    <SideNav />
+                    {/* <SideNav /> */}
                     <div className={s.row}>
                         <FeedsList />
-                        <Recommend />
+                        {/* <Recommend /> */}
                     </div>
                 </div>
             </div>

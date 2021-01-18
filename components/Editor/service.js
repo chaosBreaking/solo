@@ -1,7 +1,7 @@
 import BaseService from '@framework/BaseService';
 
 const API = {
-    PUBLISH: 'content/publish',
+    PUBLISH: 'article/publish',
     REQUEST_TOKEN: 'cloud/get_policy',
 };
 
@@ -22,5 +22,17 @@ export default class ContentService extends BaseService {
             throw error;
         }
         return data;
+    }
+
+    redirectLogin = () => {
+        if (process.env.BROWSER) {
+            const error = new Error();
+            error.message = 'Need login';
+            error.code = 403;
+            throw error;
+        } else {
+            // 服务端走默认的重定向逻辑
+            super.redirectLogin();
+        }
     }
 };

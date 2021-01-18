@@ -4,9 +4,15 @@
     position: relative;
     width: 100%;
     margin: auto;
+    padding-bottom: .1rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     border-radius: .05rem;
+}
+
+.list {
+    position: relative;
+    margin-bottom: .1rem;
     background: #fff;
 }

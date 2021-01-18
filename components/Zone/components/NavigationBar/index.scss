@@ -20,9 +20,10 @@ $NAVI_BG_COLOR: #fff;
     position: fixed;
     width: 100%;
     height: $NAV_HEIGHT_MAIN;
-    padding: 0 .1rem;
+    padding: .05rem .1rem 0;
     margin-bottom: .02rem;
     display: flex;
+    align-items: center;
     border-bottom: 1px solid rgba(255, 255, 255, .3);
     z-index: 99;
 }
@@ -30,12 +31,17 @@ $NAVI_BG_COLOR: #fff;
 .logo {
     position: relative;
     padding: 0 .1rem;
-    color: #000;
-    font-size: .2rem;
+    background-image: linear-gradient(135deg, #5a8afb 0%, #f86363 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: .26rem;
     font-weight: bolder;
     font-family: lemon;
-    cursor: pointer;
-    @include NAVI_BASE();
+
+    // @include NAVI_BASE();
+    .small {
+        font-size: .18rem;
+    }
 
     &:hover {
         animation: colorfulFont 1.5s infinite ease;
@@ -44,70 +50,40 @@ $NAVI_BG_COLOR: #fff;
 }
 
 .user {
-    position: relative;
+    position: absolute;
+    right: .1rem;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    @include NAVI_BASE();
 }
 
 .mainNav {
-    position: relative;
+    position: absolute;
     height: $NAV_HEIGHT_MAIN;
-
+    width: 50%;
+    left: 0;
+    right: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    flex: 1 0 auto;
-
-    margin: auto .1rem;
+    // flex: 1 0 auto;
+    margin: 0 auto;
     color: #000;
-    font-size: .1rem;
-    font-weight: bold;
     @include NAVI_BASE();
 
-
-    span {
-        height: 100%;
-        width: .8rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        padding: 0 .2rem;
-        cursor: pointer;
-        &:hover {
-            background: rgba(255, 255, 255, .1);
-        }
+    input {
+        font-size: .11rem !important;
     }
 }
 
-.subNav {
-    position: relative;
-    width: 100%;
-    height: $NAV_HEIGHT_SUB;
+.icon {
+    height: 100%;
+    width: .3rem;
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: center;
-    padding-top: .1rem;
-    color: #333;
-    font-size: .08rem;
-
-    span {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        width: .8rem;
-        padding: .05rem .2rem;
-        cursor: pointer;
-        opacity: .8;
-        &:hover {
-            opacity: 1;
-        }
-    }
+    align-items: center;
+    padding: 0 .2rem;
 }

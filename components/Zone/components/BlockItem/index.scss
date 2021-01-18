@@ -3,15 +3,26 @@
 .container {
     position: relative;
     width: 100%;
-    height: 1.2rem;
-    padding: .05rem;
+    padding: .1rem;
     display: flex;
-    margin: 0 0 .1rem 0;
+    flex-direction: column;
     box-shadow: 0 1px 1px rgba(27, 95, 160, .1);
+
+    &:hover {
+        background: #f4f4f4;
+        outline: 1px solid #fff;
+    }
+}
+
+.body {
+    position: relative;
+    display: flex;
 }
 
 .content {
+    position: relative;
     padding-left: .1rem;
+    cursor: pointer;
 }
 
 .avatar {
@@ -20,20 +31,19 @@
 }
 
 .image {
-    width: 1.2rem;
-    height: 100%;
+    width: 1rem;
+    height: 1rem;
     border-radius: .05rem;
     flex: 1 0 auto;
 }
 
 .title {
-    font-size: .11rem;
-    font-weight: bold;
+    font-size: .12rem;
     padding-bottom: .05rem;
 }
 
 .intro {
-    display: block;
+    display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
     overflow: hidden;
@@ -41,13 +51,54 @@
     color: #666;
 }
 
-.creatorBar {
-    height: .3rem;
-    width: 50%;
+.topLine {
+    position: relative;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     padding-left: .02rem;
-    border-radius: .5rem;
-    background: #ddd;
+    margin-bottom: .05rem;
+    font-size: .08rem;
+}
+
+.source {
+    padding-left: .02rem;
+
+    span {
+        margin-left: .02rem;
+        border-radius: .02rem;
+        padding: .02rem .04rem;
+        background: #eee;
+        cursor: pointer;
+    }
+}
+
+.ts {
+    position: absolute;
+    right: 0;
+    color: #aaa;
+}
+
+.name {
+    margin-left: .05rem;
+    font-size: .09rem;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.bottomLine {
+    position: absolute;
+    bottom: 0;
+    height: .2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.tag {
+    margin-right: .05rem;
+    color: #868686;
 }

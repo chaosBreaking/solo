@@ -9,36 +9,41 @@ export const SlideItem = ({ children, className }) => <div className={cs('keen-s
 
 const ArrowLeft = (props) => {
     return (
-        <svg
-            onClick={props.onClick}
-            className={cs(s.arrow, s.arrowLeft, { [s.arrowDisabled]: props.disabled })}
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-        >
-            <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
-        </svg>
+        <div className={s.leftWrapper}
+            onClick={props.onClick}>
+            <svg
+                className={cs(s.arrow, s.arrowLeft, { [s.arrowDisabled]: props.disabled })}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+            >
+                <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
+            </svg>
+        </div>
     );
 };
 
 const ArrowRight = (props) => {
     return (
-        <svg
-            onClick={props.onClick}
-            className={cs(s.arrow, s.arrowRight, { [s.arrowDisabled]: props.disabled })}
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-        >
-            <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
-        </svg>
+        <div className={s.rightWrapper}
+            onClick={props.onClick}>
+            <svg
+                onClick={props.onClick}
+                className={cs(s.arrow, s.arrowRight, { [s.arrowDisabled]: props.disabled })}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+            >
+                <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
+            </svg>
+        </div>
     );
 };
 
-const RealSlider = ({ className, options, children }) => {
+const RealSlider = ({ className, options = {}, children }) => {
     const [currentSlide, setCurrentSlide] = React.useState(0);
     const { showNaviBtn, ...rest } = options;
     const [ref, slider] = useKeenSlider({
         ...rest,
-        slideChanged (s) {
+        slideChanged(s) {
             setCurrentSlide(s.details().relativeSlide);
         }
     });
@@ -51,12 +56,12 @@ const RealSlider = ({ className, options, children }) => {
                 <>
                     <ArrowLeft
                         onClick={e => e.stopPropagation() || slider.prev()}
-                        // disabled={currentSlide === 0}
+                    // disabled={currentSlide === 0}
                     />
 
                     <ArrowRight
                         onClick={e => e.stopPropagation() || slider.next()}
-                        // disabled={currentSlide === slider.details().size - 1}
+                    // disabled={currentSlide === slider.details().size - 1}
                     />
                 </>
             )}
@@ -64,9 +69,9 @@ const RealSlider = ({ className, options, children }) => {
     );
 };
 
-export default function Slider (props) {
+export default function Slider(props = {}) {
     useStyles(s);
-    const { className, children, options } = props;
+    const { className, children, options = {} } = props;
     const [mounted, setMounted] = useState(false);
     const { showNaviBtn } = options;
 

@@ -4,6 +4,8 @@ import { toast } from 'react-toastify';
 import ContentService from './service';
 import uploader from '@utils/upload';
 import showSpinner from '@utils/spinner';
+import AuthService from '@framework/common/services/AuthService';
+import { setAccessToken } from '@framework/auth';
 
 const SESSION_KEY = 'EDITOR_SESSION_CONTENT';
 
@@ -15,6 +17,9 @@ export default class Store extends CommonStore {
     @observable introContent = '';
     @observable coverImgUrl = '';
     @observable tags = [];
+    @observable editorLoaded = false;
+
+    @observable showLoginCard = false;
 
     contentService;
 
@@ -26,6 +31,7 @@ export default class Store extends CommonStore {
 
     initService(axios) {
         this.contentService = new ContentService(axios);
+        this.authService = new AuthService(axios);
     }
 
     @action.bound
@@ -38,6 +44,7 @@ export default class Store extends CommonStore {
     onEditorInit = editor => {
         this.editor = editor;
         this.loadSession();
+        this.editorLoaded = true;
     }
 
     @action.bound
@@ -47,6 +54,9 @@ export default class Store extends CommonStore {
 
     @action.bound
     saveContent = editor => {
+        if (!this.editorLoaded) {
+            return;
+        }
         // todo: 保存tags,封面图片和title等
         const sessionData = {
             title: this.editorTitle,
@@ -100,6 +110,9 @@ export default class Store extends CommonStore {
 
     @action.bound
     publishContent = async () => {
+        if (!this.editorLoaded) {
+            return;
+        }
         const data = {
             title: this.editorTitle,
             intro: this.introContent,
@@ -108,7 +121,34 @@ export default class Store extends CommonStore {
             tags: this.tags,
         };
         showSpinner();
-        const res = await this.contentService.publishContent(data);
-        console.log(res);
+        try {
+            const res = await this.contentService.publishContent(data);
+            console.log(res);
+        } catch (error) {
+            if (error?.code === 403) {
+                this.switchLoginCard(true);
+            }
+        }
+    }
+
+    @action.bound
+    switchLoginCard = val => {
+        // 出登录弹窗
+        this.showLoginCard = val;
+    }
+
+    @action.bound
+    handleLoginSubmit = async formData => {
+        try {
+            const res = await this.authService.handleLogin(formData);
+            if (res.success) {
+                const { accessToken } = res;
+                setAccessToken(accessToken);
+            }
+            return res;
+        } catch (error) {
+            console.error(error);
+            return { success: false, msg: error?.message };
+        }
     }
 }

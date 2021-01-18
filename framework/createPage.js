@@ -30,9 +30,9 @@ const enhanceAxios = context => {
         token = cookie.token;
     } else {
         const { req, res } = context;
-        token = res.locals.token;
         axios.__req = req;
         axios.__res = res;
+        token = res.locals.token;
     }
     if (!token) {
         console.warn('Missing token');

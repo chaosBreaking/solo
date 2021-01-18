@@ -4,14 +4,23 @@ import { Editor as TinyMCEditor } from '@tinymce/tinymce-react';
 const plugins = 'formatpainter print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons';
 const toolbar = 'undo redo | bold italic underline strikethrough formatpainter | fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat pagebreak | charmap emoticons image media | save print link anchor codesample insertfile template | fullscreen code preview';
 // 'code codesample undo redo restoredraft | cut copy paste pastetext | forecolor backcolor searchreplace bold italic underline strikethrough link anchor | alignleft aligncenter alignright alignjustify outdent indent | bullist numlist | formatselect fontselect fontsizeselect | blockquote subscript superscript removeformat | table image media charmap emoticons hr pagebreak insertdatetime print preview',
-const menubar = false;
-const fontsizeFormats = '22px 24px 26px';
 // 'file edit view insert format tools table help';
-const fontFamily = "'Spectral', Serif;";
+const fontsizeFormats = '22px 24px 26px';
+const MAX_IMG_WIDTH = 640;
 const DEFAULT_CONTENT = '';
 const UPLOAD_URL = '/upload';
 const FOLDER_PREFIX = 'content_imgs/';
-
+const contentStyle = `
+* { font-family: 'Spectral', serif }
+.mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before {
+    font-size: 20px; font-family: 'Spectral', serif !important;
+}
+img {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+`;
 export default class Editor extends React.Component {
     state = { mounted: false };
     uploadUrl = UPLOAD_URL;
@@ -47,6 +56,7 @@ export default class Editor extends React.Component {
                 outputFormat='html'
                 apiKey="yhv7e7rccduf41j39x83x364fdzt91183p8v3thgkw4zm9iw"
                 init={{
+                    // content_css: 'dark',
                     document_base_url: 'http://fs.hyperii.com',
                     skin_url: 'http://fs.hyperii.com/script',
                     theme_url: 'http://fs.hyperii.com/script/theme.js',
@@ -60,7 +70,6 @@ export default class Editor extends React.Component {
                         // 'table',
                         // 'quickimage',
                         // 'quickbars',
-                        // 'codesample',
                         // 'help',
                         // 'wordcount', // 暂时不用
                     ],
@@ -68,8 +77,8 @@ export default class Editor extends React.Component {
                         link: 'http://fs.hyperii.com/script/link.js',
                         quickbars: 'http://fs.hyperii.com/script/quickbar.js',
                     },
-                    // quickbars_insert_toolbar: 'quickimage quicktable codesample', // 插入菜单
-                    quickbars_insert_toolbar: false,
+                    quickbars_insert_toolbar: 'quickimage quicktable codesample', // 插入菜单
+                    // quickbars_insert_toolbar: false,
                     quickbars_selection_toolbar: 'bold italic underline | blockquote quicklink | fontsizeselect', // 选中后菜单
                     contextmenu: 'undo redo | inserttable | cell row column deletetable', // 右键context菜单
                     powerpaste_word_import: 'clean',
@@ -88,16 +97,30 @@ export default class Editor extends React.Component {
                     toolbar_sticky: true,
                     branding: false,
                     fontsize_formats: fontsizeFormats,
-                    content_style: `
-                    * { font-family: 'Spectral', serif }
-                    .mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before { font-size: 20px; font-family: 'Spectral', serif !important; }
-                    `,
+                    content_style: contentStyle,
                     placeholder: '输入正文 ...',
+                    quickbars_image_toolbar: false, // 选中图片后出现的toolbar
                     // automatic_uploads: false,
                     // upload_images: () => console.log('dddd'),
                     // file_picker_callback: () => console.log('dddsssd'),
                     // images_upload_url: 'postAcceptor',
-                    images_upload_handler: this.uploadHandler
+                    images_upload_handler: this.uploadHandler,
+                    setup: function (editor) {
+                        editor.on('init', function (args) {
+                            editor = args.target;
+                            editor.on('NodeChange', function (e) {
+                                if (e && e.element.nodeName.toLowerCase() === 'img') {
+                                    let width = e.element.width;
+                                    let height = e.element.height;
+                                    if (width > MAX_IMG_WIDTH) {
+                                        height = height / (width / MAX_IMG_WIDTH);
+                                        width = MAX_IMG_WIDTH;
+                                    }
+                                    window.tinyMCE.DOM.setAttribs(e.element, { width, height });
+                                }
+                            });
+                        });
+                    }
                 }}
                 onEditorChange={this.onEditorChange}
                 onInit={this.onInit}
