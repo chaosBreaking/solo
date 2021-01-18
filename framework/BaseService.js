@@ -12,9 +12,11 @@ export default class BaseService {
 
     async __request(method, url, ...rest) {
         try {
-            // 每次请求都要从cookie拿token
-            const token = getAccessToken();
-            this.axios.defaults.headers.common.token = token;
+            if (process.env.BROWSER) {
+                // 客户端每次请求都要从cookie拿token
+                const token = getAccessToken();
+                this.axios.defaults.headers.common.token = token;
+            }
             const res = await this.axios[method](url, ...rest);
             const { data, headers } = res;
             return { headers, data };

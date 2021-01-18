@@ -94,6 +94,28 @@ export default class Store extends CommonStore {
     }
 
     @action.bound
+    switchLoginCard = val => {
+        // 出登录弹窗
+        this.showLoginCard = val;
+    }
+
+    @action.bound
+    handleLoginSubmit = async formData => {
+        try {
+            const res = await this.authService.handleLogin(formData);
+            if (res.success) {
+                const { accessToken } = res;
+                setAccessToken(accessToken);
+            }
+            this.switchLoginCard(false);
+            return res;
+        } catch (error) {
+            console.error(error);
+            return { success: false, msg: error?.message };
+        }
+    }
+
+    @action.bound
     setIntroContent = value => {
         this.introContent = value;
     }
@@ -123,32 +145,12 @@ export default class Store extends CommonStore {
         showSpinner();
         try {
             const res = await this.contentService.publishContent(data);
+            localStorage.removeItem(SESSION_KEY);
             console.log(res);
         } catch (error) {
             if (error?.code === 403) {
                 this.switchLoginCard(true);
             }
-        }
-    }
-
-    @action.bound
-    switchLoginCard = val => {
-        // 出登录弹窗
-        this.showLoginCard = val;
-    }
-
-    @action.bound
-    handleLoginSubmit = async formData => {
-        try {
-            const res = await this.authService.handleLogin(formData);
-            if (res.success) {
-                const { accessToken } = res;
-                setAccessToken(accessToken);
-            }
-            return res;
-        } catch (error) {
-            console.error(error);
-            return { success: false, msg: error?.message };
         }
     }
 }
