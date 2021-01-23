@@ -21,12 +21,52 @@ img {
     margin-right: auto !important;
 }
 `;
+
+/**
+ * 可监听的事件 https://www.tiny.cloud/docs/advanced/events/#mediaembedevents
+ * dom util https://www.tiny.cloud/docs/api/tinymce.dom/tinymce.dom.domutils/
+ */
+
 export default class Editor extends React.Component {
-    state = { mounted: false };
+    state = { mounted: false, newLine: false };
     uploadUrl = UPLOAD_URL;
 
     get handleEditorChange() {
         return this.props.handleEditorChange || (() => { });
+    }
+
+    setupHandler(editor) {
+        editor.on('init', function (args) {
+            editor = args.target;
+            editor.on('NodeChange', function (e) {
+                if (e && e.element.nodeName.toLowerCase() === 'img') {
+                    let width = e.element.width;
+                    let height = e.element.height;
+                    if (width > MAX_IMG_WIDTH) {
+                        height = height / (width / MAX_IMG_WIDTH);
+                        width = MAX_IMG_WIDTH;
+                    }
+                    window.tinyMCE.DOM.setAttribs(e.element, { width, height });
+                }
+            });
+        });
+        // editor.ui.registry.addContextToolbar('inserttoolbar', {
+        //     predicate: function (node) {
+        //         return node.nodeName === 'P';
+        //     },
+        //     items: 'quickimage media',
+        //     position: 'line',
+        //     scope: 'editor'
+        // });
+
+        // editor.ui.registry.addContextToolbar('textselection', {
+        //     predicate: function (node) {
+        //         return !editor.selection.isCollapsed();
+        //     },
+        //     items: 'bold italic | blockquote',
+        //     position: 'selection',
+        //     scope: 'node'
+        // });
     }
 
     onEditorChange = (content, editor) => {
@@ -57,6 +97,15 @@ export default class Editor extends React.Component {
                 apiKey="yhv7e7rccduf41j39x83x364fdzt91183p8v3thgkw4zm9iw"
                 init={{
                     // content_css: 'dark',
+                    entity_encoding: 'raw',
+                    cleanup: true,
+                    remove_linebreaks: true,
+                    forced_root_block: true,
+                    force_br_newlines: true,
+                    force_p_newlines: false,
+                    convert_newlines_to_brs: true,
+                    paste_auto_cleanup_on_paste: true,
+                    image_caption: true,
                     document_base_url: 'http://fs.hyperii.com',
                     skin_url: 'http://fs.hyperii.com/script',
                     theme_url: 'http://fs.hyperii.com/script/theme.js',
@@ -65,7 +114,7 @@ export default class Editor extends React.Component {
                         // 'codesample',
                         // 'link',
                         // 'lists',
-                        // // 'media',
+                        // 'media',
                         // 'powerpaste',
                         // 'table',
                         // 'quickimage',
@@ -79,7 +128,8 @@ export default class Editor extends React.Component {
                     },
                     quickbars_insert_toolbar: 'quickimage quicktable codesample', // 插入菜单
                     // quickbars_insert_toolbar: false,
-                    quickbars_selection_toolbar: 'bold italic underline | blockquote quicklink | fontsizeselect', // 选中后菜单
+                    // quickbars_selection_toolbar: 'bold italic underline | blockquote quicklink | fontsizeselect', // 选中后菜单
+                    quickbars_selection_toolbar: 'bold italic underline | blockquote quicklink', // 选中后菜单
                     contextmenu: 'undo redo | inserttable | cell row column deletetable', // 右键context菜单
                     powerpaste_word_import: 'clean',
                     powerpaste_html_import: 'clean',
@@ -105,22 +155,7 @@ export default class Editor extends React.Component {
                     // file_picker_callback: () => console.log('dddsssd'),
                     // images_upload_url: 'postAcceptor',
                     images_upload_handler: this.uploadHandler,
-                    setup: function (editor) {
-                        editor.on('init', function (args) {
-                            editor = args.target;
-                            editor.on('NodeChange', function (e) {
-                                if (e && e.element.nodeName.toLowerCase() === 'img') {
-                                    let width = e.element.width;
-                                    let height = e.element.height;
-                                    if (width > MAX_IMG_WIDTH) {
-                                        height = height / (width / MAX_IMG_WIDTH);
-                                        width = MAX_IMG_WIDTH;
-                                    }
-                                    window.tinyMCE.DOM.setAttribs(e.element, { width, height });
-                                }
-                            });
-                        });
-                    }
+                    setup: this.setupHandler,
                 }}
                 onEditorChange={this.onEditorChange}
                 onInit={this.onInit}

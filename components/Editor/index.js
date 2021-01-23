@@ -39,8 +39,8 @@ export default class EditorPage extends Component {
                 <Editor onInit={onEditorInit} content={editorContent} handleEditorChange={handleEditorChange} />
                 <ToastContainer limit={1} pauseOnFocusLoss={false} />
                 {
-                    showLoginCard && <div className={s.authModal} onClick={() => switchLoginCard(false)}>
-                        <Mask zIndex={0} />
+                    showLoginCard && <div className={s.authModal}>
+                        <Mask zIndex={0} onClick={() => switchLoginCard(false)} />
                         <LoginCard handleSubmit={handleLoginSubmit} />
                     </div>
                 }

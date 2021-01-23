@@ -6,6 +6,7 @@ import uploader from '@utils/upload';
 import showSpinner from '@utils/spinner';
 import AuthService from '@framework/common/services/AuthService';
 import { setAccessToken } from '@framework/auth';
+import { forward } from '@utils/navi';
 
 const SESSION_KEY = 'EDITOR_SESSION_CONTENT';
 
@@ -54,13 +55,16 @@ export default class Store extends CommonStore {
 
     @action.bound
     saveContent = editor => {
+        /**
+         * todo: 将草稿同步到远端
+         */
         if (!this.editorLoaded) {
             return;
         }
         // todo: 保存tags,封面图片和title等
         const sessionData = {
             title: this.editorTitle,
-            content: this.editorContent,
+            content: this.editor.getContent(),
             intro: this.introContent,
             tags: this.tags,
             img: this.coverImgUrl,
@@ -138,15 +142,26 @@ export default class Store extends CommonStore {
         const data = {
             title: this.editorTitle,
             intro: this.introContent,
-            content: this.editorContent,
+            content: this.editor.getContent(),
             cover: this.coverImgUrl,
             tags: this.tags,
         };
         showSpinner();
         try {
+            toast.info('正在发布中，请稍等...', {
+                position: toast.POSITION.TOP_LEFT,
+            });
             const res = await this.contentService.publishContent(data);
             localStorage.removeItem(SESSION_KEY);
-            console.log(res);
+            toast.info('文章发布成功，即将进入预览', {
+                position: toast.POSITION.TOP_LEFT,
+            });
+            (requestAnimationFrame || setTimeout)(() => {
+                const contentId = res._id;
+                forward('/article.html', {
+                    id: contentId,
+                });
+            });
         } catch (error) {
             if (error?.code === 403) {
                 this.switchLoginCard(true);

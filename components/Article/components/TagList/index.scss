@@ -1,0 +1,22 @@
+.container {
+    max-width: 100%;
+    padding: 0 .1rem;
+    display: flex;
+    // overflow: auto;
+}
+
+.item {
+    width: max-content !important;
+    padding: .02rem .05rem;
+    border-radius: .1rem;
+    margin-right: .1rem;
+    white-space: nowrap;
+    background-color: #ebebeb;
+    text-align: center;
+    cursor: pointer;
+    color: #333;
+}
+
+.slider {
+    width: 100%;
+}

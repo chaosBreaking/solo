@@ -42,6 +42,10 @@ const routes = {
             load: () => import(/* webpackChunkName: 'page' */ './page'),
         },
         {
+            path: '/article.html',
+            load: () => import(/* webpackChunkName: 'article' */ './article'),
+        },
+        {
             path: '/verify.html',
             load: () => import(/* webpackChunkName: 'verify' */ './verify'),
         },

@@ -7,8 +7,18 @@ serif !important;
 }
 
 :global(.tox-notifications-container) {
-    display: none;
+    display: none !important;
 }
+
+:global(.tox-pop--left) {
+    transform: translateX(-210%);
+
+    &:before,
+    &::after {
+        display: none !important;
+    }
+}
+
 
 .container {
     position: relative;

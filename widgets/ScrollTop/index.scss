@@ -1,0 +1,23 @@
+@import '~static/ani';
+
+.scrollTop {
+    position: fixed;
+    width: .3rem;
+    height: .3rem;
+    bottom: .5rem;
+    right: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    border-radius: 100%;
+    cursor: pointer;
+    animation: upIn .5s;
+    -webkit-animation: upIn .5s;
+
+    display: none;
+}
+
+.show {
+    display: flex;
+}
