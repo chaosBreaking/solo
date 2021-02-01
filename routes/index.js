@@ -28,6 +28,20 @@ const routes = {
         {
             path: '/zone.html',
             load: () => import(/* webpackChunkName: 'zone' */ './zone'),
+            children: [
+                {
+                    path: '',
+                    load: () => import(/* webpackChunkName: 'zone' */ './zone'),
+                },
+                {
+                    path: '/posts',
+                    load: () => import(/* webpackChunkName: 'zone' */ './zone'),
+                },
+                {
+                    path: '/community',
+                    load: () => import(/* webpackChunkName: 'zone' */ './zone'),
+                },
+            ],
         },
         {
             path: '/explore.html',

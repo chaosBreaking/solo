@@ -1,15 +1,16 @@
-@import '~static/color';
 @import '~static/constants';
-@import '~static/ani';
 
 .container {
     position: sticky;
     top: 0;
     width: 100%;
     height: $NAV_HEIGHT_MAIN;
-    padding: .05rem .1rem;
-    margin-bottom: .02rem;
+    padding: .05rem;
+    margin-bottom: .1rem;
     display: flex;
     align-items: center;
     z-index: 1;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.12);
+    border-radius: .02rem;
+    background: #fff;
 }

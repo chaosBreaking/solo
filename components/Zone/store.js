@@ -1,24 +1,49 @@
 import { observable, action, runInAction } from 'mobx';
 import CommonStore from '@framework/CommonStore';
 import ContentService from './service';
+import { ACTIVE_VIEW, NAVI_ITEMS } from './constants';
+import { forward } from '@utils/navi';
 
 const count = 10;
 export default class Store extends CommonStore {
+    navItems = NAVI_ITEMS;
+    offset = 0;
+
     @observable dataList = [];
     @observable offsetId = '';
     @observable loadingStatus = 0;
+    @observable activeView = ACTIVE_VIEW.ARTICLE;
     @observable hasMore = true;
-    @observable mainTabs = [{ title: 'tab1', }, { title: 'tab2', }, { title: 'tab3' }];
-    offset = 0;
+    @observable mainTabs = [{ title: '推荐', }, { title: '最新', }, { title: '关注' }];
 
     @action.bound
     async initializeData(requestContext) {
+        const { pathname } = requestContext;
+        this.checkActiveView(pathname);
         await this.loadMore();
         return {};
     }
 
     initService(axios) {
         this.contentService = new ContentService(axios);
+    }
+
+    @action.bound
+    checkActiveView(pathname) {
+        if (pathname.endsWith(ACTIVE_VIEW.POST)) {
+            this.activeView = ACTIVE_VIEW.POST;
+        } else if (pathname.endsWith(ACTIVE_VIEW.COMMUNITY)) {
+            this.activeView = ACTIVE_VIEW.COMMUNITY;
+        } else {
+            this.activeView = ACTIVE_VIEW.ARTICLE;
+        }
+    }
+
+    @action.bound
+    setActiveView(view) {
+        if (view !== this.activeView) {
+            this.activeView = view;
+        }
     }
 
     @action.bound
@@ -44,5 +69,20 @@ export default class Store extends CommonStore {
                 this.loadingStatus = 0;
             }
         });
+    }
+
+    @action.bound
+    handleNav(item) {
+        const { insideView, url, index } = item;
+        if (index === this.activeView) {
+            return;
+        }
+        if (insideView) {
+            const dest = `/zone.html/${url}`;
+            history.pushState({ activeView: index }, '', dest);
+            this.activeView = index;
+        } else {
+            forward(url);
+        }
     }
 }

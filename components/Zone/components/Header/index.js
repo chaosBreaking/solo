@@ -8,10 +8,7 @@ export default React.memo(function Header(props) {
     useStyles(s);
     return (
         <div className={s.container}>
-            <div className={s.tab}>
-                <MainTab />
-                {/* <SubTab /> */}
-            </div>
+            <MainTab />
         </div>
     );
 });
