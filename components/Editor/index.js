@@ -16,7 +16,10 @@ import Mask from '@widgets/Mask';
 
 @withStyles(s)
 @createPage({
-    Store
+    Store,
+    pageInfo: {
+        title: 'Solo|编辑器'
+    }
 })
 @inject('store')
 @observer
@@ -37,7 +40,7 @@ export default class EditorPage extends Component {
                 <NavigationBar saveContent={saveContent} publishContent={publishContent} />
                 <LeftBar />
                 <Editor onInit={onEditorInit} content={editorContent} handleEditorChange={handleEditorChange} />
-                <ToastContainer limit={1} pauseOnFocusLoss={false} />
+                <ToastContainer autoClose={3000} hideProgressBar limit={1} pauseOnFocusLoss={false} closeOnClick />
                 {
                     showLoginCard && <div className={s.authModal}>
                         <Mask zIndex={0} onClick={() => switchLoginCard(false)} />

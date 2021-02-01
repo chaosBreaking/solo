@@ -1,0 +1,31 @@
+@import '~static/color';
+@import '~static/constants';
+@import '~static/ani';
+
+.container {
+    position: relative;
+    // width: 1rem;
+    // height: $NAV_HEIGHT_MAIN;
+    padding: 0 .1rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 2px solid #eee;
+    font-size: .09rem;
+    z-index: 9;
+    text-align: left;
+}
+
+.item {
+    background: #ddd;
+    padding: .02rem .1rem;
+    margin: 0 .1rem .1rem 0;
+    border-radius: .05rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.active {
+    background: var(--theme-main);
+    color: #fff;
+}

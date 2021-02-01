@@ -4,8 +4,8 @@ import { SlideItem } from '@widgets/Slider';
 import Avatar from '@widgets/Avatar';
 
 import s from './index.scss';
-// const MockImg = ({ uni, src }) => <div style={{ position: 'absolute', width: '100%', height: '100%', background: '#eee' }}></div>;
-const MockImg = ({ uni, src }) => <img src={src || 'https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture' + '&c=' + uni} />;
+const MockImg = ({ uni, src }) => <div style={{ position: 'absolute', width: '100%', height: '100%', background: '#eee' }}></div>;
+// const MockImg = ({ uni, src }) => <img src={src || 'https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture' + '&c=' + uni} />;
 
 export default React.memo(function RecommendCard({ data, idx }) {
     useStyles(s);

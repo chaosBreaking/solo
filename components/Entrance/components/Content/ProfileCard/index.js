@@ -11,11 +11,13 @@ export default React.memo(function ProfileCard({ data, idx }) {
 
     return <div className={s.profileCard}>
         <div className={s.imgBlock}>
-            <Emage src={img + idx || 'https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture' + '&c=' + idx} isFake />
+            <Emage isFake={true} />
             <div className={s.info}>
-                <Avatar className={s.avatar} src={avatar} />
-                <p className={s.name}>{name}</p>
-                <p className={s.action}>{bio}</p>
+                <Avatar className={s.avatar} isFake size={'large'} />
+                <div className={s.line}>
+                    <p className={s.name}>{name}</p>
+                    <p className={s.action}>{bio}</p>
+                </div>
             </div>
         </div>
         <div className={s.bottom}>

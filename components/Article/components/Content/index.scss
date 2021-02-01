@@ -1,13 +1,14 @@
 @import '~static/color';
 @import '~static/constants';
 
-p {
+p,
+span {
     display: block;
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
-    line-height: 1.5;
+    line-height: 2;
 }
 
 img {

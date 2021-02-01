@@ -11,70 +11,22 @@ import Button from '@widgets/Button';
 
 export default function Recommend(props) {
     useStyles(s);
-    const tags = ['COV-19', 'Anti-996', 'Utopia', 'Tech', 'Artificial Intelligence', 'hack', 'BlockChain', 'Pink'];
-    // const profiles = [{
-    //     // avatar: 'https://api.ixiaowai.cn/api/api.php',
-    //     nickname: 'Allon',
-    //     intro: 'Never stop thinking'
-    // }, {
-    //     // avatar: 'https://api.ixiaowai.cn/api/api.php?x=1',
-    //     nickname: 'Bob',
-    //     intro: 'Hello, i am fresh!'
-    // }, {
-    //     // avatar: 'https://api.ixiaowai.cn/api/api.php?x=2',
-    //     nickname: 'Cobain',
-    //     intro: 'It\'s better to burn out than fade away!'
-    // }, {
-    //     // avatar: 'https://api.ixiaowai.cn/api/api.php?x=1',
-    //     nickname: 'Dacy',
-    //     intro: 'Hello, i am fresh!'
-    // }];
-    const content = [
-        {
-            // img: 'https://api.ixiaowai.cn/api/api.php?x=content1',
-            title: '小布尔什乔亚的虚幻岁静',
-            abstract: '轻型目录访问协议（英文：Lightweight Directory Access Protocol，缩写：LDAP，/ˈɛldæp/）是一个开放的，中立的，工业标准的应用协议，通过IP协议提供访问控制和维护分布式信息的目录信息。[1]',
-            author: 'Kick Ass'
-        },
-        {
-            // img: 'https://api.ixiaowai.cn/api/api.php?x=content2',
-            title: '无辜者，不幸与必然',
-            abstract: 'GPG 可以在互联网上，以数学为基础创造一个无法被伪造的身份，并以此身份签名信息、接收加密信息。',
-            author: 'Shameless'
-        },
-        {
-            // img: 'https://api.ixiaowai.cn/api/api.php?x=content3',
-            title: '密码朋克宣言',
-            abstract: '我们密码朋克，将投身于建设匿名的系统。 我们要捍卫自己的隐私，用密码学，用匿名邮件系统，用数字签名，用电子货币。',
-            author: 'Eric Hughes'
-        },
-    ];
-    const topics = [
-        {
-            title: '新一代还有没有改变世界的机会'
-        },
-        {
-            title: '后浪们该奔涌向何处'
-        },
-        {
-            title: '疫情，我，他们'
-        },
-        {
-            title: '生活的艺术和开心的学问'
-        },
-        {
-            title: '这个世界会好吗'
-        },
-    ];
     // todo: RSS订阅
     return (
         <div className={s.container}>
             <div className={s.body}>
+                <StaticSearchBar
+                    className={s.search}
+                    placeholder={'搜索圈子、创作者或作品集'}
+                    PreIcon={() => <span className={'iconfont icon-fcstubiao13 ' + s.icon} />}
+                />
+                {/* <div className={s.search}>
+                </div> */}
                 {/* <Card className={s.card}>
                     <div className={s.title}>热门创作者</div>
                     <ProfileLine data={profiles} />
                 </Card> */}
-                <Card className={s.card}>
+                {/* <Card className={s.card}>
                     <div className={s.title}>为你推荐</div>
                     <ContentLine data={content} />
                 </Card>
@@ -85,7 +37,7 @@ export default function Recommend(props) {
                 <Card className={s.card}>
                     <span className={s.title}>热门标签</span>
                     <TagsBox tags={tags} />
-                </Card>
+                </Card> */}
                 <Card className={s.card}>
                     <div className={s.title}>订阅圈子</div>
                     <div className={s.content}>

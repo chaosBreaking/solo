@@ -30,12 +30,6 @@ textarea {
     user-select: text;
 }
 
-@font-face {
-    font-family: lemon;
-    src: url('../../public/font.ttf');
-    font-display: swap;
-}
-
 :global(.iconfont) {
     font-family: "iconfont" !important;
     // font-size: .1rem;

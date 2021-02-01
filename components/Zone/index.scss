@@ -1,8 +1,6 @@
 @import '~static/color';
 @import '~static/constants';
 
-$TOP: $NAV_HEIGHT_MAIN+.1rem;
-
 body {
     overflow: hidden !important;
     font-family: 'Quicksand', arial, sans-serif !important;
@@ -16,22 +14,31 @@ body {
     flex-flow: column;
     justify-content: flex-start;
     overflow: auto;
-    background: #f4f4f4;
+    // background: #f6f6f6;
 }
 
 .main {
     position: relative;
-    width: 5rem;
+    width: 40%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin: $TOP auto auto;
+    margin: 0 auto;
 }
 
 .row {
     position: relative;
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
+    border: 1px solid #eee;
+}
+
+.tab {
+    top: 0;
+    // position: sticky;
+    // z-index: 6;
+    background: #fff;
 }

@@ -6,7 +6,8 @@ import s from './index.scss';
 
 const MockImg = ({ uni, src }) => (
     // <div style={{ width: '100%', height: '2rem', background: '#ddd' }} />
-    <img src={src || 'https://api.ixiaowai.cn/api/api.php' + '?c=' + uni} />
+    <img src={src || 'https://image.gcores.com/984fe87f-bd32-4d90-9afe-0dfe88ceb997.jpg?x-oss-process=image/resize,limit_1,m_lfit,w_3000,h_3000/quality,q_90'} />
+    // <img src={src || 'https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture'} />
 );
 const options = {
     spacing: 8,

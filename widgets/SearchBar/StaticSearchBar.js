@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import useStyles from 'isomorphic-style-loader/useStyles';
+import cs from 'classnames';
 import s from './static.scss';
 
-export default function StaticSearchBar(props) {
+export default function StaticSearchBar({ className, mountRef, onChange, onClick, placeholder, PreIcon }) {
     useStyles(s);
     const [content, setContent] = useState('');
-    const { mountRef, onChange, onClick, placeholder, PreIcon } = props;
     const events = { onChange, onClick };
     const onInputChange = e => {
         setContent(e.target.value);
@@ -21,7 +21,7 @@ export default function StaticSearchBar(props) {
     };
     typeof mountRef === 'function' && mountRef(controller);
     return (
-        <div className={s.container} {...events}>
+        <div className={cs(s.container, className)} {...events}>
             {!!PreIcon && <PreIcon />}
             <input onChange={onInputChange} value={content} placeholder={placeholder} />
         </div>

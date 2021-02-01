@@ -21,7 +21,7 @@ export default class Store extends CommonStore {
     @observable editorLoaded = false;
 
     @observable showLoginCard = false;
-
+    toastContainerId = 1;
     contentService;
 
     @action.bound
@@ -136,6 +136,7 @@ export default class Store extends CommonStore {
 
     @action.bound
     publishContent = async () => {
+        toast.clearWaitingQueue();
         if (!this.editorLoaded) {
             return;
         }
@@ -143,9 +144,18 @@ export default class Store extends CommonStore {
             title: this.editorTitle,
             intro: this.introContent,
             content: this.editor.getContent(),
+            text: this.editor.getBody().innerText,
             cover: this.coverImgUrl,
             tags: this.tags,
         };
+        if (!data.title || !data.content) {
+            toast.error('写点什么吧...', {
+                position: toast.POSITION.TOP_CENTER,
+                containerId: this.toastContainerId,
+                // transition: 'slide',
+            });
+            return;
+        }
         showSpinner();
         try {
             toast.info('正在发布中，请稍等...', {
@@ -155,6 +165,8 @@ export default class Store extends CommonStore {
             localStorage.removeItem(SESSION_KEY);
             toast.info('文章发布成功，即将进入预览', {
                 position: toast.POSITION.TOP_LEFT,
+                // transition: 'slide',
+                autoClose: 5000,
             });
             (requestAnimationFrame || setTimeout)(() => {
                 const contentId = res._id;

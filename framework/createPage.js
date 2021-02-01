@@ -44,17 +44,17 @@ const enhanceAxios = context => {
 
 export default (options = {}) => {
     return Component => {
-        const { Store, pageInfo } = options;
+        const { Store, pageInfo = {} } = options;
 
         class Page extends React.Component {
             static Store = Store
+            static pageInfo = pageInfo;
 
             constructor(props) {
                 super(props);
                 this.initialProps = {
                     context: props.context,
                     store: props.store || {},
-                    pageInfo
                 };
             }
 
@@ -77,6 +77,10 @@ export default (options = {}) => {
                 store.initService(axios);
                 typeof store.prepareClientData === 'function' && await store.prepareClientData();
                 return store;
+            }
+
+            componentDidMount() {
+                document.title = pageInfo.title || document.title;
             }
 
             render() {

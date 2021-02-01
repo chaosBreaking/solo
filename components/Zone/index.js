@@ -10,7 +10,7 @@ import Recommend from './components/Recommend';
 import FeedsList from './components/FeedsList';
 import TopCard from './components/TopCard';
 import SideNav from './components/SideNav';
-import NavigationBar from './components/NavigationBar';
+import Header from './components/Header';
 import s from './index.scss';
 
 @withStyles(s)
@@ -23,14 +23,14 @@ export default class Zone extends Component {
     render() {
         return (
             <div className={s.container}>
-                <NavigationBar defaultItems />
                 <div className={s.main}>
+                    <Header />
                     <TopCard />
-                    {/* <SideNav /> */}
+                    <SideNav />
                     <div className={s.row}>
                         <FeedsList />
-                        {/* <Recommend /> */}
                     </div>
+                    <Recommend />
                 </div>
             </div>
         );

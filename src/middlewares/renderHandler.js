@@ -54,6 +54,7 @@ export default async (req, res, next) => {
                     </App>,
                 ),
             );
+            data.title = Component.pageInfo.title || data.title;
         }
         data.app = {
             apiUrl: config.api.clientUrl,
@@ -62,7 +63,6 @@ export default async (req, res, next) => {
         data.styles = [{ id: 'css', cssText: [...css].join('') }];
         data.scripts = Array.from(scripts);
         data.mdStyles = sheets.toString();
-
         const html = ReactDOM.renderToStaticMarkup(<Html {...data} />);
         res.status(route.status || 200);
         res.send(`<!doctype html>${html}`);

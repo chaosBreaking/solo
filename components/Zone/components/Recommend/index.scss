@@ -1,17 +1,20 @@
 @import '~static/color';
 @import '~static/constants';
 
-$RECOMMEND_WIDTH: 35%;
+$RECOMMEND_WIDTH: 25%;
 
 .container {
-    position: relative;
-    left: 0;
+    position: fixed;
+    right: 5%;
+    padding-left: .1rem;
     display: flex;
     flex-direction: column;
     width: $RECOMMEND_WIDTH;
     max-width: $RECOMMEND_WIDTH;
     min-width: $RECOMMEND_WIDTH;
+    padding-top: $NAV_HEIGHT_MAIN;
     margin-left: .1rem;
+    border-radius: .1rem;
     z-index: 1;
 }
 
@@ -23,6 +26,27 @@ $RECOMMEND_WIDTH: 35%;
     border-radius: .01rem;
 }
 
+.search {
+    height: .3rem;
+    margin-bottom: .1rem;
+    border-radius: .05rem;
+    -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
+    -moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .12);
+}
+
+.icon {
+    height: 100%;
+    width: .3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: .12rem;
+    color: #666;
+}
+
 .title {
     position: relative;
     height: .2rem;
@@ -30,6 +54,7 @@ $RECOMMEND_WIDTH: 35%;
     align-items: center;
     font-size: .1rem;
     font-weight: bold;
+
     &:before {
         content: '';
         display: inline-block;
@@ -60,6 +85,7 @@ $RECOMMEND_WIDTH: 35%;
 .rssInput {
     display: flex;
     padding: .1rem 0;
+
     input {
         height: .2rem !important;
         border: 2px solid #aaa;

@@ -11,7 +11,10 @@ const DEFAULT_CONTENT = '';
 const UPLOAD_URL = '/upload';
 const FOLDER_PREFIX = 'content_imgs/';
 const contentStyle = `
-* { font-family: 'Spectral', serif }
+* {
+    font-family: 'Spectral', serif;
+    line-height: 2;
+}
 .mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before {
     font-size: 20px; font-family: 'Spectral', serif !important;
 }
