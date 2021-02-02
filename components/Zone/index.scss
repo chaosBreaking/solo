@@ -2,8 +2,9 @@
 @import '~static/constants';
 
 body {
-    overflow: hidden !important;
+    overflow: auto !important;
     font-family: 'Quicksand', arial, sans-serif !important;
+    background: #f6f9fa;
 }
 
 .container {
@@ -13,8 +14,6 @@ body {
     display: flex;
     flex-flow: column;
     justify-content: flex-start;
-    overflow: auto;
-    background: #f6f9fa;
 }
 
 .main {
