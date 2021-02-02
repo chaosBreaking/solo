@@ -2,8 +2,8 @@
 
 .container {
     position: fixed;
-    left: 10%;
     top: 0;
+    left: 10%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -11,6 +11,11 @@
     padding-top: $NAV_HEIGHT_MAIN;
     font-size: .12rem;
     color: #151516;
+
+    :global(.iconfont) {
+        margin-right: .05rem;
+        font-size: .16rem !important;
+    }
 
     .item {
         display: flex;
@@ -28,29 +33,7 @@
         }
     }
 
-    :global(.iconfont) {
-        margin-right: .05rem;
-        font-size: .16rem !important;
-    }
-}
-
-.logo {
-    position: relative;
-    padding: 0 .1rem;
-    margin-bottom: .2rem;
-    background-image: linear-gradient(135deg, #5a8afb 0%, #f86363 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: .26rem;
-    font-weight: bolder;
-
-    // @include NAVI_BASE();
-    .small {
-        font-size: .18rem;
-    }
-
-    &:hover {
-        animation: colorfulFont 1.5s infinite ease;
-        -webkit-animation: colorfulFont 1.5s infinite ease;
+    .active {
+        color: var(--theme-primary);
     }
 }

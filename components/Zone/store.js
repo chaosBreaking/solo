@@ -6,8 +6,8 @@ import { forward } from '@utils/navi';
 
 const count = 10;
 export default class Store extends CommonStore {
-    navItems = NAVI_ITEMS;
     offset = 0;
+    navItems = NAVI_ITEMS;
 
     @observable dataList = [];
     @observable offsetId = '';

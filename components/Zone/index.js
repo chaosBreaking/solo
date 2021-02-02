@@ -13,7 +13,10 @@ import s from './index.scss';
 
 @withStyles(s)
 @createPage({
-    Store
+    Store,
+    pageInfo: {
+        title: 'Solo | 探索'
+    }
 })
 @inject('store')
 @observer

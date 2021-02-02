@@ -1,12 +1,13 @@
 import React from 'react';
 import useStyles from 'isomorphic-style-loader/useStyles';
-import s from './index.scss';
 import useStores from '@framework/util';
+import cs from 'classnames';
+import s from './index.scss';
 
 export default function SideNav(props) {
     useStyles(s);
     const { store } = useStores();
-    const { navItems } = store;
+    const { navItems, activeView } = store;
     const handleClick = (item) => {
         store.handleNav(item);
     };
@@ -14,8 +15,14 @@ export default function SideNav(props) {
     return (
         <div className={s.container}>
             {
-                navItems.map((item, index) => (
-                    <span key={index} className={s.item} onClick={() => handleClick(item)}>
+                navItems.map((item, idx) => (
+                    <span
+                        key={idx}
+                        className={cs(s.item, {
+                            [s.active]: activeView === item.index,
+                        })}
+                        onClick={() => handleClick(item)}
+                    >
                         <span className={`iconfont ${item.icon}`} />
                         <span>{item.title}</span>
                     </span>

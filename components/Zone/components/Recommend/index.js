@@ -20,13 +20,11 @@ export default function Recommend(props) {
                     placeholder={'搜索圈子、创作者或作品集'}
                     PreIcon={() => <span className={'iconfont icon-fcstubiao13 ' + s.icon} />}
                 />
-                {/* <div className={s.search}>
-                </div> */}
                 {/* <Card className={s.card}>
                     <div className={s.title}>热门创作者</div>
                     <ProfileLine data={profiles} />
-                </Card> */}
-                {/* <Card className={s.card}>
+                </Card>
+                <Card className={s.card}>
                     <div className={s.title}>为你推荐</div>
                     <ContentLine data={content} />
                 </Card>

@@ -88,7 +88,7 @@ $RECOMMEND_WIDTH: 25%;
 
     input {
         height: .2rem !important;
-        border: 2px solid #aaa;
+        border: 1px solid #666;
     }
 }
 
@@ -99,13 +99,12 @@ $RECOMMEND_WIDTH: 25%;
     margin-left: .05rem !important;
     border-radius: .02rem;
     text-align: center;
-    color: #eee !important;
-    background: #333;
+    background: #eee !important;
     cursor: pointer;
 
     &:active {
-        color: #fff !important;
-        background: #000;
+        color: #000 !important;
+        background: #aaa !important;
     }
 }
 

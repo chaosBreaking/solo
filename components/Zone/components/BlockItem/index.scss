@@ -9,8 +9,7 @@
     box-shadow: 0 1px 1px rgba(27, 95, 160, .1);
 
     &:hover {
-        background: #f4f4f4;
-        outline: 1px solid #fff;
+        background: rgba(0, 0, 0, .05);
     }
 }
 
@@ -23,6 +22,11 @@
     .bottomLine {
         position: relative;
     }
+}
+
+a {
+    text-decoration: none;
+    color: #000;
 }
 
 .content {
@@ -48,6 +52,10 @@
 .title {
     font-size: .12rem;
     padding-bottom: .05rem;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 .intro {
