@@ -9,7 +9,6 @@ import Store from './store';
 import ToastContainer from '@widgets/Toast';
 import Content from './components/Content';
 import ScrollTop from '@widgets/ScrollTop';
-// import NavigationBar from '@widgets/NavigationBar';
 import s from './index.scss';
 
 @withStyles(s)
@@ -22,7 +21,6 @@ export default class ArticlePage extends Component {
     render() {
         return (
             <div className={s.container}>
-                {/* <NavigationBar defaultItems mode={'left'} bgColor={'#fff'} /> */}
                 <Content />
                 <ScrollTop background={'f2f2f2'} />
                 <ToastContainer limit={1} pauseOnFocusLoss={false} />

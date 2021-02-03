@@ -36,13 +36,14 @@ export default React.memo(function BlockItem({
                 }
                 <span className={s.ts}>{ts}</span>
             </div>
-            <div className={bodyCls} onClick={forwardDetail}>
+            {/* <div className={bodyCls} onClick={forwardDetail}> */}
+            <a className={bodyCls} href={'/article.html?id=' + _id} target="_blank" rel="noopener noreferrer">
                 {!!cover && <Emage className={s.image} src={cover} />}
                 <div className={s.content}>
                     <div className={s.title}>{title}</div>
                     <p className={s.intro}>{text}</p>
                 </div>
-            </div>
+            </a>
             <div className={s.bottomLine}>
                 {tags.map(tag => {
                     return <span key={tag} className={s.tag}># {tag}</span>;
