@@ -1,16 +1,6 @@
 @import '~static/color';
 @import '~static/constants';
 
-p,
-span {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    line-height: 2;
-}
-
 img {
     max-width: 100% !important;
     height: auto !important;
@@ -20,30 +10,34 @@ img {
 }
 
 .container {
-    position: absolute;
     width: 100%;
-    height: 100%;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: #fff;
+
+    p,
+    span {
+        display: block;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        line-height: 2;
+    }
 }
 
 .cover {
-    max-width: 60%;
+    max-width: 100%;
 }
 
 .header {
-    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .main {
-    width: 50%;
     height: 100%;
     padding: .1rem;
     display: flex;

@@ -1,12 +1,16 @@
 import { observable, action } from 'mobx';
 import CommonStore from '@framework/CommonStore';
 import ContentService from './service';
+import { ACTIVE_VIEW, NAVI_ITEMS } from '@constants/ui';
 
 export default class Store extends CommonStore {
     @observable data;
     @observable loadError;
     @observable errorMsg;
+    @observable activeView = ACTIVE_VIEW.ARTICLE;
+    @observable mainTabs = [{ title: '推荐', }, { title: '最新', }, { title: '关注' }];
 
+    navItems = NAVI_ITEMS;
     id;
     contentService;
 

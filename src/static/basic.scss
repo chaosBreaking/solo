@@ -6,6 +6,12 @@ body {
     height: 100%;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+
+    :global(*) {
+        font-family: 'Spectral',
+            serif !important;
+    }
+
 }
 
 * {

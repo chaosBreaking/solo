@@ -1,0 +1,44 @@
+@import '~static/color';
+@import '~static/constants';
+@import '~static/ani';
+
+.container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-size: .09rem;
+    z-index: 9;
+    text-align: left;
+}
+
+.item {
+    position: relative;
+    line-height: 1;
+    padding: .05rem .1rem;
+    margin-right: .1rem;
+    border-radius: .05rem;
+    cursor: pointer;
+    opacity: .7;
+    font-size: .11rem;
+    text-align: center;
+
+    &:hover {
+        color: var(--theme-primary);
+        background: rgba(0, 0, 0, .05);
+        opacity: 1;
+    }
+}
+
+.active {
+    color: var(--theme-main);
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: .8rem;
+        height: 2px;
+        background: var(--theme-main);
+        bottom: 0;
+        left: 0;
+    }
+}
