@@ -11,7 +11,7 @@ import LeftBar from './components/LeftBar';
 import ToastContainer from '@widgets/Toast';
 import Store from './store';
 import s from './index.scss';
-import { LoginCard } from '@widgets/AuthCards';
+import { LoginCard } from '@components/Common/AuthCards';
 import Mask from '@widgets/Mask';
 
 @withStyles(s)

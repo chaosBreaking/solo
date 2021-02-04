@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import useStyles from 'isomorphic-style-loader/useStyles';
-import { RegistryCard, LoginCard } from '@widgets/AuthCards';
+import { RegistryCard, LoginCard } from '@components/Common/AuthCards';
 import { STAGE_MAP, PAGE_AFTER_LOGIN } from '../../constants';
 import { toast } from 'react-toastify';
 import { replaceQuery, replacePage } from '@utils/navi';

@@ -6,7 +6,7 @@ import { observer, inject } from 'mobx-react';
 import createPage from '@framework/createPage';
 import Store from './store';
 import withStyles from 'isomorphic-style-loader/withStyles';
-import { LoginCard } from '@widgets/AuthCards';
+import { LoginCard } from '@components/Common/AuthCards';
 import NavigationBar from './components/NavigationBar';
 import Mask from '@widgets/Mask';
 import Button from '@widgets/Button';
