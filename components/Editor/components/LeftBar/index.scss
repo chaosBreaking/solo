@@ -18,7 +18,7 @@ $introFontColor: #666;
     padding: .05rem 0;
     border-radius: 0 .1rem .1rem 0;
     color: #fff;
-    background: #186e60;
+    background: var(--theme-editor);
     font-size: .08rem;
     cursor: pointer;
 }
@@ -58,7 +58,7 @@ $introFontColor: #666;
     font-size: .11rem;
     font-weight: bold;
     text-align: left;
-    color: #186e60;
+    color: var(--theme-editor);
     padding-top: .05rem;
     padding-bottom: .1rem;
 
@@ -69,7 +69,7 @@ $introFontColor: #666;
         width: .02rem;
         height: .1rem;
         margin-right: .03rem;
-        background: #186e60;
+        background: var(--theme-editor);
     }
 }
 

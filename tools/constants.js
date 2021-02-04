@@ -11,7 +11,7 @@ export const isDebug = !process.argv.includes('--release');
 export const isVerbose = process.argv.includes('--verbose');
 export const isAnalyze = process.argv.includes('--analyze') || process.argv.includes('--analyse');
 
-export const reScript = /\.(js|jsx|mjs)$/;
+export const reScript = /\.(js|jsx|mjs|ts|tsx)$/;
 export const reStyle = /\.(css|less|styl|scss|sass|sss)$/;
 export const reImage = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
 

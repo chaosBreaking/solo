@@ -13,6 +13,8 @@ export default {
         ],
         '@babel/preset-flow',
         '@babel/preset-react',
+        '@babel/preset-react',
+        '@babel/preset-typescript',
     ],
     plugins: [
         '@babel/plugin-proposal-class-properties',

@@ -8,7 +8,7 @@ import FeedsList from './components/FeedsList';
 import TopCard from './components/TopCard';
 import SideNav from './components/SideNav';
 import Header from './components/Header';
-import { ACTIVE_VIEW } from './constants';
+import { ACTIVE_VIEW } from '@constants/ui';
 import s from './index.scss';
 
 @withStyles(s)

@@ -22,6 +22,7 @@ export default function SideNav(props) {
                             [s.active]: activeView === item.index,
                         })}
                         onClick={() => handleClick(item)}
+                        style={item.style}
                     >
                         <span className={`iconfont ${item.icon}`} />
                         <span>{item.title}</span>

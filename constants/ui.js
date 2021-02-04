@@ -17,7 +17,7 @@ export const NAVI_ITEMS = [
         index: ACTIVE_VIEW.POST,
         insideView: true,
         url: 'posts',
-        icon: 'icon-tansuo01',
+        icon: 'icon-planet1',
     },
     {
         title: '部落',
@@ -29,6 +29,18 @@ export const NAVI_ITEMS = [
     {
         title: '我の窝',
         url: '/home',
-        icon: 'icon-planet1',
+        icon: 'icon-home',
     },
+    {
+        title: '创作',
+        url: '/editor',
+        icon: 'icon-xiezuo',
+        style: {
+            marginTop: '.2rem',
+            color: '#fff',
+            lineHeight: 1,
+            borderRadius: '1rem',
+            backgroundColor: 'var(--theme-editor)'
+        }
+    }
 ];

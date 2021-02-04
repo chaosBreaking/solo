@@ -2,6 +2,7 @@ import { observable, action } from 'mobx';
 import CommonStore from '@framework/CommonStore';
 import ContentService from './service';
 import { ACTIVE_VIEW, NAVI_ITEMS } from '@constants/ui';
+import { forward } from '@utils/navi';
 
 export default class Store extends CommonStore {
     @observable data;
@@ -10,8 +11,8 @@ export default class Store extends CommonStore {
     @observable activeView = ACTIVE_VIEW.ARTICLE;
     @observable mainTabs = [{ title: '推荐', }, { title: '最新', }, { title: '关注' }];
 
-    navItems = NAVI_ITEMS;
     id;
+    navItems = NAVI_ITEMS;
     contentService;
 
     @action.bound
@@ -39,6 +40,19 @@ export default class Store extends CommonStore {
             console.error(error);
             this.loadError = true;
             this.errorMsg = error.message || error.msg;
+        }
+    }
+
+    @action.bound
+    handleNav(item) {
+        const { url, index, insideView } = item;
+        if (index === this.activeView) {
+            return;
+        }
+        if (insideView) {
+            forward(`/zone.html/${url}`, { noAddingHtml: true });
+        } else {
+            forward(url);
         }
     }
 }

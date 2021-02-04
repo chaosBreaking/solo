@@ -1,7 +1,7 @@
 import { observable, action, runInAction } from 'mobx';
 import CommonStore from '@framework/CommonStore';
 import ContentService from './service';
-import { ACTIVE_VIEW, NAVI_ITEMS } from './constants';
+import { ACTIVE_VIEW, NAVI_ITEMS } from '@constants/ui';
 import { forward } from '@utils/navi';
 
 const count = 10;
@@ -14,7 +14,12 @@ export default class Store extends CommonStore {
     @observable loadingStatus = 0;
     @observable activeView = ACTIVE_VIEW.ARTICLE;
     @observable hasMore = true;
-    @observable mainTabs = [{ title: '推荐', }, { title: '最新', }, { title: '关注' }];
+    @observable activeTab = 0;
+    @observable mainTabs = [
+        { title: '热门', id: 0 },
+        { title: '最新', id: 1 },
+        { title: '关注', id: 2 }
+    ];
 
     @action.bound
     async initializeData(requestContext) {
@@ -43,6 +48,13 @@ export default class Store extends CommonStore {
     setActiveView(view) {
         if (view !== this.activeView) {
             this.activeView = view;
+        }
+    }
+
+    @action.bound
+    setActiveTab(tab) {
+        if (tab !== this.activeTab) {
+            this.activeTab = tab;
         }
     }
 

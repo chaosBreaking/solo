@@ -27,7 +27,7 @@ export default function Html({
                     <link key={script} rel="preload" href={script} as="script" />
                 ))}
                 <link rel="manifest" href="/site.webmanifest" />
-                <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1780295_10itbhs0m0j.css"></link>
+                <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1780295_qic3xfqa0y.css"></link>
                 {styles.map(style => (
                     <style
                         key={style.id}

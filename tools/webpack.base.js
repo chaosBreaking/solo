@@ -46,9 +46,12 @@ export default {
         // Allow absolute paths in imports, e.g. import Button from 'components/Button'
         // Keep in sync with .flowconfig and .eslintrc
         modules: ['node_modules', 'src'],
-        alias
+        alias,
+        extensions: ['.ts', '.tsx', '.js', '.json'],
     },
-
+    resolveLoader: {
+        extensions: ['.ts', '.js', '.json'],
+    },
     module: {
         // Make missing exports an error instead of warning
         strictExportPresence: true,
@@ -88,6 +91,8 @@ export default {
                         // JSX
                         // https://github.com/babel/babel/tree/master/packages/babel-preset-react
                         ['@babel/preset-react', { development: isDebug }],
+
+                        '@babel/preset-typescript',
                     ],
                     plugins: [
                         // Experimental ECMAScript proposals

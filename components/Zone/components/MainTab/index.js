@@ -5,7 +5,7 @@ import cs from 'classnames';
 
 import s from './index.scss';
 
-function MainTab(props) {
+export default inject('store')(observer(function MainTab(props) {
     useStyles(s);
     const { store } = props;
     const { mainTabs, activeTab, setActiveTab } = store;
@@ -25,6 +25,4 @@ function MainTab(props) {
             }
         </div>
     );
-};
-
-export default inject('store')(observer(MainTab));
+}));

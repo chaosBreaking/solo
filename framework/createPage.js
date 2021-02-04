@@ -42,7 +42,12 @@ const enhanceAxios = context => {
     return axios;
 };
 
-export default (options = {}) => {
+interface IOptions {
+    Store: any;
+    pageInfo?: any;
+}
+
+export default (options: IOptions = {}): any => {
     return Component => {
         const { Store, pageInfo = {} } = options;
 

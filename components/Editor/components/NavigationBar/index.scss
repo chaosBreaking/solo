@@ -115,8 +115,8 @@ $iconHeight: .14rem;
 }
 
 .save {
-    border: 1px solid #186e60;
-    color: #186e60;
+    border: 1px solid var(--theme-editor);
+    color: var(--theme-editor);
 }
 
 .publish {

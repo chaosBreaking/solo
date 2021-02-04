@@ -20,7 +20,9 @@ import s from './index.scss';
 })
 @inject('store')
 @observer
-export default class ArticlePage extends Component {
+export default class ArticlePage extends React.Component<{
+    store: Store
+}> {
     render() {
         return (
             <div className={s.container}>
