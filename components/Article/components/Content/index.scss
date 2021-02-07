@@ -1,20 +1,20 @@
 @import '~static/color';
 @import '~static/constants';
 
-img {
-    max-width: 100% !important;
-    height: auto !important;
-    display: block !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
 .container {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     background: #fff;
+
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
 
     p,
     span {

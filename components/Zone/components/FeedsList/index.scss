@@ -8,6 +8,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.border {
     border-left: 1px solid rgba(0, 0, 0, 0.1);
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -18,5 +21,20 @@
     width: 100%;
     position: relative;
     margin-bottom: .1rem;
-    background: #fefefe;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
 }

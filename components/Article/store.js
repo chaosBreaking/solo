@@ -5,21 +5,19 @@ import { ACTIVE_VIEW, NAVI_ITEMS } from '@constants/ui';
 import { forward } from '@utils/navi';
 
 export default class Store extends CommonStore {
+    @observable author;
     @observable data;
     @observable loadError;
     @observable errorMsg;
-    @observable activeView = ACTIVE_VIEW.ARTICLE;
-    @observable mainTabs = [{ title: '推荐', }, { title: '最新', }, { title: '关注' }];
+    @observable activeView = ACTIVE_VIEW.ARTICLE.index;
 
     id;
     navItems = NAVI_ITEMS;
     contentService;
 
     @action.bound
-    async initializeData(requestContext) {
-        const { query } = requestContext;
-        // test only
-        const { id = '60055b8025484b9206a51b96' } = query;
+    async initializeData({ query }) {
+        const { id } = query;
         this.id = id;
         await this.queryArticle();
     }
@@ -34,8 +32,9 @@ export default class Store extends CommonStore {
             const res = await this.contentService.queryArticle({
                 _id: this.id
             });
-            this.data = res;
-            return this.data;
+            const { author, ...rest } = res;
+            this.data = rest;
+            this.author = author;
         } catch (error) {
             console.error(error);
             this.loadError = true;
@@ -45,14 +44,25 @@ export default class Store extends CommonStore {
 
     @action.bound
     handleNav(item) {
-        const { url, index, insideView } = item;
-        if (index === this.activeView) {
-            return;
-        }
+        const { url, insideView } = item;
         if (insideView) {
             forward(`/zone.html/${url}`, { noAddingHtml: true });
         } else {
             forward(url);
+        }
+    }
+
+    @action.bound
+    async followHandler(params) {
+        const res = await this.contentService.follow(params);
+        const { success, canceled } = res || {};
+        if (!success) {
+            return;
+        }
+        if (canceled) {
+            this.author.followed = false;
+        } else {
+            this.author.followed = true;
         }
     }
 }

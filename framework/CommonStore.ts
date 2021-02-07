@@ -1,5 +1,6 @@
 export default class CommonStore {
-    constructor(props) {
+    getContext: any;
+    constructor(props: any) {
         Object.assign(this, props);
     }
 
@@ -13,7 +14,7 @@ export default class CommonStore {
      * @returns
      * @memberof CommonStore
      */
-    async initializeData(requestContext) {
+    async initializeData(requestContext: any) {
         return {};
     }
 
@@ -23,8 +24,7 @@ export default class CommonStore {
      * @returns
      * @memberof CommonStore
      */
-    async initService(enhancedAxios) {
-        return {};
+    initService(enhancedAxios: any): void {
     }
 
     /**
@@ -43,7 +43,7 @@ export default class CommonStore {
      */
     async prepareClientData() { }
 
-    hydrateData(ssrData) {
+    hydrateData(ssrData: any) {
         Object.assign(this, ssrData);
     }
 }

@@ -3,6 +3,14 @@
 
 $RECOMMEND_WIDTH: 25%;
 
+:global(.tox-notifications-container) {
+    display: none !important;
+}
+
+:global(.tox-tinymce) {
+    border: none !important;
+}
+
 .container {
     position: fixed;
     right: 5%;

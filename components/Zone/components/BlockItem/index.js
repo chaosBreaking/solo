@@ -44,11 +44,13 @@ export default React.memo(function BlockItem({
                     <p className={s.intro}>{text}</p>
                 </div>
             </a>
-            <div className={s.bottomLine}>
-                {tags.map(tag => {
-                    return <span key={tag} className={s.tag}># {tag}</span>;
-                })}
-            </div>
+            {
+                !!tags.length && <div className={s.bottomLine}>
+                    {tags.map(tag => {
+                        return <span key={tag} className={s.tag}># {tag}</span>;
+                    })}
+                </div>
+            }
         </div>
     );
 });

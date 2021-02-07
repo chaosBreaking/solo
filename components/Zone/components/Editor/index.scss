@@ -1,0 +1,54 @@
+.container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: #fff;
+    border-radius: .05rem !important;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12) !important;
+}
+
+.editor {
+    position: relative;
+    flex: 1 0 auto;
+    width: 100%;
+}
+
+.bar {
+    width: 100%;
+    height: auto;
+    display: flex;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding: .05rem;
+}
+
+.send {
+    width: .3rem !important;
+    height: auto !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    font-size: .09rem !important;
+    line-height: 1 !important;
+    padding: .05rem .05rem !important;
+}
+
+.icon {
+    width: .2rem;
+    height: .2rem;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, .1);
+    }
+}
+
+.expanded {
+    background-color: rgba(0, 0, 0, .1);
+}

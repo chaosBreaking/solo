@@ -25,19 +25,3 @@ body {
     align-items: center;
     margin-left: 22%;
 }
-
-.row {
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    border: 1px solid #eee;
-}
-
-.tab {
-    top: 0;
-    // position: sticky;
-    // z-index: 6;
-    background: #fff;
-}

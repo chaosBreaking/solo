@@ -124,6 +124,7 @@ export default class Editor extends React.Component {
                         // 'quickbars',
                         // 'help',
                         // 'wordcount', // 暂时不用
+                        'paste'
                     ],
                     external_plugins: {
                         link: 'http://fs.hyperii.com/script/link.js',
