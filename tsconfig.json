@@ -15,6 +15,17 @@
             "./framework/**/*",
             "./constants/**/*",
             "./tools/**/*",
-        ]
+        ],
+        "paths": {
+            "@components/*": [
+                "components/*"
+            ],
+            "@framework/*": [
+                "framework/*"
+            ],
+            "@constants/*": [
+                "constants/*"
+            ],
+        }
     }
 }

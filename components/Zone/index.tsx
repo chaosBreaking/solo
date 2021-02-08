@@ -10,8 +10,9 @@ import SideNav from './components/SideNav';
 import Header from './components/Header';
 import { ACTIVE_VIEW } from '@constants/ui';
 import BlockItem from './components/BlockItem';
-import s from './index.scss';
 import CommunityCard from './components/CommunityCard';
+import PostsCard from './components/PostsCard';
+import s from './index.scss';
 
 @withStyles(s)
 @createPage({
@@ -46,7 +47,7 @@ export default class Zone extends Component<{ store: Store }> {
 
     renderPosts() {
         const renderItems = (item: any) => {
-            return <BlockItem key={item._id} {...item} />;
+            return <PostsCard key={item._id} {...item} />;
         };
         const {
             postList,

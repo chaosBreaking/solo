@@ -43,7 +43,8 @@ export default class Store extends CommonStore {
 
     @computed
     get postList() {
-        return this.dataList[ACTIVE_VIEW.POST.index];
+        return Array.from({ length: 10 }).fill(1);
+        // return this.dataList[ACTIVE_VIEW.POST.index];
     }
 
     @computed
