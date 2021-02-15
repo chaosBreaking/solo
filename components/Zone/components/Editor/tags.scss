@@ -1,0 +1,36 @@
+.tagContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.tagInput {
+    width: .5rem;
+    border: 2px dashed #ccc;
+    padding: .05rem;
+    border-radius: .05rem;
+    font-size: .09rem;
+    height: .2rem;
+    line-height: .2rem;
+
+    &:focus {
+        outline-style: auto;
+    }
+}
+
+.tag {
+    font-size: .09rem;
+    height: .2rem;
+    line-height: .2rem;
+    background: #eee;
+    padding: 0 .04rem;
+    margin-right: .05rem;
+    margin-bottom: .05rem;
+    border-radius: .02rem;
+    cursor: pointer;
+
+    &:hover {
+        opacity: .5;
+    }
+}

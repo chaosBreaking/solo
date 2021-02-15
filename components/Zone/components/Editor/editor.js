@@ -83,23 +83,12 @@ export default class Editor extends React.Component {
                     paste_strip_class_attributes: true,
                     paste_auto_cleanup_on_paste: true,
                     //     force_p_newlines: false,
-                    //     convert_newlines_to_brs: true,
+                    convert_newlines_to_brs: false,
                     document_base_url: 'http://fs.hyperii.com',
                     skin_url: 'http://fs.hyperii.com/script',
                     theme_url: 'http://fs.hyperii.com/script/theme.js',
                     // image_caption: true,
                     plugins: [
-                        //         // 'autolink',
-                        //         // 'codesample',
-                        //         // 'link',
-                        //         // 'lists',
-                        //         // 'media',
-                        //         // 'powerpaste',
-                        //         // 'table',
-                        //         // 'quickimage',
-                        //         // 'quickbars',
-                        //         // 'help',
-                        //         // 'wordcount', // 暂时不用
                         'paste'
                     ],
                     //     external_plugins: {

@@ -26,8 +26,7 @@ export default function Content() {
                 <TagList />
             </div>
             <article className={s.main}>
-                <section className={s.content} dangerouslySetInnerHTML={{ __html: content }}>
-                </section>
+                <section className={s.content} dangerouslySetInnerHTML={{ __html: content }} />
             </article>
         </div>
     );

@@ -1,14 +1,7 @@
 import React from 'react';
-import Loadable from 'react-loadable';
+import loadable from '@loadable/component';
 
-const LoadingUI = () => <div style={{ visibility: 'hidden' }} />;
-
-const LoadableToast = Loadable({
-    loader: () => import('./Toast'),
-    loading: LoadingUI,
-    delay: 200,
-    timeout: 10000,
-});
+const LoadableToast = loadable(() => import('./Toast'));
 
 export default function ToastContainer(props) {
     return <LoadableToast {...props} />;

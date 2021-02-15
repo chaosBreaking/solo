@@ -1,13 +1,14 @@
 import React from 'react';
-import { observer, inject } from 'mobx-react';
+import { observer } from 'mobx-react';
 import useStyles from 'isomorphic-style-loader/useStyles';
 import cs from 'classnames';
 
 import s from './index.scss';
+import useStores from '@framework/util';
 
-export default inject('store')(observer(function MainTab(props) {
+export default (observer(function MainTab(props) {
     useStyles(s);
-    const { store } = props;
+    const { store } = useStores();
     const { mainTabs, activeTab, setActiveTab } = store;
     const clickHandler = (e, id) => {
         e.stopPropagation();

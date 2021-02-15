@@ -1,0 +1,38 @@
+.container {
+    position: relative;
+    width: 100%;
+    max-height: 3rem;
+    overflow: auto;
+
+    * {
+        font-size: .09rem !important;
+    }
+}
+
+:global(.filepond--root) {
+    margin-bottom: 0;
+}
+
+:global(.filepond--root) :global(.filepond--drop-label) {
+    height: .5rem;
+}
+
+:global(.filepond--credits) {
+    display: none;
+}
+
+:global(.filepond--label-action) {
+    padding: .02rem .05rem;
+    background: #fff;
+    border-radius: .1rem;
+    margin-left: .02rem;
+    text-decoration: none !important;
+
+    &:active {
+        background: #eee;
+    }
+}
+
+:global(.filepond--action-process-item) {
+    display: none;
+}

@@ -3,12 +3,17 @@ import CommonStore from '@framework/CommonStore';
 import ContentService from './service';
 import { ACTIVE_VIEW, NAVI_ITEMS, INavItem } from '@constants/ui';
 import { forward } from '@utils/navi';
+import { toast } from 'react-toastify';
+import uploader from '@utils/upload';
+import CloudService from '@framework/common/services/CloudService';
 
 const count = 10;
 export default class Store extends CommonStore {
     offsetList = [0, 0, 0];
     navItems = NAVI_ITEMS;
     contentService!: ContentService;
+    cloudService!: CloudService;
+    uploader: any;
 
     @observable dataList: any[] = [[], [], []];
     @observable hasMoreList = [true, true, true];
@@ -43,8 +48,8 @@ export default class Store extends CommonStore {
 
     @computed
     get postList() {
-        return Array.from({ length: 10 }).fill(1);
-        // return this.dataList[ACTIVE_VIEW.POST.index];
+        // return Array.from({ length: 10 }).fill(1);
+        return this.dataList[ACTIVE_VIEW.POST.index];
     }
 
     @computed
@@ -92,12 +97,16 @@ export default class Store extends CommonStore {
     async initializeData(requestContext: any) {
         const { pathname } = requestContext;
         this.checkActiveView(pathname);
-        await this.loadMore();
+        await Promise.all([
+            this.loadMore(),
+            this.initUploader(),
+        ]);
         return {};
     }
 
     initService(axios: any) {
         this.contentService = new ContentService(axios);
+        this.cloudService = new CloudService(axios);
     }
 
     @action.bound
@@ -175,5 +184,38 @@ export default class Store extends CommonStore {
         } else {
             forward(url);
         }
+    }
+
+    @action.bound
+    async initUploader() {
+        const { token } = await this.cloudService.requestTokenFunc();
+        this.uploader = uploader(token);
+    }
+
+    @action.bound
+    async uploadImages(list) {
+        const taskList = list.map(item => {
+            const { file, id } = item;
+            const key = `post_imgs_${id}`;
+            return this.uploader(key, file);
+        });
+        const res = await Promise.all(taskList);
+        return res;
+    }
+
+    @action.bound
+    async sendPost(data) {
+        const { images, ...rest } = data;
+        const urls = await this.uploadImages(images);
+        const post = {
+            ...rest,
+            imgs: urls,
+        };
+        const res = await this.contentService.publishPost(post);
+        this.dataList[ACTIVE_VIEW.POST.index].unshift(post);
+        toast.success('发布成功', {
+            position: toast.POSITION.TOP_RIGHT,
+        });
+        return res;
     }
 }

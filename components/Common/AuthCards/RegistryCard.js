@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import useStyles from 'isomorphic-style-loader/useStyles';
-import s from './index.scss';
 import Card from '@widgets/Card';
 import Button from '@widgets/Button';
 import Input from '@widgets/Input';
@@ -19,6 +18,7 @@ import OAuthBar from './OAuthBar';
 import CodeInput from './CodeInput';
 import Logo from '@widgets/Logo';
 import { formatAuthData } from '@framework/auth';
+import s from './index.scss';
 
 // const TITLE = '创建你的社群，从这里开始'; // 放在 成为创作者 页面
 const TITLE = '即刻加入';

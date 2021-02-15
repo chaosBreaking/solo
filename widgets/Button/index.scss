@@ -18,6 +18,7 @@ $default_font_color: #fff;
     overflow: hidden;
     font-size: inherit;
     background: $default_bg_color;
+
     &:active {
         opacity: .8;
     }
@@ -65,9 +66,11 @@ $default_font_color: #fff;
     background: #efefef !important;
     color: #a6a6a6 !important;
     cursor: not-allowed !important;
+
     &:active {
         background: #efefef !important;
         color: #a6a6a6 !important;
         cursor: not-allowed !important;
+        opacity: 1;
     }
 }

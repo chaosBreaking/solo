@@ -13,6 +13,7 @@ import BlockItem from './components/BlockItem';
 import CommunityCard from './components/CommunityCard';
 import PostsCard from './components/PostsCard';
 import s from './index.scss';
+import ToastContainer from '@widgets/Toast';
 
 @withStyles(s)
 @createPage({
@@ -119,6 +120,7 @@ export default class Zone extends Component<{ store: Store }> {
                         this.getBody()
                     }
                 </div>
+                <ToastContainer />
             </div>
         );
     }

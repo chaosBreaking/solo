@@ -56,7 +56,10 @@ function uploader(token) {
     const validator = type => /^image\/\w{0,4}$/.test(type);
 
     return (key, file) => {
-        return validator(file.type) && upload({ key, file });
+        if (!validator(file.type)) {
+            throw new Error('Invalid type: ' + file.type);
+        }
+        return upload({ key, file });
     };
 };
 

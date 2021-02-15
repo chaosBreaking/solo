@@ -21,9 +21,6 @@ export const SIDE_NAVI_ITEMS = [
         url: 'dashboard.html',
     },
     {
-        title: '新闻',
-    },
-    {
         title: '发现',
         url: 'zone.html',
     },
@@ -31,9 +28,6 @@ export const SIDE_NAVI_ITEMS = [
         title: '粉丝',
     },
     {
-        title: '推广',
-    },
-    {
-        title: '更多',
+        title: '设置',
     },
 ];

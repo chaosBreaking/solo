@@ -7,7 +7,7 @@ import s from './index.scss';
 function Button(props) {
     useStyles(s);
     const { className, color, text, loading, disabled, wrapperStyles, innerStyles, plain, hollow, ...rest } = props;
-    const isLoading = !disabled && loading;
+    const isLoading = loading;
     const containerClass = cs(s.container, className, {
         [s.loading]: isLoading,
         [s.disabled]: disabled,

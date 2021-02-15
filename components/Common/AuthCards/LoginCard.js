@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { observer, inject } from 'mobx-react';
 import useStyles from 'isomorphic-style-loader/useStyles';
 import cs from 'classnames';
-import s from './index.scss';
 import Card from '@widgets/Card';
 import Button from '@widgets/Button';
 import Input from '@widgets/Input';
@@ -20,6 +19,7 @@ import OAuthBar from './OAuthBar';
 import CodeInput from './CodeInput';
 import Logo from '@widgets/Logo';
 import { formatAuthData } from '@framework/auth';
+import s from './index.scss';
 
 const TITLE = '登录';
 
