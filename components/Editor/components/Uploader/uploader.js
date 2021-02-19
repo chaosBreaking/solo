@@ -20,7 +20,6 @@ const MAX_FILE_SIZE = '5MB';
 function FilePondUploader({ serverUrl }) {
     const [files, setFiles] = useState([]);
     const uploadHandler = file => {
-        console.log(file);
         return true;
     };
     return <FilePond

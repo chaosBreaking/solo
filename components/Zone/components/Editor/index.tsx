@@ -8,17 +8,17 @@ import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import loadable from '@loadable/component';
 import { EXTEND_TYPE, ICONS } from './constant';
-import Store from '../../store';
 
 import s from './index.scss';
 
 const TagInput = loadable(() => import('./TagInput'));
 const ImgUploader = loadable(() => import('./ImgUploader'));
 
-export default function Editor(props) {
+export default function Editor() {
     useStyles(s);
     let images = [];
-    const { store } = useStores();
+    const { store, userStore } = useStores();
+    const { avatar, nickname } = userStore;
     const [activeExtendsList, setActiveExtendsList] = React.useState([]);
     const [sending, setSending] = React.useState(false);
     const [content, setContent] = React.useState('');
@@ -51,12 +51,16 @@ export default function Editor(props) {
             content,
             tags,
             images,
+            avatar,
+            nickname,
         });
-        images = [];
-        setContent('');
-        setTags([]);
+        if (res && res._id) {
+            images = [];
+            setContent('');
+            setTags([]);
+            setActiveExtendsList([]);
+        }
         setSending(false);
-        setActiveExtendsList([]);
     };
     return <div className={s.container}>
         {sending && <LinearProgress style={{ width: '100%' }} color="secondary" />}

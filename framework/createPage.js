@@ -6,6 +6,8 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import axios from './axios';
 import s from '@src/static/basic.scss';
 
+React.useLayoutEffect = React.useEffect;
+
 const theme = createMuiTheme({
     typography: {
         htmlFontSize: 160,
@@ -42,46 +44,57 @@ const enhanceAxios = context => {
     return axios;
 };
 
+interface IStores {
+    [string]: any;
+};
 interface IOptions {
-    Store: any;
     pageInfo?: any;
+    forceLogin?: boolean;
 }
 
-export default (options: IOptions = {}): any => {
+export default (Stores: IStores, options: IOptions = {}): any => {
     return Component => {
-        const { Store, pageInfo = {} } = options;
+        const { pageInfo = {}, forceLogin, } = options;
 
         class Page extends React.Component {
-            static Store = Store
+            static Stores = Stores;
             static pageInfo = pageInfo;
 
-            constructor(props) {
-                super(props);
-                this.initialProps = {
-                    context: props.context,
-                    store: props.store || {},
-                };
-            }
-
             static async initializeProps(context) {
-                const store = new Store({ getContext: () => ({ ...context }) });
+                const storeMap = {};
+                const initTasks = [];
+                const hookTasks = [];
                 const axios = enhanceAxios(context);
-                store.initService(axios);
-                await store.initializeData(context);
-                const hookFunc = process.env.BROWSER ? store.prepareClientData : store.prepareServerData;
-                typeof hookFunc === 'function' && await hookFunc();
-                return store;
+                const keys = Object.keys(Stores);
+                keys.forEach(key => {
+                    const store = new Stores[key]();
+                    store.initService(axios);
+                    storeMap[key] = store;
+                    initTasks.push(store.initializeData(context));
+                    const hookFunc = process.env.BROWSER ? store.prepareClientData : store.prepareServerData;
+                    hookTasks.push(hookFunc());
+                });
+                // 数据初始化和hook是串行
+                await Promise.all(initTasks);
+                await Promise.all(hookTasks);
+                return storeMap;
             }
 
-            static async rebuildStore(context, ssrData) {
-                const store = new Store({
-                    getContext: () => ({ ...context })
-                });
-                store.hydrateData(ssrData);
+            static async rebuildStore(context, serverStoreDataMap) {
+                const storeMap = {};
+                const hookTasks = [];
                 const axios = enhanceAxios(context);
-                store.initService(axios);
-                typeof store.prepareClientData === 'function' && await store.prepareClientData();
-                return store;
+                const keys = Object.keys(Stores);
+                keys.forEach(key => {
+                    const store = new Stores[key]();
+                    const ssrData = serverStoreDataMap[key];
+                    store.hydrateData(ssrData);
+                    store.initService(axios);
+                    hookTasks.push(store.prepareClientData());
+                    storeMap[key] = store;
+                });
+                await Promise.all(hookTasks);
+                return storeMap;
             }
 
             componentDidMount() {
@@ -91,7 +104,7 @@ export default (options: IOptions = {}): any => {
             render() {
                 return (
                     <ThemeProvider theme={theme}>
-                        <Provider {...this.initialProps}>
+                        <Provider {...this.props}>
                             <Component />
                         </Provider>
                     </ThemeProvider>

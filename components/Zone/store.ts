@@ -14,6 +14,7 @@ export default class Store extends CommonStore {
     contentService!: ContentService;
     cloudService!: CloudService;
     uploader: any;
+    serverTime: Date = new Date();
 
     @observable dataList: any[] = [[], [], []];
     @observable hasMoreList = [true, true, true];
@@ -211,11 +212,18 @@ export default class Store extends CommonStore {
             ...rest,
             imgs: urls,
         };
-        const res = await this.contentService.publishPost(post);
-        this.dataList[ACTIVE_VIEW.POST.index].unshift(post);
-        toast.success('发布成功', {
-            position: toast.POSITION.TOP_RIGHT,
-        });
-        return res;
+        try {
+            const res = await this.contentService.publishPost(post);
+            this.dataList[ACTIVE_VIEW.POST.index].unshift(post);
+            toast.success('发布成功', {
+                position: toast.POSITION.TOP_RIGHT,
+            });
+            return res;
+        } catch (error) {
+            toast.error('发布失败', {
+                position: toast.POSITION.TOP_RIGHT,
+            });
+            return false;
+        }
     }
 }

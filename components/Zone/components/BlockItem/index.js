@@ -16,14 +16,15 @@ export default React.memo(function BlockItem({
     source = '杂谈',
     tags = ['好玩', '有趣'],
     createdAt,
+    serverTime,
 }) {
     useStyles(s);
-    const forwardDetail = e => {
-        forward('/article.html', { id: _id });
-    };
+    // const forwardDetail = e => {
+    //     forward('/article.html', { id: _id });
+    // };
     const cat = new Date(createdAt);
-    const ts = (Date.now() - cat) / 1000 / 3600 / 24 >= 1
-        ? cat.toLocaleDateString().replace(/\//g, '.')
+    const ts = (serverTime - cat) / 1000 / 3600 / 24 >= 1
+        ? cat.toLocaleDateString().replace(/[/|-]/g, '.')
         : cat.toLocaleTimeString();
     const bodyCls = (!cover || (!cover && !text)) ? s.shortBody : s.body;
     return (

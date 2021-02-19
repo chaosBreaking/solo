@@ -1,9 +1,16 @@
 @import '~static/color';
 
+.wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: .1rem;
+}
+
 .container {
     position: relative;
     width: 100%;
-    margin-bottom: .1rem;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -40,13 +47,14 @@
     height: auto;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     overflow: hidden;
 }
 
 .image {
     max-width: 100%;
-    width: 33.3%;
-    flex: 1 0 auto;
+    width: 33%;
+    flex: 0 0 auto;
     transition: all .3s ease;
     cursor: pointer;
 
@@ -142,5 +150,6 @@
 
     &:hover {
         background-color: rgba(0, 0, 0, .1);
+        color: var(--theme-primary);
     }
 }

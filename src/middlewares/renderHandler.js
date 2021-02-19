@@ -45,15 +45,15 @@ export default async (req, res, next) => {
             rawData.ssr = true;
             const Component = route.component;
             const context = buildContext({ req, res });
-            const store = await Component.initializeProps(context);
-            rawData.store = store;
+            const storeMap = await Component.initializeProps(context);
             data.children = ReactDOM.renderToString(
                 sheets.collect(
                     <App insertCss={insertCss}>
-                        <Component {...rawData} />
+                        <Component {...storeMap} {...rawData} />
                     </App>,
                 ),
             );
+            rawData.storeMap = storeMap;
             data.title = Component.pageInfo.title || data.title;
         }
         data.app = {

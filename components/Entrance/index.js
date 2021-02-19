@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import createPage from '@framework/createPage';
-import Store from './store';
+import store from './store';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import { LoginCard } from '@components/Common/AuthCards';
 import NavigationBar from './components/NavigationBar';
@@ -29,7 +29,7 @@ const Block = props => <div className={s.block} style={{ width: `${props.width |
 
 @withStyles(s)
 @createPage({
-    Store
+    store
 })
 @inject('store')
 @observer

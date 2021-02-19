@@ -9,18 +9,20 @@ import Editor from './components/Editor';
 import NavigationBar from './components/NavigationBar';
 import LeftBar from './components/LeftBar';
 import ToastContainer from '@widgets/Toast';
-import Store from './store';
+import store from './store';
 import s from './index.scss';
 import { LoginCard } from '@components/Common/AuthCards';
 import Mask from '@widgets/Mask';
 
 @withStyles(s)
-@createPage({
-    Store,
-    pageInfo: {
-        title: 'Solo|编辑器'
+@createPage(
+    { store },
+    {
+        pageInfo: {
+            title: 'Solo|编辑器'
+        }
     }
-})
+)
 @inject('store')
 @observer
 export default class EditorPage extends Component {

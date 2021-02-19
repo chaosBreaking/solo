@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import createPage from '@framework/createPage';
-import Store from './store';
+import store from './store';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import ExtendZone from './components/ExtendZone';
 import FeedsList from './components/FeedsList';
@@ -12,28 +12,34 @@ import { ACTIVE_VIEW } from '@constants/ui';
 import BlockItem from './components/BlockItem';
 import CommunityCard from './components/CommunityCard';
 import PostsCard from './components/PostsCard';
-import s from './index.scss';
 import ToastContainer from '@widgets/Toast';
+import userStore from '@framework/UserStore';
+import loadable from '@loadable/component';
+
+import s from './index.scss';
 
 @withStyles(s)
 @createPage({
-    Store,
+    store,
+    userStore,
+}, {
     pageInfo: {
         title: 'Solo | 探索'
     }
 })
 @inject('store')
 @observer
-export default class Zone extends Component<{ store: Store }> {
+export default class Zone extends Component<{ store: store }> {
     renderArticles() {
-        const renderItems = (item: any) => {
-            return <BlockItem key={item._id} {...item} />;
-        };
         const {
             loadMore,
             articleList,
             loadingStatus,
+            serverTime,
         } = this.props.store;
+        const renderItems = (item: any) => {
+            return <BlockItem key={item._id} {...item} serverTime={serverTime} />;
+        };
         return <>
             <TopCard />
             <FeedsList
@@ -47,14 +53,15 @@ export default class Zone extends Component<{ store: Store }> {
     }
 
     renderPosts() {
-        const renderItems = (item: any) => {
-            return <PostsCard key={item._id} {...item} />;
-        };
         const {
             postList,
             loadMore,
             loadingStatus,
         } = this.props.store;
+        const CommentPannel = loadable(() => import('./components/CommentPannel'));
+        const renderItems = (item: any) => {
+            return <PostsCard key={item._id} {...item} CommentPannel={CommentPannel} />;
+        };
         return <FeedsList
             dataList={postList}
             loadMore={loadMore}

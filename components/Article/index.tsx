@@ -1,11 +1,11 @@
 /**
  *  文章详情页面
  */
-import React, { Component } from 'react';
+import React from 'react';
 import { observer, inject } from 'mobx-react';
 import createPage from '@framework/createPage';
 import withStyles from 'isomorphic-style-loader/withStyles';
-import Store from './store';
+import store from './store';
 import ToastContainer from '@widgets/Toast';
 import Content from './components/Content';
 import ScrollTop from '@widgets/ScrollTop';
@@ -15,13 +15,11 @@ import Header from './components/Header';
 import s from './index.scss';
 
 @withStyles(s)
-@createPage({
-    Store
-})
+@createPage({ store })
 @inject('store')
 @observer
 export default class ArticlePage extends React.Component<{
-    store: Store
+    store: store
 }> {
     render() {
         return (

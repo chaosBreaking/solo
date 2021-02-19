@@ -1,5 +1,4 @@
 export default class CommonStore {
-    getContext: any;
     constructor(props: any) {
         Object.assign(this, props);
     }

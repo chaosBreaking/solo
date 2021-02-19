@@ -58,11 +58,11 @@ async function init() {
 async function render(Component, ssrData = {}, context) {
     try {
         const isServerRender = ssrData.ssr;
-        const initialData = { context };
-        initialData.store = isServerRender
-            ? await Component.rebuildStore(context, ssrData.store)
+        const storeMap = isServerRender
+            ? await Component.rebuildStore(context, ssrData.storeMap)
             : await Component.initializeProps(context);
         const renderReactApp = isServerRender ? ReactDOM.hydrate : ReactDOM.render;
+        const initialData = { context, ...storeMap };
 
         renderReactApp(
             <App insertCss={insertCss}>

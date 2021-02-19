@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import createPage from '@framework/createPage';
 import withStyles from 'isomorphic-style-loader/withStyles';
-import Store from './store';
+import store from './store';
 import NavigationBar from '@widgets/NavigationBar';
 import ToastContainer from '@widgets/Toast';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,7 +14,7 @@ import Card from '@widgets/Card';
 
 @withStyles(s)
 @createPage({
-    Store
+    store
 })
 @inject('store')
 @observer
