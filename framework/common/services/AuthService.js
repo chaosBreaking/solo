@@ -2,11 +2,6 @@ import BaseService from '@framework/BaseService';
 import { API_MAP } from '@constants/api';
 
 export default class AuthService extends BaseService {
-    // eslint-disable-next-line no-useless-constructor
-    constructor(axios) {
-        super(axios);
-    }
-
     handlePreAuth = async authData => {
         const res = await this.post(API_MAP.PRE_AUTH, authData).catch(error => ({ error }));
         const { error, data } = res;

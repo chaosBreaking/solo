@@ -4,17 +4,13 @@ export default class CommonStore {
         Object.assign(this, props);
     }
 
-    get context() {
-        return typeof this.getContext === 'function' && this.getContext();
-    }
-
     /**
      * @desc Store数据初始化，用于SSR/CSR时根store的数据请求
      * @param {*} requestContext
      * @returns
      * @memberof CommonStore
      */
-    async initializeData(requestContext: any) {
+    async initializeData(requestContext: any): Promise<any> {
         return {};
     }
 

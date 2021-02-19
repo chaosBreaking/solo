@@ -1,7 +1,7 @@
 import BaseService from '@framework/BaseService';
 
 const URLs = {
-    INFO: 'user/basic_info',
+    INFO: 'user/profile',
 };
 
 export default class UserService extends BaseService {
