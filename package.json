@@ -80,7 +80,7 @@
     "react-toastify": "^6.2.0",
     "sass-loader": "^8.0.2",
     "sequelize": "^5.21.2",
-    "serialize-javascript": "^2.1.1",
+    "serialize-javascript": "^5.0.1",
     "smoothscroll-polyfill": "^0.4.4",
     "source-map-support": "^0.5.9",
     "uglifyjs-webpack-plugin": "^2.2.0",
