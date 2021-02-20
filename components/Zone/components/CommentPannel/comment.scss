@@ -1,0 +1,43 @@
+.container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.comment {
+    display: flex;
+    margin-bottom: .1rem;
+}
+
+.body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: .05rem;
+    font-size: .09rem;
+}
+
+.topLine {
+    width: 100%;
+    display: flex;
+    font-size: .08rem;
+    line-height: 1;
+    align-items: center;
+    margin-bottom: .1rem;
+}
+
+.ts {
+    align-self: flex-end;
+    margin-left: auto;
+    color: #888;
+}
+
+.content {
+    color: #333;
+}
+
+.divider {
+    width: 100%;
+    margin-top: .1rem;
+}

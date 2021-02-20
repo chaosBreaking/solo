@@ -60,7 +60,7 @@ export default class Zone extends Component<{ store: store }> {
         } = this.props.store;
         const CommentPannel = loadable(() => import('./components/CommentPannel'));
         const renderItems = (item: any) => {
-            return <PostsCard key={item._id} {...item} CommentPannel={CommentPannel} />;
+            return <PostsCard key={item._id} data={item} CommentPannel={CommentPannel} />;
         };
         return <FeedsList
             dataList={postList}

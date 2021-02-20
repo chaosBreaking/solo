@@ -25,6 +25,10 @@
     justify-content: flex-start;
     align-items: flex-start;
     cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 .avatar {
@@ -69,6 +73,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: .05rem .1rem;
     border-radius: .05rem;
     font-size: .1rem;
     background: #fff;
@@ -87,10 +92,11 @@
 }
 
 .content {
+    position: relative;
     width: 100%;
     flex: 1 0 auto;
-    padding: .05rem;
     text-align: start;
+    padding-bottom: .05rem;
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-all;
@@ -101,7 +107,7 @@
     width: 100%;
     height: auto;
     display: flex;
-    padding: .05rem;
+    line-height: 1;
 }
 
 .tags {
@@ -132,6 +138,7 @@
     width: 100%;
     margin-top: auto;
     margin-left: auto;
+    margin-right: .2rem;
     justify-content: flex-end;
     align-items: center;
     color: #666;
@@ -152,4 +159,23 @@
         background-color: rgba(0, 0, 0, .05);
         color: var(--theme-primary);
     }
+}
+
+.comment {
+    width: .5rem;
+    display: flex;
+    align-items: center;
+}
+
+.ts {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    font-size: .08rem;
+    margin-left: auto;
+    color: #666;
+}
+
+.commentNum {
+    font-size: .09rem;
 }

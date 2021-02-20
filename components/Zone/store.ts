@@ -15,6 +15,8 @@ export default class Store extends CommonStore {
     cloudService!: CloudService;
     uploader: any;
     serverTime: Date = new Date();
+    commentLock = false;
+    queryCommentLock = false;
 
     @observable dataList: any[] = [[], [], []];
     @observable hasMoreList = [true, true, true];
@@ -214,8 +216,11 @@ export default class Store extends CommonStore {
         };
         try {
             const res = await this.contentService.publishPost(post);
-            this.dataList[ACTIVE_VIEW.POST.index].unshift(post);
-            toast.success('发布成功', {
+            this.dataList[ACTIVE_VIEW.POST.index].unshift({
+                ...post,
+                ...res,
+            });
+            toast.info('发布成功', {
                 position: toast.POSITION.TOP_RIGHT,
             });
             return res;
@@ -224,6 +229,60 @@ export default class Store extends CommonStore {
                 position: toast.POSITION.TOP_RIGHT,
             });
             return false;
+        }
+    }
+
+    @action.bound
+    async sendComment(post: any, data: any) {
+        if (this.commentLock) {
+            return;
+        }
+        this.commentLock = true;
+        const comment = {
+            ...data,
+            postId: post._id,
+        };
+        try {
+            const res = await this.contentService.comment(comment);
+            toast.info('评论成功', {
+                position: toast.POSITION.TOP_CENTER,
+            });
+            runInAction(() => {
+                this.commentLock = false;
+                post.commentCount = typeof post.commentCount === 'number'
+                    ? post.commentCount + 1
+                    : 1;
+                if (Array.isArray(post.comments)) {
+                    post.comments.unshift(comment);
+                } else {
+                    post.comments = [comment];
+                }
+            })
+            return res;
+        } catch (error) {
+            toast.error('评论失败', {
+                position: toast.POSITION.TOP_CENTER,
+            });
+            this.commentLock = false;
+            return false;
+        }
+    }
+
+    @action.bound
+    async loadComment(post) {
+        if (this.queryCommentLock) {
+            return;
+        }
+        this.queryCommentLock = true;
+        try {
+            const res = await this.contentService.queryComments({
+                postId: post._id
+            });
+            post.comments = res;
+            return res;
+        } catch (error) {
+            post.comments = [];
+            return [];
         }
     }
 }

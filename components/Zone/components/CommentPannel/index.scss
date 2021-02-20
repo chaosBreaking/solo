@@ -25,6 +25,13 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+}
+
+.send {
+    display: flex;
+    flex-direction: column;
+    padding: .05rem;
+    margin-bottom: .1rem;
 
     &:focus-within {
         background-color: #fafbfc;

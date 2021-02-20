@@ -1,22 +1,33 @@
 import React from 'react';
 import useStyles from 'isomorphic-style-loader/useStyles';
-import s from './index.scss';
 import { Divider } from '@material-ui/core';
+import { observer } from 'mobx-react';
+import useStores from '@framework/util';
+import { formatCreatedAt } from '@utils/format';
+import s from './index.scss';
 
-export default function PostsCard({
-    _id,
-    likes,
-    avatar,
-    tags = [],
-    imgs = [],
-    content,
-    nickname,
-    createdAt,
+export default observer(function PostsCard({
+    data,
     CommentPannel,
 }) {
+    const {
+        _id,
+        likes,
+        avatar,
+        tags = [],
+        imgs = [],
+        content,
+        nickname,
+        commentCount,
+        createdAt,
+    } = data;
     useStyles(s);
+    const { store } = useStores();
+    const { serverTime } = store;
     const [showCommentPannel, setShowCommentPannel] = React.useState(false);
-    const formatUrl = url => '//' + url;
+    const formatUrl = url => url.startsWith('//') ? url : ('//' + url);
+    const ts = formatCreatedAt(createdAt, serverTime);
+
     return (
         <div className={s.wrapper}>
             <div className={s.container}>
@@ -44,16 +55,32 @@ export default function PostsCard({
                             </div>
                         }
                         <div className={s.btns}>
-                            <span className={'iconfont icon-i-message ' + s.icon} onClick={() => setShowCommentPannel(!showCommentPannel)} />
-                            <span className={'iconfont icon-fenxiang2 ' + s.icon} />
+                            {/* <div className={s.comment}>
+                                <span className={s.icon} onClick={like}>
+                                    👏
+                                </span>
+                                {!!likes && <span className={s.likes}>
+                                    {likes > 999 ? '999+' : likes}
+                                </span>}
+                            </div> */}
+                            <div className={s.comment}>
+                                <span className={'iconfont icon-i-message ' + s.icon} onClick={() => setShowCommentPannel(!showCommentPannel)} />
+                                {!!commentCount && <span className={s.commentNum}>
+                                    {commentCount > 999 ? '999+' : commentCount}
+                                </span>}
+                            </div>
+                            {/* <span className={'iconfont icon-fenxiang2 ' + s.icon} /> */}
+                        </div>
+                        <div className={s.ts}>
+                            <span>{ts}</span>
                         </div>
                     </div>
                     {showCommentPannel && <>
                         <Divider style={{ width: '100%' }} />
-                        <CommentPannel />
+                        <CommentPannel post={data} />
                     </>}
                 </div>
             </div >
         </div>
     );
-};
+});

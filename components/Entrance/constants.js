@@ -41,15 +41,7 @@ export const NAVI_ITEMS = [
         url: ''
     },
     {
-        title: '创作团',
-        url: ''
-    },
-    {
         title: '活动',
-        url: ''
-    },
-    {
-        title: '会员',
         url: ''
     },
     {
@@ -59,15 +51,6 @@ export const NAVI_ITEMS = [
 ];
 
 export const NAVI_FUNC_ITEMS = [
-    {
-        title: '入门资源',
-        url: '',
-    },
-    {
-        title: '创作者',
-        url: '',
-        type: NAVI_ITEM_TYPE.COLLECTION,
-    },
     {
         title: '登录',
         url: '/auth.html',

@@ -5,8 +5,8 @@ import { RegistryCard, LoginCard } from '@components/Common/AuthCards';
 import { STAGE_MAP, PAGE_AFTER_LOGIN } from '../../constants';
 import { toast } from 'react-toastify';
 import { replaceQuery, replacePage } from '@utils/navi';
-import s from './index.scss';
 import useStores from '@framework/util';
+import s from './index.scss';
 
 export default observer(function NavigationBar() {
     useStyles(s);
@@ -51,7 +51,7 @@ export default observer(function NavigationBar() {
     const renderBody = () => {
         switch (store.currentStage) {
             case STAGE_MAP.LOGIN:
-                return <LoginCard handleSubmit={handleLoginSubmit} backHandler={backHandler} />;
+                return <LoginCard handleSubmit={handleLoginSubmit} backHandler={backHandler} showRegister />;
             case STAGE_MAP.SIGNUP:
                 return <RegistryCard handleSubmit={handleRegisterSubmit} switchLogin={switchLogin} />;
         }
