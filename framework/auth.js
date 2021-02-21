@@ -9,7 +9,10 @@ export const formatAuthData = formData => {
     const { passwd, ...rest } = formData;
     return {
         ...rest,
-        password: hash(formData.passwd, { salt: HASH_SALT }),
+        ...formData.passwd
+            ? {
+                password: hash(formData.passwd, { salt: HASH_SALT }),
+            } : {}
     };
 };
 

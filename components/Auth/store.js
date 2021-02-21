@@ -42,7 +42,7 @@ export default class Store extends CommonStore {
             }
             return res;
         } catch (error) {
-            return { success: false, msg: error.message };
+            return { success: false, code: error.status };
         }
     }
 
@@ -56,7 +56,7 @@ export default class Store extends CommonStore {
             }
             return res;
         } catch (error) {
-            return { success: false, msg: error?.message };
+            return { success: false, code: error.status };
         }
     }
 }

@@ -7,3 +7,10 @@ export const formatCreatedAt = (createdAt, serverTime) => {
             : '刚刚';
     return ts;
 };
+
+export const cleanUndefined = obj => {
+    for (const i in obj) {
+        if (obj[i] === undefined) delete obj[i];
+    }
+    return obj;
+};

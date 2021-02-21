@@ -20,6 +20,7 @@ import CodeInput from './CodeInput';
 import Logo from '@widgets/Logo';
 import { formatAuthData } from '@framework/auth';
 import s from './index.scss';
+import { cleanUndefined } from '@utils/format';
 
 const TITLE = '登录';
 
@@ -57,7 +58,7 @@ export default (inject('store')((observer(function LoginCard(props) {
         return () => timer && clearTimeout(timer);
     }, [formState.countdown]);
     const switchAuthType = () => {
-        const authType = formState.authType === AUTH_TYPE.PHONE ? AUTH_TYPE.EMAIL : AUTH_TYPE.PHONE;
+        const authType = formState.authType === AUTH_TYPE.PHONE_MSG ? AUTH_TYPE.EMAIL : AUTH_TYPE.PHONE_MSG;
         updateState({ authType });
     };
     const refs = {
@@ -95,11 +96,13 @@ export default (inject('store')((observer(function LoginCard(props) {
             loading: true,
         });
         const authData = formatAuthData({
+            phone: formatPhone(refs.phoneRef().getInput()),
             email: refs.emailRef().getInput(),
             passwd: refs.passwdRef().getInput(),
             type: formState.authType,
+            code: refs.codeRef().getInput(),
         });
-        typeof handleSubmit === 'function' && await handleSubmit(authData);
+        typeof handleSubmit === 'function' && await handleSubmit(cleanUndefined(authData));
         updateState({
             loading: false,
         });
@@ -155,12 +158,12 @@ export default (inject('store')((observer(function LoginCard(props) {
                                 />
                                 <CodeInput
                                     addRefFunc={func => (refs.codeRef = func)}
-                                    getPhoneNumberFunc={() => refs.codeRef().getInput()}
+                                    getPhoneNumberFunc={() => refs.phoneRef().getInput()}
                                 />
                             </>
                     }
                 </div>
-                <Button className={s.btn} text={'登录'} loading={formState.loading} onClick={btnClickHandler} />
+                <Button className={s.btn} text={'登录'} loading={formState.loading} onClick={btnClickHandler} disabled={formState.loading} />
                 {showBack && <Button text={'返回'} plain onClick={backHandler} />}
                 {showRegister && <Button text={'没有账号？立即注册'} plain onClick={backHandler} />}
                 <div className={s.oauthTip}>其他登录方式</div>

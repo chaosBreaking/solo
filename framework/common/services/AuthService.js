@@ -12,11 +12,8 @@ export default class AuthService extends BaseService {
     }
 
     handleRegister = async formData => {
-        const res = await this.post(API_MAP.REGISTER, formData).catch(error => ({ error }));
-        const { error, data } = res;
-        if (error) {
-            throw error;
-        }
+        const res = await this.post(API_MAP.REGISTER, formData);
+        const { data } = res;
         return data;
     }
 

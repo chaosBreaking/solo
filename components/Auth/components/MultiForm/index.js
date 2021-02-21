@@ -8,6 +8,14 @@ import { replaceQuery, replacePage } from '@utils/navi';
 import useStores from '@framework/util';
 import s from './index.scss';
 
+const getToastInfo = code => {
+    switch (code) {
+        case 404: return '用户不存在';
+        case 400: return '用户名或密码错误';
+        case 415: return '不支持的认证类型';
+    }
+};
+
 export default observer(function NavigationBar() {
     useStyles(s);
     const { store } = useStores();
@@ -24,7 +32,7 @@ export default observer(function NavigationBar() {
         if (res.success) {
             replacePage(PAGE_AFTER_LOGIN);
         } else {
-            toast.error(res.msg, {
+            toast.error(getToastInfo(res.code), {
                 position: toast.POSITION.TOP_LEFT,
                 progressStyle: { display: 'none' }
             });
@@ -35,7 +43,8 @@ export default observer(function NavigationBar() {
         if (res.success) {
             replacePage(PAGE_AFTER_LOGIN);
         } else {
-            toast.error(res.msg, {
+            const msg = res.code === 406 ? `该${formData.email ? '邮箱' : '手机号'}已被注册` : '出错啦，请稍后重试~';
+            toast.error(res.msg || msg, {
                 position: toast.POSITION.TOP_LEFT,
                 progressStyle: { display: 'none' }
             });

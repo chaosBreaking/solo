@@ -19,6 +19,7 @@ import CodeInput from './CodeInput';
 import Logo from '@widgets/Logo';
 import { formatAuthData } from '@framework/auth';
 import s from './index.scss';
+import { cleanUndefined } from '@utils/format';
 
 // const TITLE = '创建你的社群，从这里开始'; // 放在 成为创作者 页面
 const TITLE = '即刻加入';
@@ -113,7 +114,7 @@ export default (observer(function RegistryCard(props) {
             code: refs.codeRef().getInput(),
             type: formState.authType,
         });
-        typeof handleSubmit === 'function' && await handleSubmit(authData);
+        typeof handleSubmit === 'function' && await handleSubmit(cleanUndefined(authData));
         updateState({
             loading: false,
         });
