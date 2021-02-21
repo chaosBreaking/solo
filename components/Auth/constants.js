@@ -4,4 +4,4 @@ export const STAGE_MAP = {
     USER_TYPE: 2,
 };
 
-export const PAGE_AFTER_LOGIN = 'zone.html';
+export const PAGE_AFTER_LOGIN = '/zone.html';
