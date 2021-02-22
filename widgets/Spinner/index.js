@@ -1,5 +1,6 @@
 import React from 'react';
 import { CubeGrid } from 'better-react-spinkit';
+import { Backdrop } from '@material-ui/core';
 
 const DEFAULT_STYLE = {
     position: 'fixed',
@@ -13,8 +14,8 @@ const DEFAULT_STYLE = {
     alignItems: 'center',
 };
 
-export default function Spinner({ className, size = 42, color = 'var(--theme-primary)', style = DEFAULT_STYLE }) {
-    return <div className={className} style={className ? {} : style}>
+export default function Spinner({ className, size = 42, color = 'var(--theme-editor)', style = DEFAULT_STYLE }) {
+    return <Backdrop open={true} style={{ zIndex: 10 }}>
         <CubeGrid size={size} color={color} />
-    </div>;
+    </Backdrop>;
 };
