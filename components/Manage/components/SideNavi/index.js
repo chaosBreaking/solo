@@ -5,11 +5,9 @@ import { forward } from '@utils/navi';
 import { SIDE_NAVI_ITEMS } from '../../constants';
 import cs from 'classnames';
 import s from './index.scss';
-import useStores from '@framework/util';
 
 function SideNavi(props) {
     useStyles(s);
-    const { store } = useStores();
     const active = 0;
     const handleClick = item => {
         const { url } = item;
@@ -19,12 +17,16 @@ function SideNavi(props) {
         <div className={s.container}>
             {
                 SIDE_NAVI_ITEMS.map((item, index) => {
-                    const { title, url } = item;
-                    return <div key={title} className={cs(s.item, {
-                        [s.active]: active === index,
-                    })}>
+                    const { title } = item;
+                    return <div
+                        key={title}
+                        className={cs(s.item, {
+                            [s.active]: active === index,
+                        })}
+                        onClick={() => handleClick(item)}
+                    >
                         <span className={'iconfont icon-geren'} />
-                        <span onClick={() => handleClick(item)}>{title}</span>
+                        <span>{title}</span>
                     </div>;
                 })
             }

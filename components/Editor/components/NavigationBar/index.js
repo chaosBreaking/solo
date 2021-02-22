@@ -3,6 +3,7 @@ import useStyles from 'isomorphic-style-loader/useStyles';
 import Logo from '@widgets/Logo';
 import { FlexSearchBar } from '@widgets/SearchBar';
 import s from './index.scss';
+import { forward } from '@utils/navi';
 
 function NavigationBar(props) {
     useStyles(s);
@@ -14,7 +15,7 @@ function NavigationBar(props) {
         <div className={s.container}>
             <div className={s.mainNav}>
                 <div className={s.left}>
-                    <Logo size={'middle'} />
+                    <Logo size={'middle'} onClick={forward('/zone.html')} />
                     <FlexSearchBar />
                 </div>
                 <div className={s.right}>
