@@ -18,12 +18,12 @@ export default class Store extends CommonStore {
     commentLock = false;
     queryCommentLock = false;
 
+    @observable activeView = ACTIVE_VIEW.ME.index;
     @observable dataList: any[] = [[], [], []];
     @observable hasMoreList = [true, true, true];
     @observable offsetIdList = ['', '', ''];
     @observable loadingStatusList = [0, 0, 0];
-    @observable activeView = ACTIVE_VIEW.ARTICLE.index;
-    @observable activeTabList = [0, 0, 0];
+    @observable activeTabList = [0, 0, 0, 0];
     @observable mainTabList = [[
         { title: '热门', id: 0 },
         { title: '最新', id: 1 },
@@ -32,7 +32,14 @@ export default class Store extends CommonStore {
         { title: '热门', id: 0 },
         { title: '最新', id: 1 },
         { title: '关注', id: 2 },
-    ], []];
+    ], [
+        { title: '热门', id: 0 },
+        { title: '关注', id: 1 },
+    ], [
+        { title: '文章', id: 0 },
+        { title: '推文', id: 1 },
+        { title: '圈子', id: 2 },
+    ]];
 
     @computed
     get activeTab() {
@@ -51,7 +58,6 @@ export default class Store extends CommonStore {
 
     @computed
     get postList() {
-        // return Array.from({ length: 10 }).fill(1);
         return this.dataList[ACTIVE_VIEW.POST.index];
     }
 
@@ -118,6 +124,8 @@ export default class Store extends CommonStore {
             this.activeView = ACTIVE_VIEW.POST.index;
         } else if (pathname.endsWith(ACTIVE_VIEW.COMMUNITY.path)) {
             this.activeView = ACTIVE_VIEW.COMMUNITY.index;
+        } else if (pathname.endsWith(ACTIVE_VIEW.ME.path)) {
+            this.activeView = ACTIVE_VIEW.ME.index;
         } else {
             this.activeView = ACTIVE_VIEW.ARTICLE.index;
         }

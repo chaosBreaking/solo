@@ -10,6 +10,9 @@ export default (observer(function MainTab(props) {
     useStyles(s);
     const { store } = useStores();
     const { mainTabs, activeTab, setActiveTab } = store;
+    if (!mainTabs) {
+        return null;
+    }
     const clickHandler = (e, id) => {
         e.stopPropagation();
         setActiveTab(+id);

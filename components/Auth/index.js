@@ -12,7 +12,11 @@ import ToastContainer from '@widgets/Toast';
 // import 'react-toastify/dist/ReactToastify.css';
 
 @withStyles(s)
-@createPage({ store })
+@createPage({ store }, {
+    pageInfo: {
+        title: 'Solo | 登录'
+    }
+})
 @inject('store')
 @observer
 export default class AuthPage extends Component {

@@ -1,0 +1,94 @@
+.container {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    padding-bottom: .1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: .05rem .05rem 0 0;
+    overflow: hidden;
+}
+
+.top {
+    position: relative;
+}
+
+.cover {
+    width: 100%;
+    height: 2rem;
+}
+
+.avatar {
+    position: absolute;
+    bottom: 0;
+    width: .7rem;
+    height: .7rem;
+    left: .1rem;
+    transform: translateY(50%);
+    border: 3px solid #eee;
+    z-index: 1;
+}
+
+.btn {
+    position: absolute;
+    right: .1rem;
+}
+
+.profile {
+    position: relative;
+    width: 100%;
+    padding-top: .4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: .1rem;
+    padding-bottom: .1rem;
+    border: 2px solid #eee;
+    font-size: .1rem;
+}
+
+.nickname {
+    font-size: .11rem;
+    font-weight: bold;
+}
+
+.bio {
+    margin-top: .1rem;
+    color: #666;
+}
+
+.dialog {
+    width: 4rem;
+    padding: .1rem;
+    background: #fff;
+    border-radius: .1rem;
+    z-index: 2;
+}
+
+.title {
+    width: 100%;
+    text-align: center;
+    font-size: .12rem;
+    padding-bottom: .1rem;
+}
+
+.pv {
+    position: relative;
+    width: 100%;
+    margin-bottom: .3rem;
+}
+
+.pvCover {
+    width: 100%;
+    height: 1.2rem;
+}
+
+.pvAvatar {
+    position: absolute;
+    left: .1rem;
+    bottom: 0;
+    width: .4rem;
+    height: .4rem;
+    transform: translateY(50%);
+}

@@ -14,6 +14,8 @@ export default class UserStore extends CommonStore {
     @observable email: string = '';
     @observable avatar: string = '';
     @observable nickname: string = '';
+    @observable cover: string = '';
+    @observable bio: string = '';
     @observable refreshing: boolean = false;
 
     authService: AuthService;
@@ -48,11 +50,16 @@ export default class UserStore extends CommonStore {
                 nickname,
                 email,
                 avatar,
+                bio,
+                cover,
             } = await this.userService.queryBasicInfo();
             this.uid = uid;
             this.email = email;
             this.nickname = nickname;
             this.avatar = avatar;
+            this.bio = bio;
+            this.cover = cover;
+
         } catch (error) {
             console.error(error);
             if (error && error.code === 403) {

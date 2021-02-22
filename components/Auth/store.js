@@ -25,6 +25,11 @@ export default class Store extends CommonStore {
 
     @action.bound
     switchStage(stage) {
+        if (stage === STAGE_MAP.LOGIN) {
+            document.title = 'Solo | 登录';
+        } else if (stage === STAGE_MAP.SIGNUP) {
+            document.title = 'Solo | 注册';
+        }
         this.currentStage = stage;
     }
 

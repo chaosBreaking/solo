@@ -75,9 +75,8 @@ input {
     margin: .05rem 0;
     border-radius: .03rem;
     border: 1px solid #ddd;
-    // background: #ddd;
-    // font-weight: bold;
-    color: #333;
+    font-weight: bold;
+    font-size: .11rem;
 
     &:focus,
     &:hover {
@@ -223,6 +222,7 @@ input {
 }
 
 :global(.Toastify__toast) {
+    font-size: .1rem;
     border-radius: .05rem !important;
 }
 

@@ -22,35 +22,40 @@ export const ACTIVE_VIEW = {
         path: 'community',
         index: 2,
     },
+    ME: {
+        path: 'me',
+        index: 3,
+    },
 };
 
 export const NAVI_ITEMS: INavItemList = [
     {
         title: '文章',
-        index: ACTIVE_VIEW.ARTICLE.index,
         insideView: true,
+        index: ACTIVE_VIEW.ARTICLE.index,
         url: ACTIVE_VIEW.ARTICLE.path,
         icon: 'icon-wenzhang1',
     },
     {
         title: '动态',
-        index: ACTIVE_VIEW.POST.index,
         insideView: true,
+        index: ACTIVE_VIEW.POST.index,
         url: ACTIVE_VIEW.POST.path,
         icon: 'icon-planet1',
     },
     {
         title: '部落',
-        index: ACTIVE_VIEW.COMMUNITY.index,
         insideView: true,
+        index: ACTIVE_VIEW.COMMUNITY.index,
         url: ACTIVE_VIEW.COMMUNITY.path,
         icon: 'icon-shequ',
     },
     {
         title: '我の窝',
-        url: '/manage',
+        insideView: true,
+        url: ACTIVE_VIEW.ME.path,
+        index: ACTIVE_VIEW.ME.index,
         icon: 'icon-home',
-        index: 4,
     },
     {
         title: '创作',

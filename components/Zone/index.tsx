@@ -3,12 +3,12 @@ import { observer, inject } from 'mobx-react';
 import createPage from '@framework/createPage';
 import store from './store';
 import withStyles from 'isomorphic-style-loader/withStyles';
+import { ACTIVE_VIEW } from '@constants/ui';
 import ExtendZone from './components/ExtendZone';
 import FeedsList from './components/FeedsList';
 import TopCard from './components/TopCard';
 import SideNav from './components/SideNav';
 import Header from './components/Header';
-import { ACTIVE_VIEW } from '@constants/ui';
 import BlockItem from './components/BlockItem';
 import CommunityCard from './components/CommunityCard';
 import PostsCard from './components/PostsCard';
@@ -92,6 +92,11 @@ export default class Zone extends Component<{ store: store }> {
         />;
     }
 
+    renderMyPage() {
+        const MyPage = loadable(() => import('./components/MyPage'));
+        return <MyPage />
+    }
+
     getBody() {
         const { activeView } = this.props.store;
         switch (activeView) {
@@ -99,6 +104,8 @@ export default class Zone extends Component<{ store: store }> {
                 return this.renderPosts();
             case ACTIVE_VIEW.COMMUNITY.index:
                 return this.renderCommunity();
+            case ACTIVE_VIEW.ME.index:
+                return this.renderMyPage();
             default:
                 return this.renderArticles();
         }
