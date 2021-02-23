@@ -1,6 +1,6 @@
 import React from 'react';
 import useStyles from 'isomorphic-style-loader/useStyles';
-import { Divider } from '@material-ui/core';
+import { Avatar, Divider } from '@material-ui/core';
 import { observer } from 'mobx-react';
 import useStores from '@framework/util';
 import { formatCreatedAt } from '@utils/format';
@@ -32,7 +32,7 @@ export default observer(function PostsCard({
         <div className={s.wrapper}>
             <div className={s.container}>
                 <div className={s.left}>
-                    <img className={s.avatar} src={avatar} />
+                    <Avatar className={s.avatar} src={avatar} variant="square">{nickname.slice(0, 1)}</Avatar>
                     <div className={s.nickname}>{nickname}</div>
                 </div>
                 <div className={s.body}>
