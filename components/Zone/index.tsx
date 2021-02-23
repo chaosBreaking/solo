@@ -41,7 +41,7 @@ export default class Zone extends Component<{ store: store }> {
             return <BlockItem key={item._id} {...item} serverTime={serverTime} />;
         };
         return <>
-            <TopCard />
+            {/* <TopCard /> */}
             <FeedsList
                 dataList={articleList}
                 loadMore={loadMore}
