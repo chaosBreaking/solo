@@ -30,6 +30,11 @@ export default class Store extends CommonStore {
         return {};
     }
 
+    @action.bound
+    async prepareClientData() {
+        await this.initUploader();
+    }
+
     initService(axios) {
         this.contentService = new ContentService(axios);
         this.authService = new AuthService(axios);

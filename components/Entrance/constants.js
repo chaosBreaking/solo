@@ -38,7 +38,8 @@ export const NAVI_ITEM_TYPE = {
 export const NAVI_ITEMS = [
     {
         title: '探索',
-        url: ''
+        url: '/zone.html',
+        type: NAVI_ITEM_TYPE.LINK
     },
     {
         title: '活动',

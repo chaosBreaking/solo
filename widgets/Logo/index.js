@@ -35,7 +35,7 @@ export default function Logo(props) {
         if (!noLink) {
             typeof onClick === 'function'
                 ? onClick()
-                : forward('/');
+                : forward('/zone.html');
         }
     };
     return (

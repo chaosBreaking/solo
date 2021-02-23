@@ -62,12 +62,19 @@ export default class UserStore extends CommonStore {
 
         } catch (error) {
             console.error(error);
-            if (error && error.code === 403) {
-                if (forceLogin) {
-
-                }
-            }
         }
+    }
+
+    @action.bound
+    async updateProfile(data) {
+        const res = await this.userService.updateProfile(data) || {};
+        Object.keys(res).map(key => {
+            const value = res[key];
+            if (value) {
+                this[key] = value;
+            }
+        });
+        return res;
     }
 
     @action.bound

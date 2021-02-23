@@ -113,6 +113,12 @@ export default class Store extends CommonStore {
         return {};
     }
 
+
+    @action.bound
+    async prepareClientData() {
+        await this.initUploader();
+    }
+
     initService(axios: any) {
         this.contentService = new ContentService(axios);
         this.cloudService = new CloudService(axios);
@@ -206,6 +212,9 @@ export default class Store extends CommonStore {
     @action.bound
     async uploadImages(list) {
         const taskList = list.map(item => {
+            if (!item) {
+                return '';
+            }
             const { file, id } = item;
             const key = `post_imgs_${id}`;
             return this.uploader(key, file);

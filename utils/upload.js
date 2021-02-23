@@ -48,7 +48,7 @@ function uploader(token) {
             }, function (err, data) {
                 if (err) reject(err);
                 const { Location } = data;
-                resolve(Location);
+                resolve(Location.startsWith('//') ? Location : '//' + Location);
             });
         });
     };

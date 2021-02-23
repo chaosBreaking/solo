@@ -50,15 +50,16 @@
     max-width: 100%;
     height: auto;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-between;
     overflow: hidden;
 }
 
 .image {
     max-width: 100%;
-    width: 33%;
-    flex: 0 0 auto;
+    min-width: 33%;
+    margin-right: 1%;
+    flex: 0 1 auto;
     transition: all .3s ease;
     cursor: pointer;
 
