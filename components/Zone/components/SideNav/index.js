@@ -2,9 +2,10 @@ import React from 'react';
 import useStyles from 'isomorphic-style-loader/useStyles';
 import useStores from '@framework/util';
 import cs from 'classnames';
+import { observer } from 'mobx-react';
 import s from './index.scss';
 
-export default function SideNav(props) {
+export default observer(function SideNav(props) {
     useStyles(s);
     const { store } = useStores();
     const { navItems, activeView } = store;
@@ -31,4 +32,4 @@ export default function SideNav(props) {
             }
         </div >
     );
-};
+});

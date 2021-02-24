@@ -17,6 +17,7 @@ export default class Store extends CommonStore {
     serverTime: Date = new Date();
     commentLock = false;
     queryCommentLock = false;
+    targetUid: string; // uid参数，展示某人的资料页用到
 
     @observable activeView = ACTIVE_VIEW.ME.index;
     @observable dataList: any[] = [[], [], []];
@@ -161,7 +162,9 @@ export default class Store extends CommonStore {
 
     @action.bound
     async initializeData(requestContext: any) {
-        const { pathname } = requestContext;
+        const { pathname, query } = requestContext;
+        const { uid } = query;
+        this.targetUid = uid;
         this.checkActiveView(pathname);
         await Promise.all([
             this.activeView === ACTIVE_VIEW.ME.index
@@ -266,6 +269,7 @@ export default class Store extends CommonStore {
         this.myPageLoadingStatus = 1;
         const service = this.getMyPageService();
         const data: any[] = await service({
+            ...this.targetUid ? { userId: this.targetUid } : {},
             offset: this.myOffset,
             offsetId: this.myOffsetId,
             count,

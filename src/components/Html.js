@@ -35,7 +35,7 @@ export default function Html({
                         dangerouslySetInnerHTML={{ __html: style.cssText }}
                     />
                 ))}
-                <style id="jss-server-side">${mdStyles}</style>
+                <style id="jss-server-side">{mdStyles}</style>
             </head>
             <body>
                 <div id="app" dangerouslySetInnerHTML={{ __html: children }} />

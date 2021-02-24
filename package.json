@@ -51,6 +51,7 @@
     "classnames": "^2.2.6",
     "cookie-parser": "^1.4.3",
     "cos-js-sdk-v5": "^1.0.1",
+    "dayjs": "^1.10.4",
     "express": "^4.16.3",
     "filepond": "^4.25.1",
     "filepond-plugin-file-validate-size": "^2.2.2",

@@ -12,6 +12,7 @@ export default function App({ context, insertCss, children }) {
             jssStyles.parentElement.removeChild(jssStyles);
         }
     });
+
     return (
         <StyleContext.Provider value={{ insertCss }}>
             {React.Children.only(children)}

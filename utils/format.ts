@@ -1,9 +1,11 @@
+import dayjs from 'dayjs';
+
 export const formatCreatedAt = (createdAt, serverTime) => {
     const cat = new Date(createdAt);
     const ts = (serverTime - +cat) / 1000 / 3600 / 24 >= 1
-        ? cat.toLocaleDateString().replace(/[/|-]/g, '.')
+        ? dayjs(cat).format('M月D日')
         : (serverTime - +cat) / 1000 / 60 > 1
-            ? cat.toLocaleTimeString().split(':').slice(0, -1).join(':')
+            ? dayjs(cat).format('H:mm')
             : '刚刚';
     return ts;
 };

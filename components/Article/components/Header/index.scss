@@ -6,7 +6,7 @@
     width: 100%;
     height: $NAV_HEIGHT_MAIN;
     margin-bottom: .1rem;
-    padding-right: .1rem;
+    padding: 0 .1rem;
     display: flex;
     align-items: center;
     z-index: 1;
@@ -15,9 +15,10 @@
 }
 
 .info {
-    font-size: .09rem;
+    padding-left: .1rem;
     display: flex;
     flex-direction: column;
+    font-size: .09rem;
 
     cursor: pointer;
 }
