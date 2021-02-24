@@ -43,6 +43,7 @@ export default class Zone extends Component<{ store: store }> {
         return <>
             {/* <TopCard /> */}
             <FeedsList
+                key={ACTIVE_VIEW.ARTICLE.index}
                 dataList={articleList}
                 loadMore={loadMore}
                 loadingStatus={loadingStatus}
@@ -63,6 +64,7 @@ export default class Zone extends Component<{ store: store }> {
             return <PostsCard key={item._id} data={item} CommentPannel={CommentPannel} />;
         };
         return <FeedsList
+            key={ACTIVE_VIEW.POST.index}
             dataList={postList}
             loadMore={loadMore}
             loadingStatus={loadingStatus}
@@ -82,6 +84,7 @@ export default class Zone extends Component<{ store: store }> {
             loadingStatus,
         } = this.props.store;
         return <FeedsList
+            key={ACTIVE_VIEW.COMMUNITY.index}
             direction={'row'}
             dataList={communityList}
             loadMore={loadMore}

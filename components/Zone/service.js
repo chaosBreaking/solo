@@ -7,6 +7,10 @@ const URLs = {
     PUBLISH_POST: 'post/publish',
     COMMENT: 'post/comment',
     QUERY_COMMENT: 'post/comments',
+    DELETE_POST: 'post/delete',
+    QUERY_MY_POST: 'post/user/list',
+    QUERY_MY_ARTICLE: 'article/user/list',
+    QUERY_MY_COMMUNITY: 'community/user/list',
 };
 
 export default class ContentService extends BaseService {
@@ -57,6 +61,42 @@ export default class ContentService extends BaseService {
 
     queryComments = async params => {
         const res = await this.get(URLs.QUERY_COMMENT, params).catch(error => ({ error }));
+        const { error, data } = res;
+        if (error) {
+            throw error;
+        }
+        return data;
+    }
+
+    deletePost = async params => {
+        const res = await this.post(URLs.DELETE_POST, params).catch(error => ({ error }));
+        const { error, data } = res;
+        if (error) {
+            throw error;
+        }
+        return data;
+    }
+
+    getMyArticleList = async params => {
+        const res = await this.post(URLs.QUERY_MY_ARTICLE, params).catch(error => ({ error }));
+        const { error, data } = res;
+        if (error) {
+            throw error;
+        }
+        return data;
+    }
+
+    getMyPostList = async params => {
+        const res = await this.post(URLs.QUERY_MY_POST, params).catch(error => ({ error }));
+        const { error, data } = res;
+        if (error) {
+            throw error;
+        }
+        return data;
+    }
+
+    getMyCommunityList = async params => {
+        const res = await this.post(URLs.QUERY_MY_COMMUNITY, params).catch(error => ({ error }));
         const { error, data } = res;
         if (error) {
             throw error;

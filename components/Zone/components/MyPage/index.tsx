@@ -4,11 +4,14 @@ import useStores from '@framework/util';
 import { Avatar, Button, } from '@material-ui/core';
 import { observer } from 'mobx-react';
 import loadable from '@loadable/component';
+import Store from '../../store';
+import Content from './Content';
+import UserStore from '@framework/UserStore';
 import s from './index.scss';
 
 export default observer(function MyPage() {
     useStyles(s);
-    const { userStore } = useStores();
+    const { userStore }: { userStore: UserStore } = useStores();
     const {
         nickname,
         avatar,
@@ -36,8 +39,7 @@ export default observer(function MyPage() {
             <span className={s.nickname}>{nickname}</span>
             <p className={s.bio}>{bio}</p>
         </div>
-        <div className={s.content}>
-        </div>
+        <Content />
         {open && <ProfileDialog open={open} onClose={handleClose} />}
     </div>;
 });

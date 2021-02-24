@@ -2,13 +2,14 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import useStyles from 'isomorphic-style-loader/useStyles';
 import cs from 'classnames';
+import useStores from '@framework/util';
+import Store from '../../store';
 
 import s from './index.scss';
-import useStores from '@framework/util';
 
 export default (observer(function MainTab(props) {
     useStyles(s);
-    const { store } = useStores();
+    const { store }: { store: Store } = useStores();
     const { mainTabs, activeTab, setActiveTab } = store;
     if (!mainTabs) {
         return null;

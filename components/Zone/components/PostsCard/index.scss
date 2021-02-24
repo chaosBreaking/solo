@@ -48,6 +48,7 @@
 
 .imageWrapper {
     max-width: 100%;
+    max-height: 3rem;
     height: auto;
     display: flex;
     flex-wrap: nowrap;
@@ -109,6 +110,7 @@
     height: auto;
     display: flex;
     line-height: 1;
+    margin-top: .1rem;
 }
 
 .tags {
@@ -146,6 +148,7 @@
 }
 
 .icon {
+    position: relative;
     width: .2rem;
     height: .2rem;
     margin-left: .1rem;
@@ -163,12 +166,12 @@
 }
 
 .comment {
-    width: .5rem;
     display: flex;
     align-items: center;
 }
 
 .ts {
+    width: .5rem;
     display: flex;
     align-items: center;
     white-space: nowrap;

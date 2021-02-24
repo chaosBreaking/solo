@@ -15,7 +15,7 @@ function NavigationBar(props) {
         <div className={s.container}>
             <div className={s.mainNav}>
                 <div className={s.left}>
-                    <Logo size={'middle'} onClick={forward('/zone.html')} />
+                    <Logo size={'middle'} onClick={() => forward('/zone.html')} />
                     <FlexSearchBar />
                 </div>
                 <div className={s.right}>

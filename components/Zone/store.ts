@@ -26,20 +26,77 @@ export default class Store extends CommonStore {
     @observable activeTabList = [0, 0, 0, 0];
     @observable mainTabList = [[
         { title: '热门', id: 0 },
-        { title: '最新', id: 1 },
-        { title: '关注', id: 2 }
+        // { title: '最新', id: 1 },
+        // { title: '关注', id: 2 },
     ], [
         { title: '热门', id: 0 },
-        { title: '最新', id: 1 },
-        { title: '关注', id: 2 },
+        // { title: '最新', id: 1 },
+        // { title: '关注', id: 2 },
     ], [
         { title: '热门', id: 0 },
-        { title: '关注', id: 1 },
+        // { title: '关注', id: 1 },
     ], [
         { title: '文章', id: 0 },
         { title: '推文', id: 1 },
         { title: '圈子', id: 2 },
     ]];
+
+    @observable myPageDataList: any[] = [[], [], []]; // 个人页面数据，分为文章/推文/圈子
+    @observable myHasMoreList: any[] = [[], [], []]; // 个人页面数据，分为文章/推文/圈子
+    @observable myPageLoadingStatusList = [0, 0, 0];
+    @observable myOffsetList = [0, 0, 0];
+    @observable myOffsetIdList = ['', '', ''];
+
+    @computed
+    get myPageArticle() {
+        return this.myPageDataList[0];
+    }
+
+    @computed
+    get myPagePost() {
+        return this.myPageDataList[1];
+    }
+
+    @computed
+    get myPageCommunity() {
+        return this.myPageDataList[2];
+    }
+
+    @computed
+    get myHasMore() {
+        return this.myHasMoreList[this.activeTab];
+    }
+
+    set myHasMore(val) {
+        this.myHasMoreList[this.activeTab] = val;
+    }
+
+    @computed
+    get myOffset() {
+        return this.myOffsetList[this.activeTab];
+    }
+
+    set myOffset(offset: number) {
+        this.myOffsetList[this.activeTab] = offset;
+    }
+
+    @computed
+    get myOffsetId() {
+        return this.myOffsetIdList[this.activeTab];
+    }
+
+    set myOffsetId(offsetId: string) {
+        this.offsetIdList[this.activeTab] = offsetId;
+    }
+
+    @computed
+    get myPageLoadingStatus() {
+        return this.myPageLoadingStatusList[this.activeTab];
+    }
+
+    set myPageLoadingStatus(status: number) {
+        this.myPageLoadingStatusList[this.activeTab] = status;
+    }
 
     @computed
     get activeTab() {
@@ -52,17 +109,17 @@ export default class Store extends CommonStore {
     }
 
     @computed
-    get articleList() {
+    get articleList(): any[] {
         return this.dataList[ACTIVE_VIEW.ARTICLE.index];
     }
 
     @computed
-    get postList() {
+    get postList(): any[] {
         return this.dataList[ACTIVE_VIEW.POST.index];
     }
 
     @computed
-    get communityList() {
+    get communityList(): any[] {
         return this.dataList[ACTIVE_VIEW.COMMUNITY.index];
     }
 
@@ -107,7 +164,9 @@ export default class Store extends CommonStore {
         const { pathname } = requestContext;
         this.checkActiveView(pathname);
         await Promise.all([
-            this.loadMore(),
+            this.activeView === ACTIVE_VIEW.ME.index
+                ? this.loadMyPageData()
+                : this.loadMore(),
             this.initUploader(),
         ]);
         return {};
@@ -142,6 +201,8 @@ export default class Store extends CommonStore {
         if (index !== this.activeView) {
             this.activeView = index;
         }
+
+        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     }
 
     @action.bound
@@ -149,6 +210,7 @@ export default class Store extends CommonStore {
         if (tabIndex !== this.activeTab) {
             this.activeTabList[this.activeView] = tabIndex;
         }
+        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     }
 
     getService() {
@@ -157,6 +219,14 @@ export default class Store extends CommonStore {
             [ACTIVE_VIEW.POST.index]: this.contentService.getPostList,
             [ACTIVE_VIEW.COMMUNITY.index]: this.contentService.getCommunityList,
         }[this.activeView];
+    }
+
+    getMyPageService() {
+        return {
+            0: this.contentService.getMyArticleList,
+            1: this.contentService.getMyPostList,
+            2: this.contentService.getMyCommunityList,
+        }[this.activeTab];
     }
 
     @action.bound
@@ -172,7 +242,6 @@ export default class Store extends CommonStore {
             offsetId: this.offsetId,
             count,
         }).catch(err => {
-            console.error(err);
             return [];
         });
         runInAction(() => {
@@ -189,6 +258,35 @@ export default class Store extends CommonStore {
     }
 
     @action.bound
+    async loadMyPageData() {
+        if (!this.myHasMore) {
+            this.myPageLoadingStatus = -1;
+            return;
+        }
+        this.myPageLoadingStatus = 1;
+        const service = this.getMyPageService();
+        const data: any[] = await service({
+            offset: this.myOffset,
+            offsetId: this.myOffsetId,
+            count,
+        }).catch(err => {
+            console.error(err);
+            return [];
+        });
+        runInAction(() => {
+            if (!data || !data.length) {
+                this.myHasMore = false;
+                this.myPageLoadingStatus = -1;
+            } else {
+                this.myOffset += data.length;
+                this.myOffsetId = data[data.length - 1]._id;
+                this.myPageDataList[this.activeTab].push(...data);
+                this.myPageLoadingStatus = 0;
+            }
+        });
+    }
+
+    @action.bound
     handleNav(item: INavItem) {
         const { insideView, url, index } = item;
         if (index === this.activeView) {
@@ -197,7 +295,7 @@ export default class Store extends CommonStore {
         if (insideView) {
             const dest = `/zone.html/${url}`;
             history.pushState({ activeView: index }, '', dest);
-            this.activeView = index;
+            this.setActiveView(index);
         } else {
             forward(url);
         }
@@ -300,6 +398,24 @@ export default class Store extends CommonStore {
         } catch (error) {
             post.comments = [];
             return [];
+        }
+    }
+
+    @action.bound
+    async deletePost(postId) {
+        try {
+            const success = await this.contentService.deletePost({ postId });
+            if (success) {
+                const indexOfMine = this.myPagePost.findIndex(post => post._id === postId);
+                indexOfMine !== -1 && this.myPagePost.splice(indexOfMine, 1);
+                const index = this.postList.findIndex(post => post._id === postId);
+                index !== -1 && this.postList.splice(index, 1);
+                toast.info('删除成功', { position: toast.POSITION.TOP_RIGHT });
+            } else {
+                throw new Error('');
+            }
+        } catch (error) {
+            toast.error('删除失败，请稍后重试～', { position: toast.POSITION.TOP_RIGHT });
         }
     }
 }

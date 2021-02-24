@@ -1,6 +1,6 @@
 import React from 'react';
 import useStyles from 'isomorphic-style-loader/useStyles';
-import { Avatar, Divider } from '@material-ui/core';
+import { Avatar, Button, Dialog, DialogActions, DialogContent, DialogContentText, Divider, Menu, MenuItem } from '@material-ui/core';
 import { observer } from 'mobx-react';
 import useStores from '@framework/util';
 import { formatCreatedAt } from '@utils/format';
@@ -9,7 +9,7 @@ import s from './index.scss';
 export default observer(function PostsCard({
     data,
     CommentPannel,
-}) {
+}: { data: any, CommentPannel?: any }) {
     const {
         _id,
         likes,
@@ -20,13 +20,22 @@ export default observer(function PostsCard({
         nickname,
         commentCount,
         createdAt,
+        self,
     } = data;
     useStyles(s);
     const { store } = useStores();
     const { serverTime } = store;
     const [showCommentPannel, setShowCommentPannel] = React.useState(false);
+    const deleteRef = React.useRef();
+    const [anchorEl, setAnchorEl] = React.useState(false);
+    const [showConfirmDelete, setShowConfirmDelete] = React.useState(false);
     const formatUrl = url => url.startsWith('//') ? url : ('//' + url);
     const ts = formatCreatedAt(createdAt, serverTime);
+    const handleDelete = async () => {
+        await store.deletePost(_id);
+        setAnchorEl(false);
+        setShowConfirmDelete(false);
+    };
 
     return (
         <div className={s.wrapper}>
@@ -69,7 +78,25 @@ export default observer(function PostsCard({
                                     {commentCount > 999 ? '999+' : commentCount}
                                 </span>}
                             </div>
-                            {/* <span className={'iconfont icon-fenxiang2 ' + s.icon} /> */}
+                            {self && <span
+                                className={'iconfont icon-more4 ' + s.icon}
+                                onClick={() => setAnchorEl(true)}
+                                ref={deleteRef}
+                            />}
+                            <Menu
+                                id="simple-menu"
+                                anchorEl={deleteRef.current}
+                                keepMounted
+                                disableAutoFocusItem
+                                open={anchorEl}
+                                onClose={() => setAnchorEl(false)}
+                                transformOrigin={{
+                                    vertical: -50,
+                                    horizontal: 'center',
+                                }}
+                            >
+                                {self && <MenuItem onClick={() => setShowConfirmDelete(true)} style={{ color: '#666' }}>删除</MenuItem>}
+                            </Menu>
                         </div>
                         <div className={s.ts}>
                             <span>{ts}</span>
@@ -77,8 +104,28 @@ export default observer(function PostsCard({
                     </div>
                     {showCommentPannel && <>
                         <Divider style={{ width: '100%' }} />
-                        <CommentPannel post={data} />
+                        {!!CommentPannel && <CommentPannel post={data} />}
                     </>}
+                    <Dialog
+                        open={showConfirmDelete}
+                        onClose={() => setShowConfirmDelete(false)}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                    >
+                        <DialogContent>
+                            <DialogContentText id="alert-dialog-description">
+                                确定要删除该条推文吗？
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleDelete} color="primary" autoFocus>
+                                确定
+                            </Button>
+                            <Button onClick={() => setShowConfirmDelete(false)} color="primary">
+                                取消
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                 </div>
             </div >
         </div>
