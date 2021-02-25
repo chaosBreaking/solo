@@ -6,7 +6,7 @@ import withStyles from 'isomorphic-style-loader/withStyles';
 import { ACTIVE_VIEW } from '@constants/ui';
 import ExtendZone from './components/ExtendZone';
 import FeedsList from './components/FeedsList';
-import TopCard from './components/TopCard';
+// import TopCard from './components/TopCard';
 import SideNav from './components/SideNav';
 import Header from './components/Header';
 import BlockItem from './components/BlockItem';
@@ -145,11 +145,9 @@ export default class Zone extends Component<{ store: store }> {
                     <Header />
                     <SideNav />
                     <ExtendZone />
-                    <div key={this.props.store.activeView}>
-                        {
-                            this.getBody()
-                        }
-                    </div>
+                    {
+                        this.getBody()
+                    }
                 </div>
                 <ToastContainer />
             </div>

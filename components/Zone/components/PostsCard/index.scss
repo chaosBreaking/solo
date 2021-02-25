@@ -41,9 +41,14 @@
 }
 
 .nickname {
-    font-size: .08rem;
-    font-weight: 600;
+    width: .35rem;
+    max-width: .35rem;
+    font-size: .09rem;
+    font-weight: 900;
     color: #333;
+    text-align: center;
+    word-break: break-all;
+    white-space: pre-wrap;
 }
 
 .imageWrapper {
