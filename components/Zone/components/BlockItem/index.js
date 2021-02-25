@@ -3,9 +3,11 @@ import useStyles from 'isomorphic-style-loader/useStyles';
 import Emage from '@widgets/Emage';
 import { Avatar } from '@material-ui/core';
 import s from './index.scss';
+import useStores from '@framework/util';
 
 export default React.memo(function BlockItem({
     _id,
+    uid,
     title,
     text,
     cover,
@@ -18,14 +20,16 @@ export default React.memo(function BlockItem({
     serverTime,
 }) {
     useStyles(s);
+    const { store } = useStores();
     const cat = new Date(createdAt);
     const ts = (serverTime - cat) / 1000 / 3600 / 24 >= 1
         ? cat.toLocaleDateString().replace(/[/|-]/g, '.')
         : cat.toLocaleTimeString();
     const bodyCls = (!cover || (!cover && !text)) ? s.shortBody : s.body;
+    const jumpUser = () => store.navToUser(uid);
     return (
         <div className={s.container}>
-            <div className={s.topLine}>
+            <div className={s.topLine} onClick={jumpUser}>
                 <Avatar className={s.avatar} src={avatar}>{nickname.slice(0, 1)}</Avatar>
                 <div className={s.name}>{nickname}</div>
                 {

@@ -11,6 +11,7 @@ const URLs = {
     QUERY_MY_POST: 'post/user/list',
     QUERY_MY_ARTICLE: 'article/user/list',
     QUERY_MY_COMMUNITY: 'community/user/list',
+    QUERY_USER_INFO: 'user/info',
 };
 
 export default class ContentService extends BaseService {
@@ -97,6 +98,15 @@ export default class ContentService extends BaseService {
 
     getMyCommunityList = async params => {
         const res = await this.post(URLs.QUERY_MY_COMMUNITY, params).catch(error => ({ error }));
+        const { error, data } = res;
+        if (error) {
+            throw error;
+        }
+        return data;
+    }
+
+    async queryUserInfo(params) {
+        const res = await this.post(URLs.QUERY_USER_INFO, params).catch(error => ({ error }));
         const { error, data } = res;
         if (error) {
             throw error;

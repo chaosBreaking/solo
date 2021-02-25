@@ -21,7 +21,7 @@ export default observer(function Header() {
 
     return (
         <div className={s.container}>
-            <Avatar src={avatar}>{nickname.slice(0, 1)}</Avatar>
+            <Avatar className={s.avatar} src={avatar}>{nickname.slice(0, 1)}</Avatar>
             <div className={s.info}>
                 <p className={s.name}>{nickname}</p>
                 <p className={s.bio}>{bio}</p>
@@ -29,7 +29,7 @@ export default observer(function Header() {
             {
                 !data.self
                     ? followed
-                        ? <span className={s.disBtn} onClick={() => handleClick({ cancel: true })}>取消关注</span>
+                        ? <span className={s.disBtn} onClick={() => handleClick({ cancel: true })}>已关注</span>
                         : <span className={s.btn} onClick={() => handleClick()}>关注</span>
                     : null
             }

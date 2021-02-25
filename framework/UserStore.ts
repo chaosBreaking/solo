@@ -82,9 +82,26 @@ export default class UserStore extends CommonStore {
         // await this.queryBasicInfo();
     }
 
-    // async clearSessions() {
-    //     return Promise.all([deleteKV(['_userInfo']), deleteToken()]);
-    // }
+    @action.bound
+    async isFollower({ uid }) {
+        const res = await this.userService.queryIsFollower({ uid });
+        return res;
+    }
+
+
+    @action.bound
+    async followHandler({ cancel, uid }: { cancel?: boolean, uid: string }) {
+        const res = await this.userService.follow({ cancel, uid });
+        const { success, canceled } = res || {};
+        if (!success) {
+            return { success: false };
+        }
+        if (canceled) {
+            return { success: true, followed: false };
+        } else {
+            return { success: true, followed: true };
+        }
+    }
 
     // @action.bound
     // async verifyToken(token: string): Promise<boolean> {

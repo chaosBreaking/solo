@@ -26,6 +26,10 @@ export const ACTIVE_VIEW = {
         path: 'me',
         index: 3,
     },
+    USER: {
+        path: 'user',
+        index: 4,
+    },
 };
 
 export const NAVI_ITEMS: INavItemList = [

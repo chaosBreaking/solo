@@ -15,6 +15,7 @@ export default observer(function FeedsList({
     showNoMoreTip = true,
     style = {},
     noBorder = false,
+    uniqueKey,
 }) {
     useStyles(s);
     if (!dataList.length && loadingStatus === -1) {
@@ -26,6 +27,7 @@ export default observer(function FeedsList({
 
     return <div className={s.container}>
         <div
+            key={uniqueKey}
             className={cs(s.list,
                 {
                     [s.border]: !noBorder

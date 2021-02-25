@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { observer } from 'mobx-react';
 import useStyles from 'isomorphic-style-loader/useStyles';
 import {
     authService,
@@ -15,7 +14,7 @@ import Button from '@widgets/Button';
 import Input from '@widgets/Input';
 import s from './index.scss';
 
-export default (observer(function CodeInput(props) {
+export default function CodeInput(props) {
     useStyles(s);
     const {
         addRefFunc,
@@ -100,4 +99,4 @@ export default (observer(function CodeInput(props) {
             />
         </div>
     );
-}));
+};

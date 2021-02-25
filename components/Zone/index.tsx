@@ -38,11 +38,12 @@ export default class Zone extends Component<{ store: store }> {
             serverTime,
         } = this.props.store;
         const renderItems = (item: any) => {
-            return <BlockItem key={item._id} {...item} serverTime={serverTime} />;
+            return <BlockItem key={ACTIVE_VIEW.ARTICLE.index + item._id} {...item} serverTime={serverTime} />;
         };
         return <>
             {/* <TopCard /> */}
             <FeedsList
+                uniqueKey={ACTIVE_VIEW.ARTICLE.index}
                 key={ACTIVE_VIEW.ARTICLE.index}
                 dataList={articleList}
                 loadMore={loadMore}
@@ -61,22 +62,23 @@ export default class Zone extends Component<{ store: store }> {
         } = this.props.store;
         const CommentPannel = loadable(() => import('./components/CommentPannel'));
         const renderItems = (item: any) => {
-            return <PostsCard key={item._id} data={item} CommentPannel={CommentPannel} />;
+            return <PostsCard key={ACTIVE_VIEW.POST.index + item._id} data={item} CommentPannel={CommentPannel} />;
         };
         return <FeedsList
+            uniqueKey={ACTIVE_VIEW.POST.index}
             key={ACTIVE_VIEW.POST.index}
             dataList={postList}
             loadMore={loadMore}
             loadingStatus={loadingStatus}
             renderItems={renderItems}
-            showNoMoreTip={false}
+            // showNoMoreTip={false}
             noBorder
         />;
     }
 
     renderCommunity() {
         const renderItems = (item: any) => {
-            return <CommunityCard key={item._id} {...item} />;
+            return <CommunityCard key={ACTIVE_VIEW.COMMUNITY.index + item._id} {...item} />;
         };
         const {
             communityList,
@@ -84,33 +86,43 @@ export default class Zone extends Component<{ store: store }> {
             loadingStatus,
         } = this.props.store;
         return <FeedsList
+            uniqueKey={ACTIVE_VIEW.COMMUNITY.index}
             key={ACTIVE_VIEW.COMMUNITY.index}
             direction={'row'}
             dataList={communityList}
             loadMore={loadMore}
             loadingStatus={loadingStatus}
             renderItems={renderItems}
-            showNoMoreTip={false}
+            // showNoMoreTip={false}
             noBorder
         />;
     }
 
     renderMyPage() {
         const MyPage = loadable(() => import('./components/MyPage'));
-        return <MyPage />
+        return <MyPage key={this.props.store.targetUid} />
+    }
+
+    renderUserPage() {
+        const MyPage = loadable(() => import('./components/MyPage'));
+        return <MyPage key={this.props.store.targetUid} />
     }
 
     getBody() {
         const { activeView } = this.props.store;
         switch (activeView) {
+            case ACTIVE_VIEW.ARTICLE.index:
+                return this.renderArticles();
             case ACTIVE_VIEW.POST.index:
                 return this.renderPosts();
             case ACTIVE_VIEW.COMMUNITY.index:
                 return this.renderCommunity();
             case ACTIVE_VIEW.ME.index:
                 return this.renderMyPage();
+            case ACTIVE_VIEW.USER.index:
+                return this.renderUserPage();
             default:
-                return this.renderArticles();
+                return null;
         }
     }
 
@@ -133,9 +145,11 @@ export default class Zone extends Component<{ store: store }> {
                     <Header />
                     <SideNav />
                     <ExtendZone />
-                    {
-                        this.getBody()
-                    }
+                    <div key={this.props.store.activeView}>
+                        {
+                            this.getBody()
+                        }
+                    </div>
                 </div>
                 <ToastContainer />
             </div>

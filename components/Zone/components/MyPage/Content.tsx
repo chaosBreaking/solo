@@ -24,6 +24,7 @@ export default class Zone extends Component<{ store?: store }> {
             return <BlockItem key={item._id} {...item} serverTime={serverTime} />;
         };
         return <FeedsList
+            uniqueKey={'articleList'}
             key={'articleList'}
             dataList={myPageArticle}
             loadMore={loadMyPageData}
@@ -43,12 +44,12 @@ export default class Zone extends Component<{ store?: store }> {
             return <PostsCard key={item._id} data={item} />;
         };
         return <FeedsList
+            uniqueKey={'postList'}
             key={'postList'}
             dataList={myPagePost}
             loadMore={loadMyPageData}
             loadingStatus={myPageLoadingStatus}
             renderItems={renderItems}
-            showNoMoreTip={false}
             noBorder
         />;
     }
@@ -63,13 +64,13 @@ export default class Zone extends Component<{ store?: store }> {
             return <CommunityCard key={item._id} {...item} />;
         };
         return <FeedsList
+            uniqueKey={'communityList'}
             key={'communityList'}
             direction={'row'}
             dataList={myPageCommunity}
             loadMore={loadMyPageData}
             loadingStatus={myPageLoadingStatus}
             renderItems={renderItems}
-            showNoMoreTip={false}
             noBorder
         />;
     }

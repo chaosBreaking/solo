@@ -12,6 +12,7 @@ export default observer(function PostsCard({
 }: { data: any, CommentPannel?: any }) {
     const {
         _id,
+        uid,
         likes,
         avatar,
         tags = [],
@@ -36,11 +37,14 @@ export default observer(function PostsCard({
         setAnchorEl(false);
         setShowConfirmDelete(false);
     };
+    const jumpProfile = () => {
+        store.navToUser(uid);
+    };
 
     return (
         <div className={s.wrapper}>
             <div className={s.container}>
-                <div className={s.left}>
+                <div className={s.left} onClick={jumpProfile}>
                     <Avatar className={s.avatar} src={avatar} variant="square">{nickname.slice(0, 1)}</Avatar>
                     <div className={s.nickname}>{nickname}</div>
                 </div>

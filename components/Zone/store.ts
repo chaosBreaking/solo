@@ -18,13 +18,14 @@ export default class Store extends CommonStore {
     commentLock = false;
     queryCommentLock = false;
     targetUid: string; // uid参数，展示某人的资料页用到
+    targetUser: any;
 
-    @observable activeView = ACTIVE_VIEW.ME.index;
+    @observable activeView = ACTIVE_VIEW.ARTICLE.index;
     @observable dataList: any[] = [[], [], []];
     @observable hasMoreList = [true, true, true];
     @observable offsetIdList = ['', '', ''];
     @observable loadingStatusList = [0, 0, 0];
-    @observable activeTabList = [0, 0, 0, 0];
+    @observable activeTabList = [0, 0, 0, 0, 0];
     @observable mainTabList = [[
         { title: '热门', id: 0 },
         // { title: '最新', id: 1 },
@@ -40,6 +41,10 @@ export default class Store extends CommonStore {
         { title: '文章', id: 0 },
         { title: '推文', id: 1 },
         { title: '圈子', id: 2 },
+    ], [
+        { title: '文章', id: 0 },
+        { title: '推文', id: 1 },
+        { title: '圈子', id: 2 },
     ]];
 
     @observable myPageDataList: any[] = [[], [], []]; // 个人页面数据，分为文章/推文/圈子
@@ -47,6 +52,7 @@ export default class Store extends CommonStore {
     @observable myPageLoadingStatusList = [0, 0, 0];
     @observable myOffsetList = [0, 0, 0];
     @observable myOffsetIdList = ['', '', ''];
+    @observable loadingUserInfo = false;
 
     @computed
     get myPageArticle() {
@@ -87,7 +93,7 @@ export default class Store extends CommonStore {
     }
 
     set myOffsetId(offsetId: string) {
-        this.offsetIdList[this.activeTab] = offsetId;
+        this.myOffsetIdList[this.activeTab] = offsetId;
     }
 
     @computed
@@ -167,14 +173,16 @@ export default class Store extends CommonStore {
         this.targetUid = uid;
         this.checkActiveView(pathname);
         await Promise.all([
-            this.activeView === ACTIVE_VIEW.ME.index
+            this.activeView === ACTIVE_VIEW.ME.index || this.activeView === ACTIVE_VIEW.USER.index
                 ? this.loadMyPageData()
                 : this.loadMore(),
             this.initUploader(),
+            ...this.activeView === ACTIVE_VIEW.USER.index
+                ? [this.queryUserInfo(uid)]
+                : []
         ]);
         return {};
     }
-
 
     @action.bound
     async prepareClientData() {
@@ -189,23 +197,29 @@ export default class Store extends CommonStore {
     @action.bound
     checkActiveView(pathname: string) {
         if (pathname.endsWith(ACTIVE_VIEW.POST.path)) {
-            this.activeView = ACTIVE_VIEW.POST.index;
+            this.setActiveView(ACTIVE_VIEW.POST.index);
         } else if (pathname.endsWith(ACTIVE_VIEW.COMMUNITY.path)) {
-            this.activeView = ACTIVE_VIEW.COMMUNITY.index;
+            this.setActiveView(ACTIVE_VIEW.COMMUNITY.index);
         } else if (pathname.endsWith(ACTIVE_VIEW.ME.path)) {
-            this.activeView = ACTIVE_VIEW.ME.index;
+            this.setActiveView(ACTIVE_VIEW.ME.index);
+        } else if (pathname.endsWith(ACTIVE_VIEW.USER.path)) {
+            this.setActiveView(ACTIVE_VIEW.USER.index);
         } else {
-            this.activeView = ACTIVE_VIEW.ARTICLE.index;
+            this.setActiveView(ACTIVE_VIEW.ARTICLE.index);
         }
     }
 
     @action.bound
     setActiveView(index: number) {
         if (index !== this.activeView) {
+            if (index === ACTIVE_VIEW.ME.index) {
+                // 切回个人页面，需要清空数据，否则会使用其他用户数据
+                this.clearMyPageData();
+            }
             this.activeView = index;
         }
-
-        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+        // 服务端也用到该函数，做个判断
+        process.env.BROWSER && window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     }
 
     @action.bound
@@ -213,9 +227,10 @@ export default class Store extends CommonStore {
         if (tabIndex !== this.activeTab) {
             this.activeTabList[this.activeView] = tabIndex;
         }
-        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+        process.env.BROWSER && window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     }
 
+    @action.bound
     getService() {
         return {
             [ACTIVE_VIEW.ARTICLE.index]: this.contentService.getContentList,
@@ -224,12 +239,19 @@ export default class Store extends CommonStore {
         }[this.activeView];
     }
 
+    @action.bound
     getMyPageService() {
         return {
             0: this.contentService.getMyArticleList,
             1: this.contentService.getMyPostList,
             2: this.contentService.getMyCommunityList,
         }[this.activeTab];
+    }
+
+    @action.bound
+    async queryUserInfo(userId: string) {
+        const user = await this.contentService.queryUserInfo({ userId });
+        this.targetUser = user;
     }
 
     @action.bound
@@ -271,7 +293,7 @@ export default class Store extends CommonStore {
         const data: any[] = await service({
             ...this.targetUid ? { userId: this.targetUid } : {},
             offset: this.myOffset,
-            offsetId: this.myOffsetId,
+            // offsetId: this.myOffsetId,
             count,
         }).catch(err => {
             console.error(err);
@@ -288,6 +310,39 @@ export default class Store extends CommonStore {
                 this.myPageLoadingStatus = 0;
             }
         });
+    }
+
+    @action.bound
+    clearMyPageData() {
+        this.targetUid = null;
+        this.targetUser = null;
+        this.myPageDataList = [[], [], []];
+        this.myOffsetIdList = ['', '', ''];
+        this.myOffsetList = [0, 0, 0];
+        this.myPageLoadingStatusList = [0, 0, 0];
+        this.myHasMoreList = [true, true, true];
+    }
+
+    @action.bound
+    async navToUser(uid) {
+        const jump = () => {
+            const dest = `/zone.html/${ACTIVE_VIEW.USER.path}?uid=${uid}`;
+            history.pushState({ activeView: ACTIVE_VIEW.USER.index }, '', dest);
+            this.setActiveView(ACTIVE_VIEW.USER.index);
+        }
+        if (uid !== this.targetUid) {
+            this.clearMyPageData();
+            this.loadingUserInfo = true;
+            await Promise.all([
+                this.queryUserInfo(uid),
+                this.loadMyPageData(),
+            ]);
+            this.targetUid = uid;
+            jump();
+            this.loadingUserInfo = false;
+        } else {
+            jump();
+        }
     }
 
     @action.bound
