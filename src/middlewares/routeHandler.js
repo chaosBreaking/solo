@@ -9,8 +9,11 @@ export default async (req, res, next) => {
     try {
         const route = await router.resolve(context);
         if (route.redirect) {
-            res.redirect(route.status || 302, route.redirect);
-            return;
+            const needRedirect = !route.checkRedirect || route.checkRedirect(req, res);
+            if (needRedirect) {
+                res.redirect(route.status || 302, route.redirect);
+                return;
+            }
         }
 
         res.locals.route = route;

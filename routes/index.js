@@ -10,6 +10,10 @@ const routes = {
             load: () => import(/* webpackChunkName: 'entrance' */ './entrance'),
         },
         {
+            path: '/index',
+            load: () => import(/* webpackChunkName: 'entrance' */ './entrance'),
+        },
+        {
             path: '/auth.html',
             load: () => import(/* webpackChunkName: 'auth' */ './auth'),
         },
