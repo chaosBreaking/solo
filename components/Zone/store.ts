@@ -212,8 +212,8 @@ export default class Store extends CommonStore {
     @action.bound
     setActiveView(index: number) {
         if (index !== this.activeView) {
-            if (index === ACTIVE_VIEW.ME.index) {
-                // 切回个人页面，需要清空数据，否则会使用其他用户数据
+            if (index === ACTIVE_VIEW.ME.index || this.activeView === ACTIVE_VIEW.USER.index) {
+                // 切回个人页面或者切出用户页面，需要清空数据，否则会使用其他用户数据
                 this.clearMyPageData();
             }
             this.activeView = index;
@@ -325,6 +325,9 @@ export default class Store extends CommonStore {
 
     @action.bound
     async navToUser(uid) {
+        if (!uid || this.activeView === ACTIVE_VIEW.ME.index || this.activeView === ACTIVE_VIEW.USER.index) {
+            return;
+        }
         const jump = () => {
             const dest = `/zone.html/${ACTIVE_VIEW.USER.path}?uid=${uid}`;
             history.pushState({ activeView: ACTIVE_VIEW.USER.index }, '', dest);
@@ -332,12 +335,12 @@ export default class Store extends CommonStore {
         }
         if (uid !== this.targetUid) {
             this.clearMyPageData();
+            this.targetUid = uid;
             this.loadingUserInfo = true;
             await Promise.all([
                 this.queryUserInfo(uid),
                 this.loadMyPageData(),
             ]);
-            this.targetUid = uid;
             jump();
             this.loadingUserInfo = false;
         } else {
