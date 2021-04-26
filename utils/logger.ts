@@ -14,6 +14,7 @@ export const beaconAction = (apiUrl, params) => {
 };
 
 class Logger {
+    static instance: any;
     static getInstance () {
         if (!Logger.instance) {
             Logger.instance = new Logger();

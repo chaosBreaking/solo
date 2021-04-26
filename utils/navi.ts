@@ -1,4 +1,4 @@
-export const parseQuery = query => {
+export const parseQuery = (query?: string) => {
     query = query || location.search;
     return query.slice(1).split('&').reduce((acc, s) => {
         const [k, v] = s.split('=');
@@ -26,7 +26,7 @@ export const replaceQuery = params => {
     return buildQuery(final);
 };
 
-export const forward = (url = '', params = {}) => {
+export const forward = (url = '', params: any = {}) => {
     const { origin } = location;
     const { noAddingHtml } = params;
     let destUrl = origin;

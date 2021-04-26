@@ -38,11 +38,11 @@ export function setCookie(params) {
                 value = value.value;
             }
             exp.setTime(exp.getTime() + ttl);
-            str += value + '; path=/; expires=' + exp.toGMTString();
+            str += value + '; path=/; expires=' + exp.toUTCString();
             document.cookie = str;
         } else {
             exp.setTime(exp.getTime() - 1);
-            const expStr = '; path=/; expires=' + exp.toGMTString();
+            const expStr = '; path=/; expires=' + exp.toUTCString();
             if (cookies[key]) {
                 for (let i = 0; i < cookies[key].length; i++) {
                     document.cookie = str + cookies[key][i] + expStr;
