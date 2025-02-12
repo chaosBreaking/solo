@@ -6,6 +6,9 @@ import App from '../components/App';
 import Html from '../components/Html';
 import buildContext from '../contextBuilder';
 import { ServerStyleSheets } from '@material-ui/core/styles';
+import { useStaticRendering } from 'mobx-react';
+
+useStaticRendering(true);
 
 export default async (req, res, next) => {
     try {
